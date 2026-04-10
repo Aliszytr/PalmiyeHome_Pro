@@ -1,0 +1,192 @@
+{
+  "nav": {
+    "apartment": "Our Apartment",
+    "gallery": "Gallery",
+    "location": "Location",
+    "trust": "Reviews",
+    "booking": "Book Now",
+    "contact": "Contact",
+    "whatsapp": "WhatsApp",
+    "attractions": "Places to Visit"
+  },
+  "hero": {
+    "trust_pill": "Booking.com 9.6 · Exceptional guest rating",
+    "title": "Your Private Retreat <span>in Antalya</span>",
+    "subtitle": "Fully equipped apartment with pool, mountain views & free parking in Kemer–Göynük",
+    "bullet1": "Shared Pool & Garden",
+    "bullet2": "Free Wi-Fi & Parking",
+    "bullet3": "Direct Booking — Best Price",
+    "cta_whatsapp": "Check Availability on WhatsApp",
+    "cta_booking": "View on Booking.com",
+    "response_note": "<i data-lucide=\"zap\"></i> We typically respond within 5 minutes"
+  },
+  "trust": {
+    "pool": "Shared Pool",
+    "pool_desc": "Adult & Kids pool",
+    "capacity": "Up to 4 Guests",
+    "capacity_desc": "Comfortable stay",
+    "wifi": "High-Speed Wi-Fi",
+    "wifi_desc": "Fiber internet",
+    "location": "Göynük Center",
+    "location_desc": "Central location",
+    "direct": "Direct Contact",
+    "direct_desc": "24/7 WhatsApp"
+  },
+  "booking_trust": {
+    "score_label": "Exceptional",
+    "title": "Exceptional Rating on Booking.com",
+    "desc": "Rated 9.6 on Booking.com. Guests especially love the cleanliness, peaceful atmosphere, pool area and responsive hosting.",
+    "h1": "Verified Property",
+    "h2": "Secure Payment",
+    "h3": "Real Guest Reviews",
+    "cta": "Check Availability on Booking.com"
+  },
+  "cp1": {
+    "title": "Get the Best Price — Book Directly",
+    "subtitle": "Message us on WhatsApp for availability and special rates.",
+    "cta": "Check Availability on WhatsApp"
+  },
+  "apartment": {
+    "title": "Our Apartment",
+    "desc": "Close to the center, quiet, surrounded by nature — a fully equipped 1+1 apartment. Every detail designed for comfort.",
+    "capacity": "Max. 4 guests",
+    "checkin": "Check-in: 14:00",
+    "checkout": "Check-out: 11:00"
+  },
+  "feature": {
+    "ac": "Air Conditioning",
+    "wifi": "High-Speed Wi-Fi",
+    "tv": "Smart TV (Netflix)",
+    "kitchen": "Equipped Kitchen",
+    "laundry": "Washing Machine",
+    "hairdryer": "Hair Dryer",
+    "baby": "Crib & High Chair",
+    "parking": "Free Parking",
+    "security": "Security Camera"
+  },
+  "cp2": {
+    "title": "Like What You See?",
+    "subtitle": "Contact us for availability and pricing.",
+    "cta": "Check Availability on WhatsApp"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "Explore our apartment and surroundings with real photos.",
+    "all": "All",
+    "pool": "Pool",
+    "garden": "Garden",
+    "living": "Living Room",
+    "bedroom": "Bedroom",
+    "kitchen": "Kitchen / Bath",
+    "property": "Property"
+  },
+  "cp3": {
+    "title": "Ready to Book Your Stay?",
+    "subtitle": "Send us a message — we reply within minutes.",
+    "cta": "Message Us on WhatsApp"
+  },
+  "location": {
+    "title": "Location",
+    "subtitle": "Close to center, quiet, in the heart of nature.",
+    "center": "Göynük Center",
+    "center_desc": "Walking distance to shops and markets",
+    "beach": "Beach",
+    "beach_desc": "~15-20 min walk (~2 km)",
+    "canyon": "Göynük Canyon",
+    "canyon_desc": "~5 min by car",
+    "kemer": "Kemer Center",
+    "kemer_desc": "~10 min by car",
+    "airport": "Antalya Airport",
+    "airport_desc": "~50 min by car"
+  },
+  "pricing": {
+    "title": "Stay Options",
+    "subtitle": "Flexible accommodation options to plan your vacation.",
+    "daily": "Daily",
+    "daily_note": "/ night starting from",
+    "daily_desc": "Flexible check-in/check-out",
+    "popular": "Popular",
+    "weekly": "Weekly",
+    "weekly_note": "discount",
+    "weekly_desc": "Valid for 7+ night stays",
+    "monthly": "Monthly",
+    "monthly_note": "discount",
+    "monthly_desc": "Valid for 30+ night stays",
+    "footer": "Message us on WhatsApp for current prices and availability."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "q1": "What are the check-in and check-out times?",
+    "a1": "Check-in is from 14:00 onwards, and check-out is by 11:00 at the latest. You can contact us in advance for flexible times.",
+    "q2": "When is the pool open?",
+    "a2": "The property pool is open from June to November. There is an adult and a children's pool.",
+    "q3": "Is there parking?",
+    "a3": "Yes, free open-air parking is available within the property.",
+    "q4": "Is there a crib or high chair?",
+    "a4": "Yes, a baby crib and high chair are provided free of charge upon request.",
+    "q6": "How do I get to the beach?",
+    "a6": "The beach is approximately a 15-20 minute walk (~2 km). You can reach Kemer beach in about 10 minutes by car.",
+    "q8": "Is airport transfer available?",
+    "a8": "Airport transfer can be arranged upon request. Contact us via WhatsApp for details and pricing."
+  },
+  "booking": {
+    "title": "Book Your Stay",
+    "subtitle": "Choose the way that works best for you.",
+    "wa_title": "Message Us on WhatsApp",
+    "wa_desc": "Instant response — Best price guaranteed",
+    "booking_title": "View on Booking.com",
+    "booking_desc": "Secure payment and instant confirmation",
+    "airbnb_title": "Also on Airbnb",
+    "airbnb_desc": "Reviews and secure payment"
+  },
+  "contact": {
+    "title": "Contact",
+    "email": "Email",
+    "address": "Address",
+    "address_text": "Göynük Mah. 3270. Sok. B Blok No:1, Kemer / Antalya, Turkey",
+    "wa_btn": "Message Us on WhatsApp"
+  },
+  "footer": {
+    "desc": "A peaceful and comfortable accommodation experience in the heart of nature, in Kemer – Göynük.",
+    "quick_links": "Quick Links",
+    "platforms": "Book With Us",
+    "rights": "All rights reserved."
+  },
+  "attractions": {
+    "title": "Places to Visit",
+    "subtitle": "Discover the natural and historical beauties just minutes away from Palmiye Home.",
+    "read_more": "Tap for details →",
+    "show_more": "Show More Places",
+    "show_less": "Show Less",
+    "canyon": "Göynük Canyon",
+    "canyon_short": "A natural wonder with waterfalls and pine forests",
+    "canyon_desc": "One of Kemer's most popular attractions, Göynük Canyon is located on the Lycian Way within the Beydağları Coastal National Park. This natural wonder features stunning scenery, rich vegetation, and waterfalls. The area also contains artificial ponds, streams, and natural pools. Ranked among the world's top 10 trekking routes, it's an essential destination for nature lovers. You can swim in its ice-blue waters, enjoy camping facilities, and create an unforgettable holiday itinerary.",
+    "phaselis": "Phaselis Ancient City",
+    "phaselis_short": "Ancient port city where you can swim among ruins",
+    "phaselis_desc": "Founded by Rhodians in the 7th century BC, this city sits on a peninsula extending into the Mediterranean. For years it served as one of the most important ports on Lycia's eastern coast, boasting four harbors. The surviving ruins mostly date from Roman and Byzantine periods, including a main avenue connecting north and south harbors, a square, theater, temple remnants, and three agoras.",
+    "olympos": "Olympos Ancient City",
+    "olympos_short": "Ancient ruins, forest trails and a stunning beach",
+    "olympos_desc": "Another renowned port city after Phaselis, Olympos features ruins from the Roman, Byzantine, and Hellenistic periods. The city stretches east-west, situated at the river mouth and connected by a bridge — one pillar still stands today. Follow the stream path through the ancient city to reach the beautiful Olympos Beach on foot.",
+    "tahtali": "Tahtalı Mountain Cable Car",
+    "tahtali_short": "Ride up to 2,365m for breathtaking panoramic views",
+    "tahtali_desc": "Standing at 2,365 meters, Tahtalı is one of the tallest mountains in the region. The summit is accessible by cable car from Olympos, offering spectacular nature views along the way. This cable car holds the title of Europe's longest and the world's second longest.",
+    "cirali": "Çıralı – Yanartaş (Chimera)",
+    "cirali_short": "Eternal flames burning for 2,500 years",
+    "cirali_desc": "Known as the \"Eternal Flame of Olympos,\" this remarkable site features naturally burning rocks fueled by methane gas seeping from the earth. Referenced in Homer's texts and mythologized over centuries, the fires have been considered sacred. These stones have been burning continuously for over 2,500 years.",
+    "adrasan": "Adrasan Bay",
+    "adrasan_short": "Crystal-clear shallow waters, fine sand beach",
+    "adrasan_desc": "One of the most popular beaches in the area with pristine waters, Adrasan Bay is about an hour from Kemer. With a 4,000-year history, this location is surrounded by orange and pine trees. The bay's most distinctive feature is its shallow, stone-free, fine-sand beach with calm waters.",
+    "paris2": "Paris II Shipwreck",
+    "paris2_short": "One of the world's top 100 diving spots",
+    "paris2_desc": "Listed among the world's 100 most remarkable diving spots, Paris II is a French ship that sank in Kemer waters during World War I. Resting 33 meters offshore, the wreck still contains six anti-aircraft guns and two torpedo tubes, making it a fascinating underwater museum.",
+    "alacasu": "Alacasu Paradise Cove",
+    "alacasu_short": "A hidden paradise with turquoise waters",
+    "alacasu_desc": "Considered one of Kemer's hidden gems, this cove is about 90 minutes from the center. With its 175-meter beach, trekking trails, crystal-blue swimming waters, and camping and picnic areas, it's an ideal escape from the city.",
+    "beldibi": "Beldibi Cave",
+    "beldibi_short": "Prehistoric cave art dating back millennia",
+    "beldibi_desc": "Located about 20 kilometers from Kemer, this cave sits where the sea meets the rocks. Its walls feature animal and human figures. Research has uncovered artifacts from the Neolithic, Paleolithic, and Mesolithic eras.",
+    "idyros": "Idyros Ancient City",
+    "idyros_short": "Byzantine-era geometric mosaics in Kemer center",
+    "idyros_desc": "Uncovered during excavations in 1976, this ancient city harbors artifacts from the Byzantine period. The most distinctive find is a geometric-patterned mosaic floor. Located right in Kemer's town center."
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "nav": {
+    "apartment": "Dairemiz",
+    "gallery": "Galeri",
+    "location": "Konum",
+    "trust": "Değerlendirmeler",
+    "booking": "Rezervasyon",
+    "contact": "İletişim",
+    "whatsapp": "WhatsApp",
+    "attractions": "Gezilecek Yerler"
+  },
+  "hero": {
+    "trust_pill": "Booking.com 9,6 · Olağanüstü misafir puanı",
+    "title": "Antalya'da <span>Özel Kaçamağınız</span>",
+    "subtitle": "Kemer–Göynük'te havuzlu, dağ manzaralı, ücretsiz otoparkli tam donanımlı daire",
+    "bullet1": "Ortak Havuz & Bahçe",
+    "bullet2": "Ücretsiz Wi-Fi & Otopark",
+    "bullet3": "Doğrudan Rezervasyon — En İyi Fiyat",
+    "cta_whatsapp": "WhatsApp ile Müsaitlik Sorun",
+    "cta_booking": "Booking.com'da İnceleyin",
+    "response_note": "<i data-lucide=\"zap\"></i> Genellikle 5 dakika içinde yanıt veriyoruz"
+  },
+  "trust": {
+    "pool": "Ortak Havuz",
+    "pool_desc": "Yetişkin & Çocuk havuzu",
+    "capacity": "4 Kişiye Kadar",
+    "capacity_desc": "Rahat konaklama",
+    "wifi": "Yüksek Hız Wi-Fi",
+    "wifi_desc": "Fiber internet",
+    "location": "Göynük Merkez",
+    "location_desc": "Merkezi konum",
+    "direct": "Doğrudan İletişim",
+    "direct_desc": "7/24 WhatsApp"
+  },
+  "booking_trust": {
+    "score_label": "Olağanüstü",
+    "title": "Booking.com'da 9,6 Olağanüstü Puan",
+    "desc": "Booking.com üzerinde 9,6 puana sahibiz. Misafirler özellikle temizlik, huzurlu ortam, havuz alanı ve hızlı iletişimi çok beğeniyor.",
+    "h1": "Doğrulanmış Mülk",
+    "h2": "Güvenli Ödeme",
+    "h3": "Gerçek Misafir Yorumları",
+    "cta": "Booking.com'da müsaitliği kontrol et"
+  },
+  "cp1": {
+    "title": "En İyi Fiyatı Alın — Doğrudan Rezervasyon",
+    "subtitle": "Müsaitlik ve özel fiyatlar için WhatsApp'tan yazın.",
+    "cta": "WhatsApp ile Müsaitlik Sorun"
+  },
+  "apartment": {
+    "title": "Dairemiz",
+    "desc": "Merkeze yakın, sessiz, doğa içinde tam donanımlı 1+1 apart daire. Her şey düşünülmüş konfor.",
+    "capacity": "Maks. 4 kişi",
+    "checkin": "Giriş: 14:00",
+    "checkout": "Çıkış: 11:00"
+  },
+  "feature": {
+    "ac": "Klima",
+    "wifi": "Yüksek Hız Wi-Fi",
+    "tv": "Smart TV (Netflix)",
+    "kitchen": "Donanımlı Mutfak",
+    "laundry": "Çamaşır Makinesi",
+    "hairdryer": "Saç Kurutma",
+    "baby": "Beşik & Mama Sand.",
+    "parking": "Ücretsiz Otopark",
+    "security": "Güvenlik Kamerası"
+  },
+  "cp2": {
+    "title": "Beğendiniz mi?",
+    "subtitle": "Müsaitlik ve fiyat bilgisi için hemen ulaşın.",
+    "cta": "WhatsApp ile Müsaitlik Sorun"
+  },
+  "gallery": {
+    "title": "Galeri",
+    "subtitle": "Gerçek fotoğraflarla dairemizi ve çevresini keşfedin.",
+    "all": "Tümü",
+    "pool": "Havuz",
+    "garden": "Bahçe",
+    "living": "Salon",
+    "bedroom": "Yatak Odası",
+    "kitchen": "Mutfak / Banyo",
+    "property": "Tesis"
+  },
+  "cp3": {
+    "title": "Tatil Planınız Hazır mı?",
+    "subtitle": "Bize mesaj gönderin — dakikalar içinde yanıt veriyoruz.",
+    "cta": "WhatsApp ile Yazın"
+  },
+  "location": {
+    "title": "Konum",
+    "subtitle": "Merkeze yakın, sessiz, doğanın içinde.",
+    "center": "Göynük Merkez",
+    "center_desc": "Market ve mağazalara yürüme mesafesi",
+    "beach": "Deniz",
+    "beach_desc": "~15-20 dk yürüyüş (~2 km)",
+    "canyon": "Göynük Kanyonu",
+    "canyon_desc": "~5 dk araç mesafesi",
+    "kemer": "Kemer Merkez",
+    "kemer_desc": "~10 dk araç mesafesi",
+    "airport": "Antalya Havalimanı",
+    "airport_desc": "~50 dk araç mesafesi"
+  },
+  "pricing": {
+    "title": "Konaklama Seçenekleri",
+    "subtitle": "Esnek konaklama seçenekleri ile tatilinizi planlayın.",
+    "daily": "Günlük",
+    "daily_note": "/ gece'den başlayan",
+    "daily_desc": "Esnek giriş-çıkış imkanı",
+    "popular": "Popüler",
+    "weekly": "Haftalık",
+    "weekly_note": "indirimli",
+    "weekly_desc": "7+ gece konaklamalarda geçerli",
+    "monthly": "Aylık",
+    "monthly_note": "indirimli",
+    "monthly_desc": "30+ gece konaklamalarda geçerli",
+    "footer": "Güncel fiyat ve müsaitlik bilgisi için WhatsApp'tan yazın."
+  },
+  "faq": {
+    "title": "Sık Sorulan Sorular",
+    "q1": "Check-in ve check-out saatleri nedir?",
+    "a1": "Giriş (check-in) saat 14:00'ten itibaren, çıkış (check-out) en geç saat 11:00'e kadardır. Esnek saatler için önceden iletişime geçebilirsiniz.",
+    "q2": "Havuz ne zaman açık?",
+    "a2": "Site havuzu Haziran – Kasım ayları arasında kullanıma açıktır. Yetişkin ve çocuk havuzu bulunmaktadır.",
+    "q3": "Otopark var mı?",
+    "a3": "Evet, site içinde ücretsiz açık otopark mevcuttur.",
+    "q4": "Çocuklar için beşik veya mama sandalyesi var mı?",
+    "a4": "Evet, talep üzerine bebek beşiği ve mama sandalyesi ücretsiz olarak sağlanmaktadır.",
+    "q6": "Denize nasıl ulaşılır?",
+    "a6": "Deniz yaklaşık 15-20 dakika yürüme mesafesindedir (~2 km). Kemer sahiline araçla yaklaşık 10 dakikada ulaşabilirsiniz.",
+    "q8": "Havalimanı transferi var mı?",
+    "a8": "Havalimanı transfer hizmeti talep üzerine organize edilebilir. Detaylar ve fiyat için WhatsApp üzerinden bilgi alabilirsiniz."
+  },
+  "booking": {
+    "title": "Rezervasyon",
+    "subtitle": "Size en uygun yoldan ulaşın.",
+    "wa_title": "WhatsApp ile Yazın",
+    "wa_desc": "Anında yanıt — En iyi fiyat garantisi",
+    "booking_title": "Booking.com'da İnceleyin",
+    "booking_desc": "Güvenli ödeme ve anlık onay",
+    "airbnb_title": "Airbnb'de de Varız",
+    "airbnb_desc": "Değerlendirmeler ve güvenli ödeme"
+  },
+  "contact": {
+    "title": "İletişim",
+    "email": "E-posta",
+    "address": "Adres",
+    "address_text": "Göynük Mah. 3270. Sok. B Blok No:1, Kemer / Antalya",
+    "wa_btn": "WhatsApp ile Yazın"
+  },
+  "footer": {
+    "desc": "Kemer – Göynük'te doğanın kalbinde, huzurlu ve konforlu konaklama deneyimi.",
+    "quick_links": "Hızlı Bağlantılar",
+    "platforms": "Rezervasyon",
+    "rights": "Tüm hakları saklıdır."
+  },
+  "attractions": {
+    "title": "Gezilecek Yerler",
+    "subtitle": "Palmiye Home yakınındaki en güzel doğal ve tarihi noktaları keşfedin.",
+    "read_more": "Detaylar için dokunun →",
+    "show_more": "Daha Fazla Yer Göster",
+    "show_less": "Daha Az Göster",
+    "canyon": "Göynük Kanyonu",
+    "canyon_short": "Şelaleler ve çam ormanlarıyla doğal bir harika",
+    "canyon_desc": "Kemer'in en popüler doğa noktalarından biri olan Göynük Kanyonu, Beydağları Sahil Milli Parkı sınırları içinde Likya Yolu üzerinde yer alır. Zengin bitki örtüsü, şelaleleri ve muhteşem manzaralarıyla doğal bir harikadır. Yapay göletler, akarsular ve doğal havuzlar barındırır. Dünyanın en iyi 10 trekking rotası arasında gösterilen kanyon, doğaseverler için vazgeçilmez bir destinasyondur.",
+    "phaselis": "Phaselis Antik Kenti",
+    "phaselis_short": "Antik kalıntıların arasında yüzeceğiniz liman şehri",
+    "phaselis_desc": "MÖ 7. yüzyılda Rodoslular tarafından kurulan bu şehir, Akdeniz'e uzanan bir yarımada üzerinde yer alır. Likya'nın doğu kıyısındaki en önemli limanlardan biri olarak dört limana sahipti. Günümüze ulaşan kalıntılar Roma ve Bizans dönemlerine aittir.",
+    "olympos": "Olympos Antik Kenti",
+    "olympos_short": "Antik kalıntılar, orman yolları ve muhteşem plaj",
+    "olympos_desc": "Phaselis'ten sonra bir diğer ünlü liman kenti olan Olympos, Roma, Bizans ve Helenistik dönemlere ait kalıntılara sahiptir. Antik kentin içinden akan dere yolunu takip ederek yürüyerek güzel Olympos Plajı'na ulaşabilirsiniz.",
+    "tahtali": "Tahtalı Dağı Teleferik",
+    "tahtali_short": "2.365 metreye yükselip nefes kesen panoramik manzara",
+    "tahtali_desc": "2.365 metre yüksekliğiyle bölgenin en yüksek dağlarından biri olan Tahtalı'nın zirvesine teleferikle ulaşılabilir. Avrupa'nın en uzun, dünyanın ikinci en uzun teleferiği unvanını taşır.",
+    "cirali": "Çıralı – Yanartaş (Kimera)",
+    "cirali_short": "2.500 yıldır yanan sönmeyen ateşler",
+    "cirali_desc": "\"Olympos'un Sönmeyen Ateşi\" olarak bilinen bu olağanüstü alan, yerden sızan metan gazıyla doğal olarak yanan kayalara sahiptir. Homeros'un metinlerinde de geçen bu ateşler 2.500 yıldan fazla süredir kesintisiz yanmaktadır.",
+    "adrasan": "Adrasan Koyu",
+    "adrasan_short": "Berrak sığ sular, ince kum plaj",
+    "adrasan_desc": "Bölgenin en popüler plajlarından biri olan Adrasan Koyu, Kemer'e yaklaşık bir saat mesafededir. 4.000 yıllık tarihiyle portakal ve çam ağaçlarıyla çevrili koyu, sığ, taşsız, ince kumlu plajıyla öne çıkar.",
+    "paris2": "Paris II Batığı",
+    "paris2_short": "Dünyanın en iyi 100 dalış noktasından biri",
+    "paris2_desc": "Dünyanın en dikkat çekici 100 dalış noktası arasında yer alan Paris II, I. Dünya Savaşı sırasında Kemer sularında batan bir Fransız gemisidir. 33 metre derinlikte yatan batık, dünya çapındaki dalış meraklıları için büyüleyici bir su altı müzesidir.",
+    "alacasu": "Alacasu Cennet Koyu",
+    "alacasu_short": "Turkuaz sularla gizli cennet",
+    "alacasu_desc": "Kemer'in gizli kalmış güzelliklerinden biri olan bu koy, merkezden yaklaşık 90 dakika uzaklıktadır. 175 metrelik plajı, trekking parkurları ve kristal mavisi yüzme sularıyla şehir kaoasundan kaçmak isteyenler için ideal bir kaçamaktır.",
+    "beldibi": "Beldibi Mağarası",
+    "beldibi_short": "Bin yıllık tarih öncesi mağara sanatı",
+    "beldibi_desc": "Kemer'e yaklaşık 20 kilometre mesafede bulunan bu mağara, denizin kayalıklarla buluştuğu noktada yer alır. Duvarlarında dağ keçisi, geyik ve insan figürleri bulunmaktadır. Neolitik, Paleolitik ve Mezolitik dönemlere ait eserler keşfedilmiştir.",
+    "idyros": "Idyros Antik Kenti",
+    "idyros_short": "Kemer merkezinde Bizans dönemi geometrik mozaikler",
+    "idyros_desc": "1976 yılındaki kazılarda ortaya çıkarılan bu antik kent, Bizans dönemine ait eserlere sahiptir. En dikkat çekici buluntu, dönemin sanatsal ustalığını sergileyen geometrik desenli mozaik zemindir. Kemer'in tam merkezindeki konumuyla kolayca ziyaret edilebilir."
+  }
+}
