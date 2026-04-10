@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /_originals/
+Disallow: /_build/
+Disallow: /data/
+
+Sitemap: https://palmiyehome.com/sitemap.xml

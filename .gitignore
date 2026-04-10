@@ -1,0 +1,24 @@
+# Backup originals - not for deployment
+_originals/
+
+# Node modules - installed by Netlify during deploy
+node_modules/
+package-lock.json
+
+# Build tools - not for deployment
+_build/
+
+# Original full-size logo (7MB) - web variants already generated
+Logo/Logo_Transpalan.png
+
+# System files
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# Optional photos not used in site
+AnasayfadaOlabilirResimler/
+
+# Fix/merge notes - development artifacts
+FIX_NOTES.txt
+MERGE_NOTES.txt

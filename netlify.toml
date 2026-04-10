@@ -1,0 +1,19 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/bookings"
+  to = "/.netlify/functions/get-bookings"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/save"
+  to = "/.netlify/functions/save-bookings"
+  status = 200
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"

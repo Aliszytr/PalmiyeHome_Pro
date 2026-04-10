@@ -1,0 +1,20 @@
+Controlled merge performed on top of the old working base ZIP.
+
+Source of merged changes:
+- PalmiyeHome-ConversionOptimized.zip
+
+Files replaced from Claude ZIP:
+- index.html
+- style.css
+- script.js
+- lang/tr.json
+- lang/en.json
+- lang/ru.json
+
+Files preserved from old working base ZIP:
+- All other existing assets and folders not listed above.
+
+Notes:
+- Project structure was preserved.
+- No extra rewrite was applied beyond the detected frontend/conversion files.
+- Logo filenames were left unchanged to avoid path regressions.
