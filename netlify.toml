@@ -12,6 +12,16 @@
   to = "/.netlify/functions/save-bookings"
   status = 200
 
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+
 [[headers]]
   for = "/admin/*"
   [headers.values]
