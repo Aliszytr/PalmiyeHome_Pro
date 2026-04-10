@@ -107,6 +107,19 @@ async function loadData() {
   }
 }
 
+// ── GET JWT TOKEN (with fallback) ──
+async function getToken() {
+  // 1) Try refresh
+  try { return await currentUser.jwt(true); } catch (_) {}
+  // 2) Try cached
+  try { return await currentUser.jwt(false); } catch (_) {}
+  // 3) Try raw token from user object
+  if (currentUser.token && currentUser.token.access_token) {
+    return currentUser.token.access_token;
+  }
+  return null;
+}
+
 // ── SAVE ──
 document.getElementById('btn-save').addEventListener('click', saveData);
 
@@ -130,7 +143,12 @@ async function saveData() {
   setStatus('Kaydediliyor...', '');
 
   try {
-    const token = await currentUser.jwt(true);
+    const token = await getToken();
+    if (!token) {
+      setStatus('Oturum süresi dolmuş — lütfen çıkış yapıp tekrar giriş yapın.', 'err');
+      return;
+    }
+
     const res = await fetch('/api/admin/save', {
       method: 'POST',
       headers: {
