@@ -719,7 +719,7 @@ function initBackToTop() {
 function initCookieNotice() {
   const notice = document.getElementById('cookie-notice');
   if (!notice) return;
-  if (localStorage.getItem('palmiye_cookies_accepted')) return;
+  if (localStorage.getItem('palmiye_cookies_accepted') || localStorage.getItem('palmiye_cookies_declined')) return;
 
   setTimeout(() => notice.classList.add('visible'), 2000);
 
@@ -727,6 +727,14 @@ function initCookieNotice() {
   if (acceptBtn) {
     acceptBtn.addEventListener('click', () => {
       localStorage.setItem('palmiye_cookies_accepted', '1');
+      notice.classList.remove('visible');
+    });
+  }
+
+  const declineBtn = notice.querySelector('.cookie-decline');
+  if (declineBtn) {
+    declineBtn.addEventListener('click', () => {
+      localStorage.setItem('palmiye_cookies_declined', '1');
       notice.classList.remove('visible');
     });
   }

@@ -152,6 +152,10 @@
     "platforms": "Rezervasyon",
     "rights": "Tüm hakları saklıdır."
   },
+  "reviews": {
+    "title": "Misafirlerimiz Ne Diyor?",
+    "subtitle": "Booking.com'daki misafirlerimizden gerçek yorumlar"
+  },
   "attractions": {
     "title": "Gezilecek Yerler",
     "subtitle": "Palmiye Home yakınındaki en güzel doğal ve tarihi noktaları keşfedin.",

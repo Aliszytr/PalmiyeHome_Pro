@@ -7,7 +7,8 @@
     "booking": "Book Now",
     "contact": "Contact",
     "whatsapp": "WhatsApp",
-    "attractions": "Places to Visit"
+    "attractions": "Places to Visit",
+    "availability": "Availability"
   },
   "hero": {
     "trust_pill": "Booking.com 9.6 · Exceptional guest rating",
@@ -18,7 +19,17 @@
     "bullet3": "Direct Booking — Best Price",
     "cta_whatsapp": "Check Availability on WhatsApp",
     "cta_booking": "View on Booking.com",
+    "cta_airbnb": "View on Airbnb",
     "response_note": "<i data-lucide=\"zap\"></i> We typically respond within 5 minutes"
+  },
+  "calendar": {
+    "title": "Availability Calendar",
+    "subtitle": "Check available dates and plan your stay. Green dates are available!",
+    "available": "Available",
+    "booked": "Booked",
+    "past": "Past",
+    "cta_text": "Found your dates? Book directly for the best price!",
+    "cta_btn": "Book via WhatsApp"
   },
   "trust": {
     "pool": "Shared Pool",
@@ -151,6 +162,10 @@
     "quick_links": "Quick Links",
     "platforms": "Book With Us",
     "rights": "All rights reserved."
+  },
+  "reviews": {
+    "title": "What Our Guests Say",
+    "subtitle": "Real reviews from our valued guests on Booking.com"
   },
   "attractions": {
     "title": "Places to Visit",

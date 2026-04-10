@@ -1862,6 +1862,21 @@ a:focus:not(:focus-visible) {
 .cookie-notice .btn-gold:hover {
   background: var(--gold-light);
 }
+.cookie-btns {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.cookie-decline {
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.2);
+  font-family: var(--font-body);
+}
+.cookie-decline:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.5);
+}
 @media (max-width: 480px) {
   .cookie-notice {
     flex-direction: column;

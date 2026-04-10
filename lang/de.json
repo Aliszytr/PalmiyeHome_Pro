@@ -163,6 +163,10 @@
     "platforms": "Buchen bei",
     "rights": "Alle Rechte vorbehalten."
   },
+  "reviews": {
+    "title": "Was unsere Gäste sagen",
+    "subtitle": "Echte Bewertungen unserer Gäste auf Booking.com"
+  },
   "attractions": {
     "title": "Sehenswürdigkeiten",
     "subtitle": "Entdecken Sie die Natur- und Geschichtsschönheiten nur wenige Minuten von Palmiye Home entfernt.",
@@ -171,23 +175,33 @@
     "show_less": "Weniger anzeigen",
     "canyon": "Göynük-Schlucht",
     "canyon_short": "Naturwunder mit Wasserfällen und Kiefernwäldern",
+    "canyon_desc": "Eine der beliebtesten Naturattraktionen von Kemer, die Göynük-Schlucht liegt am Lykischen Weg im Beydağları Küsten-Nationalpark. Mit atemberaubender Landschaft, reicher Vegetation und Wasserfällen. Gilt als eine der 10 besten Trekkingr outen der Welt.",
     "phaselis": "Antike Stadt Phaselis",
     "phaselis_short": "Antike Hafenstadt, in der Sie zwischen Ruinen schwimmen",
+    "phaselis_desc": "Im 7. Jahrhundert v. Chr. von Rhodiern gegründet, liegt diese Stadt auf einer Halbinsel im Mittelmeer. Die erhaltenen Ruinen stammen aus römischer und byzantinischer Zeit.",
     "olympos": "Antike Stadt Olympos",
     "olympos_short": "Antike Ruinen, Waldwege und ein atemberaubender Strand",
+    "olympos_desc": "Eine weitere berühmte Hafenstadt nach Phaselis, mit Ruinen aus römischer, byzantinischer und hellenistischer Zeit. Folgen Sie dem Bachweg durch die antike Stadt zum wunderschönen Olympos-Strand.",
     "tahtali": "Tahtalı-Seilbahn",
     "tahtali_short": "Fahrt auf 2.365 m mit atemberaubendem Panoramablick",
+    "tahtali_desc": "Mit 2.365 Metern einer der höchsten Berge der Region. Der Gipfel ist per Seilbahn erreichbar — die längste Europas und zweitlängste der Welt.",
     "cirali": "Çıralı – Yanartaş (Chimäre)",
     "cirali_short": "Ewige Flammen, die seit 2.500 Jahren brennen",
+    "cirali_desc": "Bekannt als 'Ewige Flamme von Olympos', brennen hier natürlich Felsen, gespeist von Methangas aus der Erde. Diese Feuer brennen seit über 2.500 Jahren ununterbrochen.",
     "adrasan": "Bucht von Adrasan",
     "adrasan_short": "Kristallklares seichtes Wasser, feiner Sandstrand",
+    "adrasan_desc": "Einer der beliebtesten Strände der Region, etwa eine Stunde von Kemer. Mit 4.000 Jahren Geschichte, umgeben von Orangen- und Kiefernbäumen, zeichnet sich die Bucht durch ihren flachen, steinfreien Feinsandstrand aus.",
     "paris2": "Schiffswrack Paris II",
     "paris2_short": "Einer der Top 100 Tauchplätze der Welt",
+    "paris2_desc": "Unter den 100 bemerkenswertesten Tauchplätzen der Welt gelistet. Paris II ist ein französisches Schiff, das im Ersten Weltkrieg vor Kemer sank. In 33 Metern Tiefe beherbergt das Wrack sechs Flugabwehrkanonen.",
     "alacasu": "Alacasu Paradiesbucht",
     "alacasu_short": "Ein verstecktes Paradies mit türkisfarbenem Wasser",
+    "alacasu_desc": "Ein verborgenes Juwel Kemers, etwa 90 Minuten vom Zentrum entfernt. Mit 175 Meter Strand, Wanderwegen und kristallklarem Wasser — ideal für Ruhe und Natur.",
     "beldibi": "Beldibi-Höhle",
     "beldibi_short": "Prähistorische Höhlenkunst aus Jahrtausenden",
+    "beldibi_desc": "Etwa 20 Kilometer von Kemer entfernt, dort wo das Meer auf die Felsen trifft. Die Wände zeigen Tier- und Menschenfiguren. Funde aus Neolithikum, Paläolithikum und Mesolithikum.",
     "idyros": "Antike Stadt Idyros",
-    "idyros_short": "Byzantinische geometrische Mosaike im Zentrum von Kemer"
+    "idyros_short": "Byzantinische geometrische Mosaike im Zentrum von Kemer",
+    "idyros_desc": "Bei Ausgrabungen 1976 entdeckt, beherbergt diese antike Stadt byzantinische Artefakte. Der bemerkenswerteste Fund ist ein geometrisch gemusterter Mosaikboden. Direkt im Zentrum von Kemer gelegen."
   }
 }
