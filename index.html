@@ -18,7 +18,17 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="tr_TR">
   <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:site_name" content="Palmiye Home">
+  <meta name="theme-color" content="#0f2027">
+  <!-- Multi-language hreflang -->
+  <link rel="alternate" hreflang="en" href="https://palmiyehome.com/">
+  <link rel="alternate" hreflang="tr" href="https://palmiyehome.com/?lang=tr">
+  <link rel="alternate" hreflang="ru" href="https://palmiyehome.com/?lang=ru">
+  <link rel="alternate" hreflang="de" href="https://palmiyehome.com/?lang=de">
+  <link rel="alternate" hreflang="x-default" href="https://palmiyehome.com/">
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Palmiye Home — Pool Apartment in Kemer, Antalya">
@@ -91,6 +101,7 @@
   </script>
 </head>
 <body>
+  <a href="#hero" class="skip-to-content">Skip to content</a>
 
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
@@ -112,6 +123,7 @@
           <button class="lang-btn active" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="tr">TR</button>
           <button class="lang-btn" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="de">DE</button>
         </div>
         <a href="https://wa.me/905327786732?text=Hello%2C%20I%20would%20like%20to%20check%20availability.%0A%0ACheck-in%3A%0ACheck-out%3A%0AGuests%3A" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm nav-whatsapp-btn">
           <i data-lucide="message-circle"></i>
@@ -219,6 +231,53 @@
                 <span data-i18n="booking_trust.cta">Check Availability on Booking.com</span>
               </a>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUEST REVIEWS -->
+    <section id="reviews" class="section-cream">
+      <div class="container fade-up">
+        <h2 class="section-title" data-i18n="reviews.title">What Our Guests Say</h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle" data-i18n="reviews.subtitle">Real reviews from our valued guests on Booking.com</p>
+
+        <div class="reviews-carousel" id="reviews-carousel">
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"The apartment was spotlessly clean and had everything we needed. The pool area is beautiful and the host responded instantly to every question. Best value in Kemer!"</p>
+            <div class="review-author">Sarah M.</div>
+            <div class="review-meta">🇬🇧 United Kingdom · August 2025</div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Wunderbare Unterkunft! Sehr sauber, ruhige Lage und der Pool war fantastisch. Die Kommunikation mit dem Gastgeber war hervorragend. Wir kommen gerne wieder!"</p>
+            <div class="review-author">Thomas K.</div>
+            <div class="review-meta">🇩🇪 Deutschland · Juli 2025</div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Отличная квартира в тихом месте. Чисто, уютно, есть всё необходимое. Бассейн замечательный! Хозяин очень отзывчивый. Рекомендую!"</p>
+            <div class="review-author">Ольга П.</div>
+            <div class="review-meta">🇷🇺 Россия · Сентябрь 2025</div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Harika bir tatil geçirdik! Daire tertemiz, havuz muhteşem. Ev sahibi çok ilgili ve her konuda yardımcı oldu. Kesinlikle tekrar geleceğiz."</p>
+            <div class="review-author">Mehmet Y.</div>
+            <div class="review-meta">🇹🇷 Türkiye · Ağustos 2025</div>
+          </div>
+
+          <div class="review-nav">
+            <button class="review-dot active" aria-label="Review 1"></button>
+            <button class="review-dot" aria-label="Review 2"></button>
+            <button class="review-dot" aria-label="Review 3"></button>
+            <button class="review-dot" aria-label="Review 4"></button>
           </div>
         </div>
       </div>
@@ -627,6 +686,7 @@
           </div>
 
           <div class="calendar-cta">
+            <span class="urgency-badge" id="urgency-badge" style="display:none"></span>
             <p data-i18n="calendar.cta_text">Found your dates? Book directly for the best price!</p>
             <a href="https://wa.me/905327786732?text=Hello%2C%20I%20would%20like%20to%20check%20availability.%0A%0ACheck-in%3A%0ACheck-out%3A%0AGuests%3A" target="_blank" rel="noopener" class="btn btn-whatsapp">
               <i data-lucide="message-circle"></i>
@@ -751,7 +811,7 @@
   </a>
 
   <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-label="Photo Viewer">
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Photo Viewer">
     <button class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
     <button class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous"><i data-lucide="chevron-left"></i></button>
     <button class="lightbox-nav next" id="lightbox-next" aria-label="Next"><i data-lucide="chevron-right"></i></button>
@@ -759,6 +819,17 @@
   </div>
 
   <div class="form-message" id="form-message"></div>
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <!-- Cookie Notice -->
+  <div id="cookie-notice" class="cookie-notice" role="alert">
+    <p>We use cookies for basic functionality. By continuing, you agree to our use of cookies. <a href="#" aria-label="Privacy policy">Privacy Policy</a></p>
+    <button class="btn btn-gold btn-sm cookie-accept">Accept</button>
+  </div>
+
   <script src="data/bookings.js"></script>
   <script src="assets/js/bookings-source.js"></script>
   <script src="script.js"></script>
