@@ -57,11 +57,13 @@
   from = "/api/bookings"
   to = "/.netlify/functions/get-bookings"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/api/admin/save"
   to = "/.netlify/functions/save-bookings"
   status = 200
+  force = true
 
 # ── Admin Redirects (EXISTING - preserved) ──
 [[redirects]]
