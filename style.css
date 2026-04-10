@@ -137,15 +137,16 @@ section { padding: 5rem 0; }
 }
 .btn-booking:hover { background: #00264d; transform: translateY(-2px); }
 .btn-booking-outline {
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,53,128,0.35);
   color: #fff;
-  border: 2px solid rgba(255,255,255,0.4);
+  border: 2px solid rgba(0,83,180,0.6);
   backdrop-filter: blur(8px);
 }
 .btn-booking-outline:hover {
-  background: rgba(255,255,255,0.2);
-  border-color: #fff;
+  background: var(--blue-booking);
+  border-color: var(--blue-booking);
   transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,53,128,0.4);
 }
 
 /* ---- NAVBAR ---- */
@@ -1167,7 +1168,6 @@ section { padding: 5rem 0; }
   color: #fff;
 }
 .cta-card:hover {
-  background: rgba(255,255,255,0.10);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
@@ -1177,7 +1177,25 @@ section { padding: 5rem 0; }
   border-color: var(--green-wa);
 }
 .cta-card-primary:hover { background: var(--green-wa-hover); }
-.cta-card-small { grid-column: span 2; }
+.cta-card-booking {
+  background: rgba(0,53,128,0.25);
+  border-color: rgba(0,83,180,0.4);
+}
+.cta-card-booking:hover {
+  background: var(--blue-booking);
+  border-color: var(--blue-booking);
+  box-shadow: 0 8px 24px rgba(0,53,128,0.35);
+}
+.cta-card-small {
+  grid-column: span 2;
+  background: rgba(255,56,95,0.15);
+  border-color: rgba(255,56,95,0.3);
+}
+.cta-card-small:hover {
+  background: #ff385f;
+  border-color: #ff385f;
+  box-shadow: 0 8px 24px rgba(255,56,95,0.35);
+}
 .cta-icon {
   width: 48px; height: 48px;
   border-radius: 12px;
@@ -1188,7 +1206,7 @@ section { padding: 5rem 0; }
 }
 .cta-icon.whatsapp { background: rgba(255,255,255,0.2); }
 .cta-icon.booking { background: var(--blue-booking); }
-.cta-icon.airbnb { background: #ff5a5f; }
+.cta-icon.airbnb { background: #ff385f; }
 .cta-icon svg { width: 22px; height: 22px; }
 .cta-card h4 { font-size: 1rem; font-weight: 600; font-family: var(--font-body); }
 .cta-card p { font-size: 0.8rem; opacity: 0.8; margin-top: 2px; }
@@ -1447,16 +1465,17 @@ section { padding: 5rem 0; }
 
 /* ---- Airbnb Outline Button ---- */
 .btn-airbnb-outline {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,56,95,0.25);
   color: #fff;
-  border: 2px solid rgba(255,255,255,0.4);
+  border: 2px solid rgba(255,56,95,0.5);
   backdrop-filter: blur(8px);
 }
 .btn-airbnb-outline:hover {
-  background: rgba(255,56,95,0.15);
+  background: #ff385f;
   border-color: #ff385f;
   color: #fff;
   transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255,56,95,0.4);
 }
 
 /* ---- AVAILABILITY CALENDAR ---- */
