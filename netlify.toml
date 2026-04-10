@@ -2,14 +2,44 @@
   publish = "."
   functions = "netlify/functions"
 
-[[redirects]]
-  from = "/api/bookings"
-  to = "/.netlify/functions/get-bookings"
-  status = 200
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(self)"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/Pictures/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/Resimler/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
 
 [[redirects]]
-  from = "/api/admin/save"
-  to = "/.netlify/functions/save-bookings"
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
   status = 200
 
 [[redirects]]
@@ -22,11 +52,23 @@
   to = "/admin/:splat"
   status = 200
 
-[[headers]]
-  for = "/admin/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
-    Cache-Control = "no-store"
+[[redirects]]
+  from = "https://www.palmiyehome.com/*"
+  to = "https://palmiyehome.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://kemerpalmiyehome.com/*"
+  to = "https://palmiyehome.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.kemerpalmiyehome.com/*"
+  to = "https://palmiyehome.com/:splat"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/*"

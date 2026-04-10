@@ -1,0 +1,11 @@
+# Palmiye Home — Netlify Redirects
+# API functions
+/api/*  /.netlify/functions/:splat  200
+
+# Old domain redirect
+https://kemerpalmiyehome.com/*  https://palmiyehome.com/:splat  301!
+https://www.kemerpalmiyehome.com/*  https://palmiyehome.com/:splat  301!
+https://www.palmiyehome.com/*  https://palmiyehome.com/:splat  301!
+
+# 404 fallback
+/*  /404.html  404
