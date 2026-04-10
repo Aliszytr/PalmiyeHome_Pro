@@ -14,10 +14,32 @@ function isValidRange(x) {
   );
 }
 
+// ── AUTH HELPER ──
+function getUserFromRequest(req, context) {
+  // 1) Try Netlify's automatic clientContext (v1 compat)
+  const ctxUser = (context?.clientContext || {}).user;
+  if (ctxUser) return ctxUser;
+
+  // 2) Fallback: decode JWT from Authorization header
+  const auth = req.headers.get("authorization");
+  if (!auth || !auth.startsWith("Bearer ")) return null;
+
+  try {
+    const token = auth.split(" ")[1];
+    const parts = token.split(".");
+    if (parts.length !== 3) return null;
+    // Base64url → Base64 → JSON
+    const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
+    if (!payload.sub && !payload.email) return null;
+    return { email: payload.email || payload.sub };
+  } catch (e) {
+    return null;
+  }
+}
+
 // ── HANDLER ──
 export default async (req, context) => {
-  // Auth check — Netlify Identity server-side verification via context
-  const { identity, user } = context.clientContext || {};
+  const user = getUserFromRequest(req, context);
 
   if (!user) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
