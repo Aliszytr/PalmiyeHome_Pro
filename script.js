@@ -19,6 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initFloatingWhatsApp();
   initAttractionToggle();
   initCalendar();
+
+  // New professional features (each in try-catch for safety)
+  try { initReviewsCarousel(); } catch(e) { console.warn('[Palmiye] Reviews carousel error:', e); }
+  try { initBackToTop(); } catch(e) { console.warn('[Palmiye] Back-to-top error:', e); }
+  try { initCookieNotice(); } catch(e) { console.warn('[Palmiye] Cookie notice error:', e); }
+  try { initLazyImages(); } catch(e) { console.warn('[Palmiye] Lazy images error:', e); }
+  try { initCalendarDateSelection(); } catch(e) { console.warn('[Palmiye] Calendar date selection error:', e); }
+  try { initUrgencyBadge(); } catch(e) { console.warn('[Palmiye] Urgency badge error:', e); }
 });
 
 /* ---- NAVBAR ---- */
@@ -147,51 +155,93 @@ function initLightbox() {
   const closeBtn = document.getElementById('lightbox-close');
   const prevBtn = document.getElementById('lightbox-prev');
   const nextBtn = document.getElementById('lightbox-next');
+  if (!lightbox || !lightboxImg) return;
+
   let images = [];
   let currentIndex = 0;
+  let lastFocused = null;
 
   function getVisibleImages() {
     return Array.from(document.querySelectorAll('.gallery-item:not(.hidden) img'));
   }
 
-  document.getElementById('gallery-grid').addEventListener('click', (e) => {
-    const item = e.target.closest('.gallery-item');
-    if (!item) return;
+  const galleryGrid = document.getElementById('gallery-grid');
+  if (galleryGrid) {
+    galleryGrid.addEventListener('click', (e) => {
+      const item = e.target.closest('.gallery-item');
+      if (!item) return;
 
-    images = getVisibleImages();
-    const img = item.querySelector('img');
-    currentIndex = images.indexOf(img);
+      images = getVisibleImages();
+      const img = item.querySelector('img');
+      currentIndex = images.indexOf(img);
 
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt || '';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      // Focus trap
+      lastFocused = document.activeElement;
+      if (closeBtn) closeBtn.focus();
+
+      updateCounter();
+    });
+  }
 
   function navigate(dir) {
     currentIndex = (currentIndex + dir + images.length) % images.length;
     lightboxImg.src = images[currentIndex].src;
-    lightboxImg.alt = images[currentIndex].alt;
+    lightboxImg.alt = images[currentIndex].alt || '';
+    updateCounter();
+  }
+
+  function updateCounter() {
+    let counter = lightbox.querySelector('.lightbox-counter');
+    if (!counter) {
+      counter = document.createElement('div');
+      counter.className = 'lightbox-counter';
+      counter.style.cssText = 'position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.6);font-size:0.85rem;font-weight:500;';
+      lightbox.appendChild(counter);
+    }
+    counter.textContent = `${currentIndex + 1} / ${images.length}`;
   }
 
   function closeLightbox() {
     lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
   }
 
-  closeBtn.addEventListener('click', closeLightbox);
-  prevBtn.addEventListener('click', () => navigate(-1));
-  nextBtn.addEventListener('click', () => navigate(1));
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (prevBtn) prevBtn.addEventListener('click', () => navigate(-1));
+  if (nextBtn) nextBtn.addEventListener('click', () => navigate(1));
 
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) closeLightbox();
   });
 
+  // Focus trap inside lightbox
+  const focusableEls = [closeBtn, prevBtn, nextBtn].filter(Boolean);
   document.addEventListener('keydown', (e) => {
     if (!lightbox.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') navigate(-1);
     if (e.key === 'ArrowRight') navigate(1);
+
+    // Tab trap
+    if (e.key === 'Tab' && focusableEls.length) {
+      const first = focusableEls[0];
+      const last = focusableEls[focusableEls.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
   });
 }
 
@@ -315,12 +365,14 @@ function initCalendar() {
   const MONTH_NAMES = {
     en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
     tr: ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
-    ru: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
+    ru: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+    de: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']
   };
   const WEEKDAY_NAMES = {
     en: ['Mo','Tu','We','Th','Fr','Sa','Su'],
     tr: ['Pt','Sa','Ça','Pe','Cu','Ct','Pz'],
-    ru: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
+    ru: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],
+    de: ['Mo','Di','Mi','Do','Fr','Sa','So']
   };
 
   const today = new Date();
@@ -511,6 +563,7 @@ function detectBrowserLang() {
   const lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
   if (lang.startsWith('tr')) return 'tr';
   if (lang.startsWith('ru')) return 'ru';
+  if (lang.startsWith('de')) return 'de';
   return null;
 }
 
@@ -606,4 +659,288 @@ function initI18n() {
   const saved = getCurrentLang();
   // Always load the language file (including English) to ensure switching works
   loadLanguage(saved);
+}
+
+/* ---- GUEST REVIEWS CAROUSEL ---- */
+function initReviewsCarousel() {
+  const carousel = document.getElementById('reviews-carousel');
+  if (!carousel) return;
+
+  const cards = carousel.querySelectorAll('.review-card');
+  const dots = carousel.querySelectorAll('.review-dot');
+  if (!cards.length) return;
+
+  let current = 0;
+  let interval;
+
+  function showReview(index) {
+    cards[current].style.display = 'none';
+    if (dots[current]) dots[current].classList.remove('active');
+    current = (index + cards.length) % cards.length;
+    cards[current].style.display = 'block';
+    if (dots[current]) dots[current].classList.add('active');
+  }
+
+  // Hide all except first
+  cards.forEach((card, i) => {
+    card.style.display = i === 0 ? 'block' : 'none';
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      showReview(i);
+      resetInterval();
+    });
+  });
+
+  function resetInterval() {
+    clearInterval(interval);
+    interval = setInterval(() => showReview(current + 1), 7000);
+  }
+
+  interval = setInterval(() => showReview(current + 1), 7000);
+}
+
+/* ---- BACK TO TOP ---- */
+function initBackToTop() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 600);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ---- COOKIE NOTICE ---- */
+function initCookieNotice() {
+  const notice = document.getElementById('cookie-notice');
+  if (!notice) return;
+  if (localStorage.getItem('palmiye_cookies_accepted')) return;
+
+  setTimeout(() => notice.classList.add('visible'), 2000);
+
+  const acceptBtn = notice.querySelector('.cookie-accept');
+  if (acceptBtn) {
+    acceptBtn.addEventListener('click', () => {
+      localStorage.setItem('palmiye_cookies_accepted', '1');
+      notice.classList.remove('visible');
+    });
+  }
+}
+
+/* ---- LAZY IMAGE LOAD ---- */
+function initLazyImages() {
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+    }
+  });
+}
+
+/* ---- CALENDAR DATE SELECTION (WhatsApp pre-fill) ---- */
+function initCalendarDateSelection() {
+  const calWrapper = document.querySelector('.calendar-wrapper');
+  if (!calWrapper) {
+    // Calendar not yet rendered, observe for it
+    const observer = new MutationObserver(() => {
+      const cw = document.querySelector('.calendar-wrapper');
+      if (cw) {
+        observer.disconnect();
+        setupCalendarSelection(cw);
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    // Auto-disconnect after 10s
+    setTimeout(() => observer.disconnect(), 10000);
+  } else {
+    setupCalendarSelection(calWrapper);
+  }
+}
+
+function setupCalendarSelection(calWrapper) {
+  let startDate = null;
+  let endDate = null;
+
+  // Month name mapping for all supported languages
+  const MONTH_MAP = {
+    'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+    'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11,
+    'Ocak': 0, 'Şubat': 1, 'Mart': 2, 'Nisan': 3, 'Mayıs': 4, 'Haziran': 5,
+    'Temmuz': 6, 'Ağustos': 7, 'Eylül': 8, 'Ekim': 9, 'Kasım': 10, 'Aralık': 11,
+    'Январь': 0, 'Февраль': 1, 'Март': 2, 'Апрель': 3, 'Май': 4, 'Июнь': 5,
+    'Июль': 6, 'Август': 7, 'Сентябрь': 8, 'Октябрь': 9, 'Ноябрь': 10, 'Декабрь': 11,
+    'Januar': 0, 'Februar': 1, 'März': 2, 'April': 3, 'Mai': 4, 'Juni': 5,
+    'Juli': 6, 'August': 7, 'September': 8, 'Oktober': 9, 'November': 10, 'Dezember': 11
+  };
+
+  calWrapper.addEventListener('click', (e) => {
+    const day = e.target.closest('.calendar-day.available');
+    if (!day) return;
+
+    const monthContainer = day.closest('.calendar-month');
+    if (!monthContainer) return;
+
+    const label = monthContainer.querySelector('.calendar-month-label');
+    if (!label) return;
+
+    const dayNum = parseInt(day.textContent);
+    if (isNaN(dayNum)) return;
+
+    // Parse month and year from month label
+    const labelText = label.textContent.trim();
+    let month = -1;
+    let year = new Date().getFullYear();
+
+    for (const [name, idx] of Object.entries(MONTH_MAP)) {
+      if (labelText.includes(name)) {
+        month = idx;
+        const yearMatch = labelText.match(/\d{4}/);
+        if (yearMatch) year = parseInt(yearMatch[0]);
+        break;
+      }
+    }
+
+    if (month === -1) return;
+
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayNum).padStart(2, '0')}`;
+
+    if (!startDate || (startDate && endDate)) {
+      // First click or reset
+      startDate = dateStr;
+      endDate = null;
+      clearSelection();
+      day.classList.add('selected');
+    } else {
+      // Second click
+      if (dateStr < startDate) {
+        endDate = startDate;
+        startDate = dateStr;
+      } else {
+        endDate = dateStr;
+      }
+      clearSelection();
+      day.classList.add('selected');
+    }
+
+    updateSelectionBar(startDate, endDate);
+  });
+
+  function clearSelection() {
+    calWrapper.querySelectorAll('.calendar-day.selected').forEach(d => {
+      d.classList.remove('selected');
+    });
+  }
+
+  function updateSelectionBar(start, end) {
+    let bar = calWrapper.querySelector('.calendar-selection-bar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'calendar-selection-bar';
+      bar.innerHTML = `
+        <span class="selected-dates"></span>
+        <a class="btn btn-whatsapp btn-sm" href="#" target="_blank" rel="noopener">
+          <i data-lucide="message-circle"></i>
+          <span data-i18n="calendar.cta_btn">Book via WhatsApp</span>
+        </a>
+      `;
+      calWrapper.appendChild(bar);
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    const datesSpan = bar.querySelector('.selected-dates');
+    const waLink = bar.querySelector('a');
+
+    const formatDisplay = (d) => {
+      const parts = d.split('-');
+      return `${parts[2]}.${parts[1]}.${parts[0]}`;
+    };
+
+    if (start && end) {
+      datesSpan.textContent = `${formatDisplay(start)} → ${formatDisplay(end)}`;
+
+      const lang = getCurrentLang();
+      const msgs = {
+        en: `Hello! I'd like to book Palmiye Home from ${formatDisplay(start)} to ${formatDisplay(end)}. Is it available?`,
+        tr: `Merhaba! Palmiye Home'u ${formatDisplay(start)} - ${formatDisplay(end)} tarihleri arasında kiralamak istiyorum. Müsait mi?`,
+        ru: `Здравствуйте! Хочу забронировать Palmiye Home с ${formatDisplay(start)} по ${formatDisplay(end)}. Свободно?`,
+        de: `Hallo! Ich möchte Palmiye Home vom ${formatDisplay(start)} bis ${formatDisplay(end)} buchen. Ist es verfügbar?`
+      };
+      const msg = encodeURIComponent(msgs[lang] || msgs.en);
+      waLink.href = `https://wa.me/905327786732?text=${msg}`;
+
+      bar.classList.add('visible');
+    } else if (start) {
+      const langLabels = {
+        en: `Check-in: ${formatDisplay(start)} — tap checkout date`,
+        tr: `Giriş: ${formatDisplay(start)} — çıkış tarihine dokunun`,
+        ru: `Заезд: ${formatDisplay(start)} — выберите дату выезда`,
+        de: `Check-in: ${formatDisplay(start)} — Abreisedatum wählen`
+      };
+      datesSpan.textContent = langLabels[getCurrentLang()] || langLabels.en;
+      bar.classList.add('visible');
+    }
+  }
+}
+
+/* ---- URGENCY BADGE (auto-calculated) ---- */
+function initUrgencyBadge() {
+  const badge = document.getElementById('urgency-badge');
+  if (!badge) return;
+
+  function updateUrgency() {
+    const data = window.PALMIYE_BOOKINGS;
+    if (!data || !data.bookings) return;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const threeMonths = new Date(today);
+    threeMonths.setMonth(threeMonths.getMonth() + 3);
+
+    const totalDays = Math.ceil((threeMonths - today) / (1000 * 60 * 60 * 24));
+    let bookedDays = 0;
+
+    data.bookings.forEach(b => {
+      const from = new Date(b.from + 'T00:00:00');
+      const to = new Date(b.to + 'T00:00:00');
+
+      const effectiveFrom = from < today ? today : from;
+      const effectiveTo = to > threeMonths ? threeMonths : to;
+
+      if (effectiveFrom < effectiveTo) {
+        bookedDays += Math.ceil((effectiveTo - effectiveFrom) / (1000 * 60 * 60 * 24));
+      }
+    });
+
+    const availableDays = totalDays - bookedDays;
+    const availableWeeks = Math.floor(availableDays / 7);
+
+    if (availableWeeks <= 8) {
+      const lang = getCurrentLang();
+      const msgs = {
+        en: `Only ${availableWeeks} weeks available in the next 3 months!`,
+        tr: `Önümüzdeki 3 ayda sadece ${availableWeeks} hafta müsait!`,
+        ru: `Только ${availableWeeks} недель свободно в ближайшие 3 месяца!`,
+        de: `Nur noch ${availableWeeks} Wochen verfügbar in den nächsten 3 Monaten!`
+      };
+      badge.textContent = msgs[lang] || msgs.en;
+      badge.style.display = 'inline-flex';
+    }
+  }
+
+  // Wait for bookings to load
+  const checkInterval = setInterval(() => {
+    if (window.PALMIYE_BOOKINGS) {
+      clearInterval(checkInterval);
+      updateUrgency();
+    }
+  }, 500);
+
+  // Clear after 10 seconds if no data
+  setTimeout(() => clearInterval(checkInterval), 10000);
 }
