@@ -1,0 +1,79 @@
+<!-- =============================================
+     Palmiye Home — Body Extra Elements
+     Bu kodları ana index.html'in </body> kapanış tagından ÖNCE ekleyin.
+     ============================================= -->
+
+<!-- Skip to Content (Accessibility) -->
+<!-- NOT: Bu satırı <body> açılış tagından HEMEN SONRA ekleyin -->
+<!-- <a href="#hero" class="skip-to-content">Skip to content</a> -->
+
+<!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+<!-- Urgency Badge (Takvim bölümüne eklenecek) -->
+<!-- NOT: Bu elemanı #availability section içindeki calendar-cta div'ine ekleyin -->
+<!-- <span class="urgency-badge" id="urgency-badge" style="display:none">
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+</span> -->
+
+<!-- Cookie Notice -->
+<div id="cookie-notice" class="cookie-notice" role="alert">
+  <p>We use cookies for basic functionality. By continuing, you agree to our use of cookies. <a href="#" aria-label="Privacy policy">Privacy Policy</a></p>
+  <button class="btn btn-gold btn-sm cookie-accept">Accept</button>
+</div>
+
+<!-- Google Analytics (GA4) — TELEFON NUMARANIZI ve GA ID'NİZİ DEĞİŞTİRİN -->
+<!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+
+  // Track WhatsApp clicks
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href*="wa.me"]');
+    if (link) {
+      gtag('event', 'whatsapp_click', {
+        event_category: 'engagement',
+        event_label: link.closest('section')?.id || 'unknown'
+      });
+    }
+  });
+
+  // Track Booking.com clicks
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href*="booking.com"]');
+    if (link) {
+      gtag('event', 'booking_click', {
+        event_category: 'engagement',
+        event_label: 'booking_com'
+      });
+    }
+  });
+
+  // Track Airbnb clicks
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href*="airbnb.com"]');
+    if (link) {
+      gtag('event', 'airbnb_click', {
+        event_category: 'engagement',
+        event_label: 'airbnb'
+      });
+    }
+  });
+
+  // Track calendar interaction
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.calendar-day.available')) {
+      gtag('event', 'calendar_date_click', {
+        event_category: 'engagement',
+        event_label: 'availability_calendar'
+      });
+    }
+  });
+</script>
+-->

@@ -1,0 +1,11 @@
+# Palmiye Home — Robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_build/
+Disallow: /_originals/
+Disallow: /netlify/
+
+# Sitemap
+Sitemap: https://palmiyehome.com/sitemap.xml
