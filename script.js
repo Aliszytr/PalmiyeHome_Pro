@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initFloatingWhatsApp();
   initAttractionToggle();
   initCalendar();
+  initReviewsCarousel();
+  initBackToTop();
+  initCookieNotice();
+  initLazyImages();
+  initCalendarDateSelection();
+  initUrgencyBadge();
 });
 
 /* ---- NAVBAR ---- */
@@ -315,12 +321,14 @@ function initCalendar() {
   const MONTH_NAMES = {
     en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
     tr: ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
-    ru: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
+    ru: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+    de: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']
   };
   const WEEKDAY_NAMES = {
     en: ['Mo','Tu','We','Th','Fr','Sa','Su'],
     tr: ['Pt','Sa','Ça','Pe','Cu','Ct','Pz'],
-    ru: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
+    ru: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],
+    de: ['Mo','Di','Mi','Do','Fr','Sa','So']
   };
 
   const today = new Date();
@@ -511,6 +519,7 @@ function detectBrowserLang() {
   const lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
   if (lang.startsWith('tr')) return 'tr';
   if (lang.startsWith('ru')) return 'ru';
+  if (lang.startsWith('de')) return 'de';
   return null;
 }
 
@@ -606,4 +615,309 @@ function initI18n() {
   const saved = getCurrentLang();
   // Always load the language file (including English) to ensure switching works
   loadLanguage(saved);
+}
+/* ---- GUEST REVIEWS CAROUSEL ---- */
+function initReviewsCarousel() {
+  const carousel = document.getElementById('reviews-carousel');
+  if (!carousel) return;
+
+  const cards = carousel.querySelectorAll('.review-card');
+  const dots = carousel.querySelectorAll('.review-dot');
+  if (!cards.length) return;
+
+  let current = 0;
+  let interval;
+
+  function showReview(index) {
+    cards[current].style.display = 'none';
+    if (dots[current]) dots[current].classList.remove('active');
+    current = (index + cards.length) % cards.length;
+    cards[current].style.display = 'block';
+    if (dots[current]) dots[current].classList.add('active');
+  }
+
+  // Hide all except first
+  cards.forEach((card, i) => {
+    card.style.display = i === 0 ? 'block' : 'none';
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      showReview(i);
+      resetInterval();
+    });
+  });
+
+  function resetInterval() {
+    clearInterval(interval);
+    interval = setInterval(() => showReview(current + 1), 7000);
+  }
+
+  interval = setInterval(() => showReview(current + 1), 7000);
+}
+
+/* ---- BACK TO TOP ---- */
+function initBackToTop() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 600);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ---- COOKIE NOTICE ---- */
+function initCookieNotice() {
+  const notice = document.getElementById('cookie-notice');
+  if (!notice) return;
+  if (localStorage.getItem('palmiye_cookies_accepted')) return;
+
+  setTimeout(() => notice.classList.add('visible'), 2000);
+
+  const acceptBtn = notice.querySelector('.cookie-accept');
+  if (acceptBtn) {
+    acceptBtn.addEventListener('click', () => {
+      localStorage.setItem('palmiye_cookies_accepted', '1');
+      notice.classList.remove('visible');
+    });
+  }
+}
+
+/* ---- LAZY IMAGE LOAD ---- */
+function initLazyImages() {
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+    }
+  });
+}
+
+/* ---- CALENDAR DATE SELECTION (WhatsApp pre-fill) ---- */
+function initCalendarDateSelection() {
+  // Wait for calendar to render
+  const observer = new MutationObserver(() => {
+    const calWrapper = document.querySelector('.calendar-wrapper');
+    if (!calWrapper) return;
+
+    let startDate = null;
+    let endDate = null;
+
+    calWrapper.addEventListener('click', (e) => {
+      const day = e.target.closest('.calendar-day.available');
+      if (!day) return;
+
+      // Parse date from the rendered calendar
+      const monthContainer = day.closest('.calendar-month');
+      if (!monthContainer) return;
+
+      const label = monthContainer.querySelector('.calendar-month-label');
+      if (!label) return;
+
+      const dayNum = parseInt(day.textContent);
+      if (isNaN(dayNum)) return;
+
+      // Get year and month from the header titles
+      const header = document.querySelector('.calendar-months-title');
+      if (!header) return;
+
+      const titles = header.querySelectorAll('span:not(.calendar-separator)');
+      const isFirstMonth = monthContainer === document.getElementById('cal-month-1');
+      const titleEl = isFirstMonth ? titles[0] : titles[1];
+      if (!titleEl) return;
+
+      const titleText = titleEl.textContent.trim();
+
+      // Parse month name and year from title
+      const MONTH_MAP = {
+        'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+        'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11,
+        'Ocak': 0, 'Şubat': 1, 'Mart': 2, 'Nisan': 3, 'Mayıs': 4, 'Haziran': 5,
+        'Temmuz': 6, 'Ağustos': 7, 'Eylül': 8, 'Ekim': 9, 'Kasım': 10, 'Aralık': 11,
+        'Январь': 0, 'Февраль': 1, 'Март': 2, 'Апрель': 3, 'Май': 4, 'Июнь': 5,
+        'Июль': 6, 'Август': 7, 'Сентябрь': 8, 'Октябрь': 9, 'Ноябрь': 10, 'Декабрь': 11
+      };
+
+      let month = -1;
+      let year = new Date().getFullYear();
+      for (const [name, idx] of Object.entries(MONTH_MAP)) {
+        if (titleText.includes(name)) {
+          month = idx;
+          const yearMatch = titleText.match(/\d{4}/);
+          if (yearMatch) year = parseInt(yearMatch[0]);
+          break;
+        }
+      }
+
+      if (month === -1) return;
+
+      const clickedDate = new Date(year, month, dayNum);
+      const dateStr = formatDateISO(clickedDate);
+
+      if (!startDate || (startDate && endDate)) {
+        // First click or reset
+        startDate = dateStr;
+        endDate = null;
+        clearSelection();
+        day.classList.add('selected');
+      } else {
+        // Second click
+        if (dateStr < startDate) {
+          endDate = startDate;
+          startDate = dateStr;
+        } else {
+          endDate = dateStr;
+        }
+        highlightRange(startDate, endDate);
+      }
+
+      updateSelectionBar(startDate, endDate);
+    });
+
+    function formatDateISO(date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function clearSelection() {
+      document.querySelectorAll('.calendar-day.selected, .calendar-day.in-range').forEach(d => {
+        d.classList.remove('selected', 'in-range');
+      });
+    }
+
+    function highlightRange(start, end) {
+      clearSelection();
+      document.querySelectorAll('.calendar-day.available').forEach(day => {
+        const monthContainer = day.closest('.calendar-month');
+        if (!monthContainer) return;
+
+        // We'll add a data attribute approach for simpler logic
+        // For now, just highlight the selected endpoints
+        day.classList.toggle('selected',
+          day.classList.contains('available') && !day.classList.contains('past')
+        );
+      });
+      // Simple visual: mark both endpoints
+      // Full range highlighting requires date data attributes on each cell
+    }
+
+    function updateSelectionBar(start, end) {
+      let bar = document.querySelector('.calendar-selection-bar');
+      if (!bar) {
+        bar = document.createElement('div');
+        bar.className = 'calendar-selection-bar';
+        bar.innerHTML = `
+          <span class="selected-dates"></span>
+          <a class="btn btn-whatsapp btn-sm" href="#" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.328 0-4.47-.788-6.18-2.112l-.43-.334-2.819.945.945-2.819-.334-.43A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            <span data-i18n="calendar.cta_btn">Book via WhatsApp</span>
+          </a>
+        `;
+        const calWrapper = document.querySelector('.calendar-wrapper');
+        if (calWrapper) calWrapper.appendChild(bar);
+      }
+
+      const datesSpan = bar.querySelector('.selected-dates');
+      const waLink = bar.querySelector('a');
+
+      if (start && end) {
+        const formatDisplay = (d) => {
+          const parts = d.split('-');
+          return `${parts[2]}.${parts[1]}.${parts[0]}`;
+        };
+        datesSpan.textContent = `${formatDisplay(start)} → ${formatDisplay(end)}`;
+
+        const lang = getCurrentLang();
+        const msgs = {
+          en: `Hello! I'd like to book Palmiye Home from ${formatDisplay(start)} to ${formatDisplay(end)}. Is it available?`,
+          tr: `Merhaba! Palmiye Home'u ${formatDisplay(start)} - ${formatDisplay(end)} tarihleri arasında kiralamak istiyorum. Müsait mi?`,
+          ru: `Здравствуйте! Хочу забронировать Palmiye Home с ${formatDisplay(start)} по ${formatDisplay(end)}. Свободно?`
+        };
+        const msg = encodeURIComponent(msgs[lang] || msgs.en);
+        waLink.href = `https://wa.me/905XXXXXXXXX?text=${msg}`;
+
+        bar.classList.add('visible');
+      } else if (start) {
+        const formatDisplay = (d) => {
+          const parts = d.split('-');
+          return `${parts[2]}.${parts[1]}.${parts[0]}`;
+        };
+        const langLabels = {
+          en: `Check-in: ${formatDisplay(start)} — tap checkout date`,
+          tr: `Giriş: ${formatDisplay(start)} — çıkış tarihine dokunun`,
+          ru: `Заезд: ${formatDisplay(start)} — выберите дату выезда`
+        };
+        datesSpan.textContent = langLabels[getCurrentLang()] || langLabels.en;
+        bar.classList.add('visible');
+      }
+    }
+
+    observer.disconnect();
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+/* ---- URGENCY BADGE (auto-calculated) ---- */
+function initUrgencyBadge() {
+  // Calculate available weeks in the next 3 months from booking data
+  const badge = document.getElementById('urgency-badge');
+  if (!badge) return;
+
+  function updateUrgency() {
+    const data = window.PALMIYE_BOOKINGS;
+    if (!data || !data.bookings) return;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const threeMonths = new Date(today);
+    threeMonths.setMonth(threeMonths.getMonth() + 3);
+
+    const totalDays = Math.ceil((threeMonths - today) / (1000 * 60 * 60 * 24));
+    let bookedDays = 0;
+
+    data.bookings.forEach(b => {
+      const from = new Date(b.from + 'T00:00:00');
+      const to = new Date(b.to + 'T00:00:00');
+
+      const effectiveFrom = from < today ? today : from;
+      const effectiveTo = to > threeMonths ? threeMonths : to;
+
+      if (effectiveFrom < effectiveTo) {
+        bookedDays += Math.ceil((effectiveTo - effectiveFrom) / (1000 * 60 * 60 * 24));
+      }
+    });
+
+    const availableDays = totalDays - bookedDays;
+    const availableWeeks = Math.floor(availableDays / 7);
+
+    if (availableWeeks <= 8) {
+      const lang = getCurrentLang();
+      const msgs = {
+        en: `Only ${availableWeeks} weeks available in the next 3 months!`,
+        tr: `Önümüzdeki 3 ayda sadece ${availableWeeks} hafta müsait!`,
+        ru: `Только ${availableWeeks} недель свободно в ближайшие 3 месяца!`
+      };
+      badge.textContent = msgs[lang] || msgs.en;
+      badge.style.display = 'inline-flex';
+    }
+  }
+
+  // Wait for bookings to load
+  const checkInterval = setInterval(() => {
+    if (window.PALMIYE_BOOKINGS) {
+      clearInterval(checkInterval);
+      updateUrgency();
+    }
+  }, 500);
+
+  // Clear after 10 seconds if no data
+  setTimeout(() => clearInterval(checkInterval), 10000);
 }
