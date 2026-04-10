@@ -1689,3 +1689,279 @@ section { padding: 5rem 0; }
   0%, 100% { box-shadow: 0 0 0 0 rgba(201,148,62,0.3); }
   50% { box-shadow: 0 0 0 8px rgba(201,148,62,0); }
 }
+
+/* ================================================
+   PROFESSIONAL ADDITIONS — Phase 5
+   ================================================ */
+
+/* ---- SKIP TO CONTENT (Accessibility) ---- */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--gold);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  z-index: 10000;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 0 0 var(--radius) 0;
+  transition: top var(--transition-fast);
+}
+.skip-to-content:focus {
+  top: 0;
+  outline: 3px solid var(--gold-light);
+  outline-offset: 2px;
+}
+
+/* ---- FOCUS VISIBLE (Accessibility) ---- */
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ---- GUEST REVIEWS CAROUSEL ---- */
+.reviews-carousel {
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  min-height: 220px;
+}
+.review-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.04);
+  text-align: center;
+  transition: all var(--transition);
+}
+.review-stars {
+  font-size: 1.2rem;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+  letter-spacing: 2px;
+}
+.review-text {
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.7;
+  font-style: italic;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+.review-author {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy);
+}
+.review-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+.review-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.5rem;
+}
+.review-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cream-dark);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  padding: 0;
+}
+.review-dot.active {
+  background: var(--gold);
+  width: 28px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(201,148,62,0.3);
+}
+.review-dot:hover {
+  background: var(--gold-light);
+}
+
+/* ---- BACK TO TOP BUTTON ---- */
+.back-to-top {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 990;
+  background: var(--navy);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--transition);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  background: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(201,148,62,0.3);
+}
+
+/* ---- COOKIE NOTICE ---- */
+.cookie-notice {
+  position: fixed;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: var(--navy);
+  color: rgba(255,255,255,0.85);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 600px;
+  width: calc(100% - 2rem);
+  font-size: 0.85rem;
+  transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.cookie-notice.visible {
+  bottom: 20px;
+}
+.cookie-notice p {
+  flex: 1;
+  line-height: 1.5;
+  font-weight: 300;
+}
+.cookie-notice a {
+  color: var(--gold-light);
+  text-decoration: underline;
+}
+.cookie-notice .btn-gold {
+  background: var(--gold);
+  color: #fff;
+  flex-shrink: 0;
+}
+.cookie-notice .btn-gold:hover {
+  background: var(--gold-light);
+}
+@media (max-width: 480px) {
+  .cookie-notice {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ---- URGENCY BADGE ---- */
+.urgency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #ff6b35, #f72c25);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 0.75rem;
+  animation: pulse-badge 2s ease-in-out infinite;
+  box-shadow: 0 2px 12px rgba(247,44,37,0.25);
+}
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* ---- CALENDAR DATE SELECTION ---- */
+.calendar-day.selected {
+  background: var(--gold) !important;
+  color: #fff !important;
+  border-color: var(--gold) !important;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(201,148,62,0.35);
+}
+.calendar-selection-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: linear-gradient(135deg, var(--navy), var(--navy-soft));
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius);
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--transition);
+}
+.calendar-selection-bar.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.selected-dates {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+@media (max-width: 480px) {
+  .calendar-selection-bar {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ---- LAZY IMAGE LOADING ---- */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* ---- REDUCED MOTION ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-slide { transition: none; }
+  .hero-slide.active { transition: opacity 0.3s ease; transform: none; }
+}
+
+/* ---- PRINT STYLES ---- */
+@media print {
+  .navbar, .mobile-cta, .floating-whatsapp, .mobile-menu,
+  .mobile-overlay, .back-to-top, .cookie-notice,
+  .hero-indicators, .calendar-nav-btn { display: none !important; }
+
+  body { color: #000; background: #fff; }
+  .hero { min-height: auto; }
+  .hero-overlay { background: none; }
+  .hero-content { color: #000; }
+  .hero h1 { color: #333; text-shadow: none; }
+  .hero h1 span { color: #666; }
+  section { padding: 2rem 0; break-inside: avoid; }
+  .conversion-cp { background: #f5f5f5; color: #333; }
+  .conversion-cp h3, .conversion-cp p { color: #333; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666; }
+  .btn { border: 1px solid #ccc; background: transparent; color: #333; box-shadow: none; }
+}
