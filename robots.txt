@@ -9,4 +9,4 @@ Disallow: /netlify/
 Disallow: /data/
 
 # Sitemap
-Sitemap: https://palmiyehome.com/sitemap.xml
+Sitemap: https://palmiyehomekemer.com/sitemap.xml

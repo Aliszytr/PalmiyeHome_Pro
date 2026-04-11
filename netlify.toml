@@ -76,22 +76,37 @@
   to = "/admin/:splat"
   status = 200
 
-# ── Domain Redirects (NEW) ──
+# ── Domain Redirects ──
+# palmiyehome.com → palmiyehomekemer.com (eski domain)
 [[redirects]]
-  from = "https://www.palmiyehome.com/*"
-  to = "https://palmiyehome.com/:splat"
+  from = "https://palmiyehome.com/*"
+  to = "https://palmiyehomekemer.com/:splat"
   status = 301
   force = true
 
 [[redirects]]
+  from = "https://www.palmiyehome.com/*"
+  to = "https://palmiyehomekemer.com/:splat"
+  status = 301
+  force = true
+
+# kemerpalmiyehome.com → palmiyehomekemer.com
+[[redirects]]
   from = "https://kemerpalmiyehome.com/*"
-  to = "https://palmiyehome.com/:splat"
+  to = "https://palmiyehomekemer.com/:splat"
   status = 301
   force = true
 
 [[redirects]]
   from = "https://www.kemerpalmiyehome.com/*"
-  to = "https://palmiyehome.com/:splat"
+  to = "https://palmiyehomekemer.com/:splat"
+  status = 301
+  force = true
+
+# www → non-www canonical
+[[redirects]]
+  from = "https://www.palmiyehomekemer.com/*"
+  to = "https://palmiyehomekemer.com/:splat"
   status = 301
   force = true
 
