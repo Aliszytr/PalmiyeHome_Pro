@@ -952,3 +952,38 @@ function initUrgencyBadge() {
   // Clear after 10 seconds if no data
   setTimeout(() => clearInterval(checkInterval), 10000);
 }
+
+/* ---- COOKIE NOTICE ---- */
+function initCookieNotice() {
+  const notice = document.getElementById('cookie-notice');
+  if (!notice) return;
+
+  // Check if user already made a choice
+  const consent = localStorage.getItem('palmiye_cookies');
+  if (consent === 'accepted' || consent === 'declined') {
+    notice.remove();
+    return;
+  }
+
+  // Show the notice
+  setTimeout(() => notice.classList.add('visible'), 1000);
+
+  const acceptBtn = notice.querySelector('.cookie-accept');
+  const declineBtn = notice.querySelector('.cookie-decline');
+
+  if (acceptBtn) {
+    acceptBtn.addEventListener('click', () => {
+      localStorage.setItem('palmiye_cookies', 'accepted');
+      notice.classList.remove('visible');
+      setTimeout(() => notice.remove(), 400);
+    });
+  }
+
+  if (declineBtn) {
+    declineBtn.addEventListener('click', () => {
+      localStorage.setItem('palmiye_cookies', 'declined');
+      notice.classList.remove('visible');
+      setTimeout(() => notice.remove(), 400);
+    });
+  }
+}
