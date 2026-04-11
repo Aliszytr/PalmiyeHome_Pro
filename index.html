@@ -48,7 +48,7 @@
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     "name": "Palmiye Home",
-    "description": "Fully equipped 1+1 apartment with shared pool in Kemer Göynük, Antalya. Mountain views, free parking, high-speed Wi-Fi.",
+    "description": "Fully equipped 1+1 apartment with shared pool, mountain views & free parking in Kemer–Göynük, Antalya",
     "url": "https://palmiyehomekemer.com",
     "email": "aliszytr@gmail.com",
     "telephone": "+905327786732",
@@ -58,6 +58,12 @@
       "@type": "Rating",
       "ratingValue": "9.6",
       "bestRating": "10"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "9.6",
+      "bestRating": "10",
+      "reviewCount": "6"
     },
     "address": {
       "@type": "PostalAddress",
@@ -69,21 +75,28 @@
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "36.6870",
-      "longitude": "30.5390"
+      "latitude": "36.6533",
+      "longitude": "30.5437"
     },
     "amenityFeature": [
-      {"@type": "LocationFeatureSpecification", "name": "Pool", "value": true},
-      {"@type": "LocationFeatureSpecification", "name": "Wi-Fi", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Swimming Pool", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true},
       {"@type": "LocationFeatureSpecification", "name": "Air Conditioning", "value": true},
-      {"@type": "LocationFeatureSpecification", "name": "Parking", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true},
       {"@type": "LocationFeatureSpecification", "name": "Kitchen", "value": true},
-      {"@type": "LocationFeatureSpecification", "name": "Washing Machine", "value": true}
+      {"@type": "LocationFeatureSpecification", "name": "Washing Machine", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Smart TV", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Baby Crib", "value": true}
     ],
     "checkinTime": "14:00",
     "checkoutTime": "11:00",
     "numberOfRooms": 1,
-    "petsAllowed": false
+    "petsAllowed": false,
+    "availableLanguage": ["English", "Turkish", "Russian", "German"],
+    "sameAs": [
+      "https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html",
+      "https://www.airbnb.com.tr/rooms/979475001547790592"
+    ]
   }
   </script>
   <!-- Schema: FAQPage -->
@@ -788,7 +801,14 @@
           <li><a href="https://www.airbnb.com.tr/rooms/979475001547790592" target="_blank" rel="noopener"><i data-lucide="home"></i> Airbnb</a></li>
         </ul></div>
       </div>
-      <div class="footer-bottom"><p>© 2026 Palmiye Home — <span data-i18n="footer.rights">All rights reserved.</span></p></div>
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <a href="/privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+          <span>·</span>
+          <a href="/privacy.html#terms" data-i18n="footer.terms">Terms & Conditions</a>
+        </div>
+        <p>© 2026 Palmiye Home — <span data-i18n="footer.rights">All rights reserved.</span></p>
+      </div>
     </div>
   </footer>
 
@@ -826,7 +846,7 @@
 
   <!-- Cookie Notice -->
   <div id="cookie-notice" class="cookie-notice" role="alert">
-    <p>We use cookies for basic functionality. By continuing, you agree to our use of cookies. <a href="#" aria-label="Privacy policy">Privacy Policy</a></p>
+    <p data-i18n="cookie.message">We use cookies for basic functionality. By continuing, you agree to our use of cookies. <a href="/privacy.html" aria-label="Privacy policy" data-i18n="cookie.privacy_link">Privacy Policy</a></p>
     <div class="cookie-btns">
       <button class="btn btn-gold btn-sm cookie-accept">Accept</button>
       <button class="btn btn-sm cookie-decline">Decline</button>

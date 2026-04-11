@@ -1301,6 +1301,20 @@ section { padding: 5rem 0; }
   font-size: 0.8rem;
   color: rgba(255,255,255,0.35);
 }
+.footer-legal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.footer-legal a {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.8rem;
+  transition: color var(--transition);
+}
+.footer-legal a:hover { color: var(--gold-light); }
+.footer-legal span { color: rgba(255,255,255,0.25); }
 
 @media (max-width: 768px) {
   .footer-grid { grid-template-columns: 1fr; text-align: center; }
