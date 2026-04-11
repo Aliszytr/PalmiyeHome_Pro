@@ -7,7 +7,8 @@
     "booking": "Rezervasyon",
     "contact": "İletişim",
     "whatsapp": "WhatsApp",
-    "attractions": "Gezilecek Yerler"
+    "attractions": "Gezilecek Yerler",
+    "availability": "Müsaitlik"
   },
   "hero": {
     "trust_pill": "Booking.com 9,6 · Olağanüstü misafir puanı",
@@ -101,18 +102,26 @@
   },
   "pricing": {
     "title": "Konaklama Seçenekleri",
-    "subtitle": "Esnek konaklama seçenekleri ile tatilinizi planlayın.",
+    "subtitle": "Tatilinizi planlamak için esnek konaklama seçenekleri.",
+    "from_label": "Başlangıç",
+    "per_night": "/ gece",
+    "peak_note": "Yüksek sezonda €150'ye kadar",
+    "perk1": "7+ gece: %10 indirim",
+    "perk2": "30+ gece: %15 indirim",
+    "perk3": "Direkt rezervasyonda en iyi fiyat",
+    "cta_wa": "Müsaitliği Kontrol Et",
+    "cta_booking": "Booking.com'da Bak",
+    "footer": "Fiyatlar sezona göre değişir. En iyi fiyat için WhatsApp'tan bize ulaşın.",
     "daily": "Günlük",
-    "daily_note": "/ gece'den başlayan",
-    "daily_desc": "Esnek giriş-çıkış imkanı",
+    "daily_note": "/ gece",
+    "daily_desc": "Esnek giriş/çıkış",
     "popular": "Popüler",
     "weekly": "Haftalık",
-    "weekly_note": "indirimli",
-    "weekly_desc": "7+ gece konaklamalarda geçerli",
+    "weekly_note": "indirim",
+    "weekly_desc": "7+ gece konaklamalarda",
     "monthly": "Aylık",
-    "monthly_note": "indirimli",
-    "monthly_desc": "30+ gece konaklamalarda geçerli",
-    "footer": "Güncel fiyat ve müsaitlik bilgisi için WhatsApp'tan yazın."
+    "monthly_note": "indirim",
+    "monthly_desc": "30+ gece konaklamalarda"
   },
   "faq": {
     "title": "Sık Sorulan Sorular",
@@ -147,14 +156,16 @@
     "wa_btn": "WhatsApp ile Yazın"
   },
   "footer": {
-    "desc": "Kemer – Göynük'te doğanın kalbinde, huzurlu ve konforlu konaklama deneyimi.",
-    "quick_links": "Hızlı Bağlantılar",
-    "platforms": "Rezervasyon",
-    "rights": "Tüm hakları saklıdır."
+    "desc": "Doğanın kalbinde, Kemer – Göynük'te huzurlu ve konforlu bir tatil deneyimi.",
+    "quick_links": "Hızlı Linkler",
+    "platforms": "Rezervasyon Yap",
+    "rights": "Tüm hakları saklıdır.",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Koşulları"
   },
   "reviews": {
     "title": "Misafirlerimiz Ne Diyor?",
-    "subtitle": "Booking.com'daki misafirlerimizden gerçek yorumlar"
+    "subtitle": "⭐ 9.6 Olağanüstü — Booking.com'da 6 doğrulanmış değerlendirme"
   },
   "attractions": {
     "title": "Gezilecek Yerler",

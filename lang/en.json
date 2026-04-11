@@ -113,6 +113,15 @@
   "pricing": {
     "title": "Stay Options",
     "subtitle": "Flexible accommodation options to plan your vacation.",
+    "from_label": "From",
+    "per_night": "/ night",
+    "peak_note": "Peak season up to €150",
+    "perk1": "7+ nights: 10% discount",
+    "perk2": "30+ nights: 15% discount",
+    "perk3": "Best rates via direct booking",
+    "cta_wa": "Check Availability",
+    "cta_booking": "Book on Booking.com",
+    "footer": "Prices vary by season. Contact us on WhatsApp for the best available rate.",
     "daily": "Daily",
     "daily_note": "/ night starting from",
     "daily_desc": "Flexible check-in/check-out",
@@ -122,8 +131,7 @@
     "weekly_desc": "Valid for 7+ night stays",
     "monthly": "Monthly",
     "monthly_note": "discount",
-    "monthly_desc": "Valid for 30+ night stays",
-    "footer": "Message us on WhatsApp for current prices and availability."
+    "monthly_desc": "Valid for 30+ night stays"
   },
   "faq": {
     "title": "Frequently Asked Questions",
@@ -161,11 +169,13 @@
     "desc": "A peaceful and comfortable accommodation experience in the heart of nature, in Kemer – Göynük.",
     "quick_links": "Quick Links",
     "platforms": "Book With Us",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
   },
   "reviews": {
     "title": "What Our Guests Say",
-    "subtitle": "Real reviews from our valued guests on Booking.com"
+    "subtitle": "⭐ 9.6 Exceptional — Based on 6 verified reviews on Booking.com"
   },
   "attractions": {
     "title": "Places to Visit",
