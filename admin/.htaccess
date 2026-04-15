@@ -1,0 +1,45 @@
+RewriteEngine On
+
+# HTTPS zorla
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# www -> non-www
+RewriteCond %{HTTP_HOST} ^www\.palmiyehomekemer\.com$ [NC]
+RewriteRule ^ https://palmiyehomekemer.com%{REQUEST_URI} [L,R=301]
+
+# Eski domain yönlendirmesi
+RewriteCond %{HTTP_HOST} ^(www\.)?palmiyehome\.com$ [NC]
+RewriteRule ^(.*)$ https://palmiyehomekemer.com/$1 [L,R=301]
+
+# Güvenlik başlıkları
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Hassas dosyaları kapat
+<FilesMatch "^(\.env|\.git|\.htaccess|\.htpasswd)$">
+    Require all denied
+</FilesMatch>
+
+# API klasöründe dizin listeleme olmasın
+RewriteRule ^api/?$ - [F,L]
+
+# Varlık cache
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/avif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# 404
+ErrorDocument 404 /404.html
