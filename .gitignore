@@ -1,7 +1,7 @@
 # Backup originals - not for deployment
 _originals/
 
-# Node modules - installed by Netlify during deploy
+# Node modules
 node_modules/
 package-lock.json
 
@@ -22,3 +22,18 @@ AnasayfadaOlabilirResimler/
 # Fix/merge notes - development artifacts
 FIX_NOTES.txt
 MERGE_NOTES.txt
+
+# ═══════════════════════════════════════════
+#  SECRET / TOKEN / CONFIG — ASLA COMMIT ETME
+# ═══════════════════════════════════════════
+api/config/.env.php
+api/config/*.php
+!api/config/.htaccess
+.env
+.env.*
+*.env
+.htpasswd
+
+# Git reference copy — deploy paketine dahil değil
+PalmiyeHome_Pro-main/
+
