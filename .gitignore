@@ -29,6 +29,7 @@ MERGE_NOTES.txt
 api/config/.env.php
 api/config/*.php
 !api/config/.htaccess
+api/config/tmp/
 .env
 .env.*
 *.env

@@ -67,9 +67,15 @@ if (!$allowed) {
     exit;
 }
 
-// ── Rate Limiting (IP bazlı — 1 saat cooldown) ──
-$rateLimitFile = sys_get_temp_dir() . '/palmiye_notify_' . md5($_SERVER['REMOTE_ADDR'] ?? 'unknown') . '.lock';
-if (file_exists($rateLimitFile) && (time() - filemtime($rateLimitFile)) < 3600) {
+// ── Rate Limiting (IP bazlı — 10 dakika cooldown) ──
+$rateLimitDir = __DIR__ . '/config/tmp';
+if (!is_dir($rateLimitDir)) {
+    @mkdir($rateLimitDir, 0700, true);
+    // tmp klasörüne .htaccess ekle (güvenlik)
+    @file_put_contents($rateLimitDir . '/.htaccess', "Require all denied\n");
+}
+$rateLimitFile = $rateLimitDir . '/notify_' . md5($_SERVER['REMOTE_ADDR'] ?? 'unknown') . '.lock';
+if (file_exists($rateLimitFile) && (time() - filemtime($rateLimitFile)) < 600) {
     header("Content-Type: application/json");
     if ($allowed) header("Access-Control-Allow-Origin: $origin");
     http_response_code(200);
@@ -157,6 +163,7 @@ curl_setopt_array($ch, [
 ]);
 
 $result = curl_exec($ch);
+$curlError = curl_error($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
@@ -169,5 +176,8 @@ if ($httpCode === 200) {
     echo json_encode(['status' => 'ok']);
 } else {
     http_response_code(502);
-    echo json_encode(['error' => 'Telegram send failed']);
+    // Hata detayı (debug — cURL hatalarını log'a yaz)
+    $errorDetail = $curlError ?: 'HTTP ' . $httpCode;
+    error_log('[Palmiye Telegram] Send failed: ' . $errorDetail);
+    echo json_encode(['error' => 'Telegram send failed', 'detail' => $errorDetail]);
 }
