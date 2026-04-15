@@ -19,7 +19,17 @@
     "bullet3": "Doğrudan Rezervasyon — En İyi Fiyat",
     "cta_whatsapp": "WhatsApp ile Müsaitlik Sorun",
     "cta_booking": "Booking.com'da İnceleyin",
+    "cta_airbnb": "Airbnb'de İnceleyin",
     "response_note": "<i data-lucide=\"zap\"></i> Genellikle 5 dakika içinde yanıt veriyoruz"
+  },
+  "calendar": {
+    "title": "Müsaitlik Takvimi",
+    "subtitle": "Uygun tarihleri kontrol edin ve konaklamanızı planlayın. Yeşil tarihler müsait!",
+    "available": "Müsait",
+    "booked": "Dolu",
+    "past": "Geçmiş",
+    "cta_text": "Tarihinizi buldunuz mu? En iyi fiyat için doğrudan rezervasyon yapın!",
+    "cta_btn": "WhatsApp ile Rezervasyon"
   },
   "trust": {
     "pool": "Ortak Havuz",

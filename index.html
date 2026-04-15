@@ -877,18 +877,8 @@
   <script src="assets/js/bookings-source.js"></script>
   <script src="script.js"></script>
 
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="booking-redirect.js"></script>
+  <script src="analytics.js"></script>
 
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-         document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 (function () {
   'use strict';
 
-  const GA_ID = 'G-XXXXXXXXXX'; // ← REPLACE with your real GA4 Measurement ID
+  const GA_ID = 'G-6NK46VG4DY'; // GA4 Measurement ID
 
   // Check if user accepted cookies
   function hasConsent() {
@@ -23,6 +23,13 @@
   function initGA() {
     if (!hasConsent()) return;
     if (GA_ID === 'G-XXXXXXXXXX') return; // Not configured yet
+    if (window._ga4Loaded) return; // Prevent double init
+
+    // Dynamically load gtag.js (only after consent — GDPR/KVKK compliant)
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
 
     window.dataLayer = window.dataLayer || [];
     function gtag() { window.dataLayer.push(arguments); }
@@ -32,7 +39,12 @@
       anonymize_ip: true,
       cookie_flags: 'SameSite=None;Secure'
     });
+
+    window._ga4Loaded = true;
   }
+
+  // Expose to window for cookie consent trigger
+  window.initGA = initGA;
 
   // Track custom events
   function trackEvent(eventName, params) {
