@@ -1,0 +1,3 @@
+# Palmiye Home — Config Directory Protection
+# Bu klasöre HTTP erişimi tamamen engelle
+Require all denied

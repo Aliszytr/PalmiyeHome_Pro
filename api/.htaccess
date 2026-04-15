@@ -1,0 +1,14 @@
+# Palmiye Home — API Directory Protection
+# PHP dosyaları çalışsın ama dizin listesi kapalı
+
+Options -Indexes
+
+# Sadece PHP dosyalarına HTTP erişim izni
+<FilesMatch "\.php$">
+    Require all granted
+</FilesMatch>
+
+# Config dosyalarına erişim engelle
+<FilesMatch "\.(env|config|json|log)$">
+    Require all denied
+</FilesMatch>
