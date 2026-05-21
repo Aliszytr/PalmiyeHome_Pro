@@ -37,9 +37,7 @@
     "past": "Vergangen",
     "cta_text": "Ihre Daten gefunden? Buchen Sie direkt zum besten Preis!",
     "cta_btn": "Über WhatsApp buchen",
-    "whatsapp_cta": "Per WhatsApp nach diesen Daten fragen",
-    "whatsapp_message": "Hallo! Ich möchte Palmiye Home vom {start} bis {end} buchen. Ist es verfügbar?",
-    "guests_select": "Gäste"
+    "whatsapp_message": "Hallo! Ich möchte Palmiye Home vom {start} bis {end} buchen. Ist es verfügbar?"
   },
   "trust": {
     "pool": "Gemeinschaftspool",

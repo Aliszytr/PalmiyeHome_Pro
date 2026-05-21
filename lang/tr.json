@@ -36,9 +36,7 @@
     "past": "Geçmiş",
     "cta_text": "Tarihinizi buldunuz mu? En iyi fiyat için doğrudan rezervasyon yapın!",
     "cta_btn": "WhatsApp ile Rezervasyon",
-    "whatsapp_cta": "Bu Tarihler İçin WhatsApp'tan Sorun",
-    "whatsapp_message": "Merhaba, {checkin} - {checkout} tarihleri için {guests} kişilik müsaitlik ve fiyat öğrenmek istiyorum.",
-    "guests_select": "Kişi"
+    "whatsapp_message": "Merhaba! Palmiye Home'u {start} - {end} tarihleri arasında kiralamak istiyorum. Müsait mi?"
   },
   "trust": {
     "pool": "Ortak Havuz",

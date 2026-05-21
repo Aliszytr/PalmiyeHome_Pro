@@ -36,9 +36,7 @@
     "past": "Прошло",
     "cta_text": "Нашли свои даты? Бронируйте напрямую по лучшей цене!",
     "cta_btn": "Забронировать в WhatsApp",
-    "whatsapp_cta": "Спросить об этих датах в WhatsApp",
-    "whatsapp_message": "Здравствуйте! Хочу забронировать Palmiye Home с {start} по {end}. Свободно?",
-    "guests_select": "Гости"
+    "whatsapp_message": "Здравствуйте! Хочу забронировать Palmiye Home с {start} по {end}. Свободно?"
   },
   "trust": {
     "pool": "Общий бассейн",

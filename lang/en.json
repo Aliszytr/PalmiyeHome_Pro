@@ -37,10 +37,7 @@
     "past": "Past",
     "cta_text": "Found your dates? Book directly for the best price!",
     "cta_btn": "Book via WhatsApp",
-    "whatsapp_message": "Hello! I'd like to book Palmiye Home from {start} to {end}. Is it available?",
-    "whatsapp_cta": "Ask About These Dates on WhatsApp",
-    "whatsapp_message": "Hello! I'd like to check availability and price for {checkin} - {checkout}, {guests} guests.",
-    "guests_select": "Guests"
+    "whatsapp_message": "Hello! I'd like to book Palmiye Home from {start} to {end}. Is it available?"
   },
   "trust": {
     "pool": "Shared Pool",
