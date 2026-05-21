@@ -1,4 +1,11 @@
 {
+  "meta": {
+    "title": "Palmiye Home — Pool Apartment in Kemer Göynük, Antalya | Book Direct",
+    "description": "Book a fully equipped 1+1 apartment with shared pool in Kemer Göynük, Antalya. Mountain views, free Wi-Fi, parking. Booking.com 9.6 rated. Message us on WhatsApp for best rates.",
+    "og_title": "Palmiye Home — Pool Apartment in Kemer, Antalya",
+    "og_description": "Fully equipped 1+1 apartment with shared pool in Kemer Göynük. Booking.com 9.6 rated. Book directly via WhatsApp for best rates.",
+    "keywords": "kemer apartment rental, göynük holiday, pool apartment antalya, turkey vacation rental, palmiye home, whatsapp booking, kemer konaklama"
+  },
   "nav": {
     "apartment": "Our Apartment",
     "gallery": "Gallery",
@@ -12,8 +19,8 @@
   },
   "hero": {
     "trust_pill": "Booking.com 9.6 · Exceptional guest rating",
-    "title": "Your Private Retreat <span>in Antalya</span>",
-    "subtitle": "Fully equipped apartment with pool, mountain views & free parking in Kemer–Göynük",
+    "title": "Wake Up to Silence, <span>Start Your Day by the Mountain View Pool</span>",
+    "subtitle": "Kemer Göynük · Fully Equipped Apartment · Pool · Antalya",
     "bullet1": "Shared Pool & Garden",
     "bullet2": "Free Wi-Fi & Parking",
     "bullet3": "Direct Booking — Best Price",
@@ -29,7 +36,10 @@
     "booked": "Booked",
     "past": "Past",
     "cta_text": "Found your dates? Book directly for the best price!",
-    "cta_btn": "Book via WhatsApp"
+    "cta_btn": "Book via WhatsApp",
+    "whatsapp_cta": "Ask About These Dates on WhatsApp",
+    "whatsapp_message": "Hello! I'd like to check availability and price for {checkin} - {checkout}, {guests} guests.",
+    "guests_select": "Guests"
   },
   "trust": {
     "pool": "Shared Pool",
@@ -175,7 +185,7 @@
   },
   "reviews": {
     "title": "What Our Guests Say",
-    "subtitle": "⭐ 9.6 Exceptional — Based on 6 verified reviews on Booking.com"
+    "subtitle": "⭐ 9.6 Exceptional on Booking.com"
   },
   "attractions": {
     "title": "Places to Visit",
@@ -213,5 +223,66 @@
     "idyros": "Idyros Ancient City",
     "idyros_short": "Byzantine-era geometric mosaics in Kemer center",
     "idyros_desc": "Uncovered during excavations in 1976, this ancient city harbors artifacts from the Byzantine period. The most distinctive find is a geometric-patterned mosaic floor. Located right in Kemer's town center."
+  },
+  "featured_reviews": {
+    "review1_text": "Wunderbare Unterkunft! Sehr sauber, ruhige Lage und der Pool war fantastisch. Die Kommunikation mit dem Gastgeber war hervorragend. Wir kommen gerne wieder!",
+    "review1_author": "Thomas K.",
+    "review1_meta": "🇩🇪 Deutschland · Juli 2025",
+    "review2_text": "Отличная квартира в тихом месте. Чисто, уютно, есть всё необходимое. Бассейн замечательный! Хозяин очень отзывчивый. Рекомендую!",
+    "review2_author": "Ольга П.",
+    "review2_meta": "🇷🇺 Россия · Сентябрь 2025",
+    "verified_badge": "✓ Verified on Booking.com",
+    "see_all_link": "See all reviews on Booking.com"
+  },
+  "contact_form": {
+    "title": "Quick Inquiry",
+    "subtitle": "Send us a message — we'll get back to you within hours.",
+    "name_label": "Full Name",
+    "email_label": "Email Address",
+    "checkin_label": "Check-in Date",
+    "checkout_label": "Check-out Date",
+    "guests_label": "Number of Guests",
+    "guests_1": "1 Guest",
+    "guests_2": "2 Guests",
+    "guests_3": "3 Guests",
+    "guests_4": "4 Guests",
+    "message_label": "Message (optional)",
+    "message_placeholder": "Any special requests or questions...",
+    "submit": "Send Inquiry",
+    "submitting": "Sending...",
+    "success_title": "Message Sent!",
+    "success_text": "Thank you for your inquiry. We'll respond within a few hours.",
+    "error_text": "Something went wrong. Please try again or contact us via WhatsApp."
+  },
+  "comparison": {
+    "title": "Why Book Directly?",
+    "subtitle": "Compare direct booking with Booking.com and see the difference.",
+    "feature_label": "Feature",
+    "direct_label": "Direct Booking",
+    "booking_label": "Booking.com",
+    "price_feature": "Nightly Price",
+    "direct_price": "€100",
+    "booking_price": "~€118",
+    "commission_feature": "Commission",
+    "direct_commission": "None",
+    "booking_commission": "15–18%",
+    "response_feature": "Instant Response",
+    "direct_response": "✅ WhatsApp",
+    "booking_response": "❌ Message Queue",
+    "cancel_feature": "Flexible Cancellation",
+    "direct_cancel": "✅",
+    "booking_cancel": "Policy Dependent",
+    "extras_feature": "Extra Services",
+    "direct_extras": "✅ Negotiable",
+    "booking_extras": "❌ Fixed",
+    "cta": "Book Directly via WhatsApp"
+  },
+  "trust_badges": {
+    "no_commission": "No Commission",
+    "no_hidden_fees": "No Hidden Fees",
+    "support_247": "24/7 Support"
+  },
+  "sticky": {
+    "form_cta": "Inquiry Form"
   }
 }

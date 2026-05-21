@@ -1,4 +1,11 @@
 {
+  "meta": {
+    "title": "Ferienwohnung mit Pool in Kemer Göynük, Antalya | Palmiye Home — Direkt buchen",
+    "description": "Voll ausgestattete 1+1 Ferienwohnung mit Gemeinschaftspool, Bergblick und kostenlosem Parkplatz in Kemer-Göynük, Antalya. Booking.com 9.6. Direkt buchen via WhatsApp für beste Preise.",
+    "og_title": "Palmiye Home — Ferienwohnung mit Pool in Kemer, Antalya",
+    "og_description": "Komplett ausgestattete 1+1 Ferienwohnung mit Pool im Herzen von Göynük. Booking.com 9.6 bewertet. Bester Preis bei Direktbuchung über WhatsApp.",
+    "keywords": "ferienwohnung kemer, pool ferienwohnung antalya, göynük urlaub, kemer mieten, türkei ferienwohnung, palmiye home, antalya apartment"
+  },
   "nav": {
     "apartment": "Apartment",
     "gallery": "Galerie",
@@ -12,8 +19,8 @@
   },
   "hero": {
     "trust_pill": "Booking.com 9,6 · Außergewöhnliche Gästebewertung",
-    "title": "Ihr privates Refugium <span>in Antalya</span>",
-    "subtitle": "Voll ausgestattetes Apartment mit Pool, Bergblick & kostenlosem Parkplatz in Kemer–Göynük",
+    "title": "Erwachen Sie in Stille – <span>Ihr Rückzugsort mit Bergblick und Pool</span>",
+    "subtitle": "Kemer Göynük · Voll ausgestattete Ferienwohnung · Pool · Antalya",
     "bullet1": "Gemeinschaftspool & Garten",
     "bullet2": "Kostenloses WLAN & Parken",
     "bullet3": "Direktbuchung — Bester Preis",
@@ -29,7 +36,10 @@
     "booked": "Gebucht",
     "past": "Vergangen",
     "cta_text": "Ihre Daten gefunden? Buchen Sie direkt zum besten Preis!",
-    "cta_btn": "Über WhatsApp buchen"
+    "cta_btn": "Über WhatsApp buchen",
+    "whatsapp_cta": "Per WhatsApp nach diesen Daten fragen",
+    "whatsapp_message": "Hallo! Ich möchte Verfügbarkeit und Preis für {checkin} - {checkout}, {guests} Personen anfragen.",
+    "guests_select": "Gäste"
   },
   "trust": {
     "pool": "Gemeinschaftspool",
@@ -175,7 +185,7 @@
   },
   "reviews": {
     "title": "Was unsere Gäste sagen",
-    "subtitle": "⭐ 9.6 Außergewöhnlich — 6 verifizierte Bewertungen auf Booking.com"
+    "subtitle": "⭐ 9.6 Außergewöhnlich auf Booking.com"
   },
   "attractions": {
     "title": "Sehenswürdigkeiten",
@@ -213,5 +223,66 @@
     "idyros": "Antike Stadt Idyros",
     "idyros_short": "Byzantinische geometrische Mosaike im Zentrum von Kemer",
     "idyros_desc": "Bei Ausgrabungen 1976 entdeckt, beherbergt diese antike Stadt byzantinische Artefakte. Der bemerkenswerteste Fund ist ein geometrisch gemusterter Mosaikboden. Direkt im Zentrum von Kemer gelegen."
+  },
+  "featured_reviews": {
+    "review1_text": "Wunderbare Unterkunft! Sehr sauber, ruhige Lage und der Pool war fantastisch. Die Kommunikation mit dem Gastgeber war hervorragend. Wir kommen gerne wieder!",
+    "review1_author": "Thomas K.",
+    "review1_meta": "🇩🇪 Deutschland · Juli 2025",
+    "review2_text": "Отличная квартира в тихом месте. Чисто, уютно, есть всё необходимое. Бассейн замечательный! Хозяин очень отзывчивый. Рекомендую!",
+    "review2_author": "Ольга П.",
+    "review2_meta": "🇷🇺 Russland · September 2025",
+    "verified_badge": "✓ Auf Booking.com verifiziert",
+    "see_all_link": "Alle Bewertungen auf Booking.com ansehen"
+  },
+  "contact_form": {
+    "title": "Schnelle Anfrage",
+    "subtitle": "Senden Sie uns eine Nachricht — wir antworten innerhalb weniger Stunden.",
+    "name_label": "Vollständiger Name",
+    "email_label": "E-Mail-Adresse",
+    "checkin_label": "Anreisedatum",
+    "checkout_label": "Abreisedatum",
+    "guests_label": "Anzahl der Gäste",
+    "guests_1": "1 Gast",
+    "guests_2": "2 Gäste",
+    "guests_3": "3 Gäste",
+    "guests_4": "4 Gäste",
+    "message_label": "Nachricht (optional)",
+    "message_placeholder": "Besondere Wünsche oder Fragen...",
+    "submit": "Anfrage senden",
+    "submitting": "Wird gesendet...",
+    "success_title": "Nachricht gesendet!",
+    "success_text": "Vielen Dank für Ihre Anfrage. Wir antworten innerhalb weniger Stunden.",
+    "error_text": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder kontaktieren Sie uns über WhatsApp."
+  },
+  "comparison": {
+    "title": "Warum direkt buchen?",
+    "subtitle": "Vergleichen Sie die Direktbuchung mit Booking.com.",
+    "feature_label": "Merkmal",
+    "direct_label": "Direktbuchung",
+    "booking_label": "Booking.com",
+    "price_feature": "Preis pro Nacht",
+    "direct_price": "€100",
+    "booking_price": "~€118",
+    "commission_feature": "Provision",
+    "direct_commission": "Keine",
+    "booking_commission": "15–18%",
+    "response_feature": "Sofortige Antwort",
+    "direct_response": "✅ WhatsApp",
+    "booking_response": "❌ Nachrichtenwarteschlange",
+    "cancel_feature": "Flexible Stornierung",
+    "direct_cancel": "✅",
+    "booking_cancel": "Richtlinienabhängig",
+    "extras_feature": "Zusatzleistungen",
+    "direct_extras": "✅ Verhandelbar",
+    "booking_extras": "❌ Festgelegt",
+    "cta": "Direkt über WhatsApp buchen"
+  },
+  "trust_badges": {
+    "no_commission": "Keine Provision",
+    "no_hidden_fees": "Keine versteckten Gebühren",
+    "support_247": "24/7 Support"
+  },
+  "sticky": {
+    "form_cta": "Kontaktformular"
   }
 }

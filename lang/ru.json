@@ -1,4 +1,11 @@
 {
+  "meta": {
+    "title": "Апартаменты с бассейном в Кемере, Гёйнюк | Palmiye Home — Прямое бронирование",
+    "description": "Полностью оборудованная квартира 1+1 с бассейном, видом на горы и бесплатной парковкой в Кемер-Гёйнюк, Анталья. Booking.com 9.6. Забронируйте напрямую через WhatsApp.",
+    "og_title": "Palmiye Home — Апартаменты с бассейном в Кемере, Анталья",
+    "og_description": "Квартира 1+1 с общим бассейном в центре Гёйнюк. Рейтинг Booking.com 9.6. Лучшая цена при прямом бронировании через WhatsApp.",
+    "keywords": "аренда квартир кемер, квартира с бассейном анталья, гёйнюк аренда, кемер отдых, апартаменты турция, palmiye home, кемер жилье"
+  },
   "nav": {
     "apartment": "Квартира",
     "gallery": "Галерея",
@@ -12,14 +19,13 @@
   },
   "hero": {
     "trust_pill": "Booking.com 9.6 · Превосходная оценка гостей",
-    "title": "Ваш личный уголок <span>в Анталии</span>",
-    "subtitle": "Полностью оборудованная квартира с бассейном, видом на горы и бесплатной парковкой в Кемер–Гёйнюк",
+    "title": "Просыпайтесь в тишине: <span>начните день у бассейна с видом на горы</span>",
+    "subtitle": "Кемер Гёйнюк · Полностью оборудованная квартира · Бассейн · Анталья",
     "bullet1": "Общий бассейн и сад",
     "bullet2": "Бесплатный Wi-Fi и парковка",
     "bullet3": "Прямое бронирование — лучшая цена",
     "cta_whatsapp": "Узнать наличие в WhatsApp",
     "cta_booking": "Смотреть на Booking.com",
-    "cta_airbnb": "Смотреть на Airbnb",
     "response_note": "<i data-lucide=\"zap\"></i> Обычно отвечаем в течение 5 минут"
   },
   "calendar": {
@@ -29,7 +35,10 @@
     "booked": "Занято",
     "past": "Прошло",
     "cta_text": "Нашли свои даты? Бронируйте напрямую по лучшей цене!",
-    "cta_btn": "Забронировать в WhatsApp"
+    "cta_btn": "Забронировать в WhatsApp",
+    "whatsapp_cta": "Спросить об этих датах в WhatsApp",
+    "whatsapp_message": "Здравствуйте, прошу проверить наличие и цену на {checkin} - {checkout}, {guests} гостей.",
+    "guests_select": "Гости"
   },
   "trust": {
     "pool": "Общий бассейн",
@@ -175,7 +184,7 @@
   },
   "reviews": {
     "title": "Что говорят наши гости",
-    "subtitle": "⭐ 9.6 Превосходно — 6 подтверждённых отзывов на Booking.com"
+    "subtitle": "⭐ 9.6 Превосходно на Booking.com"
   },
   "attractions": {
     "title": "Что посетить рядом",
@@ -213,5 +222,66 @@
     "idyros": "Античный город Идирос",
     "idyros_short": "Византийские геометрические мозаики в центре Кемера",
     "idyros_desc": "Обнаруженный при раскопках 1976 года, этот античный город хранит артефакты византийского периода. Самая примечательная находка — мозаичный пол с геометрическим узором. Расположен прямо в центре Кемера."
+  },
+  "featured_reviews": {
+    "review1_text": "Wunderbare Unterkunft! Sehr sauber, ruhige Lage und der Pool war fantastisch. Die Kommunikation mit dem Gastgeber war hervorragend. Wir kommen gerne wieder!",
+    "review1_author": "Thomas K.",
+    "review1_meta": "🇩🇪 Германия · Июль 2025",
+    "review2_text": "Отличная квартира в тихом месте. Чисто, уютно, есть всё необходимое. Бассейн замечательный! Хозяин очень отзывчивый. Рекомендую!",
+    "review2_author": "Ольга П.",
+    "review2_meta": "🇷🇺 Россия · Сентябрь 2025",
+    "verified_badge": "✓ Проверено на Booking.com",
+    "see_all_link": "Все отзывы на Booking.com"
+  },
+  "contact_form": {
+    "title": "Быстрый запрос",
+    "subtitle": "Отправьте нам сообщение — мы ответим в течение нескольких часов.",
+    "name_label": "Полное имя",
+    "email_label": "Электронная почта",
+    "checkin_label": "Дата заезда",
+    "checkout_label": "Дата выезда",
+    "guests_label": "Количество гостей",
+    "guests_1": "1 гость",
+    "guests_2": "2 гостя",
+    "guests_3": "3 гостя",
+    "guests_4": "4 гостя",
+    "message_label": "Сообщение (необязательно)",
+    "message_placeholder": "Особые пожелания или вопросы...",
+    "submit": "Отправить запрос",
+    "submitting": "Отправка...",
+    "success_title": "Сообщение отправлено!",
+    "success_text": "Спасибо за ваш запрос. Мы ответим в течение нескольких часов.",
+    "error_text": "Произошла ошибка. Пожалуйста, попробуйте снова или свяжитесь с нами через WhatsApp."
+  },
+  "comparison": {
+    "title": "Почему бронировать напрямую?",
+    "subtitle": "Сравните прямое бронирование с Booking.com.",
+    "feature_label": "Характеристика",
+    "direct_label": "Прямое бронирование",
+    "booking_label": "Booking.com",
+    "price_feature": "Цена за ночь",
+    "direct_price": "€100",
+    "booking_price": "~€118",
+    "commission_feature": "Комиссия",
+    "direct_commission": "Нет",
+    "booking_commission": "15–18%",
+    "response_feature": "Мгновенный ответ",
+    "direct_response": "✅ WhatsApp",
+    "booking_response": "❌ Очередь сообщений",
+    "cancel_feature": "Гибкая отмена",
+    "direct_cancel": "✅",
+    "booking_cancel": "Зависит от политики",
+    "extras_feature": "Дополнительные услуги",
+    "direct_extras": "✅ По договорённости",
+    "booking_extras": "❌ Фиксированные",
+    "cta": "Забронировать напрямую через WhatsApp"
+  },
+  "trust_badges": {
+    "no_commission": "Без комиссии",
+    "no_hidden_fees": "Без скрытых платежей",
+    "support_247": "Поддержка 24/7"
+  },
+  "sticky": {
+    "form_cta": "Форма запроса"
   }
 }

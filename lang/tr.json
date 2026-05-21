@@ -1,4 +1,11 @@
 {
+  "meta": {
+    "title": "Palmiye Home Kemer | Havuzlu Kiralık Daire Göynük – Booking 9.6 Puan",
+    "description": "Kemer Göynük'te havuzlu, tam donanımlı 1+1 kiralık tatil dairesi. Booking.com 9.6 puan. Ücretsiz Wi-Fi, otopark, dağ manzarası. WhatsApp ile hızlı rezervasyon.",
+    "og_title": "Palmiye Home | Kemer Göynük Havuzlu Kiralık Daire",
+    "og_description": "Booking.com 9.6 puanlı, havuzlu 1+1 tatil dairesi. Kemer Göynük'te doğa içinde huzur.",
+    "keywords": "kemer kiralık daire, göynük tatil evi, havuzlu kiralık daire antalya, kemer apart, göynük apartment rental, kemer holiday home pool, palmiye home kemer"
+  },
   "nav": {
     "apartment": "Dairemiz",
     "gallery": "Galeri",
@@ -12,14 +19,13 @@
   },
   "hero": {
     "trust_pill": "Booking.com 9,6 · Olağanüstü misafir puanı",
-    "title": "Antalya'da <span>Özel Kaçamağınız</span>",
-    "subtitle": "Kemer–Göynük'te havuzlu, dağ manzaralı, ücretsiz otoparkli tam donanımlı daire",
+    "title": "Sessiz Bir Sabaha Uyan, <span>Dağ Manzaralı Havuzda Güne Başla</span>",
+    "subtitle": "Kemer Göynük · Donanımlı Apart · Havuz · Antalya",
     "bullet1": "Ortak Havuz & Bahçe",
     "bullet2": "Ücretsiz Wi-Fi & Otopark",
     "bullet3": "Doğrudan Rezervasyon — En İyi Fiyat",
     "cta_whatsapp": "WhatsApp ile Müsaitlik Sorun",
     "cta_booking": "Booking.com'da İnceleyin",
-    "cta_airbnb": "Airbnb'de İnceleyin",
     "response_note": "<i data-lucide=\"zap\"></i> Genellikle 5 dakika içinde yanıt veriyoruz"
   },
   "calendar": {
@@ -29,7 +35,10 @@
     "booked": "Dolu",
     "past": "Geçmiş",
     "cta_text": "Tarihinizi buldunuz mu? En iyi fiyat için doğrudan rezervasyon yapın!",
-    "cta_btn": "WhatsApp ile Rezervasyon"
+    "cta_btn": "WhatsApp ile Rezervasyon",
+    "whatsapp_cta": "Bu Tarihler İçin WhatsApp'tan Sorun",
+    "whatsapp_message": "Merhaba, {checkin} - {checkout} tarihleri için {guests} kişilik müsaitlik ve fiyat öğrenmek istiyorum.",
+    "guests_select": "Kişi"
   },
   "trust": {
     "pool": "Ortak Havuz",
@@ -175,7 +184,7 @@
   },
   "reviews": {
     "title": "Misafirlerimiz Ne Diyor?",
-    "subtitle": "⭐ 9.6 Olağanüstü — Booking.com'da 6 doğrulanmış değerlendirme"
+    "subtitle": "⭐ 9.6 Olağanüstü — Booking.com"
   },
   "attractions": {
     "title": "Gezilecek Yerler",
@@ -213,5 +222,66 @@
     "idyros": "Idyros Antik Kenti",
     "idyros_short": "Kemer merkezinde Bizans dönemi geometrik mozaikler",
     "idyros_desc": "1976 yılındaki kazılarda ortaya çıkarılan bu antik kent, Bizans dönemine ait eserlere sahiptir. En dikkat çekici buluntu, dönemin sanatsal ustalığını sergileyen geometrik desenli mozaik zemindir. Kemer'in tam merkezindeki konumuyla kolayca ziyaret edilebilir."
+  },
+  "featured_reviews": {
+    "review1_text": "Wunderbare Unterkunft! Sehr sauber, ruhige Lage und der Pool war fantastisch. Die Kommunikation mit dem Gastgeber war hervorragend. Wir kommen gerne wieder!",
+    "review1_author": "Thomas K.",
+    "review1_meta": "🇩🇪 Almanya · Temmuz 2025",
+    "review2_text": "Отличная квартира в тихом месте. Чисто, уютно, есть всё необходимое. Бассейн замечательный! Хозяин очень отзывчивый. Рекомендую!",
+    "review2_author": "Ольга П.",
+    "review2_meta": "🇷🇺 Rusya · Eylül 2025",
+    "verified_badge": "✓ Booking.com'da Doğrulanmış",
+    "see_all_link": "Booking.com'da tüm yorumları gör"
+  },
+  "contact_form": {
+    "title": "Hızlı İletişim",
+    "subtitle": "Bize mesaj gönderin — birkaç saat içinde döneriz.",
+    "name_label": "Ad Soyad",
+    "email_label": "E-posta Adresi",
+    "checkin_label": "Giriş Tarihi",
+    "checkout_label": "Çıkış Tarihi",
+    "guests_label": "Kişi Sayısı",
+    "guests_1": "1 Kişi",
+    "guests_2": "2 Kişi",
+    "guests_3": "3 Kişi",
+    "guests_4": "4 Kişi",
+    "message_label": "Mesaj (isteğe bağlı)",
+    "message_placeholder": "Özel istekleriniz veya sorularınız...",
+    "submit": "Gönder",
+    "submitting": "Gönderiliyor...",
+    "success_title": "Mesajınız İletildi!",
+    "success_text": "Talebiniz için teşekkürler. Birkaç saat içinde dönüş yapacağız.",
+    "error_text": "Bir hata oluştu. Lütfen tekrar deneyin veya WhatsApp ile ulaşın."
+  },
+  "comparison": {
+    "title": "Neden Doğrudan Rezervasyon?",
+    "subtitle": "Direkt rezervasyon ile Booking.com'u karşılaştırın, farkı görün.",
+    "feature_label": "Özellik",
+    "direct_label": "Direkt Rezervasyon",
+    "booking_label": "Booking.com",
+    "price_feature": "Gecelik Fiyat",
+    "direct_price": "€100",
+    "booking_price": "~€118",
+    "commission_feature": "Komisyon",
+    "direct_commission": "Yok",
+    "booking_commission": "%15–18",
+    "response_feature": "Anlık Yanıt",
+    "direct_response": "✅ WhatsApp",
+    "booking_response": "❌ Mesaj Kuyruğu",
+    "cancel_feature": "Esnek İptal",
+    "direct_cancel": "✅",
+    "booking_cancel": "Politikaya Bağlı",
+    "extras_feature": "Ekstra Hizmet",
+    "direct_extras": "✅ Pazarlık Edilebilir",
+    "booking_extras": "❌ Sabit",
+    "cta": "WhatsApp ile Doğrudan Rezervasyon"
+  },
+  "trust_badges": {
+    "no_commission": "Komisyon Yok",
+    "no_hidden_fees": "Gizli Ücret Yok",
+    "support_247": "7/24 İletişim"
+  },
+  "sticky": {
+    "form_cta": "İletişim Formu"
   }
 }

@@ -21,6 +21,42 @@
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:site_name" content="Palmiye Home">
   <meta name="theme-color" content="#0f2027">
+  <!-- Google Ads + GA4 Global Site Tag (gtag.js) -->
+  <!-- Tek bir gtag.js yüklenir; her iki ID buradan config edilir -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17307806485"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    // ── Google Consent Mode v2 (KVKK/GDPR uyumlu) ──
+    // Default: 'denied'. Consent denied iken bile Google anonim "modeled conversion"
+    // ping'leri toplar — bu yüzden conversion sayıları cookie reddine takılmaz.
+    // Kullanıcı banner'ı kabul edince 'granted' update edilir → tam tracking aktif.
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'wait_for_update': 500
+    });
+    // Önceki oturumda onay verdiyse hemen 'granted' yap (banner tekrar gösterilmez)
+    if (localStorage.getItem('palmiye_cookies') === 'accepted') {
+      gtag('consent', 'update', {
+        'ad_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted',
+        'analytics_storage': 'granted'
+      });
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'AW-17307806485');
+    // GA4 — IP anonimleştirme aktif
+    gtag('config', 'G-6NK46VG4DY', {
+      'anonymize_ip': true,
+      'cookie_flags': 'SameSite=None;Secure'
+    });
+  </script>
   <!-- Multi-language hreflang -->
   <link rel="alternate" hreflang="en" href="https://palmiyehomekemer.com/">
   <link rel="alternate" hreflang="tr" href="https://palmiyehomekemer.com/?lang=tr">
@@ -96,7 +132,23 @@
     "sameAs": [
       "https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html",
       "https://www.airbnb.com.tr/rooms/979475001547790592"
-    ]
+    ],
+    "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
+    "currenciesAccepted": ["EUR", "TRY", "USD"],
+    "maximumAttendeeCapacity": 4,
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "reservations",
+      "telephone": "+905327786732",
+      "email": "aliszytr@gmail.com",
+      "availableLanguage": ["English", "Turkish", "Russian", "German"],
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    }
   }
   </script>
   <!-- Schema: FAQPage -->
@@ -166,9 +218,10 @@
     <!-- HERO — 3 bright slides -->
     <section class="hero" id="hero">
       <div class="hero-slider" aria-label="Palmiye Home hero slider">
-        <div class="hero-slide active" style="background-image: url('Pictures/havuz-dag-manzarali.jpg')"></div>
-        <div class="hero-slide" style="background-image: url('Pictures/havuz-kusbakisi.jpg')"></div>
-        <div class="hero-slide" style="background-image: url('Pictures/palmiye-bahce.jpg')"></div>
+        <div class="hero-slide active" style="background-image: url('Pictures/bahce-alani.webp')"></div>
+        <div class="hero-slide" style="background-image: url('Pictures/havuz-dag-manzarali.webp')"></div>
+        <div class="hero-slide" style="background-image: url('Pictures/havuz-kusbakisi.webp')"></div>
+        <div class="hero-slide" style="background-image: url('Pictures/palmiye-bahce.webp')"></div>
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
@@ -188,6 +241,11 @@
             <i data-lucide="message-circle"></i>
             <span data-i18n="hero.cta_whatsapp">Check Availability on WhatsApp</span>
           </a>
+          <p class="trust-badges">
+            <span>✓ <span data-i18n="trust_badges.no_commission">No Commission</span></span>
+            <span>✓ <span data-i18n="trust_badges.no_hidden_fees">No Hidden Fees</span></span>
+            <span>✓ <span data-i18n="trust_badges.support_247">24/7 Support</span></span>
+          </p>
           <a href="https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html" target="_blank" rel="noopener" class="btn btn-booking-outline">
             <i data-lucide="globe"></i>
             <span data-i18n="hero.cta_booking">View on Booking.com</span>
@@ -204,6 +262,7 @@
         <button class="hero-dot active" aria-label="Slide 1"></button>
         <button class="hero-dot" aria-label="Slide 2"></button>
         <button class="hero-dot" aria-label="Slide 3"></button>
+        <button class="hero-dot" aria-label="Slide 4"></button>
       </div>
     </section>
 
@@ -293,6 +352,37 @@
             <button class="review-dot" aria-label="Review 4"></button>
           </div>
         </div>
+
+        <!-- FEATURED REVIEWS -->
+        <div class="featured-reviews fade-up">
+          <blockquote class="featured-review">
+            <div class="featured-review-stars">★★★★★</div>
+            <p class="featured-review-text" data-i18n="featured_reviews.review1_text">Wunderbare Unterkunft! Sehr sauber, ruhige Lage und der Pool war fantastisch. Die Kommunikation mit dem Gastgeber war hervorragend. Wir kommen gerne wieder!</p>
+            <footer class="featured-review-footer">
+              <cite data-i18n="featured_reviews.review1_author">Thomas K.</cite>
+              <span class="featured-review-meta" data-i18n="featured_reviews.review1_meta">🇩🇪 Deutschland · Juli 2025</span>
+              <a href="https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html" target="_blank" rel="noopener" class="featured-review-badge">
+                <span data-i18n="featured_reviews.verified_badge">✓ Verified on Booking.com</span>
+              </a>
+            </footer>
+          </blockquote>
+          <blockquote class="featured-review">
+            <div class="featured-review-stars">★★★★★</div>
+            <p class="featured-review-text" data-i18n="featured_reviews.review2_text">Отличная квартира в тихом месте. Чисто, уютно, есть всё необходимое. Бассейн замечательный! Хозяин очень отзывчивый. Рекомендую!</p>
+            <footer class="featured-review-footer">
+              <cite data-i18n="featured_reviews.review2_author">Ольга П.</cite>
+              <span class="featured-review-meta" data-i18n="featured_reviews.review2_meta">🇷🇺 Россия · Сентябрь 2025</span>
+              <a href="https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html" target="_blank" rel="noopener" class="featured-review-badge">
+                <span data-i18n="featured_reviews.verified_badge">✓ Verified on Booking.com</span>
+              </a>
+            </footer>
+          </blockquote>
+          <div class="featured-reviews-cta">
+            <a href="https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html" target="_blank" rel="noopener" class="featured-reviews-link">
+              <span data-i18n="featured_reviews.see_all_link">See all reviews on Booking.com</span> →
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -314,11 +404,11 @@
         <div class="apartment-layout">
           <div class="apartment-slider">
             <div class="slider-track" id="apartment-slider">
-              <img src="Pictures/Salon.jpg" alt="Fully furnished living room with Smart TV and air conditioning - Palmiye Home" class="slider-slide active" loading="lazy" width="1400" height="1050">
-              <img src="Pictures/yatak-odasi-isikli.jpg" alt="Comfortable double bedroom with natural lighting - holiday apartment Kemer" class="slider-slide" loading="lazy" width="1400" height="654">
-              <img src="Pictures/Mutfak.jpg" alt="Fully equipped kitchen with modern appliances - Göynük rental apartment" class="slider-slide" loading="lazy" width="1400" height="932">
-              <img src="Pictures/Banyo.jpg" alt="Clean modern bathroom - Palmiye Home Kemer vacation rental" class="slider-slide" loading="lazy" width="1400" height="1866">
-              <img src="Pictures/oturma-alani.jpg" alt="Outdoor garden seating area for breakfast - Kemer Göynük" class="slider-slide" loading="lazy" width="1400" height="788">
+              <img src="Pictures/Salon.webp" alt="Fully furnished living room with Smart TV and air conditioning - Palmiye Home" class="slider-slide active" loading="lazy" width="1400" height="1050">
+              <img src="Pictures/yatak-odasi-isikli.webp" alt="Comfortable double bedroom with natural lighting - holiday apartment Kemer" class="slider-slide" loading="lazy" width="1400" height="654">
+              <img src="Pictures/Mutfak.webp" alt="Fully equipped kitchen with modern appliances - Göynük rental apartment" class="slider-slide" loading="lazy" width="1400" height="932">
+              <img src="Pictures/Banyo.webp" alt="Clean modern bathroom - Palmiye Home Kemer vacation rental" class="slider-slide" loading="lazy" width="1400" height="1866">
+              <img src="Pictures/oturma-alani.webp" alt="Outdoor garden seating area for breakfast - Kemer Göynük" class="slider-slide" loading="lazy" width="1400" height="788">
             </div>
             <button class="slider-btn prev" id="slider-prev" aria-label="Previous"><i data-lucide="chevron-left"></i></button>
             <button class="slider-btn next" id="slider-next" aria-label="Next"><i data-lucide="chevron-right"></i></button>
@@ -378,31 +468,31 @@
         </div>
         <div class="gallery-grid" id="gallery-grid">
           <!-- Pool -->
-          <div class="gallery-item" data-category="havuz"><img src="Pictures/havuz-dag-manzarali.jpg" alt="Shared swimming pool with Taurus mountain view at Palmiye Home Kemer Göynük" loading="lazy" width="1920" height="896"></div>
-          <div class="gallery-item" data-category="havuz"><img src="Pictures/gunduzhavuz.jpg" alt="Daytime pool area surrounded by palm trees in Göynük Kemer" loading="lazy" width="1400" height="788"></div>
-          <div class="gallery-item" data-category="havuz"><img src="Pictures/havuz-ve-bahce.jpg" alt="Pool and garden area with mountain backdrop - Kemer vacation rental" loading="lazy" width="1400" height="654"></div>
-          <div class="gallery-item" data-category="havuz"><img src="Pictures/havuz-dag.jpg" alt="Swimming pool with panoramic mountain view - Palmiye Home Göynük" loading="lazy" width="1400" height="654"></div>
+          <div class="gallery-item" data-category="havuz"><img src="Pictures/havuz-dag-manzarali.webp" alt="Shared swimming pool with Taurus mountain view at Palmiye Home Kemer Göynük" loading="lazy" width="1920" height="896"></div>
+          <div class="gallery-item" data-category="havuz"><img src="Pictures/gunduzhavuz.webp" alt="Daytime pool area surrounded by palm trees in Göynük Kemer" loading="lazy" width="1400" height="788"></div>
+          <div class="gallery-item" data-category="havuz"><img src="Pictures/havuz-ve-bahce.webp" alt="Pool and garden area with mountain backdrop - Kemer vacation rental" loading="lazy" width="1400" height="654"></div>
+          <div class="gallery-item" data-category="havuz"><img src="Pictures/havuz-dag.webp" alt="Swimming pool with panoramic mountain view - Palmiye Home Göynük" loading="lazy" width="1400" height="654"></div>
           <!-- Garden -->
-          <div class="gallery-item" data-category="bahce"><img src="Pictures/palmiye-bahce.jpg" alt="Lush palm tree garden at Palmiye Home Kemer" loading="lazy" width="1920" height="1080"></div>
-          <div class="gallery-item" data-category="bahce"><img src="Pictures/bahce-alani.jpg" alt="Garden area with natural greenery - Göynük holiday apartment" loading="lazy" width="1400" height="654"></div>
-          <div class="gallery-item" data-category="bahce"><img src="Pictures/oturma-alani.jpg" alt="Outdoor garden seating area for breakfast - Kemer Göynük" loading="lazy" width="1400" height="788"></div>
-          <div class="gallery-item" data-category="bahce"><img src="Pictures/bahce-ve-kahvalti-alani.jpg" alt="Garden breakfast area under palm trees - Palmiye Home" loading="lazy" width="1400" height="654"></div>
+          <div class="gallery-item" data-category="bahce"><img src="Pictures/palmiye-bahce.webp" alt="Lush palm tree garden at Palmiye Home Kemer" loading="lazy" width="1920" height="1080"></div>
+          <div class="gallery-item" data-category="bahce"><img src="Pictures/bahce-alani.webp" alt="Garden area with natural greenery - Göynük holiday apartment" loading="lazy" width="1400" height="654"></div>
+          <div class="gallery-item" data-category="bahce"><img src="Pictures/oturma-alani.webp" alt="Outdoor garden seating area for breakfast - Kemer Göynük" loading="lazy" width="1400" height="788"></div>
+          <div class="gallery-item" data-category="bahce"><img src="Pictures/bahce-ve-kahvalti-alani.webp" alt="Garden breakfast area under palm trees - Palmiye Home" loading="lazy" width="1400" height="654"></div>
           <!-- Living Room -->
-          <div class="gallery-item" data-category="salon"><img src="Pictures/Salon.jpg" alt="Fully furnished living room with Smart TV and air conditioning - Palmiye Home" loading="lazy" width="1400" height="1050"></div>
-          <div class="gallery-item" data-category="salon"><img src="Pictures/salon-tv.jpg" alt="Living room with Netflix-enabled Smart TV - Göynük holiday apartment" loading="lazy" width="1400" height="932"></div>
-          <div class="gallery-item" data-category="salon"><img src="Pictures/salon-mobilyalar.jpeg" alt="Comfortable living room furniture - Kemer vacation rental" loading="lazy" width="1400" height="1050"></div>
-          <div class="gallery-item" data-category="salon"><img src="Pictures/salon-donanimli-mutfak.jpg" alt="Open plan kitchen and living area - Palmiye Home apartment" loading="lazy" width="1400" height="932"></div>
+          <div class="gallery-item" data-category="salon"><img src="Pictures/Salon.webp" alt="Fully furnished living room with Smart TV and air conditioning - Palmiye Home" loading="lazy" width="1400" height="1050"></div>
+          <div class="gallery-item" data-category="salon"><img src="Pictures/salon-tv.webp" alt="Living room with Netflix-enabled Smart TV - Göynük holiday apartment" loading="lazy" width="1400" height="932"></div>
+          <div class="gallery-item" data-category="salon"><img src="Pictures/salon-mobilyalar.webp" alt="Comfortable living room furniture - Kemer vacation rental" loading="lazy" width="1400" height="1050"></div>
+          <div class="gallery-item" data-category="salon"><img src="Pictures/salon-donanimli-mutfak.webp" alt="Open plan kitchen and living area - Palmiye Home apartment" loading="lazy" width="1400" height="932"></div>
           <!-- Bedroom -->
-          <div class="gallery-item" data-category="yatak"><img src="Pictures/yatak-odasi-isikli.jpg" alt="Comfortable double bedroom with natural lighting - holiday apartment Kemer" loading="lazy" width="1400" height="654"></div>
-          <div class="gallery-item" data-category="yatak"><img src="Pictures/yatak-odasi.jpg" alt="Spacious bedroom with double bed - Palmiye Home Göynük" loading="lazy" width="1400" height="932"></div>
+          <div class="gallery-item" data-category="yatak"><img src="Pictures/yatak-odasi-isikli.webp" alt="Comfortable double bedroom with natural lighting - holiday apartment Kemer" loading="lazy" width="1400" height="654"></div>
+          <div class="gallery-item" data-category="yatak"><img src="Pictures/yatak-odasi.webp" alt="Spacious bedroom with double bed - Palmiye Home Göynük" loading="lazy" width="1400" height="932"></div>
           <!-- Kitchen & Bath -->
-          <div class="gallery-item" data-category="mutfak"><img src="Pictures/Mutfak.jpg" alt="Fully equipped kitchen with modern appliances - Göynük rental apartment" loading="lazy" width="1400" height="932"></div>
-          <div class="gallery-item" data-category="mutfak"><img src="Pictures/Banyo.jpg" alt="Clean modern bathroom - Palmiye Home Kemer vacation rental" loading="lazy" width="1400" height="1866"></div>
-          <div class="gallery-item" data-category="mutfak"><img src="Pictures/banyo-tuvalet.jpg" alt="Modern bathroom and toilet - Kemer holiday apartment" loading="lazy" width="1400" height="1050"></div>
+          <div class="gallery-item" data-category="mutfak"><img src="Pictures/Mutfak.webp" alt="Fully equipped kitchen with modern appliances - Göynük rental apartment" loading="lazy" width="1400" height="932"></div>
+          <div class="gallery-item" data-category="mutfak"><img src="Pictures/Banyo.webp" alt="Clean modern bathroom - Palmiye Home Kemer vacation rental" loading="lazy" width="1400" height="1866"></div>
+          <div class="gallery-item" data-category="mutfak"><img src="Pictures/banyo-tuvalet.webp" alt="Modern bathroom and toilet - Kemer holiday apartment" loading="lazy" width="1400" height="1050"></div>
           <!-- Property -->
-          <div class="gallery-item" data-category="tesis"><img src="Pictures/havuz-kusbakisi.jpg" alt="Bird's eye view of the swimming pool and garden at Palmiye Home" loading="lazy" width="1920" height="1080"></div>
-          <div class="gallery-item" data-category="tesis"><img src="Pictures/drone-gorunumu.jpg" alt="Aerial drone view of Palmiye Home property with pool in Göynük Kemer" loading="lazy" width="1400" height="788"></div>
-          <div class="gallery-item" data-category="tesis"><img src="Pictures/site-kusbakisi.jpg" alt="Aerial view of the entire Palmiye Home complex surrounded by nature" loading="lazy" width="1400" height="788"></div>
+          <div class="gallery-item" data-category="tesis"><img src="Pictures/havuz-kusbakisi.webp" alt="Bird's eye view of the swimming pool and garden at Palmiye Home" loading="lazy" width="1920" height="1080"></div>
+          <div class="gallery-item" data-category="tesis"><img src="Pictures/drone-gorunumu.webp" alt="Aerial drone view of Palmiye Home property with pool in Göynük Kemer" loading="lazy" width="1400" height="788"></div>
+          <div class="gallery-item" data-category="tesis"><img src="Pictures/site-kusbakisi.webp" alt="Aerial view of the entire Palmiye Home complex surrounded by nature" loading="lazy" width="1400" height="788"></div>
         </div>
       </div>
     </section>
@@ -460,7 +550,7 @@
           <div class="attraction-card" onclick="this.classList.toggle('flipped')">
             <div class="attraction-card-inner">
               <div class="attraction-front">
-                <img src="Resimler/Olympos.avif" alt="Olympos Ancient City" loading="lazy">
+                <img src="Pictures/Olympos.webp" alt="Olympos Ancient City" loading="lazy">
                 <div class="attraction-info">
                   <div class="attraction-distance"><i data-lucide="navigation"></i> 40 min</div>
                   <h4 data-i18n="attractions.olympos">Olympos Ancient City</h4>
@@ -502,7 +592,7 @@
           <div class="attraction-card attraction-hidden" onclick="this.classList.toggle('flipped')">
             <div class="attraction-card-inner">
               <div class="attraction-front">
-                <img src="Resimler/Cirali.avif" alt="Çıralı - Yanartaş" loading="lazy">
+                <img src="Pictures/Cirali.webp" alt="Çıralı - Yanartaş" loading="lazy">
                 <div class="attraction-info">
                   <div class="attraction-distance"><i data-lucide="navigation"></i> 45 min</div>
                   <h4 data-i18n="attractions.cirali">Çıralı – Yanartaş (Chimera)</h4>
@@ -710,6 +800,66 @@
       </div>
     </section>
 
+    <!-- COMPARISON TABLE -->
+    <section id="comparison">
+      <div class="container">
+        <h2 class="section-title fade-up" data-i18n="comparison.title">Why Book Directly?</h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle fade-up" data-i18n="comparison.subtitle">Compare direct booking with Booking.com and see the difference.</p>
+
+        <div class="comparison-table fade-up">
+          <!-- Header -->
+          <div class="comparison-row comparison-header">
+            <div class="comparison-cell comparison-feature" data-i18n="comparison.feature_label">Feature</div>
+            <div class="comparison-cell comparison-direct" data-i18n="comparison.direct_label">Direct Booking</div>
+            <div class="comparison-cell comparison-booking" data-i18n="comparison.booking_label">Booking.com</div>
+          </div>
+          <!-- Price -->
+          <div class="comparison-row">
+            <div class="comparison-cell comparison-feature" data-i18n="comparison.price_feature">Nightly Price</div>
+            <div class="comparison-cell comparison-direct comparison-highlight" data-i18n="comparison.direct_price">€100</div>
+            <div class="comparison-cell comparison-booking" data-i18n="comparison.booking_price">~€118</div>
+          </div>
+          <!-- Commission -->
+          <div class="comparison-row">
+            <div class="comparison-cell comparison-feature" data-i18n="comparison.commission_feature">Commission</div>
+            <div class="comparison-cell comparison-direct comparison-highlight" data-i18n="comparison.direct_commission">None</div>
+            <div class="comparison-cell comparison-booking" data-i18n="comparison.booking_commission">15–18%</div>
+          </div>
+          <!-- Response -->
+          <div class="comparison-row">
+            <div class="comparison-cell comparison-feature" data-i18n="comparison.response_feature">Instant Response</div>
+            <div class="comparison-cell comparison-direct comparison-highlight" data-i18n="comparison.direct_response">✅ WhatsApp</div>
+            <div class="comparison-cell comparison-booking" data-i18n="comparison.booking_response">❌ Message Queue</div>
+          </div>
+          <!-- Cancel -->
+          <div class="comparison-row">
+            <div class="comparison-cell comparison-feature" data-i18n="comparison.cancel_feature">Flexible Cancellation</div>
+            <div class="comparison-cell comparison-direct comparison-highlight" data-i18n="comparison.direct_cancel">✅</div>
+            <div class="comparison-cell comparison-booking" data-i18n="comparison.booking_cancel">Policy Dependent</div>
+          </div>
+          <!-- Extras -->
+          <div class="comparison-row">
+            <div class="comparison-cell comparison-feature" data-i18n="comparison.extras_feature">Extra Services</div>
+            <div class="comparison-cell comparison-direct comparison-highlight" data-i18n="comparison.direct_extras">✅ Negotiable</div>
+            <div class="comparison-cell comparison-booking" data-i18n="comparison.booking_extras">❌ Fixed</div>
+          </div>
+        </div>
+
+        <div class="comparison-cta fade-up">
+          <a href="https://wa.me/905327786732?text=Hello%2C%20I%20would%20like%20to%20check%20availability.%0A%0ACheck-in%3A%0ACheck-out%3A%0AGuests%3A" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+            <i data-lucide="message-circle"></i>
+            <span data-i18n="comparison.cta">Book Directly via WhatsApp</span>
+          </a>
+          <p class="trust-badges">
+            <span>✓ <span data-i18n="trust_badges.no_commission">No Commission</span></span>
+            <span>✓ <span data-i18n="trust_badges.no_hidden_fees">No Hidden Fees</span></span>
+            <span>✓ <span data-i18n="trust_badges.support_247">24/7 Support</span></span>
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- PRICING -->
     <section id="pricing" class="section-cream">
       <div class="container">
@@ -737,6 +887,10 @@
               <a href="https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html" target="_blank" rel="noopener" class="btn btn-booking">
                 <i data-lucide="globe"></i>
                 <span data-i18n="pricing.cta_booking">Book on Booking.com</span>
+              </a>
+              <a href="https://www.airbnb.com.tr/rooms/979475001547790592" target="_blank" rel="noopener" class="btn btn-airbnb-outline">
+                <i data-lucide="home"></i>
+                <span data-i18n="pricing.cta_airbnb">View on Airbnb</span>
               </a>
             </div>
           </div>
@@ -804,6 +958,78 @@
         </div>
       </div>
     </section>
+
+    <!-- QUICK INQUIRY FORM -->
+    <section id="quick-inquiry">
+      <div class="container">
+        <h2 class="section-title fade-up" data-i18n="contact_form.title">Quick Inquiry</h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle fade-up" data-i18n="contact_form.subtitle">Send us a message — we'll get back to you within hours.</p>
+
+        <form id="inquiry-form" class="inquiry-form fade-up" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY">
+          <input type="hidden" name="subject" value="Palmiye Home — New Inquiry">
+          <input type="hidden" name="from_name" value="Palmiye Home Website">
+          <input type="hidden" name="redirect" value="https://palmiyehomekemer.com/">
+          <!-- Honeypot -->
+          <input type="checkbox" name="botcheck" style="display:none">
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="inquiry-name" data-i18n="contact_form.name_label">Full Name</label>
+              <input type="text" id="inquiry-name" name="name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="inquiry-email" data-i18n="contact_form.email_label">Email Address</label>
+              <input type="email" id="inquiry-email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="inquiry-checkin" data-i18n="contact_form.checkin_label">Check-in Date</label>
+              <input type="date" id="inquiry-checkin" name="checkin" required>
+            </div>
+            <div class="form-group">
+              <label for="inquiry-checkout" data-i18n="contact_form.checkout_label">Check-out Date</label>
+              <input type="date" id="inquiry-checkout" name="checkout" required>
+            </div>
+            <div class="form-group">
+              <label for="inquiry-guests" data-i18n="contact_form.guests_label">Number of Guests</label>
+              <select id="inquiry-guests" name="guests" required>
+                <option value="1" data-i18n="contact_form.guests_1">1 Guest</option>
+                <option value="2" selected data-i18n="contact_form.guests_2">2 Guests</option>
+                <option value="3" data-i18n="contact_form.guests_3">3 Guests</option>
+                <option value="4" data-i18n="contact_form.guests_4">4 Guests</option>
+              </select>
+            </div>
+            <div class="form-group form-group-full">
+              <label for="inquiry-message" data-i18n="contact_form.message_label">Message (optional)</label>
+              <textarea id="inquiry-message" name="message" rows="3" maxlength="500" data-i18n-placeholder="contact_form.message_placeholder"></textarea>
+            </div>
+          </div>
+
+          <div class="form-submit-area">
+            <button type="submit" class="btn btn-whatsapp btn-lg btn-block" id="inquiry-submit">
+              <i data-lucide="send"></i>
+              <span data-i18n="contact_form.submit">Send Inquiry</span>
+            </button>
+            <p class="trust-badges">
+              <span>✓ <span data-i18n="trust_badges.no_commission">No Commission</span></span>
+              <span>✓ <span data-i18n="trust_badges.no_hidden_fees">No Hidden Fees</span></span>
+              <span>✓ <span data-i18n="trust_badges.support_247">24/7 Support</span></span>
+            </p>
+          </div>
+
+          <div id="form-success" class="form-feedback form-success" style="display:none">
+            <i data-lucide="check-circle"></i>
+            <strong data-i18n="contact_form.success_title">Message Sent!</strong>
+            <p data-i18n="contact_form.success_text">Thank you for your inquiry. We'll respond within a few hours.</p>
+          </div>
+          <div id="form-error" class="form-feedback form-error" style="display:none">
+            <i data-lucide="alert-circle"></i>
+            <p data-i18n="contact_form.error_text">Something went wrong. Please try again or contact us via WhatsApp.</p>
+          </div>
+        </form>
+      </div>
+    </section>
   </main>
 
   <!-- FOOTER -->
@@ -838,8 +1064,8 @@
       <a href="https://wa.me/905327786732?text=Hello%2C%20I%20would%20like%20to%20check%20availability.%0A%0ACheck-in%3A%0ACheck-out%3A%0AGuests%3A" target="_blank" rel="noopener" class="btn btn-whatsapp mobile-cta-main">
         <i data-lucide="message-circle"></i> <span data-i18n="nav.whatsapp">WhatsApp</span>
       </a>
-      <a href="https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html" target="_blank" rel="noopener" class="btn btn-booking mobile-cta-alt">
-        <i data-lucide="globe"></i>
+      <a href="#quick-inquiry" class="btn btn-gold mobile-cta-form">
+        <i data-lucide="mail"></i> <span data-i18n="sticky.form_cta">Inquiry Form</span>
       </a>
     </div>
   </div>
@@ -879,6 +1105,7 @@
 
   <script src="booking-redirect.js"></script>
   <script src="analytics.js"></script>
+  <script src="tracking.js"></script>
 
 </body>
 </html>
