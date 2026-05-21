@@ -229,8 +229,8 @@
           <i data-lucide="star"></i>
           <span data-i18n="hero.trust_pill">Booking.com 9.6 · Exceptional guest rating</span>
         </div>
-        <h1 data-i18n="hero.title">Your Private Retreat <span>in Antalya</span></h1>
-        <p class="hero-subtitle" data-i18n="hero.subtitle">Fully equipped apartment with pool, mountain views & free parking in Kemer–Göynük</p>
+        <h1 data-i18n="hero.title">Wake Up to Silence, <span>Start Your Day by the Mountain View Pool</span></h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">Kemer Göynük · Fully Equipped Apartment · Pool · Antalya</p>
         <div class="hero-bullets">
           <span class="hero-bullet"><i data-lucide="check-circle"></i> <span data-i18n="hero.bullet1">Shared Pool & Garden</span></span>
           <span class="hero-bullet"><i data-lucide="check-circle"></i> <span data-i18n="hero.bullet2">Free Wi-Fi & Parking</span></span>
@@ -313,7 +313,7 @@
       <div class="container fade-up">
         <h2 class="section-title" data-i18n="reviews.title">What Our Guests Say</h2>
         <div class="accent-line"></div>
-        <p class="section-subtitle" data-i18n="reviews.subtitle">⭐ 9.6 Exceptional — Based on 6 verified reviews on Booking.com</p>
+        <p class="section-subtitle" data-i18n="reviews.subtitle">⭐ 9.6 Exceptional on Booking.com</p>
 
         <div class="reviews-carousel" id="reviews-carousel">
 
@@ -958,78 +958,6 @@
         </div>
       </div>
     </section>
-
-    <!-- QUICK INQUIRY FORM -->
-    <section id="quick-inquiry">
-      <div class="container">
-        <h2 class="section-title fade-up" data-i18n="contact_form.title">Quick Inquiry</h2>
-        <div class="accent-line"></div>
-        <p class="section-subtitle fade-up" data-i18n="contact_form.subtitle">Send us a message — we'll get back to you within hours.</p>
-
-        <form id="inquiry-form" class="inquiry-form fade-up" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY">
-          <input type="hidden" name="subject" value="Palmiye Home — New Inquiry">
-          <input type="hidden" name="from_name" value="Palmiye Home Website">
-          <input type="hidden" name="redirect" value="https://palmiyehomekemer.com/">
-          <!-- Honeypot -->
-          <input type="checkbox" name="botcheck" style="display:none">
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="inquiry-name" data-i18n="contact_form.name_label">Full Name</label>
-              <input type="text" id="inquiry-name" name="name" required autocomplete="name">
-            </div>
-            <div class="form-group">
-              <label for="inquiry-email" data-i18n="contact_form.email_label">Email Address</label>
-              <input type="email" id="inquiry-email" name="email" required autocomplete="email">
-            </div>
-            <div class="form-group">
-              <label for="inquiry-checkin" data-i18n="contact_form.checkin_label">Check-in Date</label>
-              <input type="date" id="inquiry-checkin" name="checkin" required>
-            </div>
-            <div class="form-group">
-              <label for="inquiry-checkout" data-i18n="contact_form.checkout_label">Check-out Date</label>
-              <input type="date" id="inquiry-checkout" name="checkout" required>
-            </div>
-            <div class="form-group">
-              <label for="inquiry-guests" data-i18n="contact_form.guests_label">Number of Guests</label>
-              <select id="inquiry-guests" name="guests" required>
-                <option value="1" data-i18n="contact_form.guests_1">1 Guest</option>
-                <option value="2" selected data-i18n="contact_form.guests_2">2 Guests</option>
-                <option value="3" data-i18n="contact_form.guests_3">3 Guests</option>
-                <option value="4" data-i18n="contact_form.guests_4">4 Guests</option>
-              </select>
-            </div>
-            <div class="form-group form-group-full">
-              <label for="inquiry-message" data-i18n="contact_form.message_label">Message (optional)</label>
-              <textarea id="inquiry-message" name="message" rows="3" maxlength="500" data-i18n-placeholder="contact_form.message_placeholder"></textarea>
-            </div>
-          </div>
-
-          <div class="form-submit-area">
-            <button type="submit" class="btn btn-whatsapp btn-lg btn-block" id="inquiry-submit">
-              <i data-lucide="send"></i>
-              <span data-i18n="contact_form.submit">Send Inquiry</span>
-            </button>
-            <p class="trust-badges">
-              <span>✓ <span data-i18n="trust_badges.no_commission">No Commission</span></span>
-              <span>✓ <span data-i18n="trust_badges.no_hidden_fees">No Hidden Fees</span></span>
-              <span>✓ <span data-i18n="trust_badges.support_247">24/7 Support</span></span>
-            </p>
-          </div>
-
-          <div id="form-success" class="form-feedback form-success" style="display:none">
-            <i data-lucide="check-circle"></i>
-            <strong data-i18n="contact_form.success_title">Message Sent!</strong>
-            <p data-i18n="contact_form.success_text">Thank you for your inquiry. We'll respond within a few hours.</p>
-          </div>
-          <div id="form-error" class="form-feedback form-error" style="display:none">
-            <i data-lucide="alert-circle"></i>
-            <p data-i18n="contact_form.error_text">Something went wrong. Please try again or contact us via WhatsApp.</p>
-          </div>
-        </form>
-      </div>
-    </section>
   </main>
 
   <!-- FOOTER -->
@@ -1064,8 +992,8 @@
       <a href="https://wa.me/905327786732?text=Hello%2C%20I%20would%20like%20to%20check%20availability.%0A%0ACheck-in%3A%0ACheck-out%3A%0AGuests%3A" target="_blank" rel="noopener" class="btn btn-whatsapp mobile-cta-main">
         <i data-lucide="message-circle"></i> <span data-i18n="nav.whatsapp">WhatsApp</span>
       </a>
-      <a href="#quick-inquiry" class="btn btn-gold mobile-cta-form">
-        <i data-lucide="mail"></i> <span data-i18n="sticky.form_cta">Inquiry Form</span>
+      <a href="https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html" target="_blank" rel="noopener" class="btn btn-booking-outline mobile-cta-alt">
+        <i data-lucide="globe"></i> <span data-i18n="nav.booking">Booking.com</span>
       </a>
     </div>
   </div>

@@ -37,6 +37,7 @@
     "past": "Past",
     "cta_text": "Found your dates? Book directly for the best price!",
     "cta_btn": "Book via WhatsApp",
+    "whatsapp_message": "Hello! I'd like to book Palmiye Home from {start} to {end}. Is it available?",
     "whatsapp_cta": "Ask About These Dates on WhatsApp",
     "whatsapp_message": "Hello! I'd like to check availability and price for {checkin} - {checkout}, {guests} guests.",
     "guests_select": "Guests"
@@ -233,27 +234,6 @@
     "review2_meta": "🇷🇺 Россия · Сентябрь 2025",
     "verified_badge": "✓ Verified on Booking.com",
     "see_all_link": "See all reviews on Booking.com"
-  },
-  "contact_form": {
-    "title": "Quick Inquiry",
-    "subtitle": "Send us a message — we'll get back to you within hours.",
-    "name_label": "Full Name",
-    "email_label": "Email Address",
-    "checkin_label": "Check-in Date",
-    "checkout_label": "Check-out Date",
-    "guests_label": "Number of Guests",
-    "guests_1": "1 Guest",
-    "guests_2": "2 Guests",
-    "guests_3": "3 Guests",
-    "guests_4": "4 Guests",
-    "message_label": "Message (optional)",
-    "message_placeholder": "Any special requests or questions...",
-    "submit": "Send Inquiry",
-    "submitting": "Sending...",
-    "success_title": "Message Sent!",
-    "success_text": "Thank you for your inquiry. We'll respond within a few hours.",
-    "error_text": "Something went wrong. Please try again or contact us via WhatsApp."
-  },
   "comparison": {
     "title": "Why Book Directly?",
     "subtitle": "Compare direct booking with Booking.com and see the difference.",
@@ -281,8 +261,5 @@
     "no_commission": "No Commission",
     "no_hidden_fees": "No Hidden Fees",
     "support_247": "24/7 Support"
-  },
-  "sticky": {
-    "form_cta": "Inquiry Form"
   }
 }

@@ -38,7 +38,7 @@
     "cta_text": "Ihre Daten gefunden? Buchen Sie direkt zum besten Preis!",
     "cta_btn": "Über WhatsApp buchen",
     "whatsapp_cta": "Per WhatsApp nach diesen Daten fragen",
-    "whatsapp_message": "Hallo! Ich möchte Verfügbarkeit und Preis für {checkin} - {checkout}, {guests} Personen anfragen.",
+    "whatsapp_message": "Hallo! Ich möchte Palmiye Home vom {start} bis {end} buchen. Ist es verfügbar?",
     "guests_select": "Gäste"
   },
   "trust": {
@@ -234,26 +234,6 @@
     "verified_badge": "✓ Auf Booking.com verifiziert",
     "see_all_link": "Alle Bewertungen auf Booking.com ansehen"
   },
-  "contact_form": {
-    "title": "Schnelle Anfrage",
-    "subtitle": "Senden Sie uns eine Nachricht — wir antworten innerhalb weniger Stunden.",
-    "name_label": "Vollständiger Name",
-    "email_label": "E-Mail-Adresse",
-    "checkin_label": "Anreisedatum",
-    "checkout_label": "Abreisedatum",
-    "guests_label": "Anzahl der Gäste",
-    "guests_1": "1 Gast",
-    "guests_2": "2 Gäste",
-    "guests_3": "3 Gäste",
-    "guests_4": "4 Gäste",
-    "message_label": "Nachricht (optional)",
-    "message_placeholder": "Besondere Wünsche oder Fragen...",
-    "submit": "Anfrage senden",
-    "submitting": "Wird gesendet...",
-    "success_title": "Nachricht gesendet!",
-    "success_text": "Vielen Dank für Ihre Anfrage. Wir antworten innerhalb weniger Stunden.",
-    "error_text": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder kontaktieren Sie uns über WhatsApp."
-  },
   "comparison": {
     "title": "Warum direkt buchen?",
     "subtitle": "Vergleichen Sie die Direktbuchung mit Booking.com.",
@@ -281,8 +261,5 @@
     "no_commission": "Keine Provision",
     "no_hidden_fees": "Keine versteckten Gebühren",
     "support_247": "24/7 Support"
-  },
-  "sticky": {
-    "form_cta": "Kontaktformular"
   }
 }

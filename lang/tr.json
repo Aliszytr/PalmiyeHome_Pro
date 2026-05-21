@@ -233,26 +233,6 @@
     "verified_badge": "✓ Booking.com'da Doğrulanmış",
     "see_all_link": "Booking.com'da tüm yorumları gör"
   },
-  "contact_form": {
-    "title": "Hızlı İletişim",
-    "subtitle": "Bize mesaj gönderin — birkaç saat içinde döneriz.",
-    "name_label": "Ad Soyad",
-    "email_label": "E-posta Adresi",
-    "checkin_label": "Giriş Tarihi",
-    "checkout_label": "Çıkış Tarihi",
-    "guests_label": "Kişi Sayısı",
-    "guests_1": "1 Kişi",
-    "guests_2": "2 Kişi",
-    "guests_3": "3 Kişi",
-    "guests_4": "4 Kişi",
-    "message_label": "Mesaj (isteğe bağlı)",
-    "message_placeholder": "Özel istekleriniz veya sorularınız...",
-    "submit": "Gönder",
-    "submitting": "Gönderiliyor...",
-    "success_title": "Mesajınız İletildi!",
-    "success_text": "Talebiniz için teşekkürler. Birkaç saat içinde dönüş yapacağız.",
-    "error_text": "Bir hata oluştu. Lütfen tekrar deneyin veya WhatsApp ile ulaşın."
-  },
   "comparison": {
     "title": "Neden Doğrudan Rezervasyon?",
     "subtitle": "Direkt rezervasyon ile Booking.com'u karşılaştırın, farkı görün.",
@@ -280,8 +260,5 @@
     "no_commission": "Komisyon Yok",
     "no_hidden_fees": "Gizli Ücret Yok",
     "support_247": "7/24 İletişim"
-  },
-  "sticky": {
-    "form_cta": "İletişim Formu"
   }
 }

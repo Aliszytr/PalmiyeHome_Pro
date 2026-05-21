@@ -37,7 +37,7 @@
     "cta_text": "Нашли свои даты? Бронируйте напрямую по лучшей цене!",
     "cta_btn": "Забронировать в WhatsApp",
     "whatsapp_cta": "Спросить об этих датах в WhatsApp",
-    "whatsapp_message": "Здравствуйте, прошу проверить наличие и цену на {checkin} - {checkout}, {guests} гостей.",
+    "whatsapp_message": "Здравствуйте! Хочу забронировать Palmiye Home с {start} по {end}. Свободно?",
     "guests_select": "Гости"
   },
   "trust": {
@@ -233,26 +233,6 @@
     "verified_badge": "✓ Проверено на Booking.com",
     "see_all_link": "Все отзывы на Booking.com"
   },
-  "contact_form": {
-    "title": "Быстрый запрос",
-    "subtitle": "Отправьте нам сообщение — мы ответим в течение нескольких часов.",
-    "name_label": "Полное имя",
-    "email_label": "Электронная почта",
-    "checkin_label": "Дата заезда",
-    "checkout_label": "Дата выезда",
-    "guests_label": "Количество гостей",
-    "guests_1": "1 гость",
-    "guests_2": "2 гостя",
-    "guests_3": "3 гостя",
-    "guests_4": "4 гостя",
-    "message_label": "Сообщение (необязательно)",
-    "message_placeholder": "Особые пожелания или вопросы...",
-    "submit": "Отправить запрос",
-    "submitting": "Отправка...",
-    "success_title": "Сообщение отправлено!",
-    "success_text": "Спасибо за ваш запрос. Мы ответим в течение нескольких часов.",
-    "error_text": "Произошла ошибка. Пожалуйста, попробуйте снова или свяжитесь с нами через WhatsApp."
-  },
   "comparison": {
     "title": "Почему бронировать напрямую?",
     "subtitle": "Сравните прямое бронирование с Booking.com.",
@@ -280,8 +260,5 @@
     "no_commission": "Без комиссии",
     "no_hidden_fees": "Без скрытых платежей",
     "support_247": "Поддержка 24/7"
-  },
-  "sticky": {
-    "form_cta": "Форма запроса"
   }
 }
