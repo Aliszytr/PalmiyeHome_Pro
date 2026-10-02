@@ -1009,8 +1009,8 @@ section { padding: 5rem 0; }
 
 @media (max-width: 768px) { .location-layout { grid-template-columns: 1fr; } }
 
-/* ---- PRICING ---- */
-#pricing {
+/* ---- RESERVATION OPTIONS ---- */
+#reservation-options {
   background: var(--warm-bg);
 }
 .pricing-grid {
@@ -1094,12 +1094,11 @@ section { padding: 5rem 0; }
 }
 .pricing-footer svg { width: 16px; height: 16px; }
 
-/* Premium pricing hero */
-.pricing-hero {
+.reservation-hero {
   display: flex;
   justify-content: center;
 }
-.pricing-main-card {
+.reservation-main-card {
   background: var(--white);
   border: 1px solid rgba(0,0,0,0.06);
   border-radius: var(--radius-xl);
@@ -1111,44 +1110,14 @@ section { padding: 5rem 0; }
   position: relative;
   overflow: hidden;
 }
-.pricing-main-card::before {
+.reservation-main-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 4px;
   background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--teal-light));
 }
-.pricing-price-display {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.35rem;
-  margin-bottom: 0.5rem;
-}
-.pricing-from {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  font-weight: 400;
-}
-.pricing-amount {
-  font-size: 3.5rem;
-  font-weight: 700;
-  font-family: var(--font-display);
-  color: var(--navy);
-  line-height: 1;
-}
-.pricing-per {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  font-weight: 400;
-}
-.pricing-main-card .pricing-note {
-  color: var(--text-light);
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
-  font-weight: 400;
-}
-.pricing-perks {
+.reservation-options-list {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -1158,24 +1127,34 @@ section { padding: 5rem 0; }
   margin-left: auto;
   margin-right: auto;
 }
-.pricing-perks span {
+.reservation-options-list span {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
   color: var(--text-light);
 }
-.pricing-perks svg { width: 16px; height: 16px; color: var(--teal); flex-shrink: 0; }
-.pricing-ctas {
+.reservation-options-list svg { width: 16px; height: 16px; color: var(--teal); flex-shrink: 0; }
+.reservation-ctas {
   display: flex;
   gap: 0.75rem;
   justify-content: center;
   flex-wrap: wrap;
 }
+.reservation-footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.reservation-footer svg { width: 16px; height: 16px; }
 
 @media (max-width: 768px) {
-  .pricing-main-card { padding: 2rem 1.5rem; }
-  .pricing-amount { font-size: 2.8rem; }
+  .reservation-main-card { padding: 2rem 1.5rem; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
   .pricing-card.featured { transform: none; }
 }

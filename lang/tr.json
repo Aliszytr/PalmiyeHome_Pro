@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "Palmiye Home Kemer | Havuzlu Kiralık Daire Göynük – Booking 9.6 Puan",
-    "description": "Kemer Göynük'te havuzlu, tam donanımlı 1+1 kiralık tatil dairesi. Booking.com 9.6 puan. Ücretsiz Wi-Fi, otopark, dağ manzarası. WhatsApp ile hızlı rezervasyon.",
+    "title": "Palmiye Home Kemer | Havuzlu Kiralık Daire Göynük – Booking.com 9.4 Puan",
+    "description": "Kemer Göynük'te havuzlu, tam donanımlı 1+1 kiralık tatil dairesi. Booking.com'da 9.4 puan. Ücretsiz Wi-Fi, otopark, dağ manzarası. WhatsApp ile hızlı rezervasyon.",
     "og_title": "Palmiye Home | Kemer Göynük Havuzlu Kiralık Daire",
-    "og_description": "Booking.com 9.6 puanlı, havuzlu 1+1 tatil dairesi. Kemer Göynük'te doğa içinde huzur.",
+    "og_description": "Booking.com'da 9.4 puanlı, havuzlu 1+1 tatil dairesi. Kemer Göynük'te doğa içinde huzur.",
     "keywords": "kemer kiralık daire, göynük tatil evi, havuzlu kiralık daire antalya, kemer apart, göynük apartment rental, kemer holiday home pool, palmiye home kemer"
   },
   "nav": {
@@ -18,15 +18,14 @@
     "availability": "Müsaitlik"
   },
   "hero": {
-    "trust_pill": "Booking.com 9,6 · Olağanüstü misafir puanı",
+    "trust_pill": "Booking.com'da 9,4",
     "title": "Sessiz Bir Sabaha Uyan, <span>Dağ Manzaralı Havuzda Güne Başla</span>",
     "subtitle": "Kemer Göynük · Donanımlı Apart · Havuz · Antalya",
     "bullet1": "Ortak Havuz & Bahçe",
     "bullet2": "Ücretsiz Wi-Fi & Otopark",
     "bullet3": "Doğrudan Rezervasyon",
     "cta_whatsapp": "WhatsApp ile Müsaitlik Sorun",
-    "cta_booking": "Booking.com'da İnceleyin",
-    "response_note": "<i data-lucide=\"zap\"></i> Genellikle 5 dakika içinde yanıt veriyoruz"
+    "cta_booking": "Booking.com'da İnceleyin"
   },
   "calendar": {
     "title": "Müsaitlik Takvimi",
@@ -48,12 +47,11 @@
     "location": "Göynük Merkez",
     "location_desc": "Merkezi konum",
     "direct": "Doğrudan İletişim",
-    "direct_desc": "7/24 WhatsApp"
+    "direct_desc": "WhatsApp"
   },
   "booking_trust": {
-    "score_label": "Olağanüstü",
-    "title": "Booking.com'da 9,6 Olağanüstü Puan",
-    "desc": "Booking.com üzerinde 9,6 puana sahibiz. Misafirler özellikle temizlik, huzurlu ortam, havuz alanı ve hızlı iletişimi çok beğeniyor.",
+    "title": "Booking.com'da 9,4 Puan",
+    "desc": "Booking.com üzerinde 9,4 puana sahibiz. Misafirler özellikle temizlik, huzurlu ortam, havuz alanı ve hızlı iletişimi çok beğeniyor.",
     "h1": "Doğrulanmış Mülk",
     "h2": "Güvenli Ödeme",
     "h3": "Gerçek Misafir Yorumları",
@@ -68,7 +66,7 @@
     "title": "Dairemiz",
     "desc": "Merkeze yakın, sessiz, doğa içinde tam donanımlı 1+1 apart daire. Her şey düşünülmüş konfor.",
     "capacity": "Maks. 4 kişi",
-    "checkin": "Giriş: 14:00",
+    "checkin": "Giriş: 14:00–23:00",
     "checkout": "Çıkış: 11:00"
   },
   "feature": {
@@ -80,7 +78,7 @@
     "hairdryer": "Saç Kurutma",
     "baby": "Beşik & Mama Sand.",
     "parking": "Ücretsiz Otopark",
-    "security": "Güvenlik Kamerası"
+    "security": "Dış mekân güvenlik kameraları (giriş ve ortak alanlar)"
   },
   "cp2": {
     "title": "Beğendiniz mi?",
@@ -100,7 +98,7 @@
   },
   "cp3": {
     "title": "Tatil Planınız Hazır mı?",
-    "subtitle": "Bize mesaj gönderin — dakikalar içinde yanıt veriyoruz.",
+    "subtitle": "Müsaitlik ve rezervasyon için hemen ulaşın.",
     "cta": "WhatsApp ile Yazın"
   },
   "location": {
@@ -117,35 +115,12 @@
     "airport": "Antalya Havalimanı",
     "airport_desc": "~50 dk araç mesafesi"
   },
-  "pricing": {
-    "title": "Rezervasyon ve Müsaitlik",
-    "subtitle": "Tatilinizi planlamak için esnek konaklama seçenekleri.",
-    "from_label": "Başlangıç",
-    "per_night": "/ gece",
-    "peak_note": "Sezonsal müsaitlik için iletişime geçin",
-    "perk1": "Uzun süreli konaklamalara uygun",
-    "perk2": "Aylık konaklamalara uygun",
-    "perk3": "Bizimle doğrudan iletişime geçin",
-    "cta_wa": "Müsaitliği Kontrol Et",
-    "cta_booking": "Booking.com'da Bak",
-    "footer": "Müsaitlik ve rezervasyon bilgileri için rezervasyon sayfasını kontrol edebilir veya bizimle iletişime geçebilirsiniz.",
-    "daily": "Günlük",
-    "daily_note": "rezervasyon",
-    "daily_desc": "Esnek giriş/çıkış",
-    "popular": "Popüler",
-    "weekly": "Haftalık",
-    "weekly_note": "uzun konaklama",
-    "weekly_desc": "7+ gece konaklamalar için",
-    "monthly": "Aylık",
-    "monthly_note": "uzun konaklama",
-    "monthly_desc": "30+ gece konaklamalar için"
-  },
   "faq": {
     "title": "Sık Sorulan Sorular",
     "q1": "Check-in ve check-out saatleri nedir?",
-    "a1": "Giriş (check-in) saat 14:00'ten itibaren, çıkış (check-out) en geç saat 11:00'e kadardır. Esnek saatler için önceden iletişime geçebilirsiniz.",
+    "a1": "Giriş (check-in) saat 14:00–23:00 arasında, çıkış (check-out) en geç saat 11:00'e kadardır. Esnek saatler için önceden iletişime geçebilirsiniz.",
     "q2": "Havuz ne zaman açık?",
-    "a2": "Site havuzu Haziran – Kasım ayları arasında kullanıma açıktır. Yetişkin ve çocuk havuzu bulunmaktadır.",
+    "a2": "Sitede sezonluk ortak havuz bulunmaktadır; yetişkin ve çocuk havuzu mevcuttur.",
     "q3": "Otopark var mı?",
     "a3": "Evet, site içinde ücretsiz açık otopark mevcuttur.",
     "q4": "Çocuklar için beşik veya mama sandalyesi var mı?",
@@ -159,9 +134,9 @@
     "title": "Rezervasyon",
     "subtitle": "Size en uygun yoldan ulaşın.",
     "wa_title": "WhatsApp ile Yazın",
-    "wa_desc": "Anında yanıt — Doğrudan rezervasyon",
+    "wa_desc": "Doğrudan rezervasyon",
     "booking_title": "Booking.com'da İnceleyin",
-    "booking_desc": "Güvenli ödeme ve anlık onay",
+    "booking_desc": "Güvenli ödeme",
     "airbnb_title": "Airbnb'de de Varız",
     "airbnb_desc": "Değerlendirmeler ve güvenli ödeme"
   },
@@ -182,7 +157,7 @@
   },
   "reviews": {
     "title": "Misafirlerimiz Ne Diyor?",
-    "subtitle": "⭐ 9.6 Olağanüstü — Booking.com"
+    "subtitle": "⭐ Booking.com'da 9,4"
   },
   "attractions": {
     "title": "Gezilecek Yerler",
@@ -228,31 +203,10 @@
     "review2_text": "Ruhige Gegend und alles Neubau. Küchengeräte alles Neue, wir haben das Gefühl gehabt das wir dieses Apartment als erste nutzen. Pool Neu und Top sauber. Das war unser bester Unterkunft seit 15 Jahren, und wir machen jährlich Urlaub. Können wir nur empfehlen :-)",
     "review2_author": "Dudojc",
     "review2_meta": "🇩🇪 Almanya · Ağustos 2024",
-    "review3_text": "Konforlu daireler. Tatil için gerekli olan her şey mevcut. Yeni ve kaliteli mobilyalar, ev aletleri ve yemek hazırlamak için çok çeşitli mutfak gereçleri var. Rahat bir teras ve hızlı internet bulunuyor. Kendimizi evimizde gibi hissettik. İlgisi için Ali'ye ayrıca teşekkür ederiz. Tatil için bu daireleri tavsiye ediyoruz.",
-    "review3_author": "Booking.com konuğu",
-    "review3_meta": "🇺🇦 Ukrayna · Haziran 2026",
     "verified_badge": "✓ Booking.com'da Doğrulanmış",
     "see_all_link": "Booking.com'da tüm yorumları gör"
   },
   "comparison": {
-    "title": "Neden Doğrudan Rezervasyon?",
-    "subtitle": "Direkt rezervasyon ile Booking.com'u karşılaştırın, farkı görün.",
-    "feature_label": "Özellik",
-    "direct_label": "Direkt Rezervasyon",
-    "booking_label": "Booking.com",
-    "response_feature": "Anlık Yanıt",
-    "direct_response": "✅ WhatsApp",
-    "booking_response": "❌ Mesaj Kuyruğu",
-    "cancel_feature": "Esnek İptal",
-    "direct_cancel": "✅",
-    "booking_cancel": "Politikaya Bağlı",
-    "extras_feature": "Ekstra Hizmet",
-    "direct_extras": "✅ Esnek",
-    "booking_extras": "❌ Sabit",
     "cta": "WhatsApp ile Doğrudan Rezervasyon"
-  },
-  "trust_badges": {
-    "no_hidden_fees": "Şeffaf İletişim",
-    "support_247": "7/24 İletişim"
   }
 }

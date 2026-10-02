@@ -52,11 +52,11 @@
   //  Format: 'AbCdEfGhIjK1LmNoPq'  (sadece label kısmı)
   //  null = henüz yapılandırılmamış → conversion fire edilmez
   // ════════════════════════════════════════════════════════════
-  var CONVERSIONS = {
-    whatsapp: 'v25ICPyy46EcEJXWgL1a',   // WhatsApp Click
-    booking:  'TPPsCP-y46EcEJXWgL1a',   // Booking.com Click
-    airbnb:   'rcALCPqz46EcEJXWgL1a'    // Airbnb Click
-  };
+var CONVERSIONS = {
+    whatsapp: 'vc01CNXHidYcEJXWgL1A',
+    booking:  'pkzoCNjHidYcEJXWgL1A',
+    airbnb:   'WFLICNvHidYcEJXWgL1A'
+}
 
   // ════════════════════════════════════════════════════════════
   //  CONSENT — Burada manuel kontrol YOK (bilinçli).

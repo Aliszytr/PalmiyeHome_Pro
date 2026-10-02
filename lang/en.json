@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "Palmiye Home — Pool Apartment in Kemer Göynük, Antalya | Book Direct",
-    "description": "Book a fully equipped 1+1 apartment with shared pool in Kemer Göynük, Antalya. Mountain views, free Wi-Fi, parking. Booking.com 9.6 rated. Message us on WhatsApp for availability and reservations.",
+    "title": "Palmiye Home — Pool Apartment in Kemer Göynük, Antalya",
+    "description": "Fully equipped 1+1 apartment with shared pool in Kemer Göynük, Antalya. Mountain views, free Wi-Fi, parking. 9.4 on Booking.com. Send your dates and guest count on WhatsApp.",
     "og_title": "Palmiye Home — Pool Apartment in Kemer, Antalya",
-    "og_description": "Fully equipped 1+1 apartment with shared pool in Kemer Göynük. Booking.com 9.6 rated. Book directly via WhatsApp for availability.",
+    "og_description": "Fully equipped 1+1 apartment with shared pool in Kemer Göynük. 9.4 on Booking.com. Check availability via WhatsApp, Booking.com or Airbnb.",
     "keywords": "kemer apartment rental, göynük holiday, pool apartment antalya, turkey vacation rental, palmiye home, whatsapp booking, kemer konaklama"
   },
   "nav": {
@@ -18,16 +18,15 @@
     "availability": "Availability"
   },
   "hero": {
-    "trust_pill": "Booking.com 9.6 · Exceptional guest rating",
+    "trust_pill": "9.4 on Booking.com",
     "title": "Wake Up to Silence, <span>Start Your Day by the Mountain View Pool</span>",
     "subtitle": "Kemer Göynük · Fully Equipped Apartment · Pool · Antalya",
     "bullet1": "Shared Pool & Garden",
     "bullet2": "Free Wi-Fi & Parking",
-    "bullet3": "Direct Booking",
+    "bullet3": "Direct Contact — Fast Response",
     "cta_whatsapp": "Check Availability on WhatsApp",
     "cta_booking": "View on Booking.com",
-    "cta_airbnb": "View on Airbnb",
-    "response_note": "<i data-lucide=\"zap\"></i> We typically respond within 5 minutes"
+    "cta_airbnb": "View on Airbnb"
   },
   "calendar": {
     "title": "Availability Calendar",
@@ -35,8 +34,8 @@
     "available": "Available",
     "booked": "Booked",
     "past": "Past",
-    "cta_text": "Found your dates? Book directly with us!",
-    "cta_btn": "Book via WhatsApp",
+    "cta_text": "Found your dates? Send them to check availability.",
+    "cta_btn": "Check via WhatsApp",
     "whatsapp_message": "Hello! I'd like to book Palmiye Home from {start} to {end}. Is it available?"
   },
   "trust": {
@@ -49,27 +48,26 @@
     "location": "Göynük Center",
     "location_desc": "Central location",
     "direct": "Direct Contact",
-    "direct_desc": "24/7 WhatsApp"
+    "direct_desc": "WhatsApp"
   },
   "booking_trust": {
-    "score_label": "Exceptional",
-    "title": "Exceptional Rating on Booking.com",
-    "desc": "Rated 9.6 on Booking.com. Guests especially love the cleanliness, peaceful atmosphere, pool area and responsive hosting.",
+    "title": "9.4 on Booking.com",
+    "desc": "Rated 9.4 on Booking.com. Guests especially love the cleanliness, peaceful atmosphere, pool area and responsive hosting.",
     "h1": "Verified Property",
     "h2": "Secure Payment",
     "h3": "Real Guest Reviews",
     "cta": "Check Availability on Booking.com"
   },
   "cp1": {
-    "title": "Book Directly",
-    "subtitle": "Message us on WhatsApp for availability.",
+    "title": "Check Availability — Book with Confidence",
+    "subtitle": "Message us with your dates and guest count.",
     "cta": "Check Availability on WhatsApp"
   },
   "apartment": {
     "title": "Our Apartment",
     "desc": "Close to the center, quiet, surrounded by nature — a fully equipped 1+1 apartment. Every detail designed for comfort.",
     "capacity": "Max. 4 guests",
-    "checkin": "Check-in: 14:00",
+    "checkin": "Check-in: 14:00–23:00",
     "checkout": "Check-out: 11:00"
   },
   "feature": {
@@ -81,11 +79,11 @@
     "hairdryer": "Hair Dryer",
     "baby": "Crib & High Chair",
     "parking": "Free Parking",
-    "security": "Security Camera"
+    "security": "Exterior security cameras (entrance &amp; common areas)"
   },
   "cp2": {
     "title": "Like What You See?",
-    "subtitle": "Contact us for availability.",
+    "subtitle": "Contact us for availability and reservation details.",
     "cta": "Check Availability on WhatsApp"
   },
   "gallery": {
@@ -101,7 +99,7 @@
   },
   "cp3": {
     "title": "Ready to Book Your Stay?",
-    "subtitle": "Send us a message — we reply within minutes.",
+    "subtitle": "Contact us for availability and reservation details.",
     "cta": "Message Us on WhatsApp"
   },
   "location": {
@@ -118,35 +116,12 @@
     "airport": "Antalya Airport",
     "airport_desc": "~50 min by car"
   },
-  "pricing": {
-    "title": "Reservations & Availability",
-    "subtitle": "Flexible accommodation options to plan your vacation.",
-    "from_label": "From",
-    "per_night": "/ night",
-    "peak_note": "Contact for seasonal availability",
-    "perk1": "Extended stays welcome",
-    "perk2": "Monthly stays welcome",
-    "perk3": "Book directly with us",
-    "cta_wa": "Check Availability",
-    "cta_booking": "Book on Booking.com",
-    "footer": "For current availability, please check the reservation page or contact us on WhatsApp.",
-    "daily": "Daily",
-    "daily_note": "reservations",
-    "daily_desc": "Flexible check-in/check-out",
-    "popular": "Popular",
-    "weekly": "Weekly",
-    "weekly_note": "extended stay",
-    "weekly_desc": "Suitable for 7+ night stays",
-    "monthly": "Monthly",
-    "monthly_note": "extended stay",
-    "monthly_desc": "Suitable for 30+ night stays"
-  },
   "faq": {
     "title": "Frequently Asked Questions",
     "q1": "What are the check-in and check-out times?",
-    "a1": "Check-in is from 14:00 onwards, and check-out is by 11:00 at the latest. You can contact us in advance for flexible times.",
+    "a1": "Check-in is from 14:00 to 23:00, and check-out is by 11:00 at the latest. You can contact us in advance for flexible times.",
     "q2": "When is the pool open?",
-    "a2": "The property pool is open from June to November. There is an adult and a children's pool.",
+    "a2": "The property has a seasonal shared pool with an adult and a children's pool.",
     "q3": "Is there parking?",
     "a3": "Yes, free open-air parking is available within the property.",
     "q4": "Is there a crib or high chair?",
@@ -154,15 +129,15 @@
     "q6": "How do I get to the beach?",
     "a6": "The beach is approximately a 15-20 minute walk (~2 km). You can reach Kemer beach in about 10 minutes by car.",
     "q8": "Is airport transfer available?",
-    "a8": "Airport transfer can be arranged upon request. Contact us via WhatsApp for details."
+    "a8": "Can be arranged upon request. Contact us via WhatsApp."
   },
   "booking": {
     "title": "Book Your Stay",
     "subtitle": "Choose the way that works best for you.",
     "wa_title": "Message Us on WhatsApp",
-    "wa_desc": "Instant response — Book directly",
+    "wa_desc": "Fast response via WhatsApp",
     "booking_title": "View on Booking.com",
-    "booking_desc": "Secure payment and instant confirmation",
+    "booking_desc": "Secure payment",
     "airbnb_title": "Also on Airbnb",
     "airbnb_desc": "Reviews and secure payment"
   },
@@ -183,7 +158,7 @@
   },
   "reviews": {
     "title": "What Our Guests Say",
-    "subtitle": "⭐ 9.6 Exceptional on Booking.com"
+    "subtitle": "⭐ 9.4 on Booking.com"
   },
   "attractions": {
     "title": "Places to Visit",
@@ -229,31 +204,39 @@
     "review2_text": "Ruhige Gegend und alles Neubau. Küchengeräte alles Neue, wir haben das Gefühl gehabt das wir dieses Apartment als erste nutzen. Pool Neu und Top sauber. Das war unser bester Unterkunft seit 15 Jahren, und wir machen jährlich Urlaub. Können wir nur empfehlen :-)",
     "review2_author": "Dudojc",
     "review2_meta": "🇩🇪 Germany · August 2024",
-    "review3_text": "Comfortable apartments with everything needed for a relaxing holiday. New quality furniture, household appliances, a well-equipped kitchen, a comfortable terrace and fast internet. We felt at home. Special thanks to Ali for his attention. We recommend these apartments for a holiday.",
-    "review3_author": "Booking.com Guest",
-    "review3_meta": "🇺🇦 Ukraine · June 2026",
     "verified_badge": "✓ Verified on Booking.com",
     "see_all_link": "See all reviews on Booking.com"
   },
   "comparison": {
-    "title": "Why Book Directly?",
-    "subtitle": "Compare direct booking with Booking.com and see the difference.",
-    "feature_label": "Feature",
-    "direct_label": "Direct Booking",
-    "booking_label": "Booking.com",
-    "response_feature": "Instant Response",
-    "direct_response": "✅ WhatsApp",
-    "booking_response": "❌ Message Queue",
-    "cancel_feature": "Flexible Cancellation",
-    "direct_cancel": "✅",
-    "booking_cancel": "Policy Dependent",
-    "extras_feature": "Extra Services",
-    "direct_extras": "✅ Negotiable",
-    "booking_extras": "❌ Fixed",
-    "cta": "Book Directly via WhatsApp"
+    "title": "Reservation Channels",
+    "subtitle": "Choose the channel you prefer and confirm availability for your dates.",
+    "channel_label": "Channel",
+    "detail_label": "What to expect",
+    "action_label": "Action",
+    "whatsapp_channel": "WhatsApp",
+    "whatsapp_detail": "Fast response from the host",
+    "whatsapp_action": "Send dates and guest count",
+    "booking_channel": "Booking.com",
+    "booking_detail": "Verified listing and guest reviews",
+    "booking_action": "View listing details",
+    "airbnb_channel": "Airbnb",
+    "airbnb_detail": "Additional platform option",
+    "airbnb_action": "View listing details",
+    "cta": "Check Availability on WhatsApp"
   },
   "trust_badges": {
-    "no_hidden_fees": "Transparent",
-    "support_247": "24/7 Support"
+    "fast_response": "Fast WhatsApp Response",
+    "verified_channels": "Verified Booking Channels"
+  },
+  "reservation": {
+    "title": "Reservation Options",
+    "subtitle": "Check availability and choose the booking channel that suits you best.",
+    "option_whatsapp": "WhatsApp for fast availability replies",
+    "option_booking": "Booking.com listing with verified guest feedback",
+    "option_airbnb": "Airbnb listing for another trusted channel",
+    "cta_wa": "Check Availability on WhatsApp",
+    "cta_booking": "View on Booking.com",
+    "cta_airbnb": "View on Airbnb",
+    "footer": "Availability and reservation details are confirmed through your chosen booking channel."
   }
 }

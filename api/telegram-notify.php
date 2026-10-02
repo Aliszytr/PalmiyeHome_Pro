@@ -1,183 +1,190 @@
 <?php
 /**
  * Palmiye Home — Telegram Visitor Notification (GoDaddy/cPanel)
- * 
- * Bu dosya her ziyaretçi bildirimi için çağrılır.
- * Token ve Chat ID .env.php dosyasından okunur — git'e ASLA commit edilmez.
  *
- * KURULUM:
- * 1. api/config/ klasöründeki .env.php dosyasına token ve chat_id girin
- * 2. Bu dosyayı /api/telegram-notify.php olarak yükleyin
+ * Purpose: send the site owner a short "site visited" notification.
+ *
+ * Privacy / data rules (see TELEGRAM_PRIVACY_BEHAVIOR.md):
+ *   - No per-visitor files. The visitor IP is never written anywhere by this script.
+ *   - Only coarse, non-identifying fields are accepted and every field is whitelisted:
+ *     language code, device class, page path, referring host name.
+ *   - Spam protection is a single global, anonymous debounce state
+ *     (timestamps + counters only), stored next to the secret file outside the web root.
+ *
+ * Secret: the bot token and chat id are read ONLY from a file outside the web root:
+ *   1. the path in the PALMIYE_SECRETS_FILE environment variable, or
+ *   2. <parent of document root>/palmiye-secrets/.env.php
+ * A secret file located inside the document root is refused.
+ * Template: env.example.php (placeholders only).
+ *
+ * The browser always gets 204 No Content; no error details are returned.
+ * Compatible with PHP 7.0+.
  */
 
 // ══════════════════════════════════════════
-//  YAPILANDIRMA — .env.php dosyasından oku
+//  SETTINGS
 // ══════════════════════════════════════════
-$configFile = __DIR__ . '/config/.env.php';
-if (!file_exists($configFile)) {
-    http_response_code(204);
-    exit;
-}
-require_once $configFile;
+$ALLOWED_ORIGINS   = ['https://palmiyehomekemer.com', 'https://www.palmiyehomekemer.com'];
+$MIN_INTERVAL_SEC  = 60;    // at most one message per minute ...
+$MAX_PER_HOUR      = 20;    // ... and at most 20 messages per rolling hour
+$ALLOWED_LANGUAGES = ['en', 'tr', 'de', 'ru'];
+$ALLOWED_DEVICES   = ['mobile', 'tablet', 'desktop'];
+$ALLOWED_PAGES     = ['/', '/index.html', '/privacy.html', '/privacy', '/404.html'];
 
-$botToken = defined('TELEGRAM_BOT_TOKEN') ? TELEGRAM_BOT_TOKEN : '';
-$chatId   = defined('TELEGRAM_CHAT_ID')   ? TELEGRAM_CHAT_ID   : '';
-
-if (empty($botToken) || empty($chatId) || 
-    strpos($botToken, '_HERE') !== false || 
-    strpos($chatId, '_HERE') !== false) {
-    http_response_code(204);
+function palmiye_done($code = 204) {
+    http_response_code($code);
     exit;
 }
 
 // ══════════════════════════════════════════
-//  GÜVENLİK — İzin verilen originler
+//  REQUEST CHECKS
 // ══════════════════════════════════════════
-$ALLOWED_ORIGINS = [
-    'https://palmiyehomekemer.com',
-    'https://www.palmiyehomekemer.com',
-];
+$origin  = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+$allowed = in_array($origin, $ALLOWED_ORIGINS, true);
 
-// ── CORS ──
-$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
-$allowed = in_array($origin, $ALLOWED_ORIGINS);
-
+if ($allowed) {
+    header("Access-Control-Allow-Origin: $origin");
+    header('Vary: Origin');
+}
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     if ($allowed) {
-        header("Access-Control-Allow-Origin: $origin");
         header('Access-Control-Allow-Methods: POST, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type');
-        header('Vary: Origin');
     }
-    http_response_code($allowed ? 200 : 403);
-    exit;
+    palmiye_done($allowed ? 204 : 403);
 }
-
-// ── Sadece POST ──
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Method not allowed']);
-    exit;
+    palmiye_done(405);
 }
-
-// ── Origin kontrolü ──
 if (!$allowed) {
-    http_response_code(403);
-    echo json_encode(['error' => 'Forbidden']);
-    exit;
+    palmiye_done(403);
 }
 
-// ── Rate Limiting (IP bazlı — 10 dakika cooldown) ──
-$rateLimitDir = __DIR__ . '/config/tmp';
-if (!is_dir($rateLimitDir)) {
-    @mkdir($rateLimitDir, 0700, true);
-    // tmp klasörüne .htaccess ekle (güvenlik)
-    @file_put_contents($rateLimitDir . '/.htaccess', "Require all denied\n");
-}
-$rateLimitFile = $rateLimitDir . '/notify_' . md5($_SERVER['REMOTE_ADDR'] ?? 'unknown') . '.lock';
-if (file_exists($rateLimitFile) && (time() - filemtime($rateLimitFile)) < 600) {
-    header("Content-Type: application/json");
-    if ($allowed) header("Access-Control-Allow-Origin: $origin");
-    http_response_code(200);
-    echo json_encode(['status' => 'ok', 'note' => 'cooldown']);
-    exit;
-}
-touch($rateLimitFile);
-
-// ── JSON body oku ──
-$raw = file_get_contents('php://input');
-$body = json_decode($raw, true);
-if (!$body || !is_array($body)) {
-    http_response_code(400);
-    header("Content-Type: application/json");
-    if ($allowed) header("Access-Control-Allow-Origin: $origin");
-    echo json_encode(['error' => 'Invalid JSON']);
-    exit;
-}
-
-// ── Bot/Crawler kontrolü ──
-$ua = strtolower($_SERVER['HTTP_USER_AGENT'] ?? '');
-if (strpos($ua, 'bot') !== false || strpos($ua, 'crawler') !== false || 
-    strpos($ua, 'spider') !== false || strpos($ua, 'lighthouse') !== false) {
-    http_response_code(204);
-    exit;
-}
-
-// ── Mesaj oluştur ──
-$language = isset($body['language']) ? $body['language'] : 'unknown';
-$referrer = isset($body['referrer']) ? $body['referrer'] : '';
-$page = isset($body['page']) ? $body['page'] : 'Ana Sayfa';
-$screenSize = isset($body['screenSize']) ? $body['screenSize'] : '';
-$timestamp = isset($body['timestamp']) ? $body['timestamp'] : date('c');
-
-// Türkiye saati
-$dt = new DateTime($timestamp);
-$dt->setTimezone(new DateTimeZone('Europe/Istanbul'));
-$trTime = $dt->format('d.m.Y H:i:s');
-
-// Cihaz tipi
-$deviceType = '🖥️ Masaüstü';
-if ($screenSize) {
-    $width = intval(explode('x', $screenSize)[0]);
-    if ($width > 0) {
-        if ($width <= 480) $deviceType = '📱 Telefon';
-        elseif ($width <= 1024) $deviceType = '📱 Tablet';
+$ua = strtolower(isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '');
+foreach (['bot', 'crawler', 'spider', 'lighthouse', 'headless', 'preview'] as $needle) {
+    if ($ua === '' || strpos($ua, $needle) !== false) {
+        palmiye_done();
     }
 }
 
-// Dil
-$langFlags = [
-    'tr' => '🇹🇷 Türkçe',
-    'en' => '🇬🇧 English',
-    'ru' => '🇷🇺 Русский',
-    'de' => '🇩🇪 Deutsch',
-];
-$langDisplay = isset($langFlags[$language]) ? $langFlags[$language] : "🌐 $language";
+// ══════════════════════════════════════════
+//  SECRET — outside the web root only
+// ══════════════════════════════════════════
+$docRoot    = isset($_SERVER['DOCUMENT_ROOT']) ? realpath($_SERVER['DOCUMENT_ROOT']) : false;
+$secretFile = getenv('PALMIYE_SECRETS_FILE');
+if (!$secretFile && $docRoot) {
+    $secretFile = dirname($docRoot) . '/palmiye-secrets/.env.php';
+}
+$secretReal = $secretFile ? realpath($secretFile) : false;
+if (!$secretReal || !is_readable($secretReal)) {
+    palmiye_done();
+}
+if ($docRoot && strpos($secretReal, $docRoot . DIRECTORY_SEPARATOR) === 0) {
+    error_log('[Palmiye Telegram] Refused: secret file is inside the document root.');
+    palmiye_done();
+}
+require_once $secretReal;
 
-$message = "🌴 *Yeni Ziyaretçi!*\n"
-    . "━━━━━━━━━━━━━━━\n"
-    . "🕐 $trTime\n"
-    . "$deviceType\n"
-    . "🌍 Dil: $langDisplay\n"
-    . "📄 Sayfa: $page\n"
-    . ($referrer ? "🔗 Kaynak: $referrer\n" : "")
-    . "━━━━━━━━━━━━━━━";
+if (defined('TELEGRAM_ENABLED') && !TELEGRAM_ENABLED) {
+    palmiye_done();
+}
+$botToken = defined('TELEGRAM_BOT_TOKEN') ? TELEGRAM_BOT_TOKEN : '';
+$chatId   = defined('TELEGRAM_CHAT_ID') ? TELEGRAM_CHAT_ID : '';
+if ($botToken === '' || $chatId === '' ||
+    strpos($botToken, '_HERE') !== false || strpos($chatId, '_HERE') !== false) {
+    palmiye_done();
+}
 
-// ── Telegram API'ye gönder ──
-$telegramUrl = 'https://api.telegram.org/bot' . $botToken . '/sendMessage';
-$postData = json_encode([
-    'chat_id' => $chatId,
-    'text' => $message,
-    'parse_mode' => 'Markdown',
-    'disable_notification' => false,
-]);
+// ══════════════════════════════════════════
+//  INPUT — whitelisted, coarse fields only
+// ══════════════════════════════════════════
+$raw  = file_get_contents('php://input', false, null, 0, 2048);
+$body = json_decode($raw, true);
+if (!is_array($body)) {
+    palmiye_done(400);
+}
 
-$ch = curl_init($telegramUrl);
+$language = isset($body['language']) ? strtolower(substr((string) $body['language'], 0, 2)) : '';
+$language = in_array($language, $ALLOWED_LANGUAGES, true) ? $language : 'other';
+
+$device = isset($body['device']) ? (string) $body['device'] : '';
+$device = in_array($device, $ALLOWED_DEVICES, true) ? $device : 'unknown';
+
+$page = isset($body['page']) ? (string) $body['page'] : '';
+$page = in_array($page, $ALLOWED_PAGES, true) ? $page : 'other';
+
+$referrer = isset($body['referrer']) ? strtolower((string) $body['referrer']) : '';
+$referrer = preg_match('/^[a-z0-9.-]{1,253}$/', $referrer) ? preg_replace('/^www\./', '', $referrer) : '';
+
+// ══════════════════════════════════════════
+//  GLOBAL DEBOUNCE — one anonymous state file, no visitor data
+// ══════════════════════════════════════════
+$fh = @fopen(dirname($secretReal) . '/telegram-state.json', 'c+');
+if (!$fh) {
+    $fh = @fopen(rtrim(sys_get_temp_dir(), '/\\') . '/palmiye-telegram-state.json', 'c+');
+}
+if (!$fh) {
+    palmiye_done(); // fail closed: without the debounce state no message is sent
+}
+flock($fh, LOCK_EX);
+$state = json_decode(stream_get_contents($fh), true);
+if (!is_array($state)) {
+    $state = ['last_sent' => 0, 'hour_start' => 0, 'sent_this_hour' => 0, 'suppressed' => 0];
+}
+$now = time();
+if ($now - (int) $state['hour_start'] >= 3600) {
+    $state['hour_start'] = $now;
+    $state['sent_this_hour'] = 0;
+}
+$send = ($now - (int) $state['last_sent'] >= $MIN_INTERVAL_SEC) && ((int) $state['sent_this_hour'] < $MAX_PER_HOUR);
+$suppressedBefore = (int) $state['suppressed'];
+if ($send) {
+    $state['last_sent'] = $now;
+    $state['sent_this_hour'] = (int) $state['sent_this_hour'] + 1;
+    $state['suppressed'] = 0;
+} else {
+    $state['suppressed'] = $suppressedBefore + 1;
+}
+ftruncate($fh, 0);
+rewind($fh);
+fwrite($fh, json_encode($state));
+fflush($fh);
+flock($fh, LOCK_UN);
+fclose($fh);
+
+if (!$send) {
+    palmiye_done();
+}
+
+// ══════════════════════════════════════════
+//  MESSAGE — plain text (no Markdown parsing of input)
+// ══════════════════════════════════════════
+$dt = new DateTime('now', new DateTimeZone('Europe/Istanbul'));
+$devices = ['mobile' => 'Telefon', 'tablet' => 'Tablet', 'desktop' => 'Masaüstü', 'unknown' => 'Bilinmiyor'];
+
+$message = "🌴 Palmiye Home — yeni ziyaret\n"
+    . $dt->format('d.m.Y H:i') . "\n"
+    . 'Dil: ' . strtoupper($language) . ' · Cihaz: ' . $devices[$device] . "\n"
+    . 'Sayfa: ' . $page
+    . ($referrer !== '' ? "\nKaynak: " . $referrer : '')
+    . ($suppressedBefore > 0 ? "\n(+" . $suppressedBefore . ' ziyaret daha, bildirim sınırı nedeniyle toplandı)' : '');
+
+$ch = curl_init('https://api.telegram.org/bot' . $botToken . '/sendMessage');
 curl_setopt_array($ch, [
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $postData,
-    CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+    CURLOPT_POST           => true,
+    CURLOPT_POSTFIELDS     => json_encode(['chat_id' => $chatId, 'text' => $message, 'disable_web_page_preview' => true]),
+    CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
     CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_TIMEOUT => 5,
+    CURLOPT_TIMEOUT        => 5,
     CURLOPT_SSL_VERIFYPEER => true,
 ]);
-
-$result = curl_exec($ch);
-$curlError = curl_error($ch);
+curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curlErrNo = curl_errno($ch);
 curl_close($ch);
 
-// ── Yanıt ──
-header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: $origin");
-header("Vary: Origin");
-
-if ($httpCode === 200) {
-    echo json_encode(['status' => 'ok']);
-} else {
-    http_response_code(502);
-    // Hata detayı (debug — cURL hatalarını log'a yaz)
-    $errorDetail = $curlError ?: 'HTTP ' . $httpCode;
-    error_log('[Palmiye Telegram] Send failed: ' . $errorDetail);
-    echo json_encode(['error' => 'Telegram send failed', 'detail' => $errorDetail]);
+if ($httpCode !== 200) {
+    // Log only a generic code — never the request URL (it contains the token).
+    error_log('[Palmiye Telegram] Send failed: http=' . $httpCode . ' curl_errno=' . $curlErrNo);
 }
+palmiye_done();

@@ -1,0 +1,59 @@
+{
+  "_about": "Single source of truth for changeable facts. tools/verify_master.py checks that index.html, lang/*.json, privacy.html and the JS files agree with these values. Not loaded by the browser. Fill a null value only after it is verified.",
+  "property": {
+    "name": "Palmiye Home",
+    "max_guests": 4
+  },
+  "ratings": {
+    "booking": {
+      "score": "9.4",
+      "verbal_label": null,
+      "review_count": null,
+      "source_url": "https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html",
+      "verified_at": "2026-10-02",
+      "rules": "Use only '9.4 on Booking.com'. No verbal label (Exceptional etc.) until Booking's own label is verified. No reviewCount / aggregateRating until the count is verified."
+    }
+  },
+  "policies": {
+    "checkin": "14:00–23:00",
+    "checkout": "11:00",
+    "pool": "Seasonal shared pool",
+    "pool_dates_2027": null,
+    "verified_at": "2026-10-02"
+  },
+  "security": {
+    "cameras": "exterior / entrance / common-area only",
+    "self_checkin_public_detail": false
+  },
+  "contact": {
+    "whatsapp_e164": "905327786732",
+    "email": "aliszytr@gmail.com"
+  },
+  "platforms": {
+    "booking": "https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html",
+    "airbnb": "https://www.airbnb.com.tr/rooms/979475001547790592"
+  },
+  "tracking": {
+    "_rule": "Production values verified in the Google Ads / GA4 accounts on 2026-10-02. Do not change or rename.",
+    "google_ads_id": "AW-17307806485",
+    "ads_conversion_labels": {
+      "whatsapp": "vc01CNXHidYcEJXWgL1A",
+      "booking": "pkzoCNjHidYcEJXWgL1A",
+      "airbnb": "WFLICNvHidYcEJXWgL1A"
+    },
+    "ga4_measurement_id": "G-6NK46VG4DY"
+  },
+  "forbidden_claims": [
+    "9.6", "9,6", "Exceptional", "Olağanüstü", "Außergewöhnlich", "Превосходн",
+    "24/7", "7/24", "within 5 minutes", "5 dakika", "5 Minuten", "5 минут",
+    "within minutes", "dakikalar içinde", "innerhalb von Minuten", "за несколько минут",
+    "Instant response", "Instant Response", "Anında yanıt", "Sofortige Antwort", "Мгновенный ответ",
+    "instant confirmation", "anlık onay", "sofortige Bestätigung", "мгновенное подтверждение",
+    "Best Price", "best price", "En İyi Fiyat", "En iyi fiyat", "Bester Preis", "Bestpreis", "лучшая цена",
+    "Flexible Cancellation", "Esnek İptal", "Flexible Stornierung", "Гибкая отмена",
+    "Negotiable", "Message Queue",
+    "June to November", "Haziran – Kasım", "Juni bis November", "с июня по ноябрь",
+    "€100", "€118", "€150", "10% discount", "15% discount", "%10 indirim", "%15 indirim", "10% Rabatt", "15% Rabatt", "скидка 10%", "скидка 15%",
+    "Security Camera", "Güvenlik Kamerası", "Überwachungskamera", "Камеры видеонаблюдения"
+  ]
+}
