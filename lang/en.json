@@ -1,9 +1,9 @@
 {
   "meta": {
     "title": "Palmiye Home — Pool Apartment in Kemer Göynük, Antalya | Book Direct",
-    "description": "Book a fully equipped 1+1 apartment with shared pool in Kemer Göynük, Antalya. Mountain views, free Wi-Fi, parking. Booking.com 9.6 rated. Message us on WhatsApp for best rates.",
+    "description": "Book a fully equipped 1+1 apartment with shared pool in Kemer Göynük, Antalya. Mountain views, free Wi-Fi, parking. Booking.com 9.6 rated. Message us on WhatsApp for availability and reservations.",
     "og_title": "Palmiye Home — Pool Apartment in Kemer, Antalya",
-    "og_description": "Fully equipped 1+1 apartment with shared pool in Kemer Göynük. Booking.com 9.6 rated. Book directly via WhatsApp for best rates.",
+    "og_description": "Fully equipped 1+1 apartment with shared pool in Kemer Göynük. Booking.com 9.6 rated. Book directly via WhatsApp for availability.",
     "keywords": "kemer apartment rental, göynük holiday, pool apartment antalya, turkey vacation rental, palmiye home, whatsapp booking, kemer konaklama"
   },
   "nav": {
@@ -23,7 +23,7 @@
     "subtitle": "Kemer Göynük · Fully Equipped Apartment · Pool · Antalya",
     "bullet1": "Shared Pool & Garden",
     "bullet2": "Free Wi-Fi & Parking",
-    "bullet3": "Direct Booking — Best Price",
+    "bullet3": "Direct Booking",
     "cta_whatsapp": "Check Availability on WhatsApp",
     "cta_booking": "View on Booking.com",
     "cta_airbnb": "View on Airbnb",
@@ -35,7 +35,7 @@
     "available": "Available",
     "booked": "Booked",
     "past": "Past",
-    "cta_text": "Found your dates? Book directly for the best price!",
+    "cta_text": "Found your dates? Book directly with us!",
     "cta_btn": "Book via WhatsApp",
     "whatsapp_message": "Hello! I'd like to book Palmiye Home from {start} to {end}. Is it available?"
   },
@@ -61,8 +61,8 @@
     "cta": "Check Availability on Booking.com"
   },
   "cp1": {
-    "title": "Get the Best Price — Book Directly",
-    "subtitle": "Message us on WhatsApp for availability and special rates.",
+    "title": "Book Directly",
+    "subtitle": "Message us on WhatsApp for availability.",
     "cta": "Check Availability on WhatsApp"
   },
   "apartment": {
@@ -85,7 +85,7 @@
   },
   "cp2": {
     "title": "Like What You See?",
-    "subtitle": "Contact us for availability and pricing.",
+    "subtitle": "Contact us for availability.",
     "cta": "Check Availability on WhatsApp"
   },
   "gallery": {
@@ -119,27 +119,27 @@
     "airport_desc": "~50 min by car"
   },
   "pricing": {
-    "title": "Stay Options",
+    "title": "Reservations & Availability",
     "subtitle": "Flexible accommodation options to plan your vacation.",
     "from_label": "From",
     "per_night": "/ night",
-    "peak_note": "Peak season up to €150",
-    "perk1": "7+ nights: 10% discount",
-    "perk2": "30+ nights: 15% discount",
-    "perk3": "Best rates via direct booking",
+    "peak_note": "Contact for seasonal availability",
+    "perk1": "Extended stays welcome",
+    "perk2": "Monthly stays welcome",
+    "perk3": "Book directly with us",
     "cta_wa": "Check Availability",
     "cta_booking": "Book on Booking.com",
-    "footer": "Prices vary by season. Contact us on WhatsApp for the best available rate.",
+    "footer": "For current availability, please check the reservation page or contact us on WhatsApp.",
     "daily": "Daily",
-    "daily_note": "/ night starting from",
+    "daily_note": "reservations",
     "daily_desc": "Flexible check-in/check-out",
     "popular": "Popular",
     "weekly": "Weekly",
-    "weekly_note": "discount",
-    "weekly_desc": "Valid for 7+ night stays",
+    "weekly_note": "extended stay",
+    "weekly_desc": "Suitable for 7+ night stays",
     "monthly": "Monthly",
-    "monthly_note": "discount",
-    "monthly_desc": "Valid for 30+ night stays"
+    "monthly_note": "extended stay",
+    "monthly_desc": "Suitable for 30+ night stays"
   },
   "faq": {
     "title": "Frequently Asked Questions",
@@ -154,13 +154,13 @@
     "q6": "How do I get to the beach?",
     "a6": "The beach is approximately a 15-20 minute walk (~2 km). You can reach Kemer beach in about 10 minutes by car.",
     "q8": "Is airport transfer available?",
-    "a8": "Airport transfer can be arranged upon request. Contact us via WhatsApp for details and pricing."
+    "a8": "Airport transfer can be arranged upon request. Contact us via WhatsApp for details."
   },
   "booking": {
     "title": "Book Your Stay",
     "subtitle": "Choose the way that works best for you.",
     "wa_title": "Message Us on WhatsApp",
-    "wa_desc": "Instant response — Best price guaranteed",
+    "wa_desc": "Instant response — Book directly",
     "booking_title": "View on Booking.com",
     "booking_desc": "Secure payment and instant confirmation",
     "airbnb_title": "Also on Airbnb",
@@ -223,26 +223,24 @@
     "idyros_desc": "Uncovered during excavations in 1976, this ancient city harbors artifacts from the Byzantine period. The most distinctive find is a geometric-patterned mosaic floor. Located right in Kemer's town center."
   },
   "featured_reviews": {
-    "review1_text": "Wunderbare Unterkunft! Sehr sauber, ruhige Lage und der Pool war fantastisch. Die Kommunikation mit dem Gastgeber war hervorragend. Wir kommen gerne wieder!",
-    "review1_author": "Thomas K.",
-    "review1_meta": "🇩🇪 Deutschland · Juli 2025",
-    "review2_text": "Отличная квартира в тихом месте. Чисто, уютно, есть всё необходимое. Бассейн замечательный! Хозяин очень отзывчивый. Рекомендую!",
-    "review2_author": "Ольга П.",
-    "review2_meta": "🇷🇺 Россия · Сентябрь 2025",
+    "review1_text": "We recently spent a week at this apartment, and our experience was nothing short of delightful. The apartment was modern, stylish and comfortable, with a fully functional kitchen including stove, oven and dishwasher. The Wi-Fi was reliable and fast. Just an 8-minute walk from Migros and Bim shops. A special mention goes to Meltem, who truly made our stay exceptional — incredibly responsive and kind. Highly recommend!",
+    "review1_author": "Roman",
+    "review1_meta": "🇷🇸 Serbia · August 2024",
+    "review2_text": "Ruhige Gegend und alles Neubau. Küchengeräte alles Neue, wir haben das Gefühl gehabt das wir dieses Apartment als erste nutzen. Pool Neu und Top sauber. Das war unser bester Unterkunft seit 15 Jahren, und wir machen jährlich Urlaub. Können wir nur empfehlen :-)",
+    "review2_author": "Dudojc",
+    "review2_meta": "🇩🇪 Germany · August 2024",
+    "review3_text": "Comfortable apartments with everything needed for a relaxing holiday. New quality furniture, household appliances, a well-equipped kitchen, a comfortable terrace and fast internet. We felt at home. Special thanks to Ali for his attention. We recommend these apartments for a holiday.",
+    "review3_author": "Booking.com Guest",
+    "review3_meta": "🇺🇦 Ukraine · June 2026",
     "verified_badge": "✓ Verified on Booking.com",
     "see_all_link": "See all reviews on Booking.com"
+  },
   "comparison": {
     "title": "Why Book Directly?",
     "subtitle": "Compare direct booking with Booking.com and see the difference.",
     "feature_label": "Feature",
     "direct_label": "Direct Booking",
     "booking_label": "Booking.com",
-    "price_feature": "Nightly Price",
-    "direct_price": "€100",
-    "booking_price": "~€118",
-    "commission_feature": "Commission",
-    "direct_commission": "None",
-    "booking_commission": "15–18%",
     "response_feature": "Instant Response",
     "direct_response": "✅ WhatsApp",
     "booking_response": "❌ Message Queue",
@@ -255,8 +253,7 @@
     "cta": "Book Directly via WhatsApp"
   },
   "trust_badges": {
-    "no_commission": "No Commission",
-    "no_hidden_fees": "No Hidden Fees",
+    "no_hidden_fees": "Transparent",
     "support_247": "24/7 Support"
   }
 }

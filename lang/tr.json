@@ -23,7 +23,7 @@
     "subtitle": "Kemer Göynük · Donanımlı Apart · Havuz · Antalya",
     "bullet1": "Ortak Havuz & Bahçe",
     "bullet2": "Ücretsiz Wi-Fi & Otopark",
-    "bullet3": "Doğrudan Rezervasyon — En İyi Fiyat",
+    "bullet3": "Doğrudan Rezervasyon",
     "cta_whatsapp": "WhatsApp ile Müsaitlik Sorun",
     "cta_booking": "Booking.com'da İnceleyin",
     "response_note": "<i data-lucide=\"zap\"></i> Genellikle 5 dakika içinde yanıt veriyoruz"
@@ -34,7 +34,7 @@
     "available": "Müsait",
     "booked": "Dolu",
     "past": "Geçmiş",
-    "cta_text": "Tarihinizi buldunuz mu? En iyi fiyat için doğrudan rezervasyon yapın!",
+    "cta_text": "Tarihinizi buldunuz mu? Doğrudan rezervasyon yapın!",
     "cta_btn": "WhatsApp ile Rezervasyon",
     "whatsapp_message": "Merhaba! Palmiye Home'u {start} - {end} tarihleri arasında kiralamak istiyorum. Müsait mi?"
   },
@@ -60,8 +60,8 @@
     "cta": "Booking.com'da müsaitliği kontrol et"
   },
   "cp1": {
-    "title": "En İyi Fiyatı Alın — Doğrudan Rezervasyon",
-    "subtitle": "Müsaitlik ve özel fiyatlar için WhatsApp'tan yazın.",
+    "title": "Doğrudan Rezervasyon",
+    "subtitle": "Müsaitlik ve rezervasyon için WhatsApp'tan yazın.",
     "cta": "WhatsApp ile Müsaitlik Sorun"
   },
   "apartment": {
@@ -84,7 +84,7 @@
   },
   "cp2": {
     "title": "Beğendiniz mi?",
-    "subtitle": "Müsaitlik ve fiyat bilgisi için hemen ulaşın.",
+    "subtitle": "Müsaitlik ve rezervasyon için hemen ulaşın.",
     "cta": "WhatsApp ile Müsaitlik Sorun"
   },
   "gallery": {
@@ -118,27 +118,27 @@
     "airport_desc": "~50 dk araç mesafesi"
   },
   "pricing": {
-    "title": "Konaklama Seçenekleri",
+    "title": "Rezervasyon ve Müsaitlik",
     "subtitle": "Tatilinizi planlamak için esnek konaklama seçenekleri.",
     "from_label": "Başlangıç",
     "per_night": "/ gece",
-    "peak_note": "Yüksek sezonda €150'ye kadar",
-    "perk1": "7+ gece: %10 indirim",
-    "perk2": "30+ gece: %15 indirim",
-    "perk3": "Direkt rezervasyonda en iyi fiyat",
+    "peak_note": "Sezonsal müsaitlik için iletişime geçin",
+    "perk1": "Uzun süreli konaklamalara uygun",
+    "perk2": "Aylık konaklamalara uygun",
+    "perk3": "Bizimle doğrudan iletişime geçin",
     "cta_wa": "Müsaitliği Kontrol Et",
     "cta_booking": "Booking.com'da Bak",
-    "footer": "Fiyatlar sezona göre değişir. En iyi fiyat için WhatsApp'tan bize ulaşın.",
+    "footer": "Müsaitlik ve rezervasyon bilgileri için rezervasyon sayfasını kontrol edebilir veya bizimle iletişime geçebilirsiniz.",
     "daily": "Günlük",
-    "daily_note": "/ gece",
+    "daily_note": "rezervasyon",
     "daily_desc": "Esnek giriş/çıkış",
     "popular": "Popüler",
     "weekly": "Haftalık",
-    "weekly_note": "indirim",
-    "weekly_desc": "7+ gece konaklamalarda",
+    "weekly_note": "uzun konaklama",
+    "weekly_desc": "7+ gece konaklamalar için",
     "monthly": "Aylık",
-    "monthly_note": "indirim",
-    "monthly_desc": "30+ gece konaklamalarda"
+    "monthly_note": "uzun konaklama",
+    "monthly_desc": "30+ gece konaklamalar için"
   },
   "faq": {
     "title": "Sık Sorulan Sorular",
@@ -153,13 +153,13 @@
     "q6": "Denize nasıl ulaşılır?",
     "a6": "Deniz yaklaşık 15-20 dakika yürüme mesafesindedir (~2 km). Kemer sahiline araçla yaklaşık 10 dakikada ulaşabilirsiniz.",
     "q8": "Havalimanı transferi var mı?",
-    "a8": "Havalimanı transfer hizmeti talep üzerine organize edilebilir. Detaylar ve fiyat için WhatsApp üzerinden bilgi alabilirsiniz."
+    "a8": "Havalimanı transfer hizmeti talep üzerine organize edilebilir. Detaylar için WhatsApp üzerinden bilgi alabilirsiniz."
   },
   "booking": {
     "title": "Rezervasyon",
     "subtitle": "Size en uygun yoldan ulaşın.",
     "wa_title": "WhatsApp ile Yazın",
-    "wa_desc": "Anında yanıt — En iyi fiyat garantisi",
+    "wa_desc": "Anında yanıt — Doğrudan rezervasyon",
     "booking_title": "Booking.com'da İnceleyin",
     "booking_desc": "Güvenli ödeme ve anlık onay",
     "airbnb_title": "Airbnb'de de Varız",
@@ -222,12 +222,15 @@
     "idyros_desc": "1976 yılındaki kazılarda ortaya çıkarılan bu antik kent, Bizans dönemine ait eserlere sahiptir. En dikkat çekici buluntu, dönemin sanatsal ustalığını sergileyen geometrik desenli mozaik zemindir. Kemer'in tam merkezindeki konumuyla kolayca ziyaret edilebilir."
   },
   "featured_reviews": {
-    "review1_text": "Wunderbare Unterkunft! Sehr sauber, ruhige Lage und der Pool war fantastisch. Die Kommunikation mit dem Gastgeber war hervorragend. Wir kommen gerne wieder!",
-    "review1_author": "Thomas K.",
-    "review1_meta": "🇩🇪 Almanya · Temmuz 2025",
-    "review2_text": "Отличная квартира в тихом месте. Чисто, уютно, есть всё необходимое. Бассейн замечательный! Хозяин очень отзывчивый. Рекомендую!",
-    "review2_author": "Ольга П.",
-    "review2_meta": "🇷🇺 Rusya · Eylül 2025",
+    "review1_text": "We recently spent a week at this apartment, and our experience was nothing short of delightful. The apartment was modern, stylish and comfortable, with a fully functional kitchen including stove, oven and dishwasher. The Wi-Fi was reliable and fast. Just an 8-minute walk from Migros and Bim shops. A special mention goes to Meltem, who truly made our stay exceptional — incredibly responsive and kind. Highly recommend!",
+    "review1_author": "Roman",
+    "review1_meta": "🇷🇸 Sırbistan · Ağustos 2024",
+    "review2_text": "Ruhige Gegend und alles Neubau. Küchengeräte alles Neue, wir haben das Gefühl gehabt das wir dieses Apartment als erste nutzen. Pool Neu und Top sauber. Das war unser bester Unterkunft seit 15 Jahren, und wir machen jährlich Urlaub. Können wir nur empfehlen :-)",
+    "review2_author": "Dudojc",
+    "review2_meta": "🇩🇪 Almanya · Ağustos 2024",
+    "review3_text": "Konforlu daireler. Tatil için gerekli olan her şey mevcut. Yeni ve kaliteli mobilyalar, ev aletleri ve yemek hazırlamak için çok çeşitli mutfak gereçleri var. Rahat bir teras ve hızlı internet bulunuyor. Kendimizi evimizde gibi hissettik. İlgisi için Ali'ye ayrıca teşekkür ederiz. Tatil için bu daireleri tavsiye ediyoruz.",
+    "review3_author": "Booking.com konuğu",
+    "review3_meta": "🇺🇦 Ukrayna · Haziran 2026",
     "verified_badge": "✓ Booking.com'da Doğrulanmış",
     "see_all_link": "Booking.com'da tüm yorumları gör"
   },
@@ -237,12 +240,6 @@
     "feature_label": "Özellik",
     "direct_label": "Direkt Rezervasyon",
     "booking_label": "Booking.com",
-    "price_feature": "Gecelik Fiyat",
-    "direct_price": "€100",
-    "booking_price": "~€118",
-    "commission_feature": "Komisyon",
-    "direct_commission": "Yok",
-    "booking_commission": "%15–18",
     "response_feature": "Anlık Yanıt",
     "direct_response": "✅ WhatsApp",
     "booking_response": "❌ Mesaj Kuyruğu",
@@ -250,13 +247,12 @@
     "direct_cancel": "✅",
     "booking_cancel": "Politikaya Bağlı",
     "extras_feature": "Ekstra Hizmet",
-    "direct_extras": "✅ Pazarlık Edilebilir",
+    "direct_extras": "✅ Esnek",
     "booking_extras": "❌ Sabit",
     "cta": "WhatsApp ile Doğrudan Rezervasyon"
   },
   "trust_badges": {
-    "no_commission": "Komisyon Yok",
-    "no_hidden_fees": "Gizli Ücret Yok",
+    "no_hidden_fees": "Şeffaf İletişim",
     "support_247": "7/24 İletişim"
   }
 }

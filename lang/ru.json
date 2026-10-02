@@ -3,7 +3,7 @@
     "title": "Апартаменты с бассейном в Кемере, Гёйнюк | Palmiye Home — Прямое бронирование",
     "description": "Полностью оборудованная квартира 1+1 с бассейном, видом на горы и бесплатной парковкой в Кемер-Гёйнюк, Анталья. Booking.com 9.6. Забронируйте напрямую через WhatsApp.",
     "og_title": "Palmiye Home — Апартаменты с бассейном в Кемере, Анталья",
-    "og_description": "Квартира 1+1 с общим бассейном в центре Гёйнюк. Рейтинг Booking.com 9.6. Лучшая цена при прямом бронировании через WhatsApp.",
+    "og_description": "Квартира 1+1 с общим бассейном в центре Гёйнюк. Рейтинг Booking.com 9.6. Бронируйте напрямую через WhatsApp для проверки наличия.",
     "keywords": "аренда квартир кемер, квартира с бассейном анталья, гёйнюк аренда, кемер отдых, апартаменты турция, palmiye home, кемер жилье"
   },
   "nav": {
@@ -23,7 +23,7 @@
     "subtitle": "Кемер Гёйнюк · Полностью оборудованная квартира · Бассейн · Анталья",
     "bullet1": "Общий бассейн и сад",
     "bullet2": "Бесплатный Wi-Fi и парковка",
-    "bullet3": "Прямое бронирование — лучшая цена",
+    "bullet3": "Прямое бронирование",
     "cta_whatsapp": "Узнать наличие в WhatsApp",
     "cta_booking": "Смотреть на Booking.com",
     "response_note": "<i data-lucide=\"zap\"></i> Обычно отвечаем в течение 5 минут"
@@ -34,7 +34,7 @@
     "available": "Свободно",
     "booked": "Занято",
     "past": "Прошло",
-    "cta_text": "Нашли свои даты? Бронируйте напрямую по лучшей цене!",
+    "cta_text": "Нашли свои даты? Бронируйте напрямую с нами!",
     "cta_btn": "Забронировать в WhatsApp",
     "whatsapp_message": "Здравствуйте! Хочу забронировать Palmiye Home с {start} по {end}. Свободно?"
   },
@@ -60,8 +60,8 @@
     "cta": "Проверить наличие на Booking.com"
   },
   "cp1": {
-    "title": "Лучшая цена — бронируйте напрямую",
-    "subtitle": "Напишите нам в WhatsApp для проверки наличия и специальных тарифов.",
+    "title": "Прямое бронирование",
+    "subtitle": "Напишите нам в WhatsApp для проверки наличия.",
     "cta": "Узнать наличие в WhatsApp"
   },
   "apartment": {
@@ -84,7 +84,7 @@
   },
   "cp2": {
     "title": "Понравилось?",
-    "subtitle": "Свяжитесь с нами для уточнения наличия и цен.",
+    "subtitle": "Свяжитесь с нами для уточнения наличия и бронирования.",
     "cta": "Узнать наличие в WhatsApp"
   },
   "gallery": {
@@ -118,27 +118,27 @@
     "airport_desc": "~50 мин на авто"
   },
   "pricing": {
-    "title": "Варианты проживания",
+    "title": "Бронирование и наличие",
     "subtitle": "Гибкие условия для планирования вашего отдыха.",
     "from_label": "От",
     "per_night": "/ ночь",
-    "peak_note": "В высокий сезон до €150",
-    "perk1": "7+ ночей: скидка 10%",
-    "perk2": "30+ ночей: скидка 15%",
-    "perk3": "Лучшие цены при прямом бронировании",
+    "peak_note": "Свяжитесь для сезонного бронирования",
+    "perk1": "Подходит для длительного проживания",
+    "perk2": "Подходит для помесячной аренды",
+    "perk3": "Свяжитесь с нами напрямую",
     "cta_wa": "Узнать наличие",
     "cta_booking": "Бронировать на Booking.com",
-    "footer": "Цены зависят от сезона. Напишите нам в WhatsApp для лучшей цены.",
+    "footer": "Для проверки актуального наличия свяжитесь с нами в WhatsApp.",
     "daily": "Посуточно",
-    "daily_note": "/ ночь от",
+    "daily_note": "бронирование",
     "daily_desc": "Гибкий заезд/выезд",
     "popular": "Популярный",
     "weekly": "Понедельно",
-    "weekly_note": "скидка",
-    "weekly_desc": "При бронировании от 7 ночей",
+    "weekly_note": "длительное проживание",
+    "weekly_desc": "Для проживания от 7 ночей",
     "monthly": "Помесячно",
-    "monthly_note": "скидка",
-    "monthly_desc": "При бронировании от 30 ночей"
+    "monthly_note": "длительное проживание",
+    "monthly_desc": "Для проживания от 30 ночей"
   },
   "faq": {
     "title": "Часто задаваемые вопросы",
@@ -159,7 +159,7 @@
     "title": "Забронировать",
     "subtitle": "Выберите удобный для вас способ.",
     "wa_title": "Написать в WhatsApp",
-    "wa_desc": "Мгновенный ответ — гарантия лучшей цены",
+    "wa_desc": "Мгновенный ответ — прямое бронирование",
     "booking_title": "Смотреть на Booking.com",
     "booking_desc": "Безопасная оплата и мгновенное подтверждение",
     "airbnb_title": "Также на Airbnb",
@@ -222,12 +222,15 @@
     "idyros_desc": "Обнаруженный при раскопках 1976 года, этот античный город хранит артефакты византийского периода. Самая примечательная находка — мозаичный пол с геометрическим узором. Расположен прямо в центре Кемера."
   },
   "featured_reviews": {
-    "review1_text": "Wunderbare Unterkunft! Sehr sauber, ruhige Lage und der Pool war fantastisch. Die Kommunikation mit dem Gastgeber war hervorragend. Wir kommen gerne wieder!",
-    "review1_author": "Thomas K.",
-    "review1_meta": "🇩🇪 Германия · Июль 2025",
-    "review2_text": "Отличная квартира в тихом месте. Чисто, уютно, есть всё необходимое. Бассейн замечательный! Хозяин очень отзывчивый. Рекомендую!",
-    "review2_author": "Ольга П.",
-    "review2_meta": "🇷🇺 Россия · Сентябрь 2025",
+    "review1_text": "We recently spent a week at this apartment, and our experience was nothing short of delightful. The apartment was modern, stylish and comfortable, with a fully functional kitchen including stove, oven and dishwasher. The Wi-Fi was reliable and fast. Just an 8-minute walk from Migros and Bim shops. A special mention goes to Meltem, who truly made our stay exceptional — incredibly responsive and kind. Highly recommend!",
+    "review1_author": "Roman",
+    "review1_meta": "🇷🇸 Сербия · Август 2024",
+    "review2_text": "Ruhige Gegend und alles Neubau. Küchengeräte alles Neue, wir haben das Gefühl gehabt das wir dieses Apartment als erste nutzen. Pool Neu und Top sauber. Das war unser bester Unterkunft seit 15 Jahren, und wir machen jährlich Urlaub. Können wir nur empfehlen :-)",
+    "review2_author": "Dudojc",
+    "review2_meta": "🇩🇪 Германия · Август 2024",
+    "review3_text": "Комфортные апартаменты. Есть все необходимое для отдыха. Новая хорошая мебель, бытовая техника, много разнообразной посуды для приготовления пищи. Удобная терраса с мягкой мебелью. Быстрый интернет. Чувствовали себя как дома. Отдельное спасибо Али за внимание. Рекомендуем апартаменты для отдыха.",
+    "review3_author": "Гость Booking.com",
+    "review3_meta": "🇺🇦 Украина · Июнь 2026",
     "verified_badge": "✓ Проверено на Booking.com",
     "see_all_link": "Все отзывы на Booking.com"
   },
@@ -237,12 +240,6 @@
     "feature_label": "Характеристика",
     "direct_label": "Прямое бронирование",
     "booking_label": "Booking.com",
-    "price_feature": "Цена за ночь",
-    "direct_price": "€100",
-    "booking_price": "~€118",
-    "commission_feature": "Комиссия",
-    "direct_commission": "Нет",
-    "booking_commission": "15–18%",
     "response_feature": "Мгновенный ответ",
     "direct_response": "✅ WhatsApp",
     "booking_response": "❌ Очередь сообщений",
@@ -255,8 +252,7 @@
     "cta": "Забронировать напрямую через WhatsApp"
   },
   "trust_badges": {
-    "no_commission": "Без комиссии",
-    "no_hidden_fees": "Без скрытых платежей",
+    "no_hidden_fees": "Прозрачно",
     "support_247": "Поддержка 24/7"
   }
 }

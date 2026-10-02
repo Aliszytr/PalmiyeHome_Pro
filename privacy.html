@@ -5,6 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Privacy Policy & Terms — Palmiye Home</title>
+  <!-- Google Ads Global Site Tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17307806485"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'wait_for_update': 500
+    });
+    if (localStorage.getItem('palmiye_cookies') === 'accepted') {
+      gtag('consent', 'update', {
+        'ad_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted',
+        'analytics_storage': 'granted'
+      });
+    }
+    gtag('js', new Date());
+    gtag('config', 'AW-17307806485');
+  </script>
   <link rel="icon" type="image/png" sizes="32x32" href="Logo/favicon-32.png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
@@ -89,7 +112,7 @@
       <p>By using this website, you agree to the following:</p>
       <ul>
         <li>All booking inquiries are non-binding until confirmed by the property owner</li>
-        <li>Prices shown are approximate and may vary by season — final prices are confirmed via WhatsApp or Booking.com</li>
+        <li>Availability and reservations are confirmed via WhatsApp or Booking.com</li>
         <li>Check-in is from 14:00, check-out by 11:00</li>
         <li>Maximum occupancy is 4 guests</li>
         <li>Pets are not allowed</li>
@@ -139,7 +162,7 @@
       <h2 id="terms-tr">Kullanım Koşulları</h2>
       <ul>
         <li>Tüm rezervasyon talepleri, mülk sahibi tarafından onaylanana kadar bağlayıcı değildir</li>
-        <li>Gösterilen fiyatlar yaklaşıktır — kesin fiyatlar WhatsApp veya Booking.com üzerinden onaylanır</li>
+        <li>Müsaitlik ve rezervasyonlar WhatsApp veya Booking.com üzerinden onaylanır</li>
         <li>Giriş saat 14:00'ten, çıkış saat 11:00'e kadardır</li>
         <li>Maksimum kapasite 4 kişidir</li>
         <li>Evcil hayvan kabul edilmez</li>
@@ -179,7 +202,7 @@
       <h2 id="terms-ru">Условия использования</h2>
       <ul>
         <li>Все запросы на бронирование не являются обязательными до подтверждения владельцем</li>
-        <li>Цены приблизительны — окончательная цена подтверждается через WhatsApp или Booking.com</li>
+        <li>Наличие мест и бронирование подтверждаются через WhatsApp или Booking.com</li>
         <li>Заезд с 14:00, выезд до 11:00</li>
         <li>Максимальная вместимость — 4 гостя</li>
         <li>Домашние животные не допускаются</li>
@@ -219,7 +242,7 @@
       <h2 id="terms-de">Nutzungsbedingungen</h2>
       <ul>
         <li>Alle Buchungsanfragen sind unverbindlich bis zur Bestätigung durch den Eigentümer</li>
-        <li>Preise sind Richtwerte — Endpreise werden über WhatsApp oder Booking.com bestätigt</li>
+        <li>Verfügbarkeit und Reservierungen werden über WhatsApp oder Booking.com bestätigt</li>
         <li>Check-in ab 14:00 Uhr, Check-out bis 11:00 Uhr</li>
         <li>Maximale Belegung: 4 Gäste</li>
         <li>Keine Haustiere erlaubt</li>
@@ -252,5 +275,6 @@
       if (['en','tr','ru','de'].includes(lang)) setLang(lang);
     })();
   </script>
+  <script src="tracking.js"></script>
 </body>
 </html>

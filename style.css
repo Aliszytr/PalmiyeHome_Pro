@@ -1859,6 +1859,17 @@ a:focus:not(:focus-visible) {
   color: var(--text-muted);
   margin-top: 0.25rem;
 }
+.review-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.75rem;
+  color: var(--teal);
+  font-weight: 500;
+  margin-top: 0.5rem;
+  transition: color var(--transition);
+}
+.review-verified-badge:hover { color: var(--teal-light); }
 .review-nav {
   display: flex;
   justify-content: center;

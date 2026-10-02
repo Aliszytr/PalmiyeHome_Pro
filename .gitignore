@@ -34,6 +34,28 @@ api/config/tmp/
 .env.*
 *.env
 .htpasswd
+# Her konumdaki secret dosyası (publish/, dist/, iç içe kopyalar dahil)
+**/.env.php
+**/api/config/*.php
+secrets/
+# Placeholder şablonlar commit edilebilir (gerçek değer içermez)
+!.env.example
+!env.example.php
+
+# Sunucu çalışma zamanı artıkları (IP türevli rate-limit kilitleri, PHP logları)
+**/api/config/tmp/
+*.lock
+error_log
+.ftpquota
+
+# ═══════════════════════════════════════════
+#  DAĞITIM ÇIKTISI — kaynak değildir, secret içerebilir
+# ═══════════════════════════════════════════
+publish/
+dist/
+
+# Yedek / baseline klasörleri
+_BACKUP_*/
 
 # Git reference copy — deploy paketine dahil değil
 PalmiyeHome_Pro-main/

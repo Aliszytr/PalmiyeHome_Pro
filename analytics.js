@@ -1,125 +1,113 @@
 /**
- * Palmiye Home — GA4 Analytics Module
+ * Palmiye Home — GA4 Event Tracking
  * ====================================
- * USAGE: Replace 'G-XXXXXXXXXX' with your real GA4 Measurement ID.
- * Then add to index.html:
- *   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
- *   <script src="analytics.js"></script>
- * 
- * Cookie Consent: Analytics only fires if user accepted cookies.
+ * GA4 (G-6NK46VG4DY) <head> içinden yüklenir (gtag.js + gtag('config', 'G-6NK46VG4DY')).
+ * Bu dosya SADECE özel event'leri (whatsapp_click, booking_click, vb.) gönderir.
+ *
+ * CONSENT (Consent Mode v2):
+ *   - Bu dosya consent check'i YAPMAZ.
+ *   - <head>'deki gtag('consent', 'default', {analytics_storage: 'denied'}) varsayılanı,
+ *     kullanıcı banner'da onay verene kadar GA4'ün cookie yazmasını engeller.
+ *   - 'denied' iken GA4 yine event topluyor ama anonim/cookieless modda
+ *     (Google "consent signals" ile modeled metric üretir). KVKK/GDPR uyumludur.
+ *   - 'granted' olunca tam ölçüm aktifleşir.
+ *
+ * @version 3.0.0
  */
-
 (function () {
   'use strict';
 
-  const GA_ID = 'G-6NK46VG4DY'; // GA4 Measurement ID
-
-  // Check if user accepted cookies
-  function hasConsent() {
-    return localStorage.getItem('palmiye_cookies') === 'accepted';
+  // gtag yüklü değilse sessizce çık (site bozulmasın)
+  if (typeof window.gtag !== 'function') {
+    console.warn('[Analytics] gtag global bulunamadı — <head> icindeki tag\'leri kontrol et.');
+    return;
   }
 
-  // Initialize GA4
-  function initGA() {
-    if (!hasConsent()) return;
-    if (GA_ID === 'G-XXXXXXXXXX') return; // Not configured yet
-    if (window._ga4Loaded) return; // Prevent double init
-
-    // Dynamically load gtag.js (only after consent — GDPR/KVKK compliant)
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-    document.head.appendChild(s);
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { window.dataLayer.push(arguments); }
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', GA_ID, {
-      anonymize_ip: true,
-      cookie_flags: 'SameSite=None;Secure'
-    });
-
-    window._ga4Loaded = true;
+  // ── Yardımcı: tek satırda event gönderimi ──
+  function track(eventName, params) {
+    try {
+      window.gtag('event', eventName, params || {});
+    } catch (err) {
+      console.warn('[Analytics] event hatasi:', eventName, err);
+    }
   }
 
-  // Expose to window for cookie consent trigger
-  window.initGA = initGA;
+  // ── Public API: dışarıdan custom event göndermek için ──
+  window.trackEvent = track;
 
-  // Track custom events
-  function trackEvent(eventName, params) {
-    if (!hasConsent() || !window.gtag) return;
-    window.gtag('event', eventName, params);
-  }
-
-  // ── Event Listeners ──
+  // ════════════════════════════════════════════════════════════
+  //  EVENT LISTENERS
+  // ════════════════════════════════════════════════════════════
 
   function setupTracking() {
-    if (!hasConsent() || !window.gtag) return;
+    // ── Outbound link click'leri (WhatsApp / Booking / Airbnb / Tel / Mail) ──
+    // Tek delegated handler, tüm linkleri yakalar (sonradan DOM'a eklenenler dahil).
+    document.addEventListener('click', function (e) {
+      var anchor = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!anchor) return;
 
-    // WhatsApp clicks
-    document.querySelectorAll('a[href*="wa.me"]').forEach(function (link) {
-      link.addEventListener('click', function () {
-        trackEvent('whatsapp_click', {
-          event_category: 'engagement',
-          event_label: link.closest('section')?.id || 'unknown'
-        });
-      });
-    });
+      var href = (anchor.getAttribute('href') || '').toLowerCase();
+      if (!href) return;
 
-    // Booking.com clicks
-    document.querySelectorAll('a[href*="booking.com"]').forEach(function (link) {
-      link.addEventListener('click', function () {
-        trackEvent('booking_click', {
-          event_category: 'engagement',
-          event_label: 'booking_com'
-        });
-      });
-    });
+      var section = anchor.closest('section');
+      var sectionId = section && section.id ? section.id : 'unknown';
 
-    // Airbnb clicks
-    document.querySelectorAll('a[href*="airbnb"]').forEach(function (link) {
-      link.addEventListener('click', function () {
-        trackEvent('airbnb_click', {
-          event_category: 'engagement',
-          event_label: 'airbnb'
-        });
-      });
-    });
+      if (href.indexOf('wa.me') !== -1 ||
+          href.indexOf('api.whatsapp.com') !== -1 ||
+          href.indexOf('whatsapp.com') !== -1) {
+        track('whatsapp_click', { event_category: 'engagement', event_label: sectionId });
+        return;
+      }
+      if (href.indexOf('booking.com') !== -1) {
+        track('booking_click', { event_category: 'engagement', event_label: 'booking_com' });
+        return;
+      }
+      if (href.indexOf('airbnb.') !== -1) {
+        track('airbnb_click', { event_category: 'engagement', event_label: 'airbnb' });
+        return;
+      }
+      if (href.indexOf('tel:') === 0) {
+        track('phone_click', { event_category: 'engagement', event_label: sectionId });
+        return;
+      }
+      if (href.indexOf('mailto:') === 0) {
+        track('email_click', { event_category: 'engagement', event_label: sectionId });
+      }
+    }, { passive: true, capture: true });
 
-    // Language switch
+    // ── Dil değişimi ──
     document.querySelectorAll('.lang-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        trackEvent('language_change', {
+        track('language_change', {
           event_category: 'navigation',
           event_label: btn.dataset.lang || btn.textContent.trim()
         });
       });
     });
 
-    // Gallery lightbox opens
+    // ── Galeri lightbox açılışı ──
     document.querySelectorAll('.gallery-item').forEach(function (item) {
       item.addEventListener('click', function () {
         var img = item.querySelector('img');
-        trackEvent('gallery_view', {
+        track('gallery_view', {
           event_category: 'engagement',
           event_label: img ? img.alt : 'unknown'
         });
       });
     });
 
-    // Scroll depth tracking
+    // ── Scroll depth (25 / 50 / 75 / 100) ──
     var scrollMilestones = [25, 50, 75, 100];
     var scrollFired = {};
 
     window.addEventListener('scroll', function () {
-      var scrollPercent = Math.round(
-        (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
-      );
+      var max = document.body.scrollHeight - window.innerHeight;
+      if (max <= 0) return;
+      var scrollPercent = Math.round((window.scrollY / max) * 100);
       scrollMilestones.forEach(function (milestone) {
         if (scrollPercent >= milestone && !scrollFired[milestone]) {
           scrollFired[milestone] = true;
-          trackEvent('scroll_depth', {
+          track('scroll_depth', {
             event_category: 'engagement',
             event_label: milestone + '%'
           });
@@ -128,14 +116,10 @@
     }, { passive: true });
   }
 
-  // ── Initialize ──
+  // ── Init ──
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      initGA();
-      setupTracking();
-    });
+    document.addEventListener('DOMContentLoaded', setupTracking);
   } else {
-    initGA();
     setupTracking();
   }
 })();
