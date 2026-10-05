@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="{{v lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{a meta.title}}</title>
+<meta name="description" content="{{a meta.description}}">
+<link rel="canonical" href="{{v canonical}}">
+{{v hreflang}}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Palmiye Home">
+<meta property="og:title" content="{{a meta.og_title}}">
+<meta property="og:description" content="{{a meta.og_description}}">
+<meta property="og:url" content="{{v canonical}}">
+<meta property="og:locale" content="{{v locale}}">
+{{v og_locale_alternates}}
+<meta property="og:image" content="{{v og_image}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{a meta.og_image_alt}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f8f5ef">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/favicon-180.png">
+<link rel="manifest" href="/manifest.json">
+{{v hero_preload}}
+<link rel="stylesheet" href="{{v css}}">
+{{v lang_redirect}}
+{{v gtag}}
+<script type="application/ld+json">{{v schema}}</script>
+</head>
+<body>
+{{v sprite}}
+<a class="skip" href="#main">{{t a11y.skip}}</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{v home_url}}">Palmiye Home</a>
+    <nav class="site-nav" id="site-nav" aria-label="{{a a11y.main_nav}}">
+      <ul>
+        <li><a href="#apartment">{{t nav.apartment}}</a></li>
+        <li><a href="#gallery">{{t nav.gallery}}</a></li>
+        <li><a href="#amenities">{{t nav.amenities}}</a></li>
+        <li><a href="#location">{{t nav.location}}</a></li>
+        <li><a href="#reviews">{{t nav.reviews}}</a></li>
+        <li><a href="#faq">{{t nav.faq}}</a></li>
+      </ul>
+      {{v lang_switch}}
+    </nav>
+    <a class="btn btn-primary btn-sm header-cta" href="#availability" data-track="availability_check" data-cta="header">{{t cta.check_availability}}</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="{{a a11y.menu_open}}" data-label-open="{{a a11y.menu_open}}" data-label-close="{{a a11y.menu_close}}">{{icon menu}}</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    {{v hero_picture}}
+    <div class="wrap hero-content">
+      <h1 id="hero-title">{{t hero.title}}<span class="tagline">{{t hero.tagline}}</span></h1>
+      <p class="hero-text">{{t hero.text}}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#availability" data-track="availability_check" data-cta="hero">{{t cta.check_availability}}</a>
+        <a class="hero-proof" href="{{v booking_reviews_url}}" target="_blank" rel="noopener" data-track="booking_review_click" data-cta="hero"><span class="score">{{c ratings.booking.score}}</span>{{t proof.rating_label}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" aria-label="{{a hero.proof}}">
+    <span class="anchor" id="trust"></span>
+    <div class="wrap proof-inner">
+      <div class="proof-rating">
+        <span class="score" aria-hidden="true">{{c ratings.booking.score}}</span>
+        <p><strong>{{t proof.rating_label}}</strong><br><a href="{{v booking_reviews_url}}" target="_blank" rel="noopener" data-track="booking_review_click" data-cta="proof">{{t proof.reviews_link}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a></p>
+      </div>
+      <ul class="proof-facts">
+        <li>{{icon home}}{{t proof.unit}}</li>
+        <li>{{icon users}}{{t proof.guests}}</li>
+        <li>{{icon waves}}{{t proof.pool}}</li>
+        <li>{{icon clock}}{{t proof.checkin}}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="apartment" aria-labelledby="apartment-title">
+    <div class="wrap split">
+      <div>
+        <h2 id="apartment-title">{{t apartment.title}}</h2>
+        <p class="lead">{{t apartment.lead}}</p>
+        <p class="muted">{{t apartment.body}}</p>
+        {{v apartment_list}}
+      </div>
+      <div class="photo-stack">
+        <div class="photo">{{pic living-room|(min-width: 900px) 600px, 100vw}}</div>
+        <div class="photo">{{pic kitchen|(min-width: 900px) 300px, 50vw}}</div>
+        <div class="photo">{{pic bedroom|(min-width: 900px) 300px, 50vw}}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band" id="gallery" aria-labelledby="gallery-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="gallery-title">{{t gallery.title}}</h2>
+        <p class="muted">{{t gallery.lead}}</p>
+      </div>
+      {{v gallery_grid}}
+      <p class="gallery-more"><button class="btn btn-ghost" type="button" data-lightbox-open="0">{{icon grid}}{{v gallery_all_label}}</button></p>
+    </div>
+  </section>
+
+  <section class="section" id="home" aria-labelledby="home-title">
+    <div class="wrap">
+      <div class="split reverse">
+        <div>
+          <h2 id="home-title">{{t home.title}}</h2>
+          <p>{{t home.body}}</p>
+          <ul class="points">
+            <li>{{icon check}}<span>{{t home.point1}}</span></li>
+            <li>{{icon check}}<span>{{t home.point2}}</span></li>
+            <li>{{icon check}}<span>{{t home.point3}}</span></li>
+          </ul>
+        </div>
+        <div class="photo" style="aspect-ratio: 4 / 3">{{pic house-mountain|(min-width: 900px) 600px, 100vw}}</div>
+      </div>
+      <div class="checkin-card" id="self-checkin">
+        <div>
+          <h3>{{icon key}} {{t checkin.title}}</h3>
+          <p class="muted" style="margin:0">{{t checkin.body}}</p>
+        </div>
+        <div class="times">
+          <div class="time"><span>{{t checkin.checkin_label}}</span><strong>{{c policies.checkin}}</strong></div>
+          <div class="time"><span>{{t checkin.checkout_label}}</span><strong>{{c policies.checkout}}</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band" id="amenities" aria-labelledby="amenities-title">
+    <div class="wrap">
+      <div class="section-head"><h2 id="amenities-title">{{t amenities.title}}</h2></div>
+      <ul class="amenities">
+        <li>{{icon snowflake}}{{t amenities.ac}}</li>
+        <li>{{icon wifi}}{{t amenities.wifi}}</li>
+        <li>{{icon tv}}{{t amenities.tv}}</li>
+        <li>{{icon utensils}}{{t amenities.kitchen}}</li>
+        <li>{{icon washer}}{{t amenities.washer}}</li>
+        <li>{{icon wind}}{{t amenities.hairdryer}}</li>
+        <li>{{icon baby}}{{t amenities.baby}}</li>
+        <li>{{icon car}}{{t amenities.parking}}</li>
+        <li>{{icon camera}}{{t amenities.cameras}}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="pool" aria-labelledby="pool-title">
+    <div class="wrap split">
+      <div>
+        <h2 id="pool-title">{{t pool.title}}</h2>
+        <p>{{t pool.body}}</p>
+        <p class="note">{{t pool.note}}</p>
+      </div>
+      <div class="pool-photos">
+        <div class="photo">{{pic pool-loungers|(min-width: 900px) 620px, 100vw}}</div>
+        <div class="photo">{{pic terrace-seating|(min-width: 900px) 300px, 50vw}}</div>
+        <div class="photo">{{pic garden|(min-width: 900px) 300px, 50vw}}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band" id="location" aria-labelledby="location-title">
+    <span class="anchor" id="attractions"></span>
+    <div class="wrap split">
+      <div>
+        <h2 id="location-title">{{t location.title}}</h2>
+        <p>{{t location.lead}}</p>
+        <ul class="distances">
+          <li>{{t location.center}} <span>{{t location.center_desc}}</span></li>
+          <li>{{t location.beach}} <span>{{t location.beach_desc}}</span></li>
+          <li>{{t location.canyon}} <span>{{t location.canyon_desc}}</span></li>
+          <li>{{t location.kemer}} <span>{{t location.kemer_desc}}</span></li>
+          <li>{{t location.airport}} <span>{{t location.airport_desc}}</span></li>
+        </ul>
+        <div><strong>{{t location.address_label}}:</strong><address>{{v address_line}}</address></div>
+      </div>
+      <div class="map-box" data-map data-map-src="{{v map_embed}}" data-map-title="{{a location.map_title}}">
+        <div>
+          <button class="btn btn-ghost" type="button" data-map-load>{{icon pin}}{{t location.map_load}}</button>
+          <p>{{t location.map_note}}</p>
+          <p><a href="{{v map_link}}" target="_blank" rel="noopener">{{t location.map_open}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="reviews" aria-labelledby="reviews-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="reviews-title">{{t reviews.title}}</h2>
+        <p class="muted">{{t reviews.lead}}</p>
+      </div>
+      {{v reviews}}
+      <p style="margin-top:22px"><a class="link-arrow" href="{{v booking_reviews_url}}" target="_blank" rel="noopener" data-track="booking_review_click" data-cta="reviews">{{t reviews.all}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a></p>
+    </div>
+  </section>
+
+  <section class="section band" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="section-head"><h2 id="faq-title">{{t faq.title}}</h2></div>
+      {{v faq}}
+    </div>
+  </section>
+
+  <section class="section availability" id="availability" aria-labelledby="availability-title">
+    <span class="anchor" id="booking"></span><span class="anchor" id="reservation-options"></span><span class="anchor" id="comparison"></span>
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="availability-title">{{t availability.title}}</h2>
+        <p class="muted">{{t availability.lead}}</p>
+      </div>
+      <div class="avail-grid">
+        <div>
+          <p class="indicative">{{icon info}}<span>{{t availability.indicative}}</span></p>
+          <div class="calendar" data-calendar>
+            <div class="cal-nav">
+              <button type="button" data-cal-prev aria-label="{{a availability.prev_month}}">{{icon chevron-left}}</button>
+              <button type="button" data-cal-next aria-label="{{a availability.next_month}}">{{icon chevron-right}}</button>
+            </div>
+            <div class="cal-months" data-cal-months aria-live="polite"></div>
+            <noscript><p>{{t availability.indicative}}</p></noscript>
+          </div>
+          <ul class="legend">
+            <li><i class="l-free"></i>{{t availability.legend_free}}</li>
+            <li><i class="l-booked"></i>{{t availability.legend_booked}}</li>
+            <li><i class="l-unknown"></i>{{t availability.legend_unknown}}</li>
+          </ul>
+          <p class="cal-updated" data-cal-updated></p>
+        </div>
+        <div class="panel">
+          <p class="panel-status" data-cal-status aria-live="polite">{{t availability.pick_start}}</p>
+          <div class="panel-row">
+            <label for="guests">{{t availability.guests}}</label>
+            {{v guests_select}}
+          </div>
+          <p style="margin:-6px 0 14px"><button type="button" class="btn-clear" data-cal-clear hidden>{{t availability.clear}}</button></p>
+          <p class="channels-title">{{t availability.channels_title}}</p>
+          <ul class="channels">
+            <li><a class="channel is-primary" data-channel="whatsapp" data-track="whatsapp_click" data-cta="availability" href="{{v whatsapp_url}}" target="_blank" rel="noopener">{{icon chat}}<span><strong>{{t availability.whatsapp}}</strong><small>{{t availability.whatsapp_desc}}</small></span></a></li>
+            <li><a class="channel" data-channel="booking" data-track="booking_click" data-cta="availability" href="{{v booking_url}}" target="_blank" rel="noopener">{{icon external}}<span><strong>{{t availability.booking}}</strong><small>{{t availability.booking_desc}}</small></span></a></li>
+            <li><a class="channel" data-channel="airbnb" data-track="airbnb_click" data-cta="availability" href="{{v airbnb_url}}" target="_blank" rel="noopener">{{icon external}}<span><strong>{{t availability.airbnb}}</strong><small>{{t availability.airbnb_desc}}</small></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{{v footer}}
+
+<div class="mobile-cta" data-mobile-cta>
+  <a class="btn btn-primary" href="#availability" data-track="availability_check" data-cta="mobile_bar">{{t cta.check_availability}}</a>
+</div>
+
+{{v consent}}
+
+<dialog class="lightbox" id="lightbox" aria-label="{{a gallery.title}}">
+  <figure class="lightbox-figure">
+    <picture><source type="image/avif" data-lb-avif><source type="image/webp" data-lb-webp><img data-lb-img alt="" src="data:," width="1200" height="900"></picture>
+    <figcaption class="lightbox-caption" data-lb-caption></figcaption>
+  </figure>
+  <button class="lb-btn lb-close" type="button" data-lb-close aria-label="{{a gallery.close}}">{{icon close}}</button>
+  <button class="lb-btn lb-prev" type="button" data-lb-prev aria-label="{{a gallery.prev}}">{{icon chevron-left}}</button>
+  <button class="lb-btn lb-next" type="button" data-lb-next aria-label="{{a gallery.next}}">{{icon chevron-right}}</button>
+</dialog>
+
+<script type="application/json" id="site-data">{{v runtime}}</script>
+<script src="/data/bookings.js" defer></script>
+<script src="{{v js_track}}" defer></script>
+<script src="{{v js_site}}" defer></script>
+</body>
+</html>

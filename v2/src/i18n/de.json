@@ -1,0 +1,212 @@
+{
+  "_lang": { "code": "de", "name": "Deutsch", "locale": "de_DE", "path": "/de/" },
+  "meta": {
+    "title": "Palmiye Home — Ferienwohnung mit Pool in Göynük, Kemer",
+    "description": "Ruhige {unit}-Ferienwohnung für bis zu {max_guests} Gäste in Göynük, Kemer (Antalya): saisonaler Gemeinschaftspool, Bergblick und eine voll ausgestattete Wohnung. {score} auf Booking.com.",
+    "og_title": "Palmiye Home — Ihr Ferienzuhause in Göynük, Kemer",
+    "og_description": "Ein ruhiger Aufenthalt in einer {unit}-Wohnung mit saisonalem Gemeinschaftspool und Bergen ringsum in Göynük, Kemer. {score} auf Booking.com.",
+    "og_image_alt": "Gemeinschaftspool vor den Bergen von Göynük bei Palmiye Home"
+  },
+  "a11y": {
+    "skip": "Zum Inhalt springen",
+    "menu_open": "Menü öffnen",
+    "menu_close": "Menü schließen",
+    "language": "Sprache",
+    "new_tab": "(öffnet in neuem Tab)",
+    "main_nav": "Hauptnavigation"
+  },
+  "nav": {
+    "apartment": "Wohnung",
+    "gallery": "Galerie",
+    "amenities": "Ausstattung",
+    "location": "Lage",
+    "reviews": "Bewertungen",
+    "faq": "FAQ"
+  },
+  "cta": {
+    "check_availability": "Verfügbarkeit prüfen"
+  },
+  "hero": {
+    "title": "Palmiye Home",
+    "tagline": "Ihr Ferienzuhause in Göynük, Kemer",
+    "text": "Ein ruhiger Aufenthalt in einer {unit}-Wohnung mit saisonalem Pool, Bergen ringsum und dem Komfort einer gut ausgestatteten Wohnung.",
+    "proof": "{score} auf Booking.com"
+  },
+  "proof": {
+    "rating": "{score}",
+    "rating_label": "auf Booking.com",
+    "reviews_link": "Gästebewertungen auf Booking.com lesen",
+    "unit": "{unit}-Wohnung",
+    "guests": "Bis zu {max_guests} Gäste",
+    "pool": "Saisonaler Gemeinschaftspool",
+    "checkin": "Check-in {checkin}"
+  },
+  "apartment": {
+    "title": "Eine ganze Wohnung, nicht nur ein Zimmer",
+    "lead": "Palmiye Home ist eine helle {unit}-Wohnung: Wohnzimmer mit offener Küche, ein separates Schlafzimmer und ein Bad mit Waschmaschine.",
+    "body": "Helle Böden, sanftes Tageslicht und schlichte, bequeme Möbel. Platz zum Kochen, zum richtigen Auspacken und zum Ausruhen nach einem Tag am Strand oder in den Bergen.",
+    "list": [
+      "Wohnzimmer mit Sofa und Smart-TV",
+      "Offene Küche mit Kühlschrank, Backofen und Kochfeld",
+      "Schlafzimmer mit Doppelbett",
+      "Bad mit Dusche und Waschmaschine"
+    ]
+  },
+  "gallery": {
+    "title": "Ein Blick hinein",
+    "lead": "Echte Fotos der Wohnung, des Gartens und des Pools.",
+    "open": "Foto öffnen",
+    "close": "Schließen",
+    "prev": "Vorheriges Foto",
+    "next": "Nächstes Foto",
+    "counter": "{n} von {total}"
+  },
+  "home": {
+    "title": "Ihr Ferienzuhause",
+    "body": "Frühstücken am eigenen Tisch, eine Wäsche waschen, nachmittags schwimmen und abends in eine ruhige Wohnung zurückkehren. Palmiye Home ist zum Wohnen gemacht, nicht nur zum Schlafen — für Paare, kleine Familien und alle, die ein Zuhause einem Hotelzimmer vorziehen.",
+    "point1": "Eigene Küche und eigener Wohnbereich",
+    "point2": "Ruhige Wohnlage am Fuß der Berge",
+    "point3": "Kemer, der Strand und die Göynük-Schlucht sind schnell erreichbar"
+  },
+  "checkin": {
+    "title": "Einfacher Self-Check-in",
+    "body": "Kommen Sie in Ihrem eigenen Tempo zwischen {checkin_from} und {checkin_until} Uhr an und checken Sie selbst ein — keine Rezeption, kein Warten auf die Schlüsselübergabe. Die Anreiseinformationen erhalten bestätigte Gäste vor dem Aufenthalt. Check-out bis {checkout} Uhr.",
+    "checkin_label": "Check-in",
+    "checkout_label": "Check-out"
+  },
+  "amenities": {
+    "title": "Alles, was Sie für den Aufenthalt brauchen",
+    "ac": "Klimaanlage",
+    "wifi": "WLAN",
+    "tv": "Smart-TV",
+    "kitchen": "Voll ausgestattete Küche",
+    "washer": "Waschmaschine",
+    "hairdryer": "Haartrockner",
+    "baby": "Babybett und Hochstuhl auf Anfrage",
+    "parking": "Kostenlose Parkplätze auf dem Gelände",
+    "cameras": "Außenkameras (Eingang und Gemeinschaftsbereiche)"
+  },
+  "pool": {
+    "title": "Pool & Außenbereich",
+    "body": "Der saisonale Gemeinschaftspool hat einen Bereich für Erwachsene und einen für Kinder, Sonnenliegen und Blick auf die Berge. Rundherum: Rasenflächen, Palmen und Sitzplätze im Garten, an denen der Tag langsamer wird.",
+    "note": "Der Pool ist saisonal. Die Öffnungszeiten können sich jedes Jahr ändern — bitte fragen Sie danach, wenn Sie Ihre Daten anfragen."
+  },
+  "location": {
+    "title": "Göynük, Kemer",
+    "lead": "Eine ruhige Wohngegend zwischen dem Taurusgebirge und dem Meer, im Bezirk Kemer in Antalya.",
+    "center": "Ortszentrum Göynük",
+    "center_desc": "Geschäfte und Märkte zu Fuß erreichbar",
+    "beach": "Strand",
+    "beach_desc": "Etwa 2 km — 15–20 Min. zu Fuß",
+    "canyon": "Göynük-Schlucht",
+    "canyon_desc": "Etwa 5 Min. mit dem Auto",
+    "kemer": "Zentrum von Kemer",
+    "kemer_desc": "Etwa 10 Min. mit dem Auto",
+    "airport": "Flughafen Antalya",
+    "airport_desc": "Etwa 50 Min. mit dem Auto",
+    "address_label": "Adresse",
+    "map_load": "Karte anzeigen",
+    "map_note": "Die Karte wird erst nach Ihrem Klick von Google Maps geladen.",
+    "map_open": "In Google Maps öffnen",
+    "map_title": "Karte von Palmiye Home, Göynük, Kemer"
+  },
+  "reviews": {
+    "title": "Was Gäste sagen",
+    "lead": "Mit {score} auf Booking.com bewertet. Zwei Bewertungen in den Worten der Gäste:",
+    "source": "Gästebewertung auf Booking.com",
+    "all": "Alle Bewertungen auf Booking.com lesen"
+  },
+  "faq": {
+    "title": "Fragen & Antworten",
+    "items": [
+      { "q": "Wann sind Check-in und Check-out?", "a": "Check-in ist zwischen {checkin_from} und {checkin_until} Uhr. Check-out bis {checkout} Uhr." },
+      { "q": "Wie viele Gäste können übernachten?", "a": "Die Wohnung ist für bis zu {max_guests} Gäste geeignet." },
+      { "q": "Wann ist der Pool geöffnet?", "a": "Der Gemeinschaftspool ist saisonal und hat einen Bereich für Erwachsene und einen für Kinder. Die Öffnungszeiten können sich jedes Jahr ändern; bitte fragen Sie danach, wenn Sie Ihre Daten anfragen." },
+      { "q": "Gibt es Parkplätze?", "a": "Ja, auf dem Gelände gibt es kostenlose Parkplätze im Freien." },
+      { "q": "Gibt es ein Babybett oder einen Hochstuhl?", "a": "Ja, ein Babybett und ein Hochstuhl können auf Anfrage bereitgestellt werden." },
+      { "q": "Wie weit ist der Strand entfernt?", "a": "Der Strand ist etwa 2 km entfernt — rund 15–20 Minuten zu Fuß. Das Zentrum von Kemer erreichen Sie in etwa 10 Minuten mit dem Auto." },
+      { "q": "Ist der Kalender auf dieser Website verbindlich?", "a": "Nein. Der Kalender wird von Hand aktualisiert und dient nur zur Orientierung. Ihre Daten bestätigt der Gastgeber per WhatsApp oder Booking.com / Airbnb bei der Buchung dort." }
+    ]
+  },
+  "availability": {
+    "title": "Verfügbarkeit prüfen",
+    "lead": "Wählen Sie Ihre Daten, um zu sehen, ob sie frei aussehen — dann fragen Sie den Gastgeber oder buchen über die Plattform Ihrer Wahl.",
+    "indicative": "Unverbindliche Verfügbarkeit — der Kalender wird von Hand aktualisiert. Bitte lassen Sie Ihre Daten vor der Reise bestätigen.",
+    "legend_free": "Sieht frei aus",
+    "legend_booked": "Belegt",
+    "legend_unknown": "Noch nicht veröffentlicht",
+    "prev_month": "Vorheriger Monat",
+    "next_month": "Nächster Monat",
+    "pick_start": "Wählen Sie Ihr Anreisedatum.",
+    "pick_end": "Anreise {start} — wählen Sie jetzt Ihr Abreisedatum.",
+    "selected": "{start} → {end} · {nights} Nächte",
+    "clear": "Daten löschen",
+    "guests": "Gäste",
+    "updated": "Kalender zuletzt aktualisiert: {date}",
+    "channels_title": "Anfragen oder buchen",
+    "whatsapp": "Per WhatsApp fragen",
+    "whatsapp_desc": "Schreiben Sie dem Gastgeber Ihre Daten",
+    "booking": "Booking.com",
+    "booking_desc": "Auf Booking.com buchen",
+    "airbnb": "Airbnb",
+    "airbnb_desc": "Auf Airbnb buchen",
+    "wa_message_dates": "Hallo! Ich interessiere mich für Palmiye Home vom {start} bis {end} für {guests} Gast/Gäste. Ist die Wohnung frei?",
+    "wa_message": "Hallo! Ich möchte nach der Verfügbarkeit von Palmiye Home fragen."
+  },
+  "consent": {
+    "title": "Cookies",
+    "text": "Mit Ihrer Erlaubnis verwenden wir Cookies von Google Analytics und Google Ads, um Besuche zu verstehen und unsere Anzeigen zu messen. Wenn Sie ablehnen, werden diese Cookies nicht gesetzt. Sie können Ihre Wahl jederzeit ändern.",
+    "accept": "Akzeptieren",
+    "decline": "Ablehnen",
+    "more": "Datenschutzerklärung"
+  },
+  "footer": {
+    "tagline": "Eine Ferienwohnung mit saisonalem Pool in Göynük, Kemer, Antalya.",
+    "contact": "Kontakt",
+    "email": "E-Mail",
+    "whatsapp": "WhatsApp",
+    "privacy": "Datenschutzerklärung",
+    "cookie_settings": "Cookie-Einstellungen",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "alt": {
+    "hero-pool-mountain": "Gemeinschaftspool vor den Bergen von Göynük mit Palmen und den Wohngebäuden",
+    "house-mountain": "Zweistöckiges Wohngebäude mit Balkonen, Sonnenliegen und einem Berg dahinter",
+    "pool-loungers": "Weiße Sonnenliegen am Pool mit Palmen und Bergblick",
+    "pool-palms-house": "Poolrand mit Palmen, bewaldetem Berg und dem Wohngebäude",
+    "pool-garden-mountain": "Pool und Heckengarten vor dem Wohngebäude und den Bergen",
+    "exterior-pool": "Wohngebäude mit Heckengarten, Pool und Bergen im Hintergrund",
+    "aerial-pool": "Luftaufnahme des Pools, der Palmen und der Wohngebäude",
+    "terrace-seating": "Rattan-Gartensitzgruppe mit Kissen auf einer sonnigen Terrasse",
+    "terrace-pool": "Gartensitzgruppe unter einem Sonnenschirm, im Hintergrund der Pool",
+    "garden": "Grüner Rasen mit Palme und jungen Obstbäumen neben dem Gebäude",
+    "living-room": "Wohnzimmer mit grauem Ecksofa, Couchtisch und Wandfernseher",
+    "living-kitchen": "Wohn- und Küchenbereich mit Sofa, Esstisch und Kühlschrank",
+    "kitchen": "Küche mit Holzschränken, Backofen, Kochfeld, Geschirrspüler und Kühlschrank",
+    "kitchen-entrance": "Offene Küche und Eingangsflur mit Holzschränken",
+    "bedroom": "Schlafzimmer mit Doppelbett, frischen Handtüchern und Nachttischlampe",
+    "bedroom-wardrobe": "Helles Schlafzimmer mit Spiegelschrank und Doppelbett",
+    "bathroom": "Bad mit grauen Fliesen, Glasdusche und Waschmaschine",
+    "bathroom-laundry": "Bad mit Duschkabine, Waschbecken und Waschmaschine"
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "meta_description": "Wie die Website von Palmiye Home mit Daten umgeht: Cookies, Google Analytics, Google Ads, Besuchsbenachrichtigungen und Ihre Wahlmöglichkeiten.",
+    "updated": "Technische Beschreibung zuletzt aktualisiert: {build_date}",
+    "back": "Zurück zur Startseite",
+    "sections": [
+      { "h": "Wer wir sind", "p": "Diese Website gehört zu Palmiye Home, einer Ferienwohnung in Göynük, Kemer, Antalya, Türkei. Kontakt: {email}." },
+      { "h": "Cookies und Ihre Wahl", "p": "Beim ersten Besuch fragt ein Hinweis, ob Cookies von Google Analytics und Google Ads verwendet werden dürfen. Bis Sie zustimmen, ist die Google-Einwilligung auf „abgelehnt“ gesetzt und diese Cookies werden nicht gespeichert. Ihre Wahl wird in Ihrem Browser gespeichert (localStorage-Schlüssel „palmiye_cookies“), damit der Hinweis nicht erneut erscheint; Sie können sie jederzeit über „Cookie-Einstellungen“ unten auf jeder Seite ändern. Ihre Sprachwahl wird auf die gleiche Weise gespeichert (Schlüssel „palmiye_lang“)." },
+      { "h": "Google Analytics und Google Ads", "p": "Die Website lädt das Google-Tag (gtag.js) für Google Analytics 4 und die Conversion-Messung von Google Ads. Bei abgelehnter Einwilligung kann Google weiterhin cookielose Messsignale erhalten (zum Beispiel, dass eine Seite aufgerufen oder ein Buchungslink angeklickt wurde), ohne Cookies auf Ihrem Gerät zu speichern. Bei erteilter Einwilligung kann Google Cookies verwenden, um Besuche und die Anzeigenleistung zu messen. Wir erfassen Klicks auf WhatsApp-, Booking.com- und Airbnb-Links sowie die Nutzung des Verfügbarkeitskalenders; Namen, Telefonnummern, E-Mail-Adressen oder Chat-Inhalte senden wir nicht an Google." },
+      { "h": "Besuchsbenachrichtigungen", "p": "Wenn eine Seite geöffnet wird, sendet die Website unserem eigenen Server einen kurzen anonymen Hinweis (Sprache, grobe Geräteart wie Telefon oder Desktop, Seitenpfad und Name der verweisenden Website). Unser Server leitet eine kurze Nachricht an das Telegram-Konto des Inhabers weiter. Ihre IP-Adresse, Browserdaten und Bildschirmgröße sind nicht Teil der Nachricht, und es wird kein Datensatz pro Besucher geführt; gespeichert wird nur ein gemeinsamer Zähler, der die Anzahl der Benachrichtigungen begrenzt. Innerhalb derselben Browsersitzung wird der Hinweis einmal gesendet (sessionStorage-Schlüssel „palmiye_notified“)." },
+      { "h": "Karte", "p": "Die Google-Maps-Karte wird nicht automatisch geladen. Sie wird nur geladen, wenn Sie auf „Karte anzeigen“ klicken; Google verarbeitet Ihre Anfrage dann nach seiner eigenen Datenschutzerklärung." },
+      { "h": "Buchungsplattformen und WhatsApp", "p": "Links zu WhatsApp, Booking.com und Airbnb öffnen diese Dienste. Was Sie dort senden oder buchen, wird von diesen Diensten nach ihren eigenen Bedingungen und Datenschutzerklärungen verarbeitet." },
+      { "h": "Ihre Rechte", "p": "Sie können uns unter {email} fragen, welche Daten wir über Sie gespeichert haben, oder deren Löschung verlangen." }
+    ]
+  },
+  "notfound": {
+    "title": "Seite nicht gefunden",
+    "text": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "back": "Zur Startseite"
+  }
+}

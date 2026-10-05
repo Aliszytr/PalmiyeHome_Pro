@@ -1,0 +1,74 @@
+# =============================================
+#  Palmiye Home V2 — Apache config (GoDaddy/cPanel)
+#  Generated site root: v2/public  (copied as-is by v2/tools/build_site.py)
+# =============================================
+
+# ── Security headers ──
+<IfModule mod_headers.c>
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # No third-party fonts, icon CDNs or script CDNs in V2. Google tag + Ads/GA4 endpoints only;
+  # Google Maps iframe loads only after a click.
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.google.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.com.tr; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://www.googleadservices.com; frame-src https://www.google.com https://maps.google.com https://td.doubleclick.net; base-uri 'self'; form-action 'self'"
+</IfModule>
+
+Options -Indexes
+
+RewriteEngine On
+
+# ── HTTPS ──
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# ── www → non-www ──
+RewriteCond %{HTTP_HOST} ^www\.palmiyehomekemer\.com$ [NC]
+RewriteRule ^(.*)$ https://palmiyehomekemer.com/$1 [R=301,L]
+
+# ── V1 language URLs (?lang=xx) → V2 language folders (Ads, sitemap, old links) ──
+RewriteCond %{QUERY_STRING} (^|&)lang=(tr|de|ru)(&|$) [NC]
+RewriteRule ^(index\.html)?$ /%2/? [R=301,L,NE]
+RewriteCond %{QUERY_STRING} (^|&)lang=en(&|$) [NC]
+RewriteRule ^(index\.html)?$ /? [R=301,L]
+
+# ── Clean URLs ──
+RewriteRule ^privacy$ /privacy.html [L]
+RewriteRule ^(tr|de|ru)/privacy$ /$1/privacy.html [L]
+
+# ── Caching ──
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  # CSS/JS are referenced with a content hash (?v=…) so they can be cached long.
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+# Availability data changes often and is not versioned: always revalidate.
+<Files "bookings.js">
+  <IfModule mod_headers.c>
+    Header set Cache-Control "no-cache"
+  </IfModule>
+</Files>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json text/xml text/plain image/svg+xml application/manifest+json
+</IfModule>
+
+# ── Never serve secrets / dev files ──
+<FilesMatch "(^\.env|\.(env|config|log|bak|sql|sh|php~|md|py)$)">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 /\.git
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType application/manifest+json .webmanifest
+</IfModule>

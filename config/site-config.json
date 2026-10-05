@@ -1,8 +1,33 @@
 {
   "_about": "Single source of truth for changeable facts. tools/verify_master.py checks that index.html, lang/*.json, privacy.html and the JS files agree with these values. Not loaded by the browser. Fill a null value only after it is verified.",
+  "site": {
+    "_about": "V2: v2/tools/build_site.py reads this file at build time; values reach every page from here only.",
+    "base_url": "https://palmiyehomekemer.com",
+    "languages": ["en", "tr", "de", "ru"],
+    "default_language": "en",
+    "consent_mode": "advanced",
+    "_consent_mode_options": "advanced = Google tags load with all consent types denied and send cookieless pings until the visitor accepts (current production behaviour). basic = Google tags are not loaded at all until the visitor accepts. Choice belongs to Ali/legal review.",
+    "telegram_endpoint": "/api/telegram-notify.php"
+  },
   "property": {
     "name": "Palmiye Home",
-    "max_guests": 4
+    "max_guests": 4,
+    "unit": "1+1",
+    "address": {
+      "street": "Göynük Mah. 3270. Sok. B Blok No:1",
+      "locality": "Kemer",
+      "region": "Antalya",
+      "postal_code": "07980",
+      "country": "TR"
+    },
+    "geo": { "lat": 36.6608389, "lng": 30.546807 }
+  },
+  "booking_links": {
+    "_about": "Parameters used by the V2 reservation links (same as the production smart redirect).",
+    "booking_label": "palmiye_direct",
+    "booking_reviews_anchor": "#tab-reviews",
+    "default_guests": 2,
+    "min_stay_nights": 3
   },
   "ratings": {
     "booking": {
@@ -13,6 +38,25 @@
       "verified_at": "2026-10-02",
       "rules": "Use only '9.4 on Booking.com'. No verbal label (Exceptional etc.) until Booking's own label is verified. No reviewCount / aggregateRating until the count is verified."
     }
+  },
+  "guest_reviews": {
+    "_about": "Verbatim guest reviews already published on the live site (source: Booking.com). Shown in the original language; never translated, edited or invented.",
+    "items": [
+      {
+        "author": "Roman",
+        "country": "Serbia",
+        "date": "2024-08",
+        "lang": "en",
+        "text": "We recently spent a week at this apartment, and our experience was nothing short of delightful. The apartment was modern, stylish and comfortable, with a fully functional kitchen including stove, oven and dishwasher. The Wi-Fi was reliable and fast. Just an 8-minute walk from Migros and Bim shops. A special mention goes to Meltem, who truly made our stay exceptional — incredibly responsive and kind. Highly recommend!"
+      },
+      {
+        "author": "Dudojc",
+        "country": "Germany",
+        "date": "2024-08",
+        "lang": "de",
+        "text": "Ruhige Gegend und alles Neubau. Küchengeräte alles Neue, wir haben das Gefühl gehabt das wir dieses Apartment als erste nutzen. Pool Neu und Top sauber. Das war unser bester Unterkunft seit 15 Jahren, und wir machen jährlich Urlaub. Können wir nur empfehlen :-)"
+      }
+    ]
   },
   "policies": {
     "checkin": "14:00–23:00",

@@ -1,0 +1,20 @@
+{
+  "name": "Palmiye Home",
+  "short_name": "Palmiye Home",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f8f5ef",
+  "theme_color": "#f8f5ef",
+  "icons": [
+    {
+      "src": "/assets/icons/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/favicon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

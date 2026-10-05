@@ -60,3 +60,6 @@ _BACKUP_*/
 # Git reference copy — deploy paketine dahil değil
 PalmiyeHome_Pro-main/
 
+
+# V2 local preview artefacts
+v2/.mock/
