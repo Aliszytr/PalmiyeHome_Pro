@@ -14,6 +14,7 @@
   owner diagnostics JSON.
 - Emulates the .htaccess ?lang=xx → /xx/ redirect.
 - ?__dev_consent=accepted|declined pre-sets the consent choice (screenshots only).
+- ?__dev_tz=America/New_York simulates the browser time zone (market-hint QA on this machine).
 
 Usage: python v2/tools/dev_server.py [port]
 """
@@ -51,8 +52,8 @@ GTAG = b"https://www.googletagmanager.com/gtag/js?id="
 
 def mock_availability(scenario):
     s = CONFIG["availability"]
-    feeds = {"booking": "fixture://booking", "airbnb": "fixture://airbnb", "direct": "fixture://direct"}
-    files = {"fixture://booking": "booking.ics", "fixture://airbnb": "airbnb.ics", "fixture://direct": "direct.ics"}
+    feeds = {"booking": "fixture://booking", "airbnb": "fixture://airbnb"}
+    files = {"fixture://booking": "booking.ics", "fixture://airbnb": "airbnb.ics"}
 
     def fetch(url, timeout):
         return 200, (FIX / files[url]).read_text(encoding="utf-8")
@@ -126,6 +127,10 @@ class Handler(SimpleHTTPRequestHandler):
             choice = q.get("__dev_consent", [""])[0]
             if target.suffix == ".html" and choice in ("accepted", "declined"):
                 body = body.replace(b"<head>", b"<head><script>localStorage.setItem('palmiye_cookies','" + choice.encode() + b"')</script>", 1)
+            tz = q.get("__dev_tz", [""])[0]
+            if target.suffix == ".html" and tz.replace("/", "").replace("_", "").isalpha():
+                body = body.replace(b"<head>", b"<head><script>(function(){var o=Intl.DateTimeFormat.prototype.resolvedOptions;"
+                                    b"Intl.DateTimeFormat.prototype.resolvedOptions=function(){var r=o.call(this);r.timeZone='" + tz.encode() + b"';return r;};})();</script>", 1)
             ctype = "text/html; charset=utf-8" if target.suffix == ".html" else "application/javascript"
             return self.send_body(200, ctype, body)
         if not target.exists():

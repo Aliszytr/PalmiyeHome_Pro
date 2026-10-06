@@ -2,7 +2,7 @@
 /**
  * Palmiye Home V2 — OWNER-ONLY availability health (not linked from the site, noindex).
  *
- * Shows per feed (Booking / Airbnb / Direct): OK or error, last successful sync, fresh/stale,
+ * Shows per feed (Booking.com / Airbnb): OK or error, last successful sync, fresh/stale,
  * plus a "Sync now" button. Never shows feed URLs or guest data.
  *
  * Access: password whose hash is PALMIYE_AVAILABILITY_ADMIN_HASH in the secret file
@@ -83,7 +83,7 @@ button{background:#1b5c63;color:#fff;border-color:#1b5c63;cursor:pointer}.msg{pa
     $state = $paths ? palmiye_read_json($paths['state']) : null;
     $pub = palmiye_av_public($state, $s, time(), isset($s['season']) ? $s['season'] : null);
     $health = palmiye_av_health($state, $s, time());
-    $names = array('booking' => 'Booking.com', 'airbnb' => 'Airbnb', 'direct' => 'Direct / WhatsApp takvimi');
+    $names = array('booking' => 'Booking.com', 'airbnb' => 'Airbnb');
     ?>
 <p>Genel durum: <strong class="<?php echo $pub['status'] === 'fresh' ? 'ok' : 'bad'; ?>"><?php echo h($pub['status']); ?></strong>
  · Son başarılı tam senkron (UTC): <?php echo h($pub['last_successful_sync'] ?: '—'); ?>

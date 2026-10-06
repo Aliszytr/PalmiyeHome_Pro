@@ -6,12 +6,14 @@ tested locally (v2/tools/test_availability.py) and served by the dev server.
 Keep both files in step; test_availability.py documents the expected behaviour.
 
 Rules
-  * Sources: Booking.com iCal, Airbnb iCal, Direct/WhatsApp calendar iCal.
+  * Sources: Booking.com iCal and Airbnb iCal ONLY. Direct/WhatsApp bookings are blocked by
+    the owner in Booking.com or Airbnb, so they arrive through those feeds (no third calendar).
     Every VEVENT is a closed period; only DTSTART/DTEND/STATUS are read.
     Names, e-mails, phone numbers, reservation codes, prices, UIDs and feed URLs are
     never read into the result.
   * Ranges are nights: start inclusive, end exclusive (= check-out day, iCal style).
-  * Union of all sources, overlapping/adjacent ranges merged.
+  * Union of both sources: a night closed in Booking.com OR in Airbnb is closed on the website
+    (covers the delay between the two OTAs' own iCal sync). Overlapping/adjacent ranges merged.
   * FAIL-SAFE: a feed that errors keeps its last good data; a feed that suddenly
     returns an empty calendar while it had future closures is accepted only after
     the same empty answer is seen twice in a row.
@@ -24,7 +26,7 @@ import re
 from datetime import date, datetime, timedelta, timezone
 
 IST = timezone(timedelta(hours=3))  # Europe/Istanbul, no DST since 2016
-SOURCES = ("booking", "airbnb", "direct")
+SOURCES = ("booking", "airbnb")
 
 
 class FeedError(Exception):
@@ -156,8 +158,10 @@ def public_view(state, settings, now, season):
     """The anonymous JSON served at /api/availability.json."""
     ts = int(now.timestamp())
     today = now.astimezone(IST).date()
-    feeds = [f for f in (state or {}).get("feeds", {}).values() if f.get("configured")]
-    if not feeds or any(not f.get("last_success") for f in feeds):
+    all_feeds = (state or {}).get("feeds", {})
+    feeds = [f for f in all_feeds.values() if f.get("configured")]
+    # Both OTAs are required: a missing or never-synced source makes the calendar 'unavailable'.
+    if any(not all_feeds.get(s, {}).get("configured") for s in SOURCES) or any(not f.get("last_success") for f in feeds):
         status, oldest = "unavailable", None
     else:
         oldest = min(f["last_success"] for f in feeds)

@@ -11,12 +11,19 @@
     "availability_endpoint": "/api/availability.json"
   },
   "market": {
-    "_about": "Reservation channel order. The visitor's market is guessed in the browser only (time zone Europe/Istanbul), no IP and no network call. Nothing is ever hidden; only the order and one note change. ?market=tr|intl overrides it for QA.",
-    "tr_time_zones": ["Europe/Istanbul"],
+    "_about": "Reservation-channel ORDER only — never content, price or property. Signal priority: (A) explicit URL ?ph_market=tr|intl (e.g. future TR-targeted Ads URLs; Ads not changed), (B) LOW-CONFIDENCE hint: browser time zone in hint_time_zones, (C) no signal = neutral. Time zone is a hint, not a country: no IP, no geolocation API/permission, no GPS, no fingerprint, no third-party geo service. Browser language alone is never used. Booking.com is never hidden or removed; only order and one note change. Used only while booking_turkey_restriction.enabled is true.",
+    "url_param": "ph_market",
+    "hint_time_zones": ["Europe/Istanbul"],
     "channel_order": {
-      "tr": ["whatsapp", "airbnb", "booking"],
-      "intl": ["booking", "airbnb", "whatsapp"]
+      "tr_hint": ["whatsapp", "airbnb", "booking"],
+      "neutral": ["booking", "airbnb", "whatsapp"]
     }
+  },
+  "booking_turkey_restriction": {
+    "_about": "Booking.com does not currently offer bookings for properties in Turkey to users located in Turkey. enabled=true → TR-hint channel order, the Booking note and the FAQ item are built. enabled=false → every visitor gets the neutral order, no note, no FAQ item and no market logic in the page (rebuild only, no code change).",
+    "enabled": true,
+    "last_verified": "2026-10-06",
+    "source": "Owner report (Ali) + task brief 2026-10-06; public Booking.com behaviour for users in Turkey. Re-check before the 2027 season."
   },
   "property": {
     "name": "Palmiye Home",
@@ -45,8 +52,11 @@
       "review_count": null,
       "source_url": "https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html",
       "verified_at": "2026-10-02",
+      "last_verified": "2026-10-06",
+      "source_type": "booking_property_page",
+      "show_review_count": false,
       "scale": "10",
-      "rules": "Use only '9.4 on Booking.com' / '9.4 / 10'. No verbal label (Exceptional etc.) until Booking's own label is verified. No reviewCount / aggregateRating until the count is verified."
+      "rules": "Use only '9.4 on Booking.com' / '9.4 / 10'. review_count stays null and is not shown: Booking's public/search surfaces can show different (cached) counts; add it only after reading it on the canonical property page and setting show_review_count. No verbal label (Exceptional etc.) until Booking's own label is verified. No reviewCount / aggregateRating until the count is verified."
     },
     "airbnb": {
       "score": null,
@@ -119,7 +129,7 @@
     "verified_at": "2026-10-02"
   },
   "availability": {
-    "_about": "Availability engine (server side, v2/src/server/availability/*). Feeds: Booking.com iCal, Airbnb iCal, Direct/WhatsApp calendar iCal — their URLs are SECRETS and live only in palmiye-secrets/availability.php outside the web root. This block holds only non-secret behaviour. season = the dates Ali opens for sale; outside it the calendar shows 'not open yet'. null = nothing is shown as free (fail-safe).",
+    "_about": "Availability engine (server side, v2/src/server/api/_lib/availability.php). Feeds: Booking.com iCal + Airbnb iCal ONLY (no third/Direct calendar: a confirmed WhatsApp/direct booking is blocked by the owner in Booking.com or Airbnb). A night closed in EITHER feed is closed on the website. Both feed URLs are SECRETS and live only in palmiye-secrets/availability.php outside the web root. This block holds only non-secret behaviour. season = the dates Ali opens for sale; outside it the calendar shows 'not open yet'. null = nothing is shown as free (fail-safe).",
     "season": { "start": null, "end": null },
     "sync_interval_minutes": 20,
     "stale_after_minutes": 180,

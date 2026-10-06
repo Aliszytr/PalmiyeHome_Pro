@@ -59,29 +59,38 @@
     }
   }
 
-  // ── Reservation channel order by market ────────────────
-  // Booking.com may not accept bookings for Turkish properties made from within Turkey.
-  // The market is guessed ONLY from the browser's time zone (no IP, no network request);
-  // ?market=tr|intl overrides it for QA. Nothing is hidden: only the order and one note change,
-  // so a wrong guess costs nothing.
-  var market = (function () {
-    var q = (location.search.match(/[?&]market=(tr|intl)\b/) || [])[1];
-    if (q) return q;
-    try {
-      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      return D.market.tr_time_zones.indexOf(tz) !== -1 ? 'tr' : 'intl';
-    } catch (err) { return 'intl'; }
-  })();
-  document.documentElement.setAttribute('data-market', market);
-  var list = $('[data-channels]');
-  if (list && D.market.order[market]) {
-    D.market.order[market].forEach(function (c) {
-      var li = $('[data-channel-item="' + c + '"]', list);
-      if (li) list.appendChild(li);
-    });
-    var note = $('[data-tr-note]', list);
-    if (note) note.hidden = market !== 'tr';
+  // ── Reservation channel order (market HINT, not a location) ─────────
+  // Only while the Booking.com Turkey restriction is enabled in config (D.market !== null).
+  // Signal priority: (A) explicit ?ph_market=tr|intl → (B) LOW-CONFIDENCE hint: the browser's
+  // time zone → (C) neutral. No IP, no geolocation API or permission, no third-party call,
+  // no fingerprint; browser language is not used. Nothing is stored or sent except the two
+  // analytics fields below (only with consent). Booking.com is never removed or hidden — only
+  // the order and one explanatory note change, so a wrong hint costs nothing.
+  var marketHint = 'neutral', marketSource = 'none';
+  if (D.market) {
+    var explicit = (location.search.match(new RegExp('[?&]' + D.market.param + '=([^&#]*)')) || [])[1];
+    if (explicit === 'tr' || explicit === 'intl') {
+      marketHint = explicit === 'tr' ? 'tr' : 'neutral';
+      marketSource = 'explicit_url';
+    } else {
+      try {
+        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        if (D.market.hint_time_zones.indexOf(tz) !== -1) { marketHint = 'tr'; marketSource = 'timezone_hint'; }
+      } catch (err) { /* neutral */ }
+    }
+    var list = $('[data-channels]');
+    var order = D.market.order[marketHint === 'tr' ? 'tr_hint' : 'neutral'];
+    if (list && order) {
+      order.forEach(function (c) {
+        var li = $('[data-channel-item="' + c + '"]', list);
+        if (li) list.appendChild(li);
+      });
+      var note = $('[data-tr-note]', list);
+      if (note) note.hidden = marketHint !== 'tr';
+    }
   }
+  document.documentElement.setAttribute('data-market-hint', marketHint);
+  document.documentElement.setAttribute('data-market-source', marketSource);
 
   // The mobile CTA appears only after the hero (which has its own CTA) has scrolled away,
   // and hides again while the availability section is on screen — never two CTAs at once.

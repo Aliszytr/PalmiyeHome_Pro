@@ -140,15 +140,15 @@
   },
   "faq": {
     "title": "Questions & answers",
+    "turkey": {"q": "Can I book from within Turkey?", "a": "Yes — on WhatsApp or on Airbnb. Booking.com currently does not offer bookings for properties in Turkey to users located in Turkey."},
     "items": [
       {"q": "What are the check-in and check-out times?", "a": "Check-in is between {checkin_from} and {checkin_until}. Check-out is by {checkout}."},
       {"q": "How many guests can stay?", "a": "The apartment is suitable for up to {max_guests} guests."},
       {"q": "When is the pool open?", "a": "The shared pool is seasonal and has an adult and a children's section. Opening dates can change each year, so please ask when you check your dates."},
       {"q": "Is there parking?", "a": "Yes, free open-air parking is available on site."},
-      {"q": "Can I book from within Turkey?", "a": "Yes — on WhatsApp or on Airbnb. Booking.com may not be available for bookings made from within Turkey."},
       {"q": "Is there a baby cot or high chair?", "a": "Yes, a baby cot and a high chair can be provided on request."},
       {"q": "How far is the beach?", "a": "The beach is about 2 km away — roughly 15–20 min on foot. Kemer centre is about 10 minutes by car."},
-      {"q": "How up to date is the calendar?", "a": "The calendar is synchronised automatically from the Booking.com, Airbnb and direct booking calendars. Final availability is confirmed when you book — by the host on WhatsApp or by Booking.com / Airbnb."}
+      {"q": "How up to date is the calendar?", "a": "The calendar is synchronised automatically from our Booking.com and Airbnb calendars; bookings made directly with us are blocked there too. Final availability is confirmed when you book — by the host on WhatsApp or by Booking.com / Airbnb."}
     ]
   },
   "availability": {
@@ -173,11 +173,11 @@
     "airbnb_desc": "Book on Airbnb",
     "wa_message_dates": "Hello! I am interested in Palmiye Home from {start} to {end} for {guests} guest(s). Is it available?",
     "wa_message": "Hello! I would like to ask about availability at Palmiye Home.",
-    "sync_note": "Availability is synchronised automatically from our booking calendars (Booking.com, Airbnb and direct bookings). Final availability is confirmed when you book.",
+    "sync_note": "Availability is synchronised automatically from our Booking.com and Airbnb calendars. Final availability is confirmed when you book.",
     "loading": "Loading availability…",
     "state_stale": "The calendar could not be refreshed recently. Please confirm your dates with us before booking.",
     "state_unavailable": "Live availability cannot be shown right now. Send us your dates on WhatsApp or check them on Booking.com or Airbnb.",
-    "booking_tr_note": "Booking.com may not be available for bookings made from within Turkey."
+    "booking_tr_note": "Booking.com currently does not offer bookings for properties in Turkey to users located in Turkey."
   },
   "consent": {
     "title": "Cookies",
@@ -226,7 +226,7 @@
       {"h": "Cookies and your choice", "p": "When you first visit, a small banner asks whether Google Analytics and Google Ads may be used. Until you accept, Google's tag is not loaded at all: no Google cookies are set and no measurement data is sent to Google. Your choice is saved in your browser (localStorage key “palmiye_cookies”) so the banner does not appear again; you can change it at any time with “Cookie settings” at the bottom of each page. If you pick a language with the language switch, that choice is saved in the same way (key “palmiye_lang”); the site never redirects you automatically."},
       {"h": "Google Analytics and Google Ads", "p": "Only after you accept does the site load Google's tag (gtag.js) for Google Analytics 4 and Google Ads conversion measurement; Google may then use cookies to measure visits and ad performance. From then on we record clicks on the WhatsApp, Booking.com and Airbnb links, clicks on review links and the use of the availability calendar. We do not send names, phone numbers, email addresses or chat contents to Google. If you later decline, measurement stops and the Google cookies set by this site are deleted."},
       {"h": "Visit notifications", "p": "When a page is opened, the site sends our own server a short notice that contains only the page language, the page path and the name of the referring website (not its full address). To add an approximate location (city or region and country), our server looks up your IP address in a GeoIP database stored on the server itself; no external service is asked. The IP address is used only for this lookup in the server's memory and is then discarded: it is not stored, not logged and not included in the message. The server then sends a short message to the owner's Telegram account, for example “Yeni ziyaret · Antalya, Türkiye · TR · Ana sayfa” (new visit · place · language · page). The location is approximate and can be wrong, for example with a VPN or a mobile network. No per-visitor record is kept; only a shared counter that limits the number of notifications is stored. Within one browser session the notice is sent once (sessionStorage key “palmiye_notified”)."},
-      {"h": "Availability calendar", "p": "The calendar shows dates from our Booking.com, Airbnb and direct booking calendars. Our server reads only the dates from those calendars; guest names, contact details, reservation codes and prices are neither read nor published. Your browser loads the calendar data from our own server and sends no personal data with it."},
+      {"h": "Availability calendar", "p": "The calendar shows dates from our Booking.com and Airbnb calendars. Our server reads only the dates from those calendars; guest names, contact details, reservation codes and prices are neither read nor published. Your browser loads the calendar data from our own server and sends no personal data with it. The order of the booking links may be adapted using your browser's time-zone setting, only inside your browser; it is not sent or stored."},
       {"h": "Map", "p": "The Google Maps map is not loaded automatically. It loads only if you click “Show map”; Google then processes your request under its own privacy policy. The “View on Google Maps” and “Get directions” links open Google Maps."},
       {"h": "Booking platforms and WhatsApp", "p": "Links to WhatsApp, Booking.com and Airbnb open those services. Anything you send or book there is handled by those services under their own terms and privacy policies."},
       {"h": "Your rights", "p": "You can ask us about the data we hold or request its deletion by writing to {email}."}

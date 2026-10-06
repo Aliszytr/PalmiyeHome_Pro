@@ -6,7 +6,9 @@
  * documents the expected behaviour and `php api/availability-sync.php --selftest` runs
  * the same scenarios on the server.
  *
- *   Booking.com iCal + Airbnb iCal + Direct/WhatsApp iCal → union of closed nights
+ *   Booking.com iCal + Airbnb iCal → union of closed nights (a night closed in EITHER OTA is
+ *   closed on the website). Direct/WhatsApp bookings are blocked by the owner in Booking.com or
+ *   Airbnb and therefore arrive through those two feeds; there is no third calendar.
  *   → anonymous JSON (closed ranges, last successful sync, fresh/stale/unavailable).
  *
  * Only DTSTART / DTEND / STATUS are read from a feed. Guest names, e-mails, phones,
@@ -17,7 +19,7 @@
 
 require_once __DIR__ . '/bootstrap.php';
 
-define('PALMIYE_AV_SOURCES', 'booking,airbnb,direct');
+define('PALMIYE_AV_SOURCES', 'booking,airbnb');
 
 class PalmiyeFeedError extends Exception
 {
@@ -239,14 +241,18 @@ function palmiye_av_public($state, $settings, $nowTs, $season)
     $now->setTimezone(palmiye_av_tz());
     $today = $now->format('Y-m-d');
     $feeds = array();
-    foreach ((is_array($state) && isset($state['feeds'])) ? $state['feeds'] : array() as $f) {
-        if (!empty($f['configured'])) {
-            $feeds[] = $f;
+    $never = false;
+    $byName = (is_array($state) && isset($state['feeds'])) ? $state['feeds'] : array();
+    foreach (palmiye_av_sources() as $src) {
+        // Both OTAs are required: a missing or never-synced source makes the calendar 'unavailable'.
+        if (empty($byName[$src]['configured'])) {
+            $never = true;
+        } else {
+            $feeds[] = $byName[$src];
         }
     }
     $oldest = null;
     $status = 'unavailable';
-    $never = false;
     foreach ($feeds as $f) {
         if (empty($f['last_success'])) {
             $never = true;
@@ -313,7 +319,6 @@ function palmiye_av_feeds_from_secrets()
     return array(
         'booking' => palmiye_secret('PALMIYE_ICAL_BOOKING'),
         'airbnb'  => palmiye_secret('PALMIYE_ICAL_AIRBNB'),
-        'direct'  => palmiye_secret('PALMIYE_ICAL_DIRECT'),
     );
 }
 

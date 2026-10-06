@@ -366,7 +366,7 @@ def runtime(lang, with_gallery=True):
         "i18n": i18n,
         "telegram_endpoint": CONFIG["site"]["telegram_endpoint"],
         "availability_endpoint": CONFIG["site"]["availability_endpoint"],
-        "market": {"tr_time_zones": CONFIG["market"]["tr_time_zones"], "order": CONFIG["market"]["channel_order"]},
+        "market": market_runtime(),
         "tracking": {"google_ads_id": t["google_ads_id"], "ga4_measurement_id": t["ga4_measurement_id"],
                      "ads_conversion_labels": t["ads_conversion_labels"], "consent_mode": CONFIG["site"]["consent_mode"]},
         "links": {"whatsapp": CONFIG["contact"]["whatsapp_e164"], "booking": CONFIG["platforms"]["booking"],
@@ -401,10 +401,26 @@ def apartment_list(lang):
     return f'<ul class="check-list">{items}</ul>'
 
 
+def restriction_on():
+    return CONFIG["booking_turkey_restriction"]["enabled"] is True
+
+
+def market_runtime():
+    """Channel-order hints for site.js — present only while the Booking Turkey restriction is on.
+    Off → null: the page carries no market logic at all and everyone gets the neutral order."""
+    if not restriction_on():
+        return None
+    m = CONFIG["market"]
+    return {"param": m["url_param"], "hint_time_zones": m["hint_time_zones"], "order": m["channel_order"]}
+
+
 def faq(lang):
+    items = list(lookup(lang, "faq.items"))
+    if restriction_on():
+        items.insert(4, lookup(lang, "faq.turkey"))  # after the parking question
     return '<div class="faq">' + "".join(
         f'<details><summary>{fill(i["q"], lang)}</summary><p>{fill(i["a"], lang)}</p></details>'
-        for i in lookup(lang, "faq.items")) + "</div>"
+        for i in items) + "</div>"
 
 
 def month_year(lang, ym):
@@ -485,12 +501,15 @@ def reviews(lang):
 
 
 def channels(lang):
-    """Default (international) order; site.js reorders for the Turkish market."""
-    order = CONFIG["market"]["channel_order"]["intl"]
+    """Neutral order in the HTML. While the Booking Turkey restriction is on, site.js may reorder
+    for a TR market hint and reveal the note. Booking is always present and never hidden."""
+    order = CONFIG["market"]["channel_order"]["neutral"]
+    note = (f'<p class="channel-note" data-tr-note hidden>{icon("info")}<span>{text(lang, "availability.booking_tr_note")}</span></p>'
+            if restriction_on() else "")
     items = {
         "booking": (f'<li data-channel-item="booking"><a class="channel" data-channel="booking" data-track="booking_click" data-cta="availability" href="{booking_url()}" target="_blank" rel="noopener">'
                     f'{icon("external")}<span><strong>{text(lang, "availability.booking")}</strong><small>{text(lang, "availability.booking_desc")}</small></span>{new_tab(lang)}</a>'
-                    f'<p class="channel-note" data-tr-note hidden>{icon("info")}<span>{text(lang, "availability.booking_tr_note")}</span></p></li>'),
+                    f'{note}</li>'),
         "airbnb": (f'<li data-channel-item="airbnb"><a class="channel" data-channel="airbnb" data-track="airbnb_click" data-cta="availability" href="{airbnb_url()}" target="_blank" rel="noopener">'
                    f'{icon("external")}<span><strong>{text(lang, "availability.airbnb")}</strong><small>{text(lang, "availability.airbnb_desc")}</small></span>{new_tab(lang)}</a></li>'),
         "whatsapp": (f'<li data-channel-item="whatsapp"><a class="channel" data-channel="whatsapp" data-track="whatsapp_click" data-cta="availability" href="{whatsapp_url(lang)}" target="_blank" rel="noopener">'

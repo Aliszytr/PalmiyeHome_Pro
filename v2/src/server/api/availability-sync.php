@@ -26,8 +26,8 @@ if (in_array('--selftest', $args, true)) {
     $S = $all['availability'];
     $season = array('start' => '2027-05-01', 'end' => '2027-10-31');
     $now = gmmktime(9, 0, 0, 5, 1, 2027);
-    $feeds = array('booking' => 'secret://booking', 'airbnb' => 'secret://airbnb', 'direct' => 'secret://direct');
-    $ok = array('secret://booking' => 'booking.ics', 'secret://airbnb' => 'airbnb.ics', 'secret://direct' => 'direct.ics');
+    $feeds = array('booking' => 'secret://booking', 'airbnb' => 'secret://airbnb');
+    $ok = array('secret://booking' => 'booking.ics', 'secret://airbnb' => 'airbnb.ics');
     $fails = 0;
     $check = function ($name, $cond) use (&$fails) {
         echo ($cond ? 'PASS ' : 'FAIL ') . $name . "\n";
@@ -54,12 +54,28 @@ if (in_array('--selftest', $args, true)) {
         }
         return implode(',', $o);
     };
-    $expected = '2027-06-10/2027-06-14,2027-07-01/2027-07-12,2027-07-20/2027-07-25,2027-08-01/2027-08-03';
+    $expected = '2027-06-10/2027-06-14,2027-07-01/2027-07-12,2027-07-20/2027-07-25,2027-08-05/2027-08-09';
+    $closedOn = function ($pub, $day) {
+        foreach ($pub['closed'] as $c) {
+            if ($c['start'] <= $day && $day < $c['end']) {
+                return true;
+            }
+        }
+        return false;
+    };
 
     $st = palmiye_av_sync(null, $feeds, $S, $now, $fetcher($ok));
     $pub = palmiye_av_public($st, $S, $now, $season);
-    $check('union + merge + cancelled skipped + UTC→Istanbul', $ranges($pub) === $expected);
+    $check('sources are exactly Booking.com + Airbnb', palmiye_av_sources() === array('booking', 'airbnb'));
+    $check('union of Booking + Airbnb, overlaps/duplicates/adjacent merged', $ranges($pub) === $expected);
     $check('status fresh', $pub['status'] === 'fresh');
+    $check('Booking-only closure is closed on the web', $closedOn($pub, '2027-08-05') && $closedOn($pub, '2027-08-08') && !$closedOn($pub, '2027-08-09'));
+    $check('Airbnb-only closure is closed on the web', $closedOn($pub, '2027-07-20') && $closedOn($pub, '2027-07-24') && !$closedOn($pub, '2027-07-25'));
+    list($edge, $n) = palmiye_av_parse_ics(file_get_contents($fx . 'parser_edge.ics'));
+    $edgeStr = implode(',', array_map(function ($x) {
+        return $x[0] . '/' . $x[1];
+    }, palmiye_av_merge($edge)));
+    $check('parser: UTC→Istanbul, cancelled skipped, missing DTEND = one night', $edgeStr === '2027-09-01/2027-09-03,2027-09-20/2027-09-21' && $n === 3);
     $blob = json_encode($pub) . json_encode($st);
     $check('no personal data / feed URL in cache or output', strpos($blob, 'Test Guest') === false
         && strpos($blob, 'FIXTURE-RES') === false && strpos($blob, 'secret://') === false && strpos($blob, 'example.invalid') === false);
@@ -77,6 +93,9 @@ if (in_array('--selftest', $args, true)) {
     $check('stale ladder: stale', palmiye_av_public(palmiye_av_sync($st, $feeds, $S, $tStale, $fetcher($allFail)), $S, $tStale, $season)['status'] === 'stale');
     $tExp = $now + 60 * ($S['expire_after_minutes'] + 5);
     $check('stale ladder: unavailable', palmiye_av_public(palmiye_av_sync($st, $feeds, $S, $tExp, $fetcher($allFail)), $S, $tExp, $season)['status'] === 'unavailable');
+    $miss = palmiye_av_sync(null, array('booking' => 'secret://booking', 'airbnb' => ''), $S, $now, $fetcher($ok));
+    $check('missing Airbnb secret → unavailable (no Booking-only fail-open)', palmiye_av_public($miss, $S, $now, $season)['status'] === 'unavailable');
+    $check('Airbnb never synced → unavailable', palmiye_av_public(palmiye_av_sync(null, $feeds, $S, $now, $fetcher(array_merge($ok, array('secret://airbnb' => array(403, ''))))), $S, $now, $season)['status'] === 'unavailable');
     $check('no feed configured → unavailable', palmiye_av_public(palmiye_av_sync(null, array(), $S, $now, $fetcher(array())), $S, $now, $season)['status'] === 'unavailable');
     $e1 = palmiye_av_sync($st, $feeds, $S, $later, $fetcher(array_merge($ok, array('secret://booking' => 'empty.ics'))));
     $check('sudden empty calendar rejected once', $e1['feeds']['booking']['error'] === 'suspect_empty');

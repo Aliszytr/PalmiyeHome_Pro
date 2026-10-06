@@ -140,15 +140,15 @@
   },
   "faq": {
     "title": "Fragen & Antworten",
+    "turkey": {"q": "Kann ich aus der Türkei buchen?", "a": "Ja — per WhatsApp oder über Airbnb. Booking.com bietet Nutzern in der Türkei derzeit keine Buchungen für Unterkünfte in der Türkei an."},
     "items": [
       {"q": "Wann sind Check-in und Check-out?", "a": "Check-in ist zwischen {checkin_from} und {checkin_until} Uhr. Check-out bis {checkout} Uhr."},
       {"q": "Wie viele Gäste können übernachten?", "a": "Die Wohnung ist für bis zu {max_guests} Gäste geeignet."},
       {"q": "Wann ist der Pool geöffnet?", "a": "Der Gemeinschaftspool ist saisonal und hat einen Bereich für Erwachsene und einen für Kinder. Die Öffnungszeiten können sich jedes Jahr ändern; bitte fragen Sie danach, wenn Sie Ihre Daten anfragen."},
       {"q": "Gibt es Parkplätze?", "a": "Ja, auf dem Gelände gibt es kostenlose Parkplätze im Freien."},
-      {"q": "Kann ich aus der Türkei buchen?", "a": "Ja — per WhatsApp oder über Airbnb. Buchungen über Booking.com sind aus der Türkei heraus möglicherweise nicht verfügbar."},
       {"q": "Gibt es ein Babybett oder einen Hochstuhl?", "a": "Ja, ein Babybett und ein Hochstuhl können auf Anfrage bereitgestellt werden."},
       {"q": "Wie weit ist der Strand entfernt?", "a": "Der Strand ist etwa 2 km entfernt — rund 15–20 Minuten zu Fuß. Das Zentrum von Kemer erreichen Sie in etwa 10 Minuten mit dem Auto."},
-      {"q": "Wie aktuell ist der Kalender?", "a": "Der Kalender wird automatisch mit den Kalendern von Booking.com, Airbnb und den Direktbuchungen synchronisiert. Die endgültige Verfügbarkeit wird bei der Buchung bestätigt — vom Gastgeber per WhatsApp oder von Booking.com / Airbnb."}
+      {"q": "Wie aktuell ist der Kalender?", "a": "Der Kalender wird automatisch mit unseren Kalendern auf Booking.com und Airbnb synchronisiert; Direktbuchungen werden dort ebenfalls blockiert. Die endgültige Verfügbarkeit wird bei der Buchung bestätigt — vom Gastgeber per WhatsApp oder von Booking.com / Airbnb."}
     ]
   },
   "availability": {
@@ -173,11 +173,11 @@
     "airbnb_desc": "Auf Airbnb buchen",
     "wa_message_dates": "Hallo! Ich interessiere mich für Palmiye Home vom {start} bis {end} für {guests} Gast/Gäste. Ist die Wohnung frei?",
     "wa_message": "Hallo! Ich möchte nach der Verfügbarkeit von Palmiye Home fragen.",
-    "sync_note": "Die Verfügbarkeit wird automatisch mit unseren Buchungskalendern (Booking.com, Airbnb und Direktbuchungen) synchronisiert. Die endgültige Verfügbarkeit wird bei der Buchung bestätigt.",
+    "sync_note": "Die Verfügbarkeit wird automatisch mit unseren Kalendern auf Booking.com und Airbnb synchronisiert. Die endgültige Verfügbarkeit wird bei der Buchung bestätigt.",
     "loading": "Verfügbarkeit wird geladen …",
     "state_stale": "Der Kalender konnte zuletzt nicht aktualisiert werden. Bitte lassen Sie sich Ihre Daten vor der Buchung von uns bestätigen.",
     "state_unavailable": "Die aktuelle Verfügbarkeit kann gerade nicht angezeigt werden. Schicken Sie uns Ihre Daten per WhatsApp oder prüfen Sie sie auf Booking.com oder Airbnb.",
-    "booking_tr_note": "Buchungen über Booking.com sind aus der Türkei heraus möglicherweise nicht verfügbar."
+    "booking_tr_note": "Booking.com bietet Nutzern in der Türkei derzeit keine Buchungen für Unterkünfte in der Türkei an."
   },
   "consent": {
     "title": "Cookies",
@@ -226,7 +226,7 @@
       {"h": "Cookies und Ihre Wahl", "p": "Beim ersten Besuch fragt ein kleiner Hinweis, ob Google Analytics und Google Ads verwendet werden dürfen. Bis Sie zustimmen, wird das Google-Tag überhaupt nicht geladen: Es werden keine Google-Cookies gesetzt und keine Messdaten an Google gesendet. Ihre Wahl wird in Ihrem Browser gespeichert (localStorage-Schlüssel „palmiye_cookies“), damit der Hinweis nicht erneut erscheint; Sie können sie jederzeit über „Cookie-Einstellungen“ unten auf jeder Seite ändern. Wählen Sie über die Sprachauswahl eine Sprache, wird diese Wahl auf die gleiche Weise gespeichert (Schlüssel „palmiye_lang“); die Website leitet Sie nie automatisch um."},
       {"h": "Google Analytics und Google Ads", "p": "Erst nach Ihrer Zustimmung lädt die Website das Google-Tag (gtag.js) für Google Analytics 4 und die Conversion-Messung von Google Ads; Google kann dann Cookies verwenden, um Besuche und die Anzeigenleistung zu messen. Ab dann erfassen wir Klicks auf WhatsApp-, Booking.com- und Airbnb-Links, Klicks auf Bewertungslinks sowie die Nutzung des Verfügbarkeitskalenders. Namen, Telefonnummern, E-Mail-Adressen oder Chat-Inhalte senden wir nicht an Google. Wenn Sie später ablehnen, endet die Messung und die von dieser Website gesetzten Google-Cookies werden gelöscht."},
       {"h": "Besuchsbenachrichtigungen", "p": "Wenn eine Seite geöffnet wird, sendet die Website unserem eigenen Server einen kurzen Hinweis, der nur die Sprache der Seite, den Seitenpfad und den Namen der verweisenden Website (nicht ihre vollständige Adresse) enthält. Um einen ungefähren Standort (Stadt oder Region und Land) hinzuzufügen, schlägt unser Server Ihre IP-Adresse in einer GeoIP-Datenbank nach, die auf dem Server selbst liegt; es wird kein externer Dienst abgefragt. Die IP-Adresse wird nur für diese Abfrage im Arbeitsspeicher des Servers verwendet und danach verworfen: Sie wird weder gespeichert noch protokolliert noch in die Nachricht übernommen. Danach sendet der Server eine kurze Nachricht an das Telegram-Konto des Inhabers, zum Beispiel „Yeni ziyaret · Antalya, Türkiye · TR · Ana sayfa“ (neuer Besuch · Ort · Sprache · Seite). Der Standort ist ungefähr und kann falsch sein, zum Beispiel bei VPN oder Mobilfunknetzen. Es wird kein Datensatz pro Besucher geführt; gespeichert wird nur ein gemeinsamer Zähler, der die Anzahl der Benachrichtigungen begrenzt. Innerhalb derselben Browsersitzung wird der Hinweis einmal gesendet (sessionStorage-Schlüssel „palmiye_notified“)."},
-      {"h": "Verfügbarkeitskalender", "p": "Der Kalender zeigt Daten aus unseren Kalendern von Booking.com, Airbnb und Direktbuchungen. Unser Server liest aus diesen Kalendern nur die Daten; Namen von Gästen, Kontaktdaten, Buchungsnummern und Preise werden weder gelesen noch veröffentlicht. Ihr Browser lädt die Kalenderdaten von unserem eigenen Server und sendet dabei keine personenbezogenen Daten."},
+      {"h": "Verfügbarkeitskalender", "p": "Der Kalender zeigt Daten aus unseren Kalendern auf Booking.com und Airbnb. Unser Server liest aus diesen Kalendern nur die Daten; Namen von Gästen, Kontaktdaten, Buchungsnummern und Preise werden weder gelesen noch veröffentlicht. Ihr Browser lädt die Kalenderdaten von unserem eigenen Server und sendet dabei keine personenbezogenen Daten. Die Reihenfolge der Buchungslinks kann anhand der Zeitzonen-Einstellung Ihres Browsers angepasst werden — nur in Ihrem Browser; sie wird weder gesendet noch gespeichert."},
       {"h": "Karte", "p": "Die Google-Maps-Karte wird nicht automatisch geladen. Sie wird nur geladen, wenn Sie auf „Karte anzeigen“ klicken; Google verarbeitet Ihre Anfrage dann nach seiner eigenen Datenschutzerklärung. Die Links „In Google Maps ansehen“ und „Route planen“ öffnen Google Maps."},
       {"h": "Buchungsplattformen und WhatsApp", "p": "Links zu WhatsApp, Booking.com und Airbnb öffnen diese Dienste. Was Sie dort senden oder buchen, wird von diesen Diensten nach ihren eigenen Bedingungen und Datenschutzerklärungen verarbeitet."},
       {"h": "Ihre Rechte", "p": "Sie können uns unter {email} fragen, welche Daten wir über Sie gespeichert haben, oder deren Löschung verlangen."}

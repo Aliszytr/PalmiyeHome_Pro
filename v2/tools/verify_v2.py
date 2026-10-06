@@ -330,11 +330,23 @@ check("reviews: excerpts are verbatim; a rating without text (Google · Hamza Ko
 check("Google Business: no invented profile URL (null until verified) — Maps links use documented search/directions URLs",
       (CONFIG["google_business"]["profile_url"] is None and "google.com/maps/search/?api=1" in idx and "google.com/maps/dir/?api=1" in idx)
       or bool(CONFIG["google_business"]["profile_url"]))
-check("Turkey logic: all three channels always present; TR order + note via time zone only (no IP, no geo API)",
-      all(f'data-channel-item="{c}"' in idx for c in ("booking", "airbnb", "whatsapp")) and "data-tr-note" in idx
-      and "resolvedOptions().timeZone" in (PUB / "assets/js/site.js").read_text(encoding="utf-8")
-      and CONFIG["market"]["channel_order"]["tr"] == ["whatsapp", "airbnb", "booking"]
-      and CONFIG["market"]["channel_order"]["intl"] == ["booking", "airbnb", "whatsapp"])
+check("market: all three channels always present; TR order + note only via ph_market / time-zone HINT; restriction config-driven",
+      all(f'data-channel-item="{c}"' in idx for c in ("booking", "airbnb", "whatsapp"))
+      and ("data-tr-note" in idx) == CONFIG["booking_turkey_restriction"]["enabled"]
+      and CONFIG["market"]["url_param"] == "ph_market"
+      and CONFIG["market"]["channel_order"]["tr_hint"] == ["whatsapp", "airbnb", "booking"]
+      and CONFIG["market"]["channel_order"]["neutral"] == ["booking", "airbnb", "whatsapp"]
+      and bool(CONFIG["booking_turkey_restriction"].get("last_verified")))
+r = subprocess.run([sys.executable, str(V2 / "tools" / "test_market.py")], capture_output=True, text=True, encoding="utf-8", errors="replace")
+check("Booking Turkey restriction ON/OFF + market-hint privacy tests", r.returncode == 0, (r.stdout.strip().splitlines() or ["?"])[-1])
+direct_refs = sorted(str(p_.relative_to(REPO)) for p_ in list(PUB.rglob("*")) + list((V2 / "src").rglob("*")) + list((V2 / "deploy").rglob("*"))
+                     if p_.is_file() and p_.suffix in {".php", ".js", ".json", ".html", ".ics"}
+                     and re.search(r"PALMIYE_ICAL_DIRECT|'direct'\s*=>|\"direct\":|Google Calendar|direct\.ics", p_.read_text(encoding="utf-8", errors="ignore")))
+check("availability: Booking.com + Airbnb only — no Direct / Google Calendar source, secret or fixture", not direct_refs, ", ".join(direct_refs))
+rb = CONFIG["ratings"]["booking"]
+check("social proof: Booking 9.4 / 10 kept with freshness metadata; review count not shown",
+      rb["score"] == "9.4" and rb.get("last_verified") and rb.get("source_type") and rb["review_count"] is None
+      and rb.get("show_review_count") is False and not re.search(r"\d+\s*(reviews|yorum|Bewertungen|отзыв)", idx))
 
 failed = [r for r in results if not r[1]]
 print(f"\n{len(results) - len(failed)}/{len(results)} checks passed")

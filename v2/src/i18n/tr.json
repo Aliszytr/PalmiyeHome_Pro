@@ -140,15 +140,15 @@
   },
   "faq": {
     "title": "Sık sorulan sorular",
+    "turkey": {"q": "Türkiye'den rezervasyon yapabilir miyim?", "a": "Evet — WhatsApp veya Airbnb üzerinden. Booking.com, Türkiye'de bulunan kullanıcılara Türkiye'deki tesisler için şu anda rezervasyon sunmuyor."},
     "items": [
       {"q": "Giriş ve çıkış saatleri nedir?", "a": "Giriş {checkin} arasındadır. Çıkış en geç {checkout}."},
       {"q": "Kaç kişi konaklayabilir?", "a": "Daire en fazla {max_guests} kişi için uygundur."},
       {"q": "Havuz ne zaman açık?", "a": "Ortak havuz sezonluktur; yetişkin ve çocuk bölümleri vardır. Açılış tarihleri yıldan yıla değişebilir, bu yüzden tarihlerinizi sorarken lütfen bunu da sorun."},
       {"q": "Otopark var mı?", "a": "Evet, tesis içinde ücretsiz açık otopark bulunur."},
-      {"q": "Türkiye'den rezervasyon yapabilir miyim?", "a": "Evet — WhatsApp veya Airbnb üzerinden. Booking.com üzerinden Türkiye içinden rezervasyon kullanılamayabilir."},
       {"q": "Bebek yatağı veya mama sandalyesi var mı?", "a": "Evet, istek üzerine bebek yatağı ve mama sandalyesi sağlanabilir."},
       {"q": "Plaj ne kadar uzakta?", "a": "Plaj yaklaşık 2 km uzaklıkta — yürüyerek 15–20 dakika. Kemer merkez arabayla yaklaşık 10 dakika."},
-      {"q": "Takvim ne kadar güncel?", "a": "Takvim, Booking.com, Airbnb ve doğrudan rezervasyon takvimlerinden otomatik olarak senkronize edilir. Kesin müsaitlik rezervasyon sırasında doğrulanır — WhatsApp'ta ev sahibi ya da Booking.com / Airbnb tarafından."}
+      {"q": "Takvim ne kadar güncel?", "a": "Takvim, Booking.com ve Airbnb takvimlerimizden otomatik olarak senkronize edilir; bize doğrudan yapılan rezervasyonlar da bu takvimlerde kapatılır. Kesin müsaitlik rezervasyon sırasında doğrulanır — WhatsApp'ta ev sahibi ya da Booking.com / Airbnb tarafından."}
     ]
   },
   "availability": {
@@ -173,11 +173,11 @@
     "airbnb_desc": "Airbnb'de rezervasyon",
     "wa_message_dates": "Merhaba! Palmiye Home için {start} – {end} tarihleri arasında {guests} kişi olarak konaklamak istiyorum. Müsait mi?",
     "wa_message": "Merhaba! Palmiye Home'un müsaitliği hakkında bilgi almak istiyorum.",
-    "sync_note": "Müsaitlik, rezervasyon takvimlerimizden (Booking.com, Airbnb ve doğrudan rezervasyonlar) otomatik olarak senkronize edilir. Kesin müsaitlik rezervasyon sırasında doğrulanır.",
+    "sync_note": "Müsaitlik, Booking.com ve Airbnb takvimlerimizden otomatik olarak senkronize edilir. Kesin müsaitlik rezervasyon sırasında doğrulanır.",
     "loading": "Müsaitlik yükleniyor…",
     "state_stale": "Takvim bir süredir güncellenemedi. Lütfen rezervasyondan önce tarihlerinizi bize teyit ettirin.",
     "state_unavailable": "Canlı müsaitlik şu anda gösterilemiyor. Tarihlerinizi WhatsApp'tan bize yazın ya da Booking.com veya Airbnb'de kontrol edin.",
-    "booking_tr_note": "Booking.com üzerinden Türkiye içinden rezervasyon kullanılamayabilir."
+    "booking_tr_note": "Booking.com, Türkiye'de bulunan kullanıcılara Türkiye'deki tesisler için şu anda rezervasyon sunmuyor."
   },
   "consent": {
     "title": "Çerezler",
@@ -226,7 +226,7 @@
       {"h": "Çerezler ve seçiminiz", "p": "İlk ziyaretinizde küçük bir bilgilendirme çubuğu, Google Analytics ve Google Ads'in kullanılıp kullanılamayacağını sorar. Kabul edene kadar Google etiketi hiç yüklenmez: Google çerezi kaydedilmez ve Google'a ölçüm verisi gönderilmez. Seçiminiz, çubuğun tekrar görünmemesi için tarayıcınızda saklanır (localStorage anahtarı “palmiye_cookies”); her sayfanın altındaki “Çerez ayarları” bağlantısıyla istediğiniz zaman değiştirebilirsiniz. Dil seçicisiyle bir dil seçerseniz bu seçim de aynı şekilde saklanır (anahtar “palmiye_lang”); site sizi hiçbir zaman otomatik olarak yönlendirmez."},
       {"h": "Google Analytics ve Google Ads", "p": "Site, Google Analytics 4 ve Google Ads dönüşüm ölçümü için Google etiketini (gtag.js) yalnızca siz kabul ettikten sonra yükler; Google bu durumda ziyaretleri ve reklam performansını ölçmek için çerez kullanabilir. Bundan sonra WhatsApp, Booking.com ve Airbnb bağlantılarına tıklamaları, yorum bağlantılarına tıklamaları ve müsaitlik takviminin kullanımını kaydederiz. Google'a ad, telefon numarası, e-posta adresi veya mesaj içeriği göndermeyiz. Daha sonra reddederseniz ölçüm durur ve bu sitenin kaydettiği Google çerezleri silinir."},
       {"h": "Ziyaret bildirimleri", "p": "Bir sayfa açıldığında site, kendi sunucumuza yalnızca sayfanın dilini, sayfa yolunu ve yönlendiren sitenin adını (tam adresini değil) içeren kısa bir bildirim gönderir. Yaklaşık konumu (şehir veya bölge ve ülke) eklemek için sunucumuz IP adresinizi sunucunun kendisinde bulunan bir GeoIP veritabanında arar; hiçbir harici hizmete sorulmaz. IP adresi yalnızca bu sorgu için sunucunun belleğinde kullanılır ve ardından atılır: kaydedilmez, log'a yazılmaz ve mesaja eklenmez. Sunucu ardından işletme sahibinin Telegram hesabına kısa bir mesaj gönderir; örneğin “Yeni ziyaret · Antalya, Türkiye · TR · Ana sayfa”. Konum yaklaşıktır ve örneğin VPN veya mobil ağ kullanımında yanlış olabilir. Ziyaretçi başına kayıt tutulmaz; yalnızca bildirim sayısını sınırlayan ortak bir sayaç saklanır. Aynı tarayıcı oturumunda bildirim bir kez gönderilir (sessionStorage anahtarı “palmiye_notified”)."},
-      {"h": "Müsaitlik takvimi", "p": "Takvim, Booking.com, Airbnb ve doğrudan rezervasyon takvimlerimizdeki tarihleri gösterir. Sunucumuz bu takvimlerden yalnızca tarihleri okur; misafir adları, iletişim bilgileri, rezervasyon kodları ve fiyatlar okunmaz ve yayınlanmaz. Tarayıcınız takvim verisini kendi sunucumuzdan yükler ve bu sırada kişisel veri göndermez."},
+      {"h": "Müsaitlik takvimi", "p": "Takvim, Booking.com ve Airbnb takvimlerimizdeki tarihleri gösterir. Sunucumuz bu takvimlerden yalnızca tarihleri okur; misafir adları, iletişim bilgileri, rezervasyon kodları ve fiyatlar okunmaz ve yayınlanmaz. Tarayıcınız takvim verisini kendi sunucumuzdan yükler ve bu sırada kişisel veri göndermez. Rezervasyon bağlantılarının sırası, tarayıcınızın saat dilimi ayarına göre yalnızca tarayıcınızın içinde uyarlanabilir; bu bilgi gönderilmez ve saklanmaz."},
       {"h": "Harita", "p": "Google Haritalar haritası otomatik olarak yüklenmez. Yalnızca “Haritayı göster”e tıklarsanız yüklenir; bu durumda isteğiniz Google tarafından kendi gizlilik politikası kapsamında işlenir. “Google Maps'te gör” ve “Yol tarifi al” bağlantıları Google Haritalar'ı açar."},
       {"h": "Rezervasyon platformları ve WhatsApp", "p": "WhatsApp, Booking.com ve Airbnb bağlantıları bu hizmetleri açar. Orada gönderdiğiniz mesajlar veya yaptığınız rezervasyonlar, bu hizmetlerin kendi koşulları ve gizlilik politikalarına tabidir."},
       {"h": "Haklarınız", "p": "Hakkınızda tuttuğumuz verileri sormak veya silinmesini istemek için {email} adresine yazabilirsiniz."}

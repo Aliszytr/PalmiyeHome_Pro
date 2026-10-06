@@ -25,13 +25,13 @@ define('TELEGRAM_CHAT_ID',   'YOUR_CHAT_ID_HERE');
 define('PALMIYE_GEOIP_DB',     'PATH_TO_CITY_MMDB_HERE');          // e.g. /home/<user>/palmiye-secrets/geo/dbip-city-lite.mmdb
 define('PALMIYE_GEOIP_READER', 'PATH_TO_MAXMIND_READER_AUTOLOAD_HERE'); // e.g. /home/<user>/palmiye-secrets/geo/MaxMind-DB-Reader-php/autoload.php
 
-// ── Availability engine: private iCal export URLs (each one is a SECRET) ──────
+// ── Availability engine: Booking.com + Airbnb private iCal export URLs (each one is a SECRET) ──
 // Booking.com extranet → Rates & Availability → Sync calendars → Export calendar link
 define('PALMIYE_ICAL_BOOKING', 'BOOKING_ICAL_EXPORT_URL_HERE');
 // Airbnb → Listing → Availability → Connect calendars → Export calendar link
 define('PALMIYE_ICAL_AIRBNB',  'AIRBNB_ICAL_EXPORT_URL_HERE');
-// Direct / WhatsApp bookings: a dedicated Google Calendar → Settings → "Secret address in iCal format"
-define('PALMIYE_ICAL_DIRECT',  'DIRECT_CALENDAR_SECRET_ICAL_URL_HERE');
+// No third calendar: a confirmed Direct/WhatsApp booking is blocked in Booking.com or Airbnb,
+// and the website reads it from those two feeds.
 
 // Owner-only page /api/availability-health.php (disabled while empty / placeholder).
 // php -r "echo password_hash('a-long-passphrase', PASSWORD_DEFAULT), PHP_EOL;"

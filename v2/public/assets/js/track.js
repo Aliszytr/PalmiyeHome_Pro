@@ -82,7 +82,9 @@
       cta_location: el.getAttribute('data-cta') || (section && section.id) || 'page',
       method: name === 'availability_check' ? 'cta' : undefined,
       platform: el.getAttribute('data-platform') || undefined,
-      market: CONVERSION_FOR[name] && document.documentElement.getAttribute('data-market') || undefined
+      // Channel-order context: a hint, never a location claim (no IP, no coordinates).
+      market_hint: CONVERSION_FOR[name] && document.documentElement.getAttribute('data-market-hint') || undefined,
+      market_source: CONVERSION_FOR[name] && document.documentElement.getAttribute('data-market-source') || undefined
     });
   }, true);
 
