@@ -164,17 +164,17 @@
   // ── Availability data (server: /api/availability.json) ─────────────────
   // FAIL-SAFE: until valid data arrives, or when the server reports 'unavailable', no date is
   // shown as free. Closed ranges are nights: start inclusive, end exclusive (check-out day).
-  var av = { status: 'loading', season: null, closed: [] };
+  var av = { status: 'loading', window: null, closed: [] };
   function isBooked(s) { for (var i = 0; i < av.closed.length; i++) if (s >= av.closed[i].start && s < av.closed[i].end) return true; return false; }
   function trusted() { return av.status === 'fresh' || av.status === 'stale'; }
-  function inSeason(s) { return trusted() && !!av.season && s >= av.season.start && s <= av.season.end; }
+  function inWindow(s) { return trusted() && !!av.window && s >= av.window.start && s <= av.window.end; }
   function rangeHasBooked(a, b) { for (var d = parse(a); iso(d) < b; d = addDays(d, 1)) if (isBooked(iso(d))) return true; return false; }
 
   // First bookable window (same rule as the production smart redirect): the first
-  // run of min_stay free nights inside the open season, from today on.
+  // run of min_stay free nights inside the booking window, from today on.
   function firstWindow() {
-    if (!av.season || !trusted()) return null;
-    var start = parse(av.season.start), end = parse(av.season.end), now = today();
+    if (!av.window || !trusted()) return null;
+    var start = parse(av.window.start), end = parse(av.window.end), now = today();
     var cand = now > start ? now : start;
     for (var guard = 0; guard < 400 && iso(addDays(cand, L.min_stay - 1)) <= iso(end); guard++) {
       var a = iso(cand), b = iso(addDays(cand, L.min_stay));
@@ -231,7 +231,7 @@
   function dayState(s, now) {
     if (s < now) return 'past';
     if (isBooked(s)) return 'booked';
-    return inSeason(s) ? 'free' : 'unknown';
+    return inWindow(s) ? 'free' : 'unknown';
   }
 
   function renderMonth(y, m) {
@@ -251,7 +251,7 @@
       if (sel.start && sel.end && s > sel.start && s < sel.end) cls += ' in-range';
       var label = show(s) + ' — ' + (st === 'free' ? t('availability.legend_free') : st === 'booked' ? t('availability.legend_booked') : st === 'unknown' ? t('availability.legend_unknown') : '');
       // A booked or unknown day can still be the check-out day of a free range.
-      var asEnd = sel.start && !sel.end && s > sel.start && !rangeHasBooked(sel.start, s) && inSeason(iso(addDays(parse(s), -1)));
+      var asEnd = sel.start && !sel.end && s > sel.start && !rangeHasBooked(sel.start, s) && inWindow(iso(addDays(parse(s), -1)));
       var disabled = st === 'past' || (st !== 'free' && !asEnd);
       html += '<td><button type="button" class="' + cls + '" data-date="' + s + '"' + (disabled ? ' disabled' : '') +
         ' aria-label="' + label + '"' + (cls.indexOf('is-start') !== -1 || cls.indexOf('is-end') !== -1 ? ' aria-pressed="true"' : '') + '>' + d + '</button></td>';
@@ -313,13 +313,13 @@
 
   function valid(j) {
     if (!j || ['fresh', 'stale', 'unavailable'].indexOf(j.status) === -1 || !Array.isArray(j.closed)) return false;
-    if (j.season && !(RX.test(j.season.start) && RX.test(j.season.end))) return false;
+    if (j.booking_window && !(RX.test(j.booking_window.start) && RX.test(j.booking_window.end))) return false;
     return j.closed.every(function (r) { return r && RX.test(r.start) && RX.test(r.end) && r.start < r.end; });
   }
 
   function apply(j) {
-    av = valid(j) ? { status: j.status, season: j.season, closed: j.closed } : { status: 'unavailable', season: null, closed: [] };
-    if (sel.start && (!inSeason(sel.start) || (sel.end && rangeHasBooked(sel.start, sel.end)))) sel = { start: null, end: null };
+    av = valid(j) ? { status: j.status, window: j.booking_window, closed: j.closed } : { status: 'unavailable', window: null, closed: [] };
+    if (sel.start && (!inWindow(sel.start) || (sel.end && rangeHasBooked(sel.start, sel.end)))) sel = { start: null, end: null };
     showState(); render(); updateStatus(); updateLinks();
   }
 

@@ -1,8 +1,8 @@
 {
   "availability": {
-    "season": {
-      "start": null,
-      "end": null
+    "booking_window": {
+      "start": "2027-01-01",
+      "end": "2027-12-31"
     },
     "sync_interval_minutes": 20,
     "stale_after_minutes": 180,

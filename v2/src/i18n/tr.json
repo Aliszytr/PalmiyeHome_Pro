@@ -93,7 +93,8 @@
   "pool": {
     "title": "Havuz ve dış mekân",
     "body": "Sezonluk ortak havuzda yetişkin ve çocuk bölümleri, şezlonglar ve dağ manzarası var. Çevresinde çimenlikler, palmiyeler ve günün yavaşladığı bahçe oturma alanları bulunuyor.",
-    "note": "Havuz sezonluktur. Açılış tarihleri yıldan yıla değişebilir — tarihlerinizi sorarken lütfen bunu da sorun."
+    "note_reference": "Sezonluk açık havuz. Açılış zamanı bakım ve hava koşullarına göre değişebilir. {pool_reference_date} öncesindeki konaklamalar için havuzun kullanım durumunu rezervasyon öncesinde teyit etmenizi öneririz. Daire ise yıl boyunca rezerve edilebilir.",
+    "note_confirmed": "Sezonluk açık havuz — bu sezon {pool_open_date} itibarıyla açık. Daire ise yıl boyunca rezerve edilebilir."
   },
   "location": {
     "title": "Göynük, Kemer",
@@ -144,7 +145,7 @@
     "items": [
       {"q": "Giriş ve çıkış saatleri nedir?", "a": "Giriş {checkin} arasındadır. Çıkış en geç {checkout}."},
       {"q": "Kaç kişi konaklayabilir?", "a": "Daire en fazla {max_guests} kişi için uygundur."},
-      {"q": "Havuz ne zaman açık?", "a": "Ortak havuz sezonluktur; yetişkin ve çocuk bölümleri vardır. Açılış tarihleri yıldan yıla değişebilir, bu yüzden tarihlerinizi sorarken lütfen bunu da sorun."},
+      {"q": "Havuz ne zaman açık?", "a": "Ortak havuzda yetişkin ve çocuk bölümleri vardır. {pool_note}"},
       {"q": "Otopark var mı?", "a": "Evet, tesis içinde ücretsiz açık otopark bulunur."},
       {"q": "Bebek yatağı veya mama sandalyesi var mı?", "a": "Evet, istek üzerine bebek yatağı ve mama sandalyesi sağlanabilir."},
       {"q": "Plaj ne kadar uzakta?", "a": "Plaj yaklaşık 2 km uzaklıkta — yürüyerek 15–20 dakika. Kemer merkez arabayla yaklaşık 10 dakika."},
@@ -231,6 +232,10 @@
       {"h": "Rezervasyon platformları ve WhatsApp", "p": "WhatsApp, Booking.com ve Airbnb bağlantıları bu hizmetleri açar. Orada gönderdiğiniz mesajlar veya yaptığınız rezervasyonlar, bu hizmetlerin kendi koşulları ve gizlilik politikalarına tabidir."},
       {"h": "Haklarınız", "p": "Hakkınızda tuttuğumuz verileri sormak veya silinmesini istemek için {email} adresine yazabilirsiniz."}
     ]
+  },
+  "dates": {
+    "day_month": "{d} {month}",
+    "months": ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
   },
   "notfound": {
     "title": "Sayfa bulunamadı",

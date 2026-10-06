@@ -81,13 +81,13 @@ button{background:#1b5c63;color:#fff;border-color:#1b5c63;cursor:pointer}.msg{pa
     $s = $all['availability'];
     $paths = palmiye_av_paths();
     $state = $paths ? palmiye_read_json($paths['state']) : null;
-    $pub = palmiye_av_public($state, $s, time(), isset($s['season']) ? $s['season'] : null);
+    $pub = palmiye_av_public($state, $s, time(), isset($s['booking_window']) ? $s['booking_window'] : null);
     $health = palmiye_av_health($state, $s, time());
     $names = array('booking' => 'Booking.com', 'airbnb' => 'Airbnb');
     ?>
 <p>Genel durum: <strong class="<?php echo $pub['status'] === 'fresh' ? 'ok' : 'bad'; ?>"><?php echo h($pub['status']); ?></strong>
  · Son başarılı tam senkron (UTC): <?php echo h($pub['last_successful_sync'] ?: '—'); ?>
- · Sezon: <?php echo $pub['season'] ? h($pub['season']['start'] . ' → ' . $pub['season']['end']) : '<span class="bad">tanımlı değil (hiçbir gün müsait gösterilmez)</span>'; ?></p>
+ · Rezervasyon penceresi (havuz sezonu değil): <?php echo $pub['booking_window'] ? h($pub['booking_window']['start'] . ' → ' . $pub['booking_window']['end']) : '<span class="bad">tanımlı değil (hiçbir gün müsait gösterilmez)</span>'; ?></p>
 <table><thead><tr><th>Kaynak</th><th>Durum</th><th>Son başarılı</th><th>Kapalı aralık</th></tr></thead><tbody>
 <?php foreach ($health as $src => $f) : ?>
 <tr><td><?php echo h($names[$src]); ?></td>

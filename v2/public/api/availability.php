@@ -3,7 +3,7 @@
  * Palmiye Home V2 — public, anonymous availability endpoint.
  * Served as /api/availability.json (rewrite in .htaccess).
  *
- * Output: status (fresh | stale | unavailable), last successful sync, season and closed
+ * Output: status (fresh | stale | unavailable), last successful sync, booking window and closed
  * date ranges. Never: guest data, reservation codes, prices or feed URLs.
  *
  * Stale-while-revalidate: the last good cache is answered immediately; if a sync is due
@@ -13,11 +13,11 @@ require_once __DIR__ . '/_lib/availability.php';
 
 $all = palmiye_settings();
 $s = isset($all['availability']) ? $all['availability'] : array();
-$season = isset($s['season']) ? $s['season'] : null;
+$window = isset($s['booking_window']) ? $s['booking_window'] : null;
 $paths = palmiye_av_paths();
 $state = $paths ? palmiye_read_json($paths['state']) : null;
 $now = time();
-$out = palmiye_av_public($state, $s, $now, $season);
+$out = palmiye_av_public($state, $s, $now, $window);
 
 $body = json_encode($out, JSON_UNESCAPED_SLASHES);
 $etag = '"' . substr(sha1($body), 0, 16) . '"';

@@ -230,11 +230,13 @@ def maps_view_url():
 
 
 def directions_url():
-    """Documented Maps directions URL to the verified coordinates (+ place id when known)."""
+    """Documented Maps directions URL: the verified Business Profile (place id) when known,
+    otherwise the verified coordinates."""
     g, gb = CONFIG["property"]["geo"], CONFIG["google_business"]
-    q = {"api": "1", "destination": f'{g["lat"]},{g["lng"]}'}
     if gb.get("place_id"):
-        q["destination_place_id"] = gb["place_id"]
+        q = {"api": "1", "destination": gb["maps_query"], "destination_place_id": gb["place_id"]}
+    else:
+        q = {"api": "1", "destination": f'{g["lat"]},{g["lng"]}'}
     return "https://www.google.com/maps/dir/?" + urlencode(q, quote_via=quote, safe=",")
 
 
@@ -305,8 +307,8 @@ def schema(lang):
                           "occupancy": {"@type": "QuantitativeValue", "maxValue": p["max_guests"]}},
         "sameAs": same,
     }
-    if gb.get("profile_url"):
-        lodging["hasMap"] = gb["profile_url"]
+    if gb.get("profile_url") or gb.get("place_id"):
+        lodging["hasMap"] = maps_view_url()
     website = {"@type": "WebSite", "@id": f"{BASE}/#website", "url": f"{BASE}/", "name": p["name"],
                "inLanguage": LANGS, "publisher": {"@id": f"{BASE}/#lodging"}}
     data = {"@context": "https://schema.org", "@graph": [website, lodging]}
@@ -415,12 +417,33 @@ def market_runtime():
     return {"param": m["url_param"], "hint_time_zones": m["hint_time_zones"], "order": m["channel_order"]}
 
 
+def day_month(lang, iso_date):
+    """'2027-06-01' → '1 June' / '1 Haziran' / '1. Juni' / '1 июня' (date inside a sentence)."""
+    y, m, d = (int(x) for x in iso_date.split("-"))
+    return lookup(lang, "dates.day_month").replace("{d}", str(d)).replace("{month}", lookup(lang, "dates.months")[m - 1])
+
+
+POOL_STATUSES = {"planned", "open", "closed"}
+
+
+def pool_note(lang):
+    """Seasonal pool copy from config.pool. COPY ONLY — the pool never closes apartment dates.
+    A confirmed opening date switches to the confirmed text; otherwise the conservative reference
+    date is shown only as 'confirm before booking', never as a guaranteed opening."""
+    p = CONFIG["pool"]
+    if p["status"] not in POOL_STATUSES:
+        raise ValueError(f"config.pool.status must be one of {sorted(POOL_STATUSES)}")
+    if p.get("confirmed_opening_date"):
+        return fill(lookup(lang, "pool.note_confirmed"), lang, {"pool_open_date": day_month(lang, p["confirmed_opening_date"])})
+    return fill(lookup(lang, "pool.note_reference"), lang, {"pool_reference_date": day_month(lang, p["reference_opening_date"])})
+
+
 def faq(lang):
     items = list(lookup(lang, "faq.items"))
     if restriction_on():
         items.insert(4, lookup(lang, "faq.turkey"))  # after the parking question
     return '<div class="faq">' + "".join(
-        f'<details><summary>{fill(i["q"], lang)}</summary><p>{fill(i["a"], lang)}</p></details>'
+        f'<details><summary>{fill(i["q"], lang)}</summary><p>{fill(i["a"], lang, {"pool_note": pool_note(lang)})}</p></details>'
         for i in items) + "</div>"
 
 
@@ -609,6 +632,7 @@ def build_files():
             "map_link": esc(maps_view_url()),
             "directions_link": esc(directions_url()),
             "channels": channels(lang),
+            "pool_note": pool_note(lang),
             "reviews": reviews(lang),
             "faq": faq(lang),
             "guests_select": guests_select(lang),

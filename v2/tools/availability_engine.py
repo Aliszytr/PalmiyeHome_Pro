@@ -154,7 +154,15 @@ def sync(state, feeds, settings, now, fetch):
     return state
 
 
-def public_view(state, settings, now, season):
+def in_booking_window(day_iso, booking_window):
+    """True if the NIGHT of day_iso lies inside the outer booking window (inclusive). Same rule as
+    site.js inWindow(). The window is not availability: closed nights still come from the feeds,
+    and the pool status plays no part at all."""
+    return bool(booking_window and booking_window.get("start") and booking_window.get("end")
+                and booking_window["start"] <= day_iso <= booking_window["end"])
+
+
+def public_view(state, settings, now, booking_window):
     """The anonymous JSON served at /api/availability.json."""
     ts = int(now.timestamp())
     today = now.astimezone(IST).date()
@@ -171,12 +179,12 @@ def public_view(state, settings, now, season):
     closed = merge((date.fromisoformat(s), date.fromisoformat(e))
                    for f in feeds for s, e in f.get("closed", []))
     closed = [(s, e) for s, e in closed if e > today]
-    has_season = bool(season and season.get("start") and season.get("end"))
+    has_window = bool(booking_window and booking_window.get("start") and booking_window.get("end"))
     return {
         "version": 1,
         "status": status,
         "last_successful_sync": datetime.fromtimestamp(oldest, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ") if oldest else None,
-        "season": {"start": season["start"], "end": season["end"]} if has_season else None,
+        "booking_window": {"start": booking_window["start"], "end": booking_window["end"]} if has_window else None,
         "closed": [{"start": s.isoformat(), "end": e.isoformat()} for s, e in closed],
         "ranges": "start inclusive, end exclusive (check-out day)",
     }

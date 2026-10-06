@@ -44,8 +44,8 @@ PAGE_LABELS = {"/": "Ana sayfa", "/index.html": "Ana sayfa", "/tr/": "Ana sayfa"
 MIN_INTERVAL, MAX_PER_HOUR = 60, 20
 STATE = {"last_sent": 0, "hour_start": 0, "sent_this_hour": 0, "suppressed": 0}
 
-# Availability mock: invented fixtures, MOCK season (production season stays null in config).
-MOCK_SEASON = {"start": "2027-05-01", "end": "2027-10-31"}
+# Availability mock: invented fixtures + the real booking window from config.
+MOCK_WINDOW = CONFIG["availability"]["booking_window"]
 SCENARIO = {"name": "fresh"}
 GTAG = b"https://www.googletagmanager.com/gtag/js?id="
 
@@ -63,7 +63,7 @@ def mock_availability(scenario):
                  "stale": now - timedelta(minutes=s["stale_after_minutes"] + 30),
                  "unavailable": now - timedelta(minutes=s["expire_after_minutes"] + 30)}[scenario]
     state = AE.sync(None, feeds, s, synced_at, fetch)
-    return state, AE.public_view(state, s, now, MOCK_SEASON), AE.health_view(state, s, now)
+    return state, AE.public_view(state, s, now, MOCK_WINDOW), AE.health_view(state, s, now)
 
 
 class Server(ThreadingHTTPServer):

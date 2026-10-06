@@ -313,13 +313,20 @@ check("availability engine: endpoint + cron + owner health present; library not 
       and "palmiye_secret('PALMIYE_ICAL_BOOKING')" in av_php and "PHP_SAPI !== 'cli'" in (PUB / "api/availability-sync.php").read_text())
 pub_fn = av_php.split("function palmiye_av_public")[1].split("function palmiye_av_health")[0]
 pub_keys = re.findall(r"'(\w+)'\s+=>", pub_fn.split("return array(")[-1])
-check("availability public JSON: only version / status / last sync / season / closed ranges (no SUMMARY, DESCRIPTION, UID, price)",
+check("availability public JSON: only version / status / last sync / booking window / closed ranges (no SUMMARY, DESCRIPTION, UID, price)",
       "'SUMMARY'" not in av_php and "'DESCRIPTION'" not in av_php and "'UID'" not in av_php
-      and pub_keys == ["version", "status", "last_successful_sync", "season", "start", "end", "closed", "ranges"], str(pub_keys))
+      and pub_keys == ["version", "status", "last_successful_sync", "booking_window", "start", "end", "closed", "ranges"], str(pub_keys))
 r = subprocess.run([sys.executable, str(V2 / "tools" / "test_availability.py")], capture_output=True, text=True, encoding="utf-8", errors="replace")
 check("availability fail-safe tests (Python reference engine)", r.returncode == 0, (r.stdout.strip().splitlines() or ["?"])[-1])
-check("production season is not invented (config availability.season stays null until Ali sets it)",
-      CONFIG["availability"]["season"]["start"] is None or bool(re.match(r"^\d{4}-\d{2}-\d{2}$", CONFIG["availability"]["season"]["start"])))
+bw = CONFIG["availability"]["booking_window"]
+check("booking window (not a pool/tourism season): 2027-01-01 → 2027-12-31, built into api/_lib/settings.json",
+      bw == {"start": "2027-01-01", "end": "2027-12-31"} and "season" not in CONFIG["availability"]
+      and json.loads((PUB / "api/_lib/settings.json").read_text(encoding="utf-8"))["availability"]["booking_window"] == bw)
+site_js = (PUB / "assets/js/site.js").read_text(encoding="utf-8")
+check("POOL STATUS != APARTMENT AVAILABILITY: no pool input in the availability engine, settings or calendar JS",
+      "pool" not in av_php.lower() and "pool" not in site_js.lower()
+      and "pool" not in (PUB / "api/_lib/settings.json").read_text(encoding="utf-8").lower()
+      and CONFIG["pool"]["seasonal"] is True and CONFIG["pool"]["status"] in ("planned", "open", "closed"))
 excerpt_ok = all(seg in r_["text"] for r_ in CONFIG["guest_reviews"]["items"] for seg in r_["excerpt"])
 google_ok = True
 for it in CONFIG["platform_reviews"]["items"]:
@@ -330,9 +337,19 @@ for it in CONFIG["platform_reviews"]["items"]:
             if "<blockquote" in card or 'class="rs-text"' in card:
                 google_ok = False
 check("reviews: excerpts are verbatim; a rating without text (Google · Hamza Konak 5/5) shows no invented text", excerpt_ok and google_ok)
-check("Google Business: no invented profile URL (null until verified) — Maps links use documented search/directions URLs",
-      (CONFIG["google_business"]["profile_url"] is None and "google.com/maps/search/?api=1" in idx and "google.com/maps/dir/?api=1" in idx)
-      or bool(CONFIG["google_business"]["profile_url"]))
+gb = CONFIG["google_business"]
+pid = gb.get("place_id")
+maps_ok = True
+for lang in LANGS:
+    s_ = (PUB / ("index.html" if lang == "en" else f"{lang}/index.html")).read_text(encoding="utf-8")
+    acts = re.search(r'<p class="map-actions">(.*?)</p>', s_, re.S).group(1)
+    links = re.findall(r'<a [^>]*>', acts)
+    maps_ok &= (len(links) == 2 and all('target="_blank"' in l and 'rel="noopener"' in l for l in links)
+                and f"google.com/maps/search/?api=1&amp;query=Palmiye%20Home&amp;query_place_id={pid}" in acts
+                and f"google.com/maps/dir/?api=1&amp;destination=Palmiye%20Home&amp;destination_place_id={pid}" in acts
+                and "<iframe" not in s_ and "data-map-load" in s_)
+check("Google Maps: verified place_id in both CTAs (4 languages), new tab + noopener, no invented profile URL, click-to-load map",
+      bool(pid) and gb.get("place_id_verified_at") and gb["profile_url"] is None and maps_ok)
 check("market: all three channels always present; TR order + note only via ph_market / time-zone HINT; restriction config-driven",
       all(f'data-channel-item="{c}"' in idx for c in ("booking", "airbnb", "whatsapp"))
       and ("data-tr-note" in idx) == CONFIG["booking_turkey_restriction"]["enabled"]

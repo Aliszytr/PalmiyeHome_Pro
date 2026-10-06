@@ -1,4 +1,4 @@
-"""Booking Turkey restriction + market-hint tests (build level, stdlib only).
+"""Booking Turkey restriction + market-hint + pool-policy tests (build level, stdlib only).
 
 python v2/tools/test_market.py   → exit 1 on any failure
 
@@ -95,6 +95,41 @@ check("signal priority: explicit ph_market (tr|intl) before time-zone hint; inva
 track = on["assets/js/track.js"].decode("utf-8")
 check("analytics: market_hint + market_source only (no 'market'/'country' claim), only on channel clicks",
       "market_hint:" in track and "market_source:" in track and "country" not in track and not re.search(r"\bmarket:", track))
+
+# ── Pool policy: COPY ONLY (POOL STATUS != APARTMENT AVAILABILITY) ──
+def build_pool(**changes):
+    original = dict(B.CONFIG["pool"])
+    B.CONFIG["pool"].update(changes)
+    try:
+        return B.build_files()
+    finally:
+        B.CONFIG["pool"].clear()
+        B.CONFIG["pool"].update(original)
+
+
+ref = on
+closed = build_pool(status="closed")
+confirmed = build_pool(status="open", confirmed_opening_date="2027-05-02")
+engine_files = [p for p in ref if p.startswith("api/") or p.startswith("assets/js/")]
+check("pool status/date changes touch no availability code or settings (api/*, JS identical)",
+      all(ref[p] == closed[p] == confirmed[p] for p in engine_files),
+      str([p for p in engine_files if not ref[p] == closed[p] == confirmed[p]]))
+check("pool settings never reach the availability engine (settings.json has no pool key)",
+      "pool" not in json.loads(ref["api/_lib/settings.json"])["availability"])
+REF_DATE = {"en": "1 June", "tr": "1 Haziran", "de": "1. Juni", "ru": "1 июня"}
+SEASONAL = {"en": "Seasonal outdoor pool", "tr": "Sezonluk açık havuz", "de": "Saisonaler Außenpool", "ru": "Сезонный открытый бассейн"}
+ALL_YEAR = {"en": "booked all year round", "tr": "yıl boyunca rezerve edilebilir", "de": "das ganze Jahr buchbar", "ru": "круглый год"}
+CONFIRM = {"en": "checking with us", "tr": "teyit etmenizi öneririz", "de": "bei uns nachzufragen", "ru": "уточнить у нас"}
+GUARANTEE = re.compile(r"opens on 1 June|open from 1 June|1 Haziran'da açıl|ab dem 1\. Juni geöffnet|открывается 1 июня|guarantee|garanti", re.I)
+for lang in LANGS:
+    h = page(ref, lang)
+    note = re.search(r'<p class="note">(.*?)</p>', h, re.S).group(1)
+    ok = (SEASONAL[lang] in note and REF_DATE[lang] in note and CONFIRM[lang] in note and ALL_YEAR[lang] in note
+          and not GUARANTEE.search(note) and note in h.split('id="faq"')[1])
+    check(f"pool copy [{lang}]: seasonal, 1 June only as 'confirm before booking', apartment bookable all year, same text in FAQ", ok, note[:120])
+    hc = page(confirmed, lang)
+    check(f"pool confirmed date [{lang}]: one config field switches the text to the confirmed date",
+          SEASONAL[lang] in hc and B.day_month(lang, "2027-05-02") in hc and CONFIRM[lang] not in hc)
 
 print(f"\n{sum(results)}/{len(results)} market tests passed")
 sys.exit(0 if all(results) else 1)

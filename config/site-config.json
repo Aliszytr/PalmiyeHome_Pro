@@ -75,12 +75,15 @@
     }
   },
   "google_business": {
-    "_about": "Real Google Business Profile of Palmiye Home. profile_url / place_id are NOT in any project, config or live file (searched 2026-10-06) and must not be guessed. While null, 'View on Google Maps' uses a documented Maps search URL (name + address) and 'Directions' uses the documented Maps directions URL with the verified coordinates.",
+    "_about": "Real Google Business Profile of Palmiye Home. place_id provided by Helpy and VERIFIED on Google Maps 2026-10-06 (opens 'Palmiye Home · Günlük Kiralık Daire', 3270 Sokak, Göynük, 07980 Kemer/Antalya; website palmiyehomekemer.com; phone 0532 778 67 32; coordinates identical to property.geo). Links use the documented Google Maps URLs API: search with query + query_place_id, directions with destination + destination_place_id. profile_url stays null (no canonical share URL provided; not invented).",
     "profile_url": null,
-    "place_id": null,
-    "maps_query": "Palmiye Home, Göynük, Kemer, Antalya",
-    "consistency_checklist": ["address", "website", "phone", "photos", "parking", "service attributes"]
+    "place_id": "ChIJUSR6qwe5wxQRbI8VsFX5buE",
+    "place_id_verified_at": "2026-10-06",
+    "maps_query": "Palmiye Home",
+    "consistency_checklist": ["address", "website", "phone", "photos", "parking", "service attributes"],
+    "consistency_note": "GBP address reads 'Dış Kapı:1B, Göynük, 3270 Sokak İç Kapı:1, 07980 Kemer/Antalya'; the site uses 'Göynük Mah. 3270. Sok. B Blok No:1, 07980 Kemer / Antalya'. Same place; Ali to decide whether to align the wording."
   },
+
   "platform_reviews": {
     "_about": "Real ratings from independent platforms other than the two Booking quotes. Never write text for a rating that has none (text: null).",
     "items": [
@@ -124,13 +127,20 @@
     "checkin": "14:00–23:00",
     "checkout": "11:00",
     "pool": "Seasonal shared pool",
-    "pool_dates_2027": null,
     "parking": "Free open-air parking within the property (same wording as the live site FAQ; Google Business Profile attribute still to be compared)",
     "verified_at": "2026-10-02"
   },
+  "pool": {
+    "_about": "Seasonal outdoor pool — COPY ONLY. POOL STATUS != APARTMENT AVAILABILITY: nothing here ever closes a date; the apartment is bookable inside availability.booking_window whatever the pool does. reference_opening_date is a conservative operating reference, never shown as a guaranteed opening. When the pool really opens (it may open earlier, late April / early May, if maintenance and weather allow), set confirmed_opening_date (and status 'open') and rebuild: the text switches to the confirmed date. Maintenance closures of the apartment are blocked in Booking.com / Airbnb, never hard-coded here.",
+    "seasonal": true,
+    "status": "planned",
+    "_status_values": "planned | open | closed",
+    "reference_opening_date": "2027-06-01",
+    "confirmed_opening_date": null
+  },
   "availability": {
-    "_about": "Availability engine (server side, v2/src/server/api/_lib/availability.php). Feeds: Booking.com iCal + Airbnb iCal ONLY (no third/Direct calendar: a confirmed WhatsApp/direct booking is blocked by the owner in Booking.com or Airbnb). A night closed in EITHER feed is closed on the website. Both feed URLs are SECRETS and live only in palmiye-secrets/availability.php outside the web root. This block holds only non-secret behaviour. season = the dates Ali opens for sale; outside it the calendar shows 'not open yet'. null = nothing is shown as free (fail-safe).",
-    "season": { "start": null, "end": null },
+    "_about": "Availability engine (server side, v2/src/server/api/_lib/availability.php). Feeds: Booking.com iCal + Airbnb iCal ONLY (no third/Direct calendar: a confirmed WhatsApp/direct booking is blocked by the owner in Booking.com or Airbnb). A night closed in EITHER feed is closed on the website. Both feed URLs are SECRETS and live only in palmiye-secrets/.env.php outside the web root. This block holds only non-secret behaviour. booking_window = the outer range in which the website evaluates stays (decision 2026-10-06: the whole of 2027, so early bookings for summer and off-season / holiday stays are possible). It is NOT the pool season, NOT a tourism season and NOT daily availability: daily availability comes only from the union of the two feeds. Outside the window the calendar shows 'not open yet'; null = nothing is shown as free (fail-safe).",
+    "booking_window": { "start": "2027-01-01", "end": "2027-12-31" },
     "sync_interval_minutes": 20,
     "stale_after_minutes": 180,
     "expire_after_minutes": 1440,

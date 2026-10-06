@@ -235,7 +235,7 @@ function palmiye_av_sync($state, $feeds, $settings, $nowTs, $fetch)
 }
 
 /** The anonymous JSON for /api/availability.json. */
-function palmiye_av_public($state, $settings, $nowTs, $season)
+function palmiye_av_public($state, $settings, $nowTs, $window)
 {
     $now = new DateTime('@' . $nowTs);
     $now->setTimezone(palmiye_av_tz());
@@ -279,12 +279,12 @@ function palmiye_av_public($state, $settings, $nowTs, $season)
             $closed[] = array('start' => $r[0], 'end' => $r[1]);
         }
     }
-    $hasSeason = is_array($season) && !empty($season['start']) && !empty($season['end']);
+    $hasWindow = is_array($window) && !empty($window['start']) && !empty($window['end']);
     return array(
         'version'              => 1,
         'status'               => $status,
         'last_successful_sync' => $oldest ? gmdate('Y-m-d\TH:i:s\Z', $oldest) : null,
-        'season'               => $hasSeason ? array('start' => $season['start'], 'end' => $season['end']) : null,
+        'booking_window'               => $hasWindow ? array('start' => $window['start'], 'end' => $window['end']) : null,
         'closed'               => $closed,
         'ranges'               => 'start inclusive, end exclusive (check-out day)',
     );

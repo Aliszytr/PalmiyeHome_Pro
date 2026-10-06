@@ -93,7 +93,8 @@
   "pool": {
     "title": "Pool & outdoor",
     "body": "The seasonal shared pool has an adult and a children's section, sun loungers and a view of the mountains. Around it: lawns, palms and garden seating where the day slows down.",
-    "note": "The pool is seasonal. Opening dates can change each year — please ask when you check your dates."
+    "note_reference": "Seasonal outdoor pool. The opening time can vary with maintenance and weather. For stays before {pool_reference_date}, we recommend checking with us whether the pool is in use before you book. The apartment itself can be booked all year round.",
+    "note_confirmed": "Seasonal outdoor pool — open from {pool_open_date} this season. The apartment itself can be booked all year round."
   },
   "location": {
     "title": "Göynük, Kemer",
@@ -144,7 +145,7 @@
     "items": [
       {"q": "What are the check-in and check-out times?", "a": "Check-in is between {checkin_from} and {checkin_until}. Check-out is by {checkout}."},
       {"q": "How many guests can stay?", "a": "The apartment is suitable for up to {max_guests} guests."},
-      {"q": "When is the pool open?", "a": "The shared pool is seasonal and has an adult and a children's section. Opening dates can change each year, so please ask when you check your dates."},
+      {"q": "When is the pool open?", "a": "The shared pool has an adult and a children's section. {pool_note}"},
       {"q": "Is there parking?", "a": "Yes, free open-air parking is available on site."},
       {"q": "Is there a baby cot or high chair?", "a": "Yes, a baby cot and a high chair can be provided on request."},
       {"q": "How far is the beach?", "a": "The beach is about 2 km away — roughly 15–20 min on foot. Kemer centre is about 10 minutes by car."},
@@ -231,6 +232,10 @@
       {"h": "Booking platforms and WhatsApp", "p": "Links to WhatsApp, Booking.com and Airbnb open those services. Anything you send or book there is handled by those services under their own terms and privacy policies."},
       {"h": "Your rights", "p": "You can ask us about the data we hold or request its deletion by writing to {email}."}
     ]
+  },
+  "dates": {
+    "day_month": "{d} {month}",
+    "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   },
   "notfound": {
     "title": "Page not found",

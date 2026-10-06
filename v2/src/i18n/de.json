@@ -93,7 +93,8 @@
   "pool": {
     "title": "Pool & Außenbereich",
     "body": "Der saisonale Gemeinschaftspool hat einen Bereich für Erwachsene und einen für Kinder, Sonnenliegen und Blick auf die Berge. Rundherum: Rasenflächen, Palmen und Sitzplätze im Garten, an denen der Tag langsamer wird.",
-    "note": "Der Pool ist saisonal. Die Öffnungszeiten können sich jedes Jahr ändern — bitte fragen Sie danach, wenn Sie Ihre Daten anfragen."
+    "note_reference": "Saisonaler Außenpool. Der Öffnungszeitpunkt kann je nach Wartung und Wetter variieren. Für Aufenthalte vor dem {pool_reference_date} empfehlen wir, vor der Buchung bei uns nachzufragen, ob der Pool bereits nutzbar ist. Die Wohnung selbst ist das ganze Jahr buchbar.",
+    "note_confirmed": "Saisonaler Außenpool — in dieser Saison ab dem {pool_open_date} geöffnet. Die Wohnung selbst ist das ganze Jahr buchbar."
   },
   "location": {
     "title": "Göynük, Kemer",
@@ -144,7 +145,7 @@
     "items": [
       {"q": "Wann sind Check-in und Check-out?", "a": "Check-in ist zwischen {checkin_from} und {checkin_until} Uhr. Check-out bis {checkout} Uhr."},
       {"q": "Wie viele Gäste können übernachten?", "a": "Die Wohnung ist für bis zu {max_guests} Gäste geeignet."},
-      {"q": "Wann ist der Pool geöffnet?", "a": "Der Gemeinschaftspool ist saisonal und hat einen Bereich für Erwachsene und einen für Kinder. Die Öffnungszeiten können sich jedes Jahr ändern; bitte fragen Sie danach, wenn Sie Ihre Daten anfragen."},
+      {"q": "Wann ist der Pool geöffnet?", "a": "Der Gemeinschaftspool hat einen Bereich für Erwachsene und einen für Kinder. {pool_note}"},
       {"q": "Gibt es Parkplätze?", "a": "Ja, auf dem Gelände gibt es kostenlose Parkplätze im Freien."},
       {"q": "Gibt es ein Babybett oder einen Hochstuhl?", "a": "Ja, ein Babybett und ein Hochstuhl können auf Anfrage bereitgestellt werden."},
       {"q": "Wie weit ist der Strand entfernt?", "a": "Der Strand ist etwa 2 km entfernt — rund 15–20 Minuten zu Fuß. Das Zentrum von Kemer erreichen Sie in etwa 10 Minuten mit dem Auto."},
@@ -231,6 +232,10 @@
       {"h": "Buchungsplattformen und WhatsApp", "p": "Links zu WhatsApp, Booking.com und Airbnb öffnen diese Dienste. Was Sie dort senden oder buchen, wird von diesen Diensten nach ihren eigenen Bedingungen und Datenschutzerklärungen verarbeitet."},
       {"h": "Ihre Rechte", "p": "Sie können uns unter {email} fragen, welche Daten wir über Sie gespeichert haben, oder deren Löschung verlangen."}
     ]
+  },
+  "dates": {
+    "day_month": "{d}. {month}",
+    "months": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
   },
   "notfound": {
     "title": "Seite nicht gefunden",
