@@ -25,6 +25,7 @@ python v2/tools/build_site.py         # regenerate v2/public (removes files the 
 python v2/tools/verify_v2.py          # 42 checks; must be all PASS before QA/deploy
 python v2/tools/test_availability.py  # fail-safe tests of the availability engine (Python reference)
 python v2/tools/test_market.py        # Booking Turkey restriction ON/OFF, market hints, pool policy
+python v2/tools/test_php_local.py --php C:\path\php.exe   # real PHP: lint, selftest, sync, endpoint, health, fail-safe (sandbox)
 python v2/tools/dev_server.py         # http://localhost:8080 — Telegram, gtag.js and availability are local mocks
 python v2/tools/package_release.py --version 1.0.0-rc1 --date 2026-10-06 --root D:\ProjelerFinal\WebProjesi\PalmiyeHome_2027_RELEASES
 ```

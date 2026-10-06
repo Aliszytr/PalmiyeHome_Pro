@@ -66,6 +66,8 @@ def main():
     ap.add_argument("--version", required=True)
     ap.add_argument("--date", required=True)
     ap.add_argument("--root", required=True)
+    ap.add_argument("--php", action="append", default=[], help="also run test_php_local.py with this PHP (repeatable)")
+    ap.add_argument("--local-tls-no-verify", action="store_true", help="passed to test_php_local.py (sandbox copy only)")
     a = ap.parse_args()
     if not re.fullmatch(r"\d+\.\d+\.\d+(-rc\d+)?", a.version) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", a.date):
         fail("bad --version / --date")
@@ -82,7 +84,13 @@ def main():
 
     # 2. Test suites (all must pass)
     tests = {}
-    for name, cmd, pat in SUITES:
+    suites = list(SUITES)
+    if a.php:
+        cmd = [sys.executable, str(V2 / "tools" / "test_php_local.py")] + [x for p in a.php for x in ("--php", p)]
+        if a.local_tls_no_verify:
+            cmd.append("--local-tls-no-verify")
+        suites.append(("php_server", cmd, r"(\d+)/(\d+) PHP server tests passed"))
+    for name, cmd, pat in suites:
         r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace",
                            env={**__import__("os").environ, "PYTHONIOENCODING": "utf-8"})
         m = re.search(pat, r.stdout)

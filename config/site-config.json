@@ -30,7 +30,8 @@
     "max_guests": 4,
     "unit": "1+1",
     "address": {
-      "street": "Göynük Mah. 3270. Sok. B Blok No:1",
+      "_about": "Public address = the verified Google Business Profile address (3270 Sokak, Göynük, 07980 Kemer/Antalya). Entrance details (block / door numbers) are arrival information for confirmed guests only and are never published (footer, schema, contact).",
+      "street": "3270 Sokak, Göynük",
       "locality": "Kemer",
       "region": "Antalya",
       "postal_code": "07980",
@@ -81,7 +82,7 @@
     "place_id_verified_at": "2026-10-06",
     "maps_query": "Palmiye Home",
     "consistency_checklist": ["address", "website", "phone", "photos", "parking", "service attributes"],
-    "consistency_note": "GBP address reads 'Dış Kapı:1B, Göynük, 3270 Sokak İç Kapı:1, 07980 Kemer/Antalya'; the site uses 'Göynük Mah. 3270. Sok. B Blok No:1, 07980 Kemer / Antalya'. Same place; Ali to decide whether to align the wording."
+    "consistency_note": "RC3: the site's public address now follows the GBP public address (3270 Sokak, Göynük, 07980 Kemer/Antalya). GBP's door detail ('Dış Kapı:1B / İç Kapı:1') is not repeated on the site."
   },
 
   "platform_reviews": {

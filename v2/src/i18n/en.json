@@ -93,7 +93,7 @@
   "pool": {
     "title": "Pool & outdoor",
     "body": "The seasonal shared pool has an adult and a children's section, sun loungers and a view of the mountains. Around it: lawns, palms and garden seating where the day slows down.",
-    "note_reference": "Seasonal outdoor pool. The opening time can vary with maintenance and weather. For stays before {pool_reference_date}, we recommend checking with us whether the pool is in use before you book. The apartment itself can be booked all year round.",
+    "note_reference": "Seasonal outdoor pool. Our reference opening date is {pool_reference_date}; if maintenance and weather allow, it can open earlier. For stays before {pool_reference_date}, you can ask us about the current pool status before booking. The apartment itself can be booked all year round.",
     "note_confirmed": "Seasonal outdoor pool — open from {pool_open_date} this season. The apartment itself can be booked all year round."
   },
   "location": {

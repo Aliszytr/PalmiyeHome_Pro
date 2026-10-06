@@ -2,6 +2,7 @@
 
 python v2/tools/verify_v2.py   → prints every check, exit 1 on any FAIL
 """
+import html
 import json
 import re
 import subprocess
@@ -348,6 +349,49 @@ for lang in LANGS:
                 and f"google.com/maps/search/?api=1&amp;query=Palmiye%20Home&amp;query_place_id={pid}" in acts
                 and f"google.com/maps/dir/?api=1&amp;destination=Palmiye%20Home&amp;destination_place_id={pid}" in acts
                 and "<iframe" not in s_ and "data-map-load" in s_)
+# RC3 — public address = GBP public address; no block / door detail anywhere public
+addr_leaks = sorted({f"{p_.relative_to(PUB)}: {m}" for p_, t_ in pub_text.items() for m in re.findall(r"B Blok|Dış Kapı|İç Kapı|No:\s*1\b|3270\. Sok", t_)})
+check("public address = Google Business address '3270 Sokak, Göynük, 07980 Kemer/Antalya'; no block/door detail in pages or schema",
+      CONFIG["property"]["address"]["street"] == "3270 Sokak, Göynük" and CONFIG["property"]["address"]["postal_code"] == "07980"
+      and not addr_leaks and '"streetAddress":"3270 Sokak, Göynük"' in idx, "; ".join(addr_leaks[:4]))
+ht = (PUB / ".htaccess").read_text(encoding="utf-8")
+csp = re.search(r'Content-Security-Policy "([^"]+)"', ht).group(1)
+need = ["RewriteCond %{HTTPS} off", "Options -Indexes", 'X-Content-Type-Options "nosniff"', 'X-Frame-Options "SAMEORIGIN"',
+        'Referrer-Policy "strict-origin-when-cross-origin"', "Permissions-Policy", "RedirectMatch 404 /\\.git", "ErrorDocument 404 /404.html"]
+blocked = re.search(r'<FilesMatch "([^"]+)">\s*Require all denied', ht)
+blk = re.compile(blocked.group(1)) if blocked else None
+check(".htaccess (static): HTTPS redirect, no listing, security headers, CSP with frame-ancestors/object-src/base-uri, secret+backup files denied",
+      all(n in ht for n in need) and "frame-ancestors 'self'" in csp and "object-src 'none'" in csp and "base-uri 'self'" in csp
+      and "default-src 'self'" in csp and blk is not None
+      and all(blk.search(f) for f in (".env", ".env.php", "x.bak", "x.old", "x.ini", "x.log", "x.sql", "config.php~", "x.swp", "README.md", "x.py", "feed.ics"))
+      and not any(blk.search(f) for f in ("index.html", "manifest.json", "site.js", "privacy.html", "telegram-notify.php")),
+      str([n for n in need if n not in ht]))
+gt = {p_.relative_to(PUB).as_posix(): t_.count("https://www.googletagmanager.com/gtag/js?id=") for p_, t_ in pub_text.items()}
+check("consent: one gtag loader only (in track.js, after Accept), no legacy analytics.js / tracking.js / UA- tags",
+      sum(gt.values()) == 1 and gt.get("assets/js/track.js") == 1
+      and not any(re.search(r"analytics\.js|tracking\.js|\bUA-\d{4,}|google-analytics\.com/ga\.js", t_) for t_ in pub_text.values()))
+# Mixed language: a long UI string of one language must not appear on another language's page
+def _strings(node, out):
+    if isinstance(node, dict):
+        for k, v in node.items():
+            if k not in ("alt", "_lang", "privacy", "countries", "languages", "months", "dates"):
+                _strings(v, out)
+    elif isinstance(node, list):
+        for v in node:
+            _strings(v, out)
+    elif isinstance(node, str) and len(node) >= 24 and "{" not in node:
+        out.add(node)
+    return out
+mixed = []
+own = {l: _strings(i18n[l], set()) for l in LANGS}
+for lang in LANGS:
+    page_ = (PUB / ("index.html" if lang == "en" else f"{lang}/index.html")).read_text(encoding="utf-8")
+    page_ = re.sub(r'<script type="application/(json|ld\+json)"[^>]*>.*?</script>', "", page_, flags=re.S)  # data, not UI text
+    page_ = html.unescape(page_)
+    for other in LANGS:
+        if other != lang:
+            mixed += [f"{lang} page has {other}: {s_[:40]}" for s_ in own[other] - own[lang] if s_ in page_]
+check("no mixed-language UI strings (EN/TR/DE/RU pages, outside the language-switch hint data)", not mixed, "; ".join(mixed[:4]))
 check("Google Maps: verified place_id in both CTAs (4 languages), new tab + noopener, no invented profile URL, click-to-load map",
       bool(pid) and gb.get("place_id_verified_at") and gb["profile_url"] is None and maps_ok)
 check("market: all three channels always present; TR order + note only via ph_market / time-zone HINT; restriction config-driven",

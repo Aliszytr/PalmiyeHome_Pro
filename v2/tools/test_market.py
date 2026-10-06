@@ -119,14 +119,17 @@ check("pool settings never reach the availability engine (settings.json has no p
 REF_DATE = {"en": "1 June", "tr": "1 Haziran", "de": "1. Juni", "ru": "1 июня"}
 SEASONAL = {"en": "Seasonal outdoor pool", "tr": "Sezonluk açık havuz", "de": "Saisonaler Außenpool", "ru": "Сезонный открытый бассейн"}
 ALL_YEAR = {"en": "booked all year round", "tr": "yıl boyunca rezerve edilebilir", "de": "das ganze Jahr buchbar", "ru": "круглый год"}
-CONFIRM = {"en": "checking with us", "tr": "teyit etmenizi öneririz", "de": "bei uns nachzufragen", "ru": "уточнить у нас"}
+CONFIRM = {"en": "ask us about the current pool status", "tr": "bize sorabilirsiniz", "de": "nach dem aktuellen Stand fragen", "ru": "уточните у нас"}
+EARLIER = {"en": "can open earlier", "tr": "daha erken açılabilir", "de": "früher öffnen", "ru": "открыться раньше"}
+REFERENCE = {"en": "reference opening date", "tr": "Referans açılış tarihimiz", "de": "Referenztermin", "ru": "Ориентировочная дата открытия"}
 GUARANTEE = re.compile(r"opens on 1 June|open from 1 June|1 Haziran'da açıl|ab dem 1\. Juni geöffnet|открывается 1 июня|guarantee|garanti", re.I)
 for lang in LANGS:
     h = page(ref, lang)
     note = re.search(r'<p class="note">(.*?)</p>', h, re.S).group(1)
     ok = (SEASONAL[lang] in note and REF_DATE[lang] in note and CONFIRM[lang] in note and ALL_YEAR[lang] in note
+          and EARLIER[lang] in note and REFERENCE[lang] in note
           and not GUARANTEE.search(note) and note in h.split('id="faq"')[1])
-    check(f"pool copy [{lang}]: seasonal, 1 June only as 'confirm before booking', apartment bookable all year, same text in FAQ", ok, note[:120])
+    check(f"pool copy [{lang}]: seasonal, 1 June = reference (no guarantee), may open earlier, ask before booking, apartment bookable all year, same text in FAQ", ok, note[:120])
     hc = page(confirmed, lang)
     check(f"pool confirmed date [{lang}]: one config field switches the text to the confirmed date",
           SEASONAL[lang] in hc and B.day_month(lang, "2027-05-02") in hc and CONFIRM[lang] not in hc)

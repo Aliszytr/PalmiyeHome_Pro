@@ -93,7 +93,7 @@
   "pool": {
     "title": "Pool & Außenbereich",
     "body": "Der saisonale Gemeinschaftspool hat einen Bereich für Erwachsene und einen für Kinder, Sonnenliegen und Blick auf die Berge. Rundherum: Rasenflächen, Palmen und Sitzplätze im Garten, an denen der Tag langsamer wird.",
-    "note_reference": "Saisonaler Außenpool. Der Öffnungszeitpunkt kann je nach Wartung und Wetter variieren. Für Aufenthalte vor dem {pool_reference_date} empfehlen wir, vor der Buchung bei uns nachzufragen, ob der Pool bereits nutzbar ist. Die Wohnung selbst ist das ganze Jahr buchbar.",
+    "note_reference": "Saisonaler Außenpool. Unser Referenztermin für die Öffnung ist der {pool_reference_date}; wenn Wartung und Wetter es zulassen, kann er früher öffnen. Für Aufenthalte vor dem {pool_reference_date} können Sie uns vor der Buchung nach dem aktuellen Stand fragen. Die Wohnung selbst ist das ganze Jahr buchbar.",
     "note_confirmed": "Saisonaler Außenpool — in dieser Saison ab dem {pool_open_date} geöffnet. Die Wohnung selbst ist das ganze Jahr buchbar."
   },
   "location": {
