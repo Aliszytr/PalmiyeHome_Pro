@@ -6,7 +6,8 @@ Single sources:
   v2/src/assets-manifest.json  image variants (from build_images.py)
   v2/src/templates/*.html      page markup
   v2/src/server/               PHP endpoints (Telegram notice, availability engine) + .htaccess
-  v2/tests/fixtures/           invented iCal fixtures for the server self-test (api/_lib/fixtures)
+  v2/tests/fixtures/           invented iCal fixtures for the server self-test — NOT deployed in the
+                               web root (package_release.py ships them in deployment/selftest-fixtures)
 
 Output: v2/public/  (the complete deploy root; nothing outside it is needed)
 
@@ -669,8 +670,6 @@ def build_files():
     for f in sorted((SRC / "server" / "api").rglob("*")):
         if f.is_file():
             files["api/" + f.relative_to(SRC / "server" / "api").as_posix()] = f.read_bytes()
-    for f in sorted((V2 / "tests" / "fixtures").glob("*")):
-        files["api/_lib/fixtures/" + f.name] = f.read_bytes()
     av = CONFIG["availability"]
     files["api/_lib/settings.json"] = json.dumps({"availability": {k: v for k, v in av.items() if not k.startswith("_")}},
                                                  indent=2).encode("utf-8")

@@ -7,8 +7,11 @@
  *
  *   php availability-sync.php            sync if due
  *   php availability-sync.php --force    sync now
- *   php availability-sync.php --selftest run the fail-safe scenarios against bundled fixtures
- *                                        (same expectations as v2/tools/test_availability.py)
+ *   php availability-sync.php --selftest --fixtures=/path/to/selftest-fixtures
+ *                                        run the fail-safe scenarios against the invented test
+ *                                        fixtures (same expectations as v2/tools/test_availability.py).
+ *                                        Fixtures are not deployed in the web root; the release
+ *                                        package ships them in deployment/selftest-fixtures.
  *
  * Over HTTP this file answers 404 and does nothing.
  */
@@ -21,7 +24,16 @@ require_once __DIR__ . '/_lib/availability.php';
 $args = array_slice($argv, 1);
 
 if (in_array('--selftest', $args, true)) {
-    $fx = __DIR__ . '/_lib/fixtures/';
+    $fx = '';
+    foreach ($args as $a) {
+        if (strpos($a, '--fixtures=') === 0) {
+            $fx = rtrim(substr($a, 11), '/\\') . '/';
+        }
+    }
+    if ($fx === '' || !is_readable($fx . 'booking.ics')) {
+        fwrite(STDERR, "Usage: php availability-sync.php --selftest --fixtures=/path/to/selftest-fixtures\n");
+        exit(2);
+    }
     $all = palmiye_settings();
     $S = $all['availability'];
     $season = array('start' => '2027-05-01', 'end' => '2027-10-31');

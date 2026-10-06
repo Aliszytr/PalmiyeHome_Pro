@@ -86,6 +86,9 @@ for p in scan:
         pass
 check(f"secret scan ({len(scan)} files: V2 tree + git-tracked files)", not sec_hits, ", ".join(sec_hits))
 check("no real secret file inside v2/public", not any(p.name == ".env.php" for p in PUB.rglob("*")))
+dev_material = sorted(str(p.relative_to(PUB)) for p in PUB.rglob("*")
+                      if "fixtures" in p.parts or ".mock" in p.parts or p.suffix in {".py", ".md", ".ics", ".map"} or p.name in {".git", "Thumbs.db", "desktop.ini"})
+check("no test fixtures / dev mocks / tools / reports / source maps inside v2/public", not dev_material, ", ".join(dev_material[:8]))
 
 
 # 3. HTML structure ---------------------------------------------------------------

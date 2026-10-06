@@ -26,7 +26,10 @@ python v2/tools/verify_v2.py          # 40 checks; must be all PASS before QA/de
 python v2/tools/test_availability.py  # fail-safe tests of the availability engine (Python reference)
 python v2/tools/test_market.py        # Booking Turkey restriction ON/OFF + market-hint rules
 python v2/tools/dev_server.py         # http://localhost:8080 — Telegram, gtag.js and availability are local mocks
+python v2/tools/package_release.py --version 1.0.0-rc1 --date 2026-10-06 --root D:\ProjelerFinal\WebProjesi\PalmiyeHome_2027_RELEASES
 ```
+
+`package_release.py` refuses to run on a dirty tree, a stale build or any failing suite, never overwrites a release folder, and copies only `v2/public` (no fixtures, tools, mocks or reports) into `<release>/publish`. Selftest fixtures go to `<release>/deployment/selftest-fixtures` (outside the web root).
 
 Dev server helpers: `/__dev/availability?scenario=fresh|stale|unavailable|offline`, `/__dev/availability-health`, `?__dev_consent=accepted|declined`, `?__dev_tz=America/New_York` (simulated time zone). Site parameter: `?ph_market=tr|intl`.
 
@@ -44,4 +47,4 @@ When a direct or WhatsApp booking is confirmed, the owner **blocks those dates i
 - Create `/home/<user>/palmiye-secrets/.env.php` (outside `public_html`, chmod 600) from `v2/deploy/palmiye-secrets/env.example.php`: Telegram token (rotated), the Booking.com and Airbnb iCal export URLs, owner password hash, optional GeoIP paths.
 - Set `availability.season` in `config/site-config.json`, rebuild, upload.
 - cPanel cron every 20 min: `/usr/local/bin/php /home/<user>/public_html/api/availability-sync.php`
-- On the server: `php api/availability-sync.php --selftest`, then `--force`, then open `/api/availability-health.php`.
+- On the server: `php api/availability-sync.php --selftest --fixtures=/home/<user>/palmiye-release/selftest-fixtures`, then `--force`, then open `/api/availability-health.php`.
