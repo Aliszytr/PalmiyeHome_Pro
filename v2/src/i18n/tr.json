@@ -1,5 +1,10 @@
 {
-  "_lang": { "code": "tr", "name": "Türkçe", "locale": "tr_TR", "path": "/tr/" },
+  "_lang": {
+    "code": "tr",
+    "name": "Türkçe",
+    "locale": "tr_TR",
+    "path": "/tr/"
+  },
   "meta": {
     "title": "Palmiye Home — Göynük, Kemer'de Havuzlu Tatil Dairesi",
     "description": "Göynük, Kemer'de (Antalya) en fazla {max_guests} kişilik huzurlu bir {unit} tatil dairesi: sezonluk ortak havuz, dağ manzarası ve eksiksiz donanımlı bir ev. Booking.com'da {score}.",
@@ -39,18 +44,16 @@
     "unit": "{unit} daire",
     "guests": "En fazla {max_guests} kişi",
     "pool": "Sezonluk ortak havuz",
-    "checkin": "Giriş {checkin}"
+    "checkin": "Giriş {checkin}",
+    "source": "Booking.com",
+    "verified": "Doğrulanmış misafir puanı",
+    "score_aria": "10 üzerinden {score}"
   },
   "apartment": {
     "title": "Sadece bir oda değil, bütün bir daire",
     "lead": "Palmiye Home aydınlık bir {unit} dairedir: açık mutfaklı bir salon, ayrı bir yatak odası ve çamaşır makineli bir banyo.",
     "body": "Açık renk zeminler, yumuşak gün ışığı ve sade, rahat mobilyalar. Yemek yapmak, eşyalarınızı rahatça yerleştirmek ve plajdan ya da dağdan dönünce dinlenmek için yeterli alan var.",
-    "list": [
-      "Kanepe ve Smart TV bulunan salon",
-      "Buzdolabı, fırın ve ocak bulunan açık mutfak",
-      "Çift kişilik yataklı yatak odası",
-      "Duş ve çamaşır makinesi bulunan banyo"
-    ]
+    "list": ["Kanepe ve Smart TV bulunan salon", "Buzdolabı, fırın ve ocak bulunan açık mutfak", "Çift kişilik yataklı yatak odası", "Duş ve çamaşır makinesi bulunan banyo"]
   },
   "gallery": {
     "title": "Yakından bakın",
@@ -70,9 +73,10 @@
   },
   "checkin": {
     "title": "Kolay self check-in",
-    "body": "{checkin} arasında dilediğiniz saatte gelin ve kendiniz giriş yapın — resepsiyon ya da anahtar teslimi için beklemek yok. Giriş bilgileri, rezervasyonu onaylanan misafirlerle konaklamadan önce paylaşılır. Çıkış en geç {checkout}.",
+    "body": "Kendi programınıza göre gelin ve kendiniz giriş yapın — resepsiyon ya da anahtar teslimi için beklemek yok. Giriş bilgileri, rezervasyonu onaylanan misafirlerle konaklamadan önce paylaşılır.",
     "checkin_label": "Giriş",
-    "checkout_label": "Çıkış"
+    "checkout_label": "Çıkış",
+    "owner": "Palmiye Home, sahibi tarafından yakından takip edilen ve profesyonelce işletilen bir tatil evidir. Konaklamanızdan önce ve konaklamanız sırasında bize WhatsApp'tan yazabilirsiniz."
   },
   "amenities": {
     "title": "Konaklamanız için gereken her şey",
@@ -83,7 +87,7 @@
     "washer": "Çamaşır makinesi",
     "hairdryer": "Saç kurutma makinesi",
     "baby": "İstek üzerine bebek yatağı ve mama sandalyesi",
-    "parking": "Tesis içinde ücretsiz otopark",
+    "parking": "Tesis içinde ücretsiz açık otopark",
     "cameras": "Dış mekân güvenlik kameraları (giriş ve ortak alanlar)"
   },
   "pool": {
@@ -107,34 +111,52 @@
     "address_label": "Adres",
     "map_load": "Haritayı göster",
     "map_note": "Harita, yalnızca tıkladığınızda Google Haritalar'dan yüklenir.",
-    "map_open": "Google Haritalar'da aç",
-    "map_title": "Palmiye Home haritası, Göynük, Kemer"
+    "map_open": "Google Maps'te gör",
+    "map_title": "Palmiye Home haritası, Göynük, Kemer",
+    "directions": "Yol tarifi al"
   },
   "reviews": {
-    "title": "Misafirlerimiz ne diyor",
-    "lead": "Booking.com'da {score} puan. Misafirlerin kendi sözleriyle iki yorum:",
-    "source": "Booking.com misafir yorumu",
-    "all": "Tüm yorumları Booking.com'da okuyun"
+    "title": "Bağımsız misafir değerlendirmeleri",
+    "lead": "Bu sayfada anlattıklarımızı, bağımsız platformlardaki gerçek misafirler doğruluyor.",
+    "all": "Tüm yorumları Booking.com'da okuyun",
+    "booking_label": "Booking.com misafir puanı",
+    "booking_note": "Booking.com'da yalnızca konaklamış misafirler değerlendirme yazabilir.",
+    "read_full": "Yorumun tamamını Booking.com'da okuyun",
+    "original": "Orijinal yorum ({language})",
+    "google_rating_only": "Yazılı yorum olmadan verilen yıldız puanı",
+    "google_link": "Palmiye Home'u Google Maps'te görün",
+    "airbnb_text": "Palmiye Home Airbnb'de de yer alıyor; misafirler konaklamalarından sonra orada değerlendirme bırakıyor.",
+    "airbnb_link": "Değerlendirmeleri Airbnb'de okuyun",
+    "rating_out_of": "{scale} üzerinden {rating}",
+    "months": ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+    "countries": {
+      "RS": "Sırbistan",
+      "DE": "Almanya"
+    },
+    "languages": {
+      "en": "İngilizce",
+      "de": "Almanca"
+    }
   },
   "faq": {
     "title": "Sık sorulan sorular",
     "items": [
-      { "q": "Giriş ve çıkış saatleri nedir?", "a": "Giriş {checkin} arasındadır. Çıkış en geç {checkout}." },
-      { "q": "Kaç kişi konaklayabilir?", "a": "Daire en fazla {max_guests} kişi için uygundur." },
-      { "q": "Havuz ne zaman açık?", "a": "Ortak havuz sezonluktur; yetişkin ve çocuk bölümleri vardır. Açılış tarihleri yıldan yıla değişebilir, bu yüzden tarihlerinizi sorarken lütfen bunu da sorun." },
-      { "q": "Otopark var mı?", "a": "Evet, tesis içinde ücretsiz açık otopark bulunur." },
-      { "q": "Bebek yatağı veya mama sandalyesi var mı?", "a": "Evet, istek üzerine bebek yatağı ve mama sandalyesi sağlanabilir." },
-      { "q": "Plaj ne kadar uzakta?", "a": "Plaj yaklaşık 2 km uzaklıkta — yürüyerek 15–20 dakika. Kemer merkez arabayla yaklaşık 10 dakika." },
-      { "q": "Sitedeki takvim kesin mi?", "a": "Hayır. Takvim elle güncellenir ve yalnızca fikir verir. Tarihleriniz WhatsApp'ta ev sahibi tarafından ya da rezervasyon yaptığınızda Booking.com / Airbnb tarafından onaylanır." }
+      {"q": "Giriş ve çıkış saatleri nedir?", "a": "Giriş {checkin} arasındadır. Çıkış en geç {checkout}."},
+      {"q": "Kaç kişi konaklayabilir?", "a": "Daire en fazla {max_guests} kişi için uygundur."},
+      {"q": "Havuz ne zaman açık?", "a": "Ortak havuz sezonluktur; yetişkin ve çocuk bölümleri vardır. Açılış tarihleri yıldan yıla değişebilir, bu yüzden tarihlerinizi sorarken lütfen bunu da sorun."},
+      {"q": "Otopark var mı?", "a": "Evet, tesis içinde ücretsiz açık otopark bulunur."},
+      {"q": "Türkiye'den rezervasyon yapabilir miyim?", "a": "Evet — WhatsApp veya Airbnb üzerinden. Booking.com üzerinden Türkiye içinden rezervasyon kullanılamayabilir."},
+      {"q": "Bebek yatağı veya mama sandalyesi var mı?", "a": "Evet, istek üzerine bebek yatağı ve mama sandalyesi sağlanabilir."},
+      {"q": "Plaj ne kadar uzakta?", "a": "Plaj yaklaşık 2 km uzaklıkta — yürüyerek 15–20 dakika. Kemer merkez arabayla yaklaşık 10 dakika."},
+      {"q": "Takvim ne kadar güncel?", "a": "Takvim, Booking.com, Airbnb ve doğrudan rezervasyon takvimlerinden otomatik olarak senkronize edilir. Kesin müsaitlik rezervasyon sırasında doğrulanır — WhatsApp'ta ev sahibi ya da Booking.com / Airbnb tarafından."}
     ]
   },
   "availability": {
     "title": "Müsaitliği kontrol et",
-    "lead": "Tarihlerinizi seçin, boş görünüp görünmediğine bakın; sonra ev sahibine sorun ya da tercih ettiğiniz platformdan rezervasyon yapın.",
-    "indicative": "Tahmini müsaitlik — takvim elle güncellenir. Kesin müsaitlik için lütfen tarihlerinizi kontrol ettirin.",
-    "legend_free": "Boş görünüyor",
+    "lead": "Tarihlerinizi seçin ve müsaitliği görün; ardından tercih ettiğiniz platformdan rezervasyon yapın ya da bize doğrudan yazın.",
+    "legend_free": "Müsait",
     "legend_booked": "Dolu",
-    "legend_unknown": "Henüz yayınlanmadı",
+    "legend_unknown": "Henüz açılmadı",
     "prev_month": "Önceki ay",
     "next_month": "Sonraki ay",
     "pick_start": "Giriş tarihinizi seçin.",
@@ -142,20 +164,24 @@
     "selected": "{start} → {end} · {nights} gece",
     "clear": "Tarihleri temizle",
     "guests": "Kişi sayısı",
-    "updated": "Takvimin son güncellenmesi: {date}",
-    "channels_title": "Sorun ya da rezervasyon yapın",
+    "channels_title": "Rezervasyon yapın ya da sorun",
     "whatsapp": "WhatsApp'tan sorun",
-    "whatsapp_desc": "Tarihlerinizi ev sahibine yazın",
+    "whatsapp_desc": "Palmiye Home ile doğrudan iletişim",
     "booking": "Booking.com",
     "booking_desc": "Booking.com'da rezervasyon",
     "airbnb": "Airbnb",
     "airbnb_desc": "Airbnb'de rezervasyon",
     "wa_message_dates": "Merhaba! Palmiye Home için {start} – {end} tarihleri arasında {guests} kişi olarak konaklamak istiyorum. Müsait mi?",
-    "wa_message": "Merhaba! Palmiye Home'un müsaitliği hakkında bilgi almak istiyorum."
+    "wa_message": "Merhaba! Palmiye Home'un müsaitliği hakkında bilgi almak istiyorum.",
+    "sync_note": "Müsaitlik, rezervasyon takvimlerimizden (Booking.com, Airbnb ve doğrudan rezervasyonlar) otomatik olarak senkronize edilir. Kesin müsaitlik rezervasyon sırasında doğrulanır.",
+    "loading": "Müsaitlik yükleniyor…",
+    "state_stale": "Takvim bir süredir güncellenemedi. Lütfen rezervasyondan önce tarihlerinizi bize teyit ettirin.",
+    "state_unavailable": "Canlı müsaitlik şu anda gösterilemiyor. Tarihlerinizi WhatsApp'tan bize yazın ya da Booking.com veya Airbnb'de kontrol edin.",
+    "booking_tr_note": "Booking.com üzerinden Türkiye içinden rezervasyon kullanılamayabilir."
   },
   "consent": {
     "title": "Çerezler",
-    "text": "İzin verirseniz ziyaretleri anlamak ve reklamlarımızı ölçmek için Google Analytics ve Google Ads çerezlerini kullanırız. Reddederseniz bu çerezler kaydedilmez. Seçiminizi istediğiniz zaman değiştirebilirsiniz.",
+    "text": "Ziyaretleri ve reklamları ölçmek için Google Analytics ve Google Ads çerezlerini kullanmak istiyoruz. Kabul etmezseniz hiçbiri yüklenmez.",
     "accept": "Kabul et",
     "decline": "Reddet",
     "more": "Gizlilik politikası"
@@ -191,22 +217,29 @@
   },
   "privacy": {
     "title": "Gizlilik politikası",
-    "meta_description": "Palmiye Home web sitesi verileri nasıl işler: çerezler, Google Analytics, Google Ads, ziyaret bildirimleri ve seçimleriniz.",
+    "meta_description": "Palmiye Home web sitesi verileri nasıl işler: izin, Google Analytics, Google Ads, ziyaret bildirimleri, müsaitlik takvimi ve harita.",
     "updated": "Teknik açıklamanın son güncellenmesi: {build_date}",
     "back": "Ana sayfaya dön",
     "sections": [
-      { "h": "Biz kimiz", "p": "Bu web sitesi, Türkiye'de Antalya, Kemer, Göynük'te bulunan Palmiye Home tatil dairesine aittir. İletişim: {email}." },
-      { "h": "Çerezler ve seçiminiz", "p": "İlk ziyaretinizde bir bilgilendirme çubuğu Google Analytics ve Google Ads çerezlerinin kullanılıp kullanılamayacağını sorar. Kabul edene kadar Google izin durumu “reddedildi” olarak ayarlıdır ve bu çerezler kaydedilmez. Seçiminiz, çubuğun tekrar görünmemesi için tarayıcınızda saklanır (localStorage anahtarı “palmiye_cookies”); her sayfanın altındaki “Çerez ayarları” bağlantısıyla istediğiniz zaman değiştirebilirsiniz. Dil seçiminiz de aynı şekilde saklanır (anahtar “palmiye_lang”)." },
-      { "h": "Google Analytics ve Google Ads", "p": "Site, Google Analytics 4 ve Google Ads dönüşüm ölçümü için Google etiketini (gtag.js) yükler. İzin reddedildiğinde Google, cihazınıza çerez kaydetmeden çerezsiz ölçüm sinyalleri (örneğin bir sayfanın görüntülendiği veya bir rezervasyon bağlantısına tıklandığı) almaya devam edebilir. İzin verildiğinde Google, ziyaretleri ve reklam performansını ölçmek için çerez kullanabilir. WhatsApp, Booking.com ve Airbnb bağlantılarına tıklamaları ve müsaitlik takviminin kullanımını kaydederiz; Google'a ad, telefon numarası, e-posta adresi veya mesaj içeriği göndermeyiz." },
-      { "h": "Ziyaret bildirimleri", "p": "Bir sayfa açıldığında site, kendi sunucumuza kısa ve anonim bir bildirim gönderir (dil, telefon veya masaüstü gibi kaba cihaz türü, sayfa yolu ve yönlendiren sitenin adı). Sunucumuz, işletme sahibinin Telegram hesabına kısa bir mesaj iletir. IP adresiniz, tarayıcı bilgileriniz ve ekran boyutunuz mesaja eklenmez ve ziyaretçi başına kayıt tutulmaz; yalnızca bildirim sayısını sınırlamak için ortak bir sayaç saklanır. Aynı tarayıcı oturumunda bildirim bir kez gönderilir (sessionStorage anahtarı “palmiye_notified”)." },
-      { "h": "Harita", "p": "Google Haritalar haritası otomatik olarak yüklenmez. Yalnızca “Haritayı göster”e tıklarsanız yüklenir; bu durumda isteğiniz Google tarafından kendi gizlilik politikası kapsamında işlenir." },
-      { "h": "Rezervasyon platformları ve WhatsApp", "p": "WhatsApp, Booking.com ve Airbnb bağlantıları bu hizmetleri açar. Orada gönderdiğiniz mesajlar veya yaptığınız rezervasyonlar, bu hizmetlerin kendi koşulları ve gizlilik politikalarına tabidir." },
-      { "h": "Haklarınız", "p": "Hakkınızda tuttuğumuz verileri sormak veya silinmesini istemek için {email} adresine yazabilirsiniz." }
+      {"h": "Biz kimiz", "p": "Bu web sitesi, Türkiye'de Antalya, Kemer, Göynük'te bulunan Palmiye Home tatil dairesine aittir. İletişim: {email}."},
+      {"h": "Barındırma", "p": "Her web sitesi gibi bu site de bir barındırma sağlayıcısının sunucusunda çalışır; sunucu, güvenlik ve işletim amacıyla standart teknik erişim kayıtları (IP adresleri dahil) tutar. Bu kayıtları ziyaretçi profili çıkarmak için kullanmayız."},
+      {"h": "Çerezler ve seçiminiz", "p": "İlk ziyaretinizde küçük bir bilgilendirme çubuğu, Google Analytics ve Google Ads'in kullanılıp kullanılamayacağını sorar. Kabul edene kadar Google etiketi hiç yüklenmez: Google çerezi kaydedilmez ve Google'a ölçüm verisi gönderilmez. Seçiminiz, çubuğun tekrar görünmemesi için tarayıcınızda saklanır (localStorage anahtarı “palmiye_cookies”); her sayfanın altındaki “Çerez ayarları” bağlantısıyla istediğiniz zaman değiştirebilirsiniz. Dil seçicisiyle bir dil seçerseniz bu seçim de aynı şekilde saklanır (anahtar “palmiye_lang”); site sizi hiçbir zaman otomatik olarak yönlendirmez."},
+      {"h": "Google Analytics ve Google Ads", "p": "Site, Google Analytics 4 ve Google Ads dönüşüm ölçümü için Google etiketini (gtag.js) yalnızca siz kabul ettikten sonra yükler; Google bu durumda ziyaretleri ve reklam performansını ölçmek için çerez kullanabilir. Bundan sonra WhatsApp, Booking.com ve Airbnb bağlantılarına tıklamaları, yorum bağlantılarına tıklamaları ve müsaitlik takviminin kullanımını kaydederiz. Google'a ad, telefon numarası, e-posta adresi veya mesaj içeriği göndermeyiz. Daha sonra reddederseniz ölçüm durur ve bu sitenin kaydettiği Google çerezleri silinir."},
+      {"h": "Ziyaret bildirimleri", "p": "Bir sayfa açıldığında site, kendi sunucumuza yalnızca sayfanın dilini, sayfa yolunu ve yönlendiren sitenin adını (tam adresini değil) içeren kısa bir bildirim gönderir. Yaklaşık konumu (şehir veya bölge ve ülke) eklemek için sunucumuz IP adresinizi sunucunun kendisinde bulunan bir GeoIP veritabanında arar; hiçbir harici hizmete sorulmaz. IP adresi yalnızca bu sorgu için sunucunun belleğinde kullanılır ve ardından atılır: kaydedilmez, log'a yazılmaz ve mesaja eklenmez. Sunucu ardından işletme sahibinin Telegram hesabına kısa bir mesaj gönderir; örneğin “Yeni ziyaret · Antalya, Türkiye · TR · Ana sayfa”. Konum yaklaşıktır ve örneğin VPN veya mobil ağ kullanımında yanlış olabilir. Ziyaretçi başına kayıt tutulmaz; yalnızca bildirim sayısını sınırlayan ortak bir sayaç saklanır. Aynı tarayıcı oturumunda bildirim bir kez gönderilir (sessionStorage anahtarı “palmiye_notified”)."},
+      {"h": "Müsaitlik takvimi", "p": "Takvim, Booking.com, Airbnb ve doğrudan rezervasyon takvimlerimizdeki tarihleri gösterir. Sunucumuz bu takvimlerden yalnızca tarihleri okur; misafir adları, iletişim bilgileri, rezervasyon kodları ve fiyatlar okunmaz ve yayınlanmaz. Tarayıcınız takvim verisini kendi sunucumuzdan yükler ve bu sırada kişisel veri göndermez."},
+      {"h": "Harita", "p": "Google Haritalar haritası otomatik olarak yüklenmez. Yalnızca “Haritayı göster”e tıklarsanız yüklenir; bu durumda isteğiniz Google tarafından kendi gizlilik politikası kapsamında işlenir. “Google Maps'te gör” ve “Yol tarifi al” bağlantıları Google Haritalar'ı açar."},
+      {"h": "Rezervasyon platformları ve WhatsApp", "p": "WhatsApp, Booking.com ve Airbnb bağlantıları bu hizmetleri açar. Orada gönderdiğiniz mesajlar veya yaptığınız rezervasyonlar, bu hizmetlerin kendi koşulları ve gizlilik politikalarına tabidir."},
+      {"h": "Haklarınız", "p": "Hakkınızda tuttuğumuz verileri sormak veya silinmesini istemek için {email} adresine yazabilirsiniz."}
     ]
   },
   "notfound": {
     "title": "Sayfa bulunamadı",
     "text": "Aradığınız sayfa yok ya da taşınmış.",
     "back": "Ana sayfaya git"
+  },
+  "lang_suggest": {
+    "text": "Bu sayfanın Türkçe sürümü de var.",
+    "switch": "Türkçe'ye geç",
+    "dismiss": "Kapat"
   }
 }

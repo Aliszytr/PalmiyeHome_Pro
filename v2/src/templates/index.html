@@ -32,6 +32,8 @@
 <body>
 {{v sprite}}
 <a class="skip" href="#main">{{t a11y.skip}}</a>
+{{v consent}}
+{{v lang_suggest}}
 
 <header class="site-header">
   <div class="wrap header-inner">
@@ -60,7 +62,11 @@
       <p class="hero-text">{{t hero.text}}</p>
       <div class="hero-actions">
         <a class="btn btn-primary btn-lg" href="#availability" data-track="availability_check" data-cta="hero">{{t cta.check_availability}}</a>
-        <a class="hero-proof" href="{{v booking_reviews_url}}" target="_blank" rel="noopener" data-track="booking_review_click" data-cta="hero"><span class="score">{{c ratings.booking.score}}</span>{{t proof.rating_label}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a>
+        <a class="hero-score" href="{{v booking_reviews_url}}" target="_blank" rel="noopener" data-track="booking_review_click" data-cta="hero">
+          <span class="hero-score-num" aria-hidden="true">{{c ratings.booking.score}}<small>/{{c ratings.booking.scale}}</small></span>
+          <span class="hero-score-txt" aria-hidden="true"><span class="booking-mark">{{t proof.source}}</span><span>{{t proof.verified}}</span></span>
+          <span class="visually-hidden">{{t proof.score_aria}} — {{t proof.verified}}, {{t proof.source}} {{t a11y.new_tab}}</span>
+        </a>
       </div>
     </div>
   </section>
@@ -68,9 +74,12 @@
   <section class="proof" aria-label="{{a hero.proof}}">
     <span class="anchor" id="trust"></span>
     <div class="wrap proof-inner">
-      <div class="proof-rating">
-        <span class="score" aria-hidden="true">{{c ratings.booking.score}}</span>
-        <p><strong>{{t proof.rating_label}}</strong><br><a href="{{v booking_reviews_url}}" target="_blank" rel="noopener" data-track="booking_review_click" data-cta="proof">{{t proof.reviews_link}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a></p>
+      <div class="proof-score">
+        <p class="proof-num"><span aria-hidden="true">{{c ratings.booking.score}}<span class="proof-scale">/ {{c ratings.booking.scale}}</span></span><span class="visually-hidden">{{t proof.score_aria}}</span></p>
+        <div class="proof-meta">
+          <p class="proof-source"><span class="booking-mark">{{t proof.source}}</span> <span>{{t proof.verified}}</span></p>
+          <a class="link-arrow" href="{{v booking_reviews_url}}" target="_blank" rel="noopener" data-track="booking_review_click" data-cta="proof">{{t proof.reviews_link}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a>
+        </div>
       </div>
       <ul class="proof-facts">
         <li>{{icon home}}{{t proof.unit}}</li>
@@ -122,10 +131,16 @@
         </div>
         <div class="photo" style="aspect-ratio: 4 / 3">{{pic house-mountain|(min-width: 900px) 600px, 100vw}}</div>
       </div>
-      <div class="checkin-card" id="self-checkin">
+    </div>
+  </section>
+
+  <section class="section section-tight" id="self-checkin" aria-labelledby="checkin-title">
+    <div class="wrap">
+      <div class="checkin-card">
         <div>
-          <h3>{{icon key}} {{t checkin.title}}</h3>
-          <p class="muted" style="margin:0">{{t checkin.body}}</p>
+          <h2 id="checkin-title" class="checkin-title">{{icon key}}<span>{{t checkin.title}}</span></h2>
+          <p>{{t checkin.body}}</p>
+          <p class="owner-note">{{t checkin.owner}}</p>
         </div>
         <div class="times">
           <div class="time"><span>{{t checkin.checkin_label}}</span><strong>{{c policies.checkin}}</strong></div>
@@ -181,12 +196,15 @@
           <li>{{t location.airport}} <span>{{t location.airport_desc}}</span></li>
         </ul>
         <div><strong>{{t location.address_label}}:</strong><address>{{v address_line}}</address></div>
+        <p class="map-actions">
+          <a class="btn btn-ghost btn-sm" href="{{v map_link}}" target="_blank" rel="noopener">{{icon pin}}{{t location.map_open}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a>
+          <a class="btn btn-ghost btn-sm" href="{{v directions_link}}" target="_blank" rel="noopener">{{icon route}}{{t location.directions}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a>
+        </p>
       </div>
       <div class="map-box" data-map data-map-src="{{v map_embed}}" data-map-title="{{a location.map_title}}">
         <div>
           <button class="btn btn-ghost" type="button" data-map-load>{{icon pin}}{{t location.map_load}}</button>
           <p>{{t location.map_note}}</p>
-          <p><a href="{{v map_link}}" target="_blank" rel="noopener">{{t location.map_open}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a></p>
         </div>
       </div>
     </div>
@@ -199,7 +217,6 @@
         <p class="muted">{{t reviews.lead}}</p>
       </div>
       {{v reviews}}
-      <p style="margin-top:22px"><a class="link-arrow" href="{{v booking_reviews_url}}" target="_blank" rel="noopener" data-track="booking_review_click" data-cta="reviews">{{t reviews.all}}<span class="visually-hidden"> {{t a11y.new_tab}}</span></a></p>
     </div>
   </section>
 
@@ -219,21 +236,21 @@
       </div>
       <div class="avail-grid">
         <div>
-          <p class="indicative">{{icon info}}<span>{{t availability.indicative}}</span></p>
-          <div class="calendar" data-calendar>
+          <p class="indicative">{{icon info}}<span>{{t availability.sync_note}}</span></p>
+          <p class="cal-state" data-cal-state role="status" hidden></p>
+          <div class="calendar" data-calendar aria-busy="true">
             <div class="cal-nav">
               <button type="button" data-cal-prev aria-label="{{a availability.prev_month}}">{{icon chevron-left}}</button>
               <button type="button" data-cal-next aria-label="{{a availability.next_month}}">{{icon chevron-right}}</button>
             </div>
-            <div class="cal-months" data-cal-months aria-live="polite"></div>
-            <noscript><p>{{t availability.indicative}}</p></noscript>
+            <div class="cal-months" data-cal-months aria-live="polite"><p class="cal-loading">{{t availability.loading}}</p></div>
+            <noscript><p>{{t availability.state_unavailable}}</p></noscript>
           </div>
           <ul class="legend">
             <li><i class="l-free"></i>{{t availability.legend_free}}</li>
             <li><i class="l-booked"></i>{{t availability.legend_booked}}</li>
             <li><i class="l-unknown"></i>{{t availability.legend_unknown}}</li>
           </ul>
-          <p class="cal-updated" data-cal-updated></p>
         </div>
         <div class="panel">
           <p class="panel-status" data-cal-status aria-live="polite">{{t availability.pick_start}}</p>
@@ -243,11 +260,7 @@
           </div>
           <p style="margin:-6px 0 14px"><button type="button" class="btn-clear" data-cal-clear hidden>{{t availability.clear}}</button></p>
           <p class="channels-title">{{t availability.channels_title}}</p>
-          <ul class="channels">
-            <li><a class="channel is-primary" data-channel="whatsapp" data-track="whatsapp_click" data-cta="availability" href="{{v whatsapp_url}}" target="_blank" rel="noopener">{{icon chat}}<span><strong>{{t availability.whatsapp}}</strong><small>{{t availability.whatsapp_desc}}</small></span></a></li>
-            <li><a class="channel" data-channel="booking" data-track="booking_click" data-cta="availability" href="{{v booking_url}}" target="_blank" rel="noopener">{{icon external}}<span><strong>{{t availability.booking}}</strong><small>{{t availability.booking_desc}}</small></span></a></li>
-            <li><a class="channel" data-channel="airbnb" data-track="airbnb_click" data-cta="availability" href="{{v airbnb_url}}" target="_blank" rel="noopener">{{icon external}}<span><strong>{{t availability.airbnb}}</strong><small>{{t availability.airbnb_desc}}</small></span></a></li>
-          </ul>
+          {{v channels}}
         </div>
       </div>
     </div>
@@ -260,8 +273,6 @@
   <a class="btn btn-primary" href="#availability" data-track="availability_check" data-cta="mobile_bar">{{t cta.check_availability}}</a>
 </div>
 
-{{v consent}}
-
 <dialog class="lightbox" id="lightbox" aria-label="{{a gallery.title}}">
   <figure class="lightbox-figure">
     <picture><source type="image/avif" data-lb-avif><source type="image/webp" data-lb-webp><img data-lb-img alt="" src="data:," width="1200" height="900"></picture>
@@ -273,7 +284,6 @@
 </dialog>
 
 <script type="application/json" id="site-data">{{v runtime}}</script>
-<script src="/data/bookings.js" defer></script>
 <script src="{{v js_track}}" defer></script>
 <script src="{{v js_site}}" defer></script>
 </body>

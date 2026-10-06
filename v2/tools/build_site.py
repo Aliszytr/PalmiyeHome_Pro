@@ -5,7 +5,8 @@ Single sources:
   v2/src/i18n/<lang>.json      every visible text, per language
   v2/src/assets-manifest.json  image variants (from build_images.py)
   v2/src/templates/*.html      page markup
-  data/bookings.js             availability data (copied as-is)
+  v2/src/server/               PHP endpoints (Telegram notice, availability engine) + .htaccess
+  v2/tests/fixtures/           invented iCal fixtures for the server self-test (api/_lib/fixtures)
 
 Output: v2/public/  (the complete deploy root; nothing outside it is needed)
 
@@ -21,6 +22,7 @@ import shutil
 import sys
 from datetime import date
 from pathlib import Path
+from urllib.parse import quote, urlencode
 
 V2 = Path(__file__).resolve().parents[1]
 REPO = V2.parent
@@ -69,6 +71,8 @@ ICONS = {
     "info": '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
     "chat": '<path d="M4 20l1.4-4.2A8 8 0 1112 20a8.2 8.2 0 01-3.8-.9z"/>',
     "external": '<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/>',
+    "route": '<circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8.2 19H15a3.5 3.5 0 000-7H9a3.5 3.5 0 010-7h6.8"/>',
+    "star": '<path d="M12 3.2l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z" fill="currentColor" stroke="none"/>',
     "grid": '<rect x="3" y="3" width="7.5" height="7.5" rx="1"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1"/>',
 }
 
@@ -212,8 +216,28 @@ def airbnb_url():
     return f'{CONFIG["platforms"]["airbnb"]}?adults={CONFIG["booking_links"]["default_guests"]}'
 
 
+def maps_view_url():
+    """Real Business Profile when known; otherwise the documented Maps search URL (name + address).
+    Never an invented profile URL."""
+    gb = CONFIG["google_business"]
+    if gb.get("profile_url"):
+        return gb["profile_url"]
+    q = {"api": "1", "query": gb["maps_query"]}
+    if gb.get("place_id"):
+        q["query_place_id"] = gb["place_id"]
+    return "https://www.google.com/maps/search/?" + urlencode(q, quote_via=quote)
+
+
+def directions_url():
+    """Documented Maps directions URL to the verified coordinates (+ place id when known)."""
+    g, gb = CONFIG["property"]["geo"], CONFIG["google_business"]
+    q = {"api": "1", "destination": f'{g["lat"]},{g["lng"]}'}
+    if gb.get("place_id"):
+        q["destination_place_id"] = gb["place_id"]
+    return "https://www.google.com/maps/dir/?" + urlencode(q, quote_via=quote, safe=",")
+
+
 def whatsapp_url(lang):
-    from urllib.parse import quote
     return f'https://wa.me/{CONFIG["contact"]["whatsapp_e164"]}?text={quote(text(lang, "availability.wa_message"))}'
 
 
@@ -235,28 +259,37 @@ def gtag_block():
             f"<script>\n{core}gtag('js',new Date());\ngtag('config','{ads}');\ngtag('config','{ga4}');\n</script>")
 
 
-def lang_redirect():
-    """Root (English) page only: send first-time visitors whose browser prefers TR/DE/RU
-    to their language, unless they already chose a language. Keeps old ?lang= links working."""
+def legacy_lang_param():
+    """Old V1 links (?lang=tr|de|ru, used by Ads sitelinks) carry an explicit language request:
+    honour it (the server does the same with a 301). No redirect is ever made from the browser
+    language or a stored preference — the root page stays English and only suggests a language."""
     langs = [l for l in LANGS if l != "en"]
     return ("<script>(function(){try{var L=" + json.dumps(langs) + ",q=new URLSearchParams(location.search).get('lang');"
-            "if(q&&L.indexOf(q)>-1){location.replace('/'+q+'/'+location.hash);return;}"
-            "if(q==='en')return;"
-            "if(/bot|crawl|spider|lighthouse/i.test(navigator.userAgent))return;"
-            "var s=localStorage.getItem('palmiye_lang');if(s){if(s!=='en'&&L.indexOf(s)>-1)location.replace('/'+s+'/'+location.hash);return;}"
-            "var b=(navigator.language||'').slice(0,2).toLowerCase();if(L.indexOf(b)>-1)location.replace('/'+b+'/'+location.hash);"
-            "}catch(e){}})();</script>")
+            "if(q&&L.indexOf(q)>-1)location.replace('/'+q+'/'+location.hash);}catch(e){}})();</script>")
+
+
+def lang_suggest():
+    """Root page only: a small, dismissible hint offering the visitor's browser language."""
+    return ('<div class="lang-suggest" data-lang-suggest hidden>'
+            '<p data-ls-text></p><a class="btn btn-primary btn-sm" data-ls-link href="/"></a>'
+            f'<button type="button" class="ls-close" data-ls-dismiss>{icon("close")}<span class="visually-hidden" data-ls-dismiss-label></span></button></div>')
 
 
 def schema(lang):
+    """Only verifiable facts. No aggregateRating / review markup (self-serving reviews are not
+    eligible and the review count is not verified); no VacationRental type (Google reserves it
+    for vacation-rental partners' feeds)."""
     p, a, g = CONFIG["property"], CONFIG["property"]["address"], CONFIG["property"]["geo"]
-    data = {
-        "@context": "https://schema.org",
+    gb = CONFIG["google_business"]
+    same = [CONFIG["platforms"]["booking"], CONFIG["platforms"]["airbnb"]] + ([gb["profile_url"]] if gb.get("profile_url") else [])
+    photos = [f'{BASE}/{fallback(sl)["file"]}' for sl in ("hero-pool-mountain", "living-room", "kitchen", "bedroom", "pool-loungers")]
+    lodging = {
         "@type": "LodgingBusiness",
+        "@id": f"{BASE}/#lodging",
         "name": p["name"],
         "description": text(lang, "hero.text"),
         "url": BASE + page_path(lang, "index"),
-        "image": f"{BASE}/assets/img/og-image.jpg",
+        "image": [f"{BASE}/assets/img/og-image.jpg"] + photos,
         "email": CONFIG["contact"]["email"],
         "telephone": "+" + CONFIG["contact"]["whatsapp_e164"],
         "address": {"@type": "PostalAddress", "streetAddress": a["street"], "addressLocality": a["locality"],
@@ -265,11 +298,17 @@ def schema(lang):
         "checkinTime": FACTS["checkin_from"],
         "checkoutTime": FACTS["checkout"],
         "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": n, "value": True}
-                           for n in ["Seasonal shared pool", "Air conditioning", "Wi-Fi", "Kitchen", "Washing machine", "Free parking"]],
-        "containsPlace": {"@type": "Apartment", "name": f'{p["unit"]} apartment',
+                           for n in ["Seasonal shared pool", "Air conditioning", "Wi-Fi", "Fully equipped kitchen",
+                                     "Washing machine", "Free open-air parking on site", "Self check-in"]],
+        "containsPlace": {"@type": "Apartment", "name": f'{p["unit"]} apartment', "numberOfBedrooms": 1,
                           "occupancy": {"@type": "QuantitativeValue", "maxValue": p["max_guests"]}},
-        "sameAs": [CONFIG["platforms"]["booking"], CONFIG["platforms"]["airbnb"]],
+        "sameAs": same,
     }
+    if gb.get("profile_url"):
+        lodging["hasMap"] = gb["profile_url"]
+    website = {"@type": "WebSite", "@id": f"{BASE}/#website", "url": f"{BASE}/", "name": p["name"],
+               "inLanguage": LANGS, "publisher": {"@id": f"{BASE}/#lodging"}}
+    data = {"@context": "https://schema.org", "@graph": [website, lodging]}
     return json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
 
@@ -307,12 +346,11 @@ def footer(lang):
 
 
 def consent(lang):
-    return f'''<div class="consent" id="consent" role="dialog" aria-modal="false" aria-labelledby="consent-title" aria-describedby="consent-text" hidden>
-  <h2 id="consent-title">{text(lang, "consent.title")}</h2>
+    return f'''<div class="consent" id="consent" role="region" aria-label="{esc(text(lang, "consent.title"))}" hidden>
   <p id="consent-text">{text(lang, "consent.text")} <a href="{page_path(lang, "privacy")}">{text(lang, "consent.more")}</a></p>
   <div class="consent-actions">
-    <button type="button" class="btn btn-ghost" data-consent="declined">{text(lang, "consent.decline")}</button>
-    <button type="button" class="btn btn-ghost" data-consent="accepted">{text(lang, "consent.accept")}</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-consent="declined">{text(lang, "consent.decline")}</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-consent="accepted">{text(lang, "consent.accept")}</button>
   </div>
 </div>'''
 
@@ -320,13 +358,15 @@ def consent(lang):
 def runtime(lang, with_gallery=True):
     t = CONFIG["tracking"]
     avail_keys = ["pick_start", "pick_end", "selected", "legend_free", "legend_booked", "legend_unknown",
-                  "updated", "wa_message_dates", "wa_message"]
+                  "wa_message_dates", "wa_message", "loading", "state_stale", "state_unavailable"]
     i18n = {f"availability.{k}": text(lang, f"availability.{k}") for k in avail_keys}
     i18n["gallery.counter"] = text(lang, "gallery.counter")
     data = {
         "lang": lang,
         "i18n": i18n,
         "telegram_endpoint": CONFIG["site"]["telegram_endpoint"],
+        "availability_endpoint": CONFIG["site"]["availability_endpoint"],
+        "market": {"tr_time_zones": CONFIG["market"]["tr_time_zones"], "order": CONFIG["market"]["channel_order"]},
         "tracking": {"google_ads_id": t["google_ads_id"], "ga4_measurement_id": t["ga4_measurement_id"],
                      "ads_conversion_labels": t["ads_conversion_labels"], "consent_mode": CONFIG["site"]["consent_mode"]},
         "links": {"whatsapp": CONFIG["contact"]["whatsapp_e164"], "booking": CONFIG["platforms"]["booking"],
@@ -334,6 +374,10 @@ def runtime(lang, with_gallery=True):
                   "default_guests": CONFIG["booking_links"]["default_guests"],
                   "min_stay": CONFIG["booking_links"]["min_stay_nights"]},
     }
+    if lang == CONFIG["site"]["default_language"] and with_gallery:
+        data["lang_suggest"] = {l: {"text": text(l, "lang_suggest.text"), "switch": text(l, "lang_suggest.switch"),
+                                    "dismiss": text(l, "lang_suggest.dismiss"), "href": page_path(l, "index")}
+                                for l in LANGS if l != lang}
     if with_gallery:
         data["gallery"] = [{"alt": text(lang, f"alt.{s}"), "avif": srcset(s, "avif"), "webp": srcset(s, "webp"),
                             "src": "/" + fallback(s)["file"], "w": fallback(s)["width"], "h": fallback(s)["height"]}
@@ -363,13 +407,96 @@ def faq(lang):
         for i in lookup(lang, "faq.items")) + "</div>"
 
 
-def reviews(lang):
+def month_year(lang, ym):
+    y, m = ym.split("-")[:2]
+    return f'{lookup(lang, "reviews.months")[int(m) - 1]} {y}'
+
+
+def stars(rating, scale, lang):
+    label = esc(fill(lookup(lang, "reviews.rating_out_of"), lang, {"rating": str(rating), "scale": str(scale)}))
+    icons = "".join(f'<svg class="icon{"" if i < rating else " off"}" aria-hidden="true"><use href="#i-star"/></svg>' for i in range(scale))
+    return f'<span class="stars" role="img" aria-label="{label}">{icons}</span>'
+
+
+def excerpt(r):
     out = []
+    for seg in r["excerpt"]:
+        if seg not in r["text"]:
+            raise ValueError(f"excerpt is not verbatim: {seg!r}")
+        out.append(seg)
+    s_ = " … ".join(esc(x) for x in out)
+    if not r["text"].startswith(r["excerpt"][0]):
+        s_ = "… " + s_
+    if not r["text"].rstrip().endswith(r["excerpt"][-1]):
+        s_ += " …"
+    return s_
+
+
+def new_tab(lang):
+    return f'<span class="visually-hidden"> {text(lang, "a11y.new_tab")}</span>'
+
+
+def reviews(lang):
+    """Platform-attributed trust layer: every card names its source and links to it.
+    Quotes are verbatim excerpts in the original language; ratings without text stay without text."""
+    rb = CONFIG["ratings"]["booking"]
+    score = rb["score"].replace(".", ",") if lang in DECIMAL_COMMA else rb["score"]
+    quotes = []
     for r in CONFIG["guest_reviews"]["items"]:
-        out.append(f'<figure class="review"><blockquote lang="{r["lang"]}"><p>{esc(r["text"])}</p></blockquote>'
-                   f'<figcaption><strong>{esc(r["author"])}</strong> · {esc(r["country"])} · {esc(r["date"])}<br>'
-                   f'{text(lang, "reviews.source")}</figcaption></figure>')
-    return '<div class="reviews-grid">' + "".join(out) + "</div>"
+        langs = lookup(lang, "reviews.languages")
+        quotes.append(
+            f'<figure class="quote"><blockquote lang="{r["lang"]}"><p>“{excerpt(r)}”</p></blockquote>'
+            f'<figcaption><strong>{esc(r["author"])}</strong> · {esc(lookup(lang, "reviews.countries")[r["country_code"]])} · {month_year(lang, r["date"])}'
+            f'<span class="quote-lang">{esc(fill(lookup(lang, "reviews.original"), lang, {"language": langs[r["lang"]]}))}</span></figcaption></figure>')
+    booking = (
+        '<article class="review-source rs-booking" aria-labelledby="rs-booking">'
+        f'<header class="rs-head"><h3 id="rs-booking" class="platform"><span class="booking-mark">Booking.com</span></h3>'
+        f'<p class="rs-score"><span aria-hidden="true"><strong>{score}</strong> / {rb["scale"]}</span><span class="visually-hidden">{text(lang, "proof.score_aria")}</span></p></header>'
+        f'<p class="rs-label">{text(lang, "reviews.booking_label")} · {text(lang, "reviews.booking_note")}</p>'
+        + "".join(quotes) +
+        f'<p class="rs-link"><a class="link-arrow" href="{booking_reviews_url()}" target="_blank" rel="noopener" data-track="booking_review_click" data-cta="reviews">{text(lang, "reviews.all")}{new_tab(lang)}</a></p>'
+        '</article>')
+    side = []
+    for r in CONFIG["platform_reviews"]["items"]:
+        if r["platform"] != "google":
+            continue
+        body = f'<p class="rs-text">{esc(r["text"])}</p>' if r.get("text") else f'<p class="rs-note">{text(lang, "reviews.google_rating_only")}</p>'
+        side.append(
+            '<article class="review-source rs-google" aria-labelledby="rs-google">'
+            f'<header class="rs-head"><h3 id="rs-google" class="platform">Google</h3>{stars(r["rating"], r["scale"], lang)}</header>'
+            f'<p class="rs-author"><strong>{esc(r["author"])}</strong> · <span aria-hidden="true">{r["rating"]}/{r["scale"]}</span></p>{body}'
+            f'<p class="rs-link"><a class="link-arrow" href="{esc(maps_view_url())}" target="_blank" rel="noopener" data-track="review_source_click" data-platform="google" data-cta="reviews">{text(lang, "reviews.google_link")}{new_tab(lang)}</a></p>'
+            '</article>')
+    ra = CONFIG["ratings"]["airbnb"]
+    a_score = ""
+    if ra.get("score"):
+        a_score = f'<p class="rs-score"><strong>{esc(ra["score"])}</strong> / {ra["scale"]}</p>'
+    side.append(
+        '<article class="review-source rs-airbnb" aria-labelledby="rs-airbnb">'
+        f'<header class="rs-head"><h3 id="rs-airbnb" class="platform">Airbnb</h3>{a_score}</header>'
+        f'<p class="rs-text">{text(lang, "reviews.airbnb_text")}</p>'
+        f'<p class="rs-link"><a class="link-arrow" href="{CONFIG["platforms"]["airbnb"]}" target="_blank" rel="noopener" data-track="review_source_click" data-platform="airbnb" data-cta="reviews">{text(lang, "reviews.airbnb_link")}{new_tab(lang)}</a></p>'
+        '</article>')
+    for r in CONFIG["direct_testimonials"]["items"]:
+        if r.get("consent_confirmed") is True:
+            side.append(f'<article class="review-source rs-direct"><p class="rs-text">{esc(r["text"])}</p>'
+                        f'<p class="rs-author"><strong>{esc(r["author"])}</strong></p></article>')
+    return f'<div class="reviews-layout">{booking}<div class="reviews-side">{"".join(side)}</div></div>'
+
+
+def channels(lang):
+    """Default (international) order; site.js reorders for the Turkish market."""
+    order = CONFIG["market"]["channel_order"]["intl"]
+    items = {
+        "booking": (f'<li data-channel-item="booking"><a class="channel" data-channel="booking" data-track="booking_click" data-cta="availability" href="{booking_url()}" target="_blank" rel="noopener">'
+                    f'{icon("external")}<span><strong>{text(lang, "availability.booking")}</strong><small>{text(lang, "availability.booking_desc")}</small></span>{new_tab(lang)}</a>'
+                    f'<p class="channel-note" data-tr-note hidden>{icon("info")}<span>{text(lang, "availability.booking_tr_note")}</span></p></li>'),
+        "airbnb": (f'<li data-channel-item="airbnb"><a class="channel" data-channel="airbnb" data-track="airbnb_click" data-cta="availability" href="{airbnb_url()}" target="_blank" rel="noopener">'
+                   f'{icon("external")}<span><strong>{text(lang, "availability.airbnb")}</strong><small>{text(lang, "availability.airbnb_desc")}</small></span>{new_tab(lang)}</a></li>'),
+        "whatsapp": (f'<li data-channel-item="whatsapp"><a class="channel" data-channel="whatsapp" data-track="whatsapp_click" data-cta="availability" href="{whatsapp_url(lang)}" target="_blank" rel="noopener">'
+                     f'{icon("chat")}<span><strong>{text(lang, "availability.whatsapp")}</strong><small>{text(lang, "availability.whatsapp_desc")}</small></span>{new_tab(lang)}</a></li>'),
+    }
+    return '<ul class="channels" data-channels>' + "".join(items[c] for c in order) + "</ul>"
 
 
 def guests_select(lang):
@@ -444,7 +571,8 @@ def build_files():
             "hreflang": hreflang("index"),
             "og_image": f"{BASE}/assets/img/og-image.jpg",
             "hero_preload": hero_preload(),
-            "lang_redirect": lang_redirect() if lang == "en" else "",
+            "lang_redirect": legacy_lang_param() if lang == "en" else "",
+            "lang_suggest": lang_suggest() if lang == "en" else "",
             "schema": schema(lang),
             "home_url": page_path(lang, "index"),
             "lang_switch": lang_switch(lang, "index"),
@@ -458,7 +586,9 @@ def build_files():
             "gallery_all_label": f'{esc(text(lang, "gallery.title"))} ({len(GALLERY)})',
             "address_line": f'{esc(a["street"])}, {esc(a["postal_code"])} {esc(a["locality"])} / {esc(a["region"])}',
             "map_embed": f'https://maps.google.com/maps?q={g["lat"]},{g["lng"]}&amp;hl={lang}&amp;z=15&amp;output=embed',
-            "map_link": f'https://www.google.com/maps/search/?api=1&amp;query={g["lat"]},{g["lng"]}',
+            "map_link": esc(maps_view_url()),
+            "directions_link": esc(directions_url()),
+            "channels": channels(lang),
             "reviews": reviews(lang),
             "faq": faq(lang),
             "guests_select": guests_select(lang),
@@ -516,9 +646,15 @@ def build_files():
                   {"src": "/assets/icons/favicon-180.png", "sizes": "180x180", "type": "image/png"}],
     }, indent=2).encode("utf-8")
 
-    # Copied as-is
-    files["data/bookings.js"] = (REPO / "data" / "bookings.js").read_bytes()
-    files["api/telegram-notify.php"] = (SRC / "server" / "telegram-notify.php").read_bytes()
+    # Server side (PHP) — copied as-is. The legacy data/bookings.js is no longer part of V2.
+    for f in sorted((SRC / "server" / "api").rglob("*")):
+        if f.is_file():
+            files["api/" + f.relative_to(SRC / "server" / "api").as_posix()] = f.read_bytes()
+    for f in sorted((V2 / "tests" / "fixtures").glob("*")):
+        files["api/_lib/fixtures/" + f.name] = f.read_bytes()
+    av = CONFIG["availability"]
+    files["api/_lib/settings.json"] = json.dumps({"availability": {k: v for k, v in av.items() if not k.startswith("_")}},
+                                                 indent=2).encode("utf-8")
     files[".htaccess"] = (SRC / "server" / ".htaccess").read_bytes()
     files["assets/icons/favicon-32.png"] = (REPO / "Logo" / "favicon-32.png").read_bytes()
     files["favicon.ico"] = files["assets/icons/favicon-32.png"]  # browsers request /favicon.ico regardless of <link rel=icon>
@@ -526,14 +662,29 @@ def build_files():
     return files
 
 
+def orphans(files):
+    """Generated files in v2/public that the current build no longer produces (images excluded:
+    build_images.py owns assets/img)."""
+    out = []
+    for f in OUT.rglob("*"):
+        rel = f.relative_to(OUT).as_posix()
+        if f.is_file() and not rel.startswith("assets/img/") and rel not in files:
+            out.append(rel)
+    return sorted(out)
+
+
 def main():
     files = build_files()
     if "--check" in sys.argv:
         stale = [p for p, c in files.items() if not (OUT / p).exists() or (OUT / p).read_bytes() != c]
+        stale += [f"(orphan) {p}" for p in orphans(files)]
         for p in stale:
             print("STALE", p)
         print("build up to date" if not stale else f"{len(stale)} file(s) out of date — run build_site.py")
         sys.exit(1 if stale else 0)
+    for p in orphans(files):
+        (OUT / p).unlink()
+        print("removed orphan", p)
     for p, c in files.items():
         dest = OUT / p
         dest.parent.mkdir(parents=True, exist_ok=True)

@@ -101,8 +101,22 @@ def resize(im, width):
     return im.resize((width, height), Image.LANCZOS)
 
 
+def previous_hashes():
+    """Source hashes recorded by the last build; a changed source forces its outputs to be rebuilt."""
+    if not MANIFEST.exists():
+        return {}
+    data = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    return {e["slug"]: e["source"].get("sha256") for e in data.get("images", [])}
+
+
+PREVIOUS = previous_hashes()
+
+
 def build_set(slug, src_name, role, crop, widths, force, fallback_width=1200):
     src = SRC_DIR / src_name
+    if PREVIOUS.get(slug) and PREVIOUS[slug] != sha256(src):
+        print(f"source changed since last build -> rebuilding {slug}")
+        force = True
     with Image.open(src) as raw:
         base = clean_rgb(raw)
         src_size = raw.size

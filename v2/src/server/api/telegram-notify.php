@@ -1,39 +1,41 @@
 <?php
 /**
- * Palmiye Home — Telegram Visitor Notification (GoDaddy/cPanel)
+ * Palmiye Home V2 — Telegram visit notice for the owner (GoDaddy/cPanel).
  *
- * Purpose: send the site owner a short "site visited" notification.
+ * Message example:  "🌴 Yeni ziyaret · Antalya, Türkiye · TR · Ana sayfa"
  *
- * Privacy / data rules (see TELEGRAM_PRIVACY_BEHAVIOR.md):
- *   - No per-visitor files. The visitor IP is never written anywhere by this script.
- *   - Only coarse, non-identifying fields are accepted and every field is whitelisted:
- *     language code, device class, page path, referring host name.
- *   - Spam protection is a single global, anonymous debounce state
- *     (timestamps + counters only), stored next to the secret file outside the web root.
+ * Privacy (2027 policy, privacy page § "Visit notifications"):
+ *   - Accepted from the browser (whitelisted): language, page path, referring HOST name.
+ *     No device class, screen size, user agent string or fingerprint data.
+ *   - Approximate city/region/country is resolved on this server from a LOCAL GeoIP file
+ *     (api/_lib/geo.php). The IP address is used only in memory for that lookup and is never
+ *     stored, logged, archived or sent to Telegram.
+ *   - No per-visitor files. Spam protection is one global anonymous debounce state
+ *     (timestamps + counters only): max 1 message / minute and 20 / hour; visits in between
+ *     are summarised as "+N".
+ *   - Secret (bot token, chat id) only from the secret file outside the web root.
  *
- * Secret: the bot token and chat id are read ONLY from a file outside the web root:
- *   1. the path in the PALMIYE_SECRETS_FILE environment variable, or
- *   2. <parent of document root>/palmiye-secrets/.env.php
- * A secret file located inside the document root is refused.
- * Template: env.example.php (placeholders only).
- *
- * The browser always gets 204 No Content; no error details are returned.
- * Compatible with PHP 7.0+.
+ * The browser always gets 204 No Content; no error details are returned. PHP 7.0+.
  */
+require_once __DIR__ . '/_lib/bootstrap.php';
+require_once __DIR__ . '/_lib/geo.php';
 
 // ══════════════════════════════════════════
 //  SETTINGS
 // ══════════════════════════════════════════
-$ALLOWED_ORIGINS   = ['https://palmiyehomekemer.com', 'https://www.palmiyehomekemer.com'];
+$ALLOWED_ORIGINS   = array('https://palmiyehomekemer.com', 'https://www.palmiyehomekemer.com');
 $MIN_INTERVAL_SEC  = 60;    // at most one message per minute ...
 $MAX_PER_HOUR      = 20;    // ... and at most 20 messages per rolling hour
-$ALLOWED_LANGUAGES = ['en', 'tr', 'de', 'ru'];
-$ALLOWED_DEVICES   = ['mobile', 'tablet', 'desktop'];
-$ALLOWED_PAGES     = ['/', '/index.html', '/privacy.html', '/privacy', '/404.html',
-                      '/tr/', '/de/', '/ru/', '/tr/index.html', '/de/index.html', '/ru/index.html',
-                      '/tr/privacy.html', '/de/privacy.html', '/ru/privacy.html'];
+$ALLOWED_LANGUAGES = array('en', 'tr', 'de', 'ru');
+$PAGE_LABELS       = array(
+    '/' => 'Ana sayfa', '/index.html' => 'Ana sayfa', '/tr/' => 'Ana sayfa', '/de/' => 'Ana sayfa', '/ru/' => 'Ana sayfa',
+    '/tr/index.html' => 'Ana sayfa', '/de/index.html' => 'Ana sayfa', '/ru/index.html' => 'Ana sayfa',
+    '/privacy.html' => 'Gizlilik', '/privacy' => 'Gizlilik', '/tr/privacy.html' => 'Gizlilik', '/de/privacy.html' => 'Gizlilik',
+    '/ru/privacy.html' => 'Gizlilik', '/404.html' => '404 sayfası',
+);
 
-function palmiye_done($code = 204) {
+function palmiye_done($code = 204)
+{
     http_response_code($code);
     exit;
 }
@@ -63,37 +65,26 @@ if (!$allowed) {
 }
 
 $ua = strtolower(isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '');
-foreach (['bot', 'crawler', 'spider', 'lighthouse', 'headless', 'preview'] as $needle) {
+foreach (array('bot', 'crawler', 'spider', 'lighthouse', 'headless', 'preview') as $needle) {
     if ($ua === '' || strpos($ua, $needle) !== false) {
         palmiye_done();
     }
 }
+$ua = null; // only used for the bot check above
 
 // ══════════════════════════════════════════
 //  SECRET — outside the web root only
 // ══════════════════════════════════════════
-$docRoot    = isset($_SERVER['DOCUMENT_ROOT']) ? realpath($_SERVER['DOCUMENT_ROOT']) : false;
-$secretFile = getenv('PALMIYE_SECRETS_FILE');
-if (!$secretFile && $docRoot) {
-    $secretFile = dirname($docRoot) . '/palmiye-secrets/.env.php';
-}
-$secretReal = $secretFile ? realpath($secretFile) : false;
-if (!$secretReal || !is_readable($secretReal)) {
+$secretReal = palmiye_load_secrets();
+if (!$secretReal) {
     palmiye_done();
 }
-if ($docRoot && strpos($secretReal, $docRoot . DIRECTORY_SEPARATOR) === 0) {
-    error_log('[Palmiye Telegram] Refused: secret file is inside the document root.');
-    palmiye_done();
-}
-require_once $secretReal;
-
 if (defined('TELEGRAM_ENABLED') && !TELEGRAM_ENABLED) {
     palmiye_done();
 }
-$botToken = defined('TELEGRAM_BOT_TOKEN') ? TELEGRAM_BOT_TOKEN : '';
-$chatId   = defined('TELEGRAM_CHAT_ID') ? TELEGRAM_CHAT_ID : '';
-if ($botToken === '' || $chatId === '' ||
-    strpos($botToken, '_HERE') !== false || strpos($chatId, '_HERE') !== false) {
+$botToken = palmiye_secret('TELEGRAM_BOT_TOKEN');
+$chatId   = palmiye_secret('TELEGRAM_CHAT_ID');
+if ($botToken === '' || $chatId === '') {
     palmiye_done();
 }
 
@@ -109,11 +100,8 @@ if (!is_array($body)) {
 $language = isset($body['language']) ? strtolower(substr((string) $body['language'], 0, 2)) : '';
 $language = in_array($language, $ALLOWED_LANGUAGES, true) ? $language : 'other';
 
-$device = isset($body['device']) ? (string) $body['device'] : '';
-$device = in_array($device, $ALLOWED_DEVICES, true) ? $device : 'unknown';
-
 $page = isset($body['page']) ? (string) $body['page'] : '';
-$page = in_array($page, $ALLOWED_PAGES, true) ? $page : 'other';
+$pageLabel = isset($PAGE_LABELS[$page]) ? $PAGE_LABELS[$page] : 'Diğer sayfa';
 
 $referrer = isset($body['referrer']) ? strtolower((string) $body['referrer']) : '';
 $referrer = preg_match('/^[a-z0-9.-]{1,253}$/', $referrer) ? preg_replace('/^www\./', '', $referrer) : '';
@@ -123,15 +111,12 @@ $referrer = preg_match('/^[a-z0-9.-]{1,253}$/', $referrer) ? preg_replace('/^www
 // ══════════════════════════════════════════
 $fh = @fopen(dirname($secretReal) . '/telegram-state.json', 'c+');
 if (!$fh) {
-    $fh = @fopen(rtrim(sys_get_temp_dir(), '/\\') . '/palmiye-telegram-state.json', 'c+');
-}
-if (!$fh) {
     palmiye_done(); // fail closed: without the debounce state no message is sent
 }
 flock($fh, LOCK_EX);
 $state = json_decode(stream_get_contents($fh), true);
 if (!is_array($state)) {
-    $state = ['last_sent' => 0, 'hour_start' => 0, 'sent_this_hour' => 0, 'suppressed' => 0];
+    $state = array('last_sent' => 0, 'hour_start' => 0, 'sent_this_hour' => 0, 'suppressed' => 0);
 }
 $now = time();
 if ($now - (int) $state['hour_start'] >= 3600) {
@@ -160,26 +145,25 @@ if (!$send) {
 
 // ══════════════════════════════════════════
 //  MESSAGE — plain text (no Markdown parsing of input)
+//  Location is resolved only now, only for a message that is actually sent.
 // ══════════════════════════════════════════
+$place = palmiye_approx_location();
 $dt = new DateTime('now', new DateTimeZone('Europe/Istanbul'));
-$devices = ['mobile' => 'Telefon', 'tablet' => 'Tablet', 'desktop' => 'Masaüstü', 'unknown' => 'Bilinmiyor'];
 
-$message = "🌴 Palmiye Home — yeni ziyaret\n"
-    . $dt->format('d.m.Y H:i') . "\n"
-    . 'Dil: ' . strtoupper($language) . ' · Cihaz: ' . $devices[$device] . "\n"
-    . 'Sayfa: ' . $page
+$message = '🌴 Yeni ziyaret · ' . ($place !== null ? $place : 'Konum bilinmiyor') . ' · ' . strtoupper($language) . ' · ' . $pageLabel
+    . "\n" . $dt->format('d.m.Y H:i') . ' · konum yaklaşıktır'
     . ($referrer !== '' ? "\nKaynak: " . $referrer : '')
-    . ($suppressedBefore > 0 ? "\n(+" . $suppressedBefore . ' ziyaret daha, bildirim sınırı nedeniyle toplandı)' : '');
+    . ($suppressedBefore > 0 ? "\n+" . $suppressedBefore . ' ziyaret daha (bildirim sınırı nedeniyle toplandı)' : '');
 
 $ch = curl_init('https://api.telegram.org/bot' . $botToken . '/sendMessage');
-curl_setopt_array($ch, [
+curl_setopt_array($ch, array(
     CURLOPT_POST           => true,
-    CURLOPT_POSTFIELDS     => json_encode(['chat_id' => $chatId, 'text' => $message, 'disable_web_page_preview' => true]),
-    CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
+    CURLOPT_POSTFIELDS     => json_encode(array('chat_id' => $chatId, 'text' => $message, 'disable_web_page_preview' => true)),
+    CURLOPT_HTTPHEADER     => array('Content-Type: application/json'),
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_TIMEOUT        => 5,
     CURLOPT_SSL_VERIFYPEER => true,
-]);
+));
 curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $curlErrNo = curl_errno($ch);

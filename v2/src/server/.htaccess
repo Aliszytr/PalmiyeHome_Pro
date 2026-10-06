@@ -34,6 +34,8 @@ RewriteRule ^(index\.html)?$ /? [R=301,L]
 
 # ── Clean URLs ──
 RewriteRule ^privacy$ /privacy.html [L]
+# Anonymous availability JSON (PHP builds it from the private cache; see api/availability.php)
+RewriteRule ^api/availability\.json$ /api/availability.php [L]
 RewriteRule ^(tr|de|ru)/privacy$ /$1/privacy.html [L]
 
 # ── Caching ──
@@ -48,12 +50,8 @@ RewriteRule ^(tr|de|ru)/privacy$ /$1/privacy.html [L]
   ExpiresByType application/javascript "access plus 1 year"
   ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
-# Availability data changes often and is not versioned: always revalidate.
-<Files "bookings.js">
-  <IfModule mod_headers.c>
-    Header set Cache-Control "no-cache"
-  </IfModule>
-</Files>
+# Availability JSON sets its own Cache-Control/ETag in PHP (5 min + stale-while-revalidate).
+# The legacy manual calendar file of V1 is NOT part of V2.
 
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json text/xml text/plain image/svg+xml application/manifest+json

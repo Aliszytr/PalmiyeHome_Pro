@@ -5,9 +5,18 @@
     "base_url": "https://palmiyehomekemer.com",
     "languages": ["en", "tr", "de", "ru"],
     "default_language": "en",
-    "consent_mode": "advanced",
-    "_consent_mode_options": "advanced = Google tags load with all consent types denied and send cookieless pings until the visitor accepts (current production behaviour). basic = Google tags are not loaded at all until the visitor accepts. Choice belongs to Ali/legal review.",
-    "telegram_endpoint": "/api/telegram-notify.php"
+    "consent_mode": "basic",
+    "_consent_mode_options": "advanced = Google tags load with all consent types denied and send cookieless pings until the visitor accepts (V1 production behaviour). basic = Google tags are not loaded and no event is queued until the visitor accepts. 2027 decision (QA revision 2026-10-06): basic.",
+    "telegram_endpoint": "/api/telegram-notify.php",
+    "availability_endpoint": "/api/availability.json"
+  },
+  "market": {
+    "_about": "Reservation channel order. The visitor's market is guessed in the browser only (time zone Europe/Istanbul), no IP and no network call. Nothing is ever hidden; only the order and one note change. ?market=tr|intl overrides it for QA.",
+    "tr_time_zones": ["Europe/Istanbul"],
+    "channel_order": {
+      "tr": ["whatsapp", "airbnb", "booking"],
+      "intl": ["booking", "airbnb", "whatsapp"]
+    }
   },
   "property": {
     "name": "Palmiye Home",
@@ -36,24 +45,67 @@
       "review_count": null,
       "source_url": "https://www.booking.com/hotel/tr/sakinlik-ve-huzur-palmiye-home.html",
       "verified_at": "2026-10-02",
-      "rules": "Use only '9.4 on Booking.com'. No verbal label (Exceptional etc.) until Booking's own label is verified. No reviewCount / aggregateRating until the count is verified."
+      "scale": "10",
+      "rules": "Use only '9.4 on Booking.com' / '9.4 / 10'. No verbal label (Exceptional etc.) until Booking's own label is verified. No reviewCount / aggregateRating until the count is verified."
+    },
+    "airbnb": {
+      "score": null,
+      "scale": "5",
+      "review_count": null,
+      "source_url": "https://www.airbnb.com.tr/rooms/979475001547790592",
+      "verified_at": null,
+      "rules": "Score stays null until Ali reads it on the live Airbnb listing. While null the site shows only the platform attribution and a link, never a number."
+    },
+    "google": {
+      "score": null,
+      "scale": "5",
+      "review_count": null,
+      "verified_at": null,
+      "rules": "Overall Google score stays null until read on the real Business Profile. Individual ratings live in platform_reviews."
     }
   },
+  "google_business": {
+    "_about": "Real Google Business Profile of Palmiye Home. profile_url / place_id are NOT in any project, config or live file (searched 2026-10-06) and must not be guessed. While null, 'View on Google Maps' uses a documented Maps search URL (name + address) and 'Directions' uses the documented Maps directions URL with the verified coordinates.",
+    "profile_url": null,
+    "place_id": null,
+    "maps_query": "Palmiye Home, Göynük, Kemer, Antalya",
+    "consistency_checklist": ["address", "website", "phone", "photos", "parking", "service attributes"]
+  },
+  "platform_reviews": {
+    "_about": "Real ratings from independent platforms other than the two Booking quotes. Never write text for a rating that has none (text: null).",
+    "items": [
+      { "platform": "google", "author": "Hamza Konak", "rating": 5, "scale": 5, "text": null, "date": null, "source": "Provided by Ali (Google review, 5 stars, no written text) — 2026-10-06" }
+    ]
+  },
+  "direct_testimonials": {
+    "_about": "Direct / WhatsApp testimonials. Shown ONLY when consent_confirmed is true (written permission from the guest to publish). Private WhatsApp messages are never published without it.",
+    "items": []
+  },
+  "review_themes": {
+    "_about": "Preparation for review intelligence (cleanliness, quietness, pool, kitchen, wifi, self_checkin, communication, location). Tags are assigned only from what a real review actually says. No aggregate claim ('guests love X') may be made from these tags until a real dataset exists.",
+    "taxonomy": ["cleanliness", "quietness", "pool", "kitchen", "wifi", "self_checkin", "communication", "location"]
+  },
   "guest_reviews": {
-    "_about": "Verbatim guest reviews already published on the live site (source: Booking.com). Shown in the original language; never translated, edited or invented.",
+    "_about": "Verbatim guest reviews already published on the live site (source: Booking.com). Shown in the original language; never translated, edited or invented. 'excerpt' = verbatim sentences cut from 'text' (verify_v2.py checks each one is an exact substring); the card links to the full reviews on Booking.com.",
     "items": [
       {
         "author": "Roman",
         "country": "Serbia",
+        "country_code": "RS",
         "date": "2024-08",
         "lang": "en",
+        "excerpt": ["The apartment was modern, stylish and comfortable, with a fully functional kitchen including stove, oven and dishwasher.", "The Wi-Fi was reliable and fast."],
+        "themes": ["kitchen", "wifi", "communication", "location"],
         "text": "We recently spent a week at this apartment, and our experience was nothing short of delightful. The apartment was modern, stylish and comfortable, with a fully functional kitchen including stove, oven and dishwasher. The Wi-Fi was reliable and fast. Just an 8-minute walk from Migros and Bim shops. A special mention goes to Meltem, who truly made our stay exceptional — incredibly responsive and kind. Highly recommend!"
       },
       {
         "author": "Dudojc",
         "country": "Germany",
+        "country_code": "DE",
         "date": "2024-08",
         "lang": "de",
+        "excerpt": ["Ruhige Gegend und alles Neubau.", "Pool Neu und Top sauber."],
+        "themes": ["quietness", "pool", "cleanliness", "kitchen"],
         "text": "Ruhige Gegend und alles Neubau. Küchengeräte alles Neue, wir haben das Gefühl gehabt das wir dieses Apartment als erste nutzen. Pool Neu und Top sauber. Das war unser bester Unterkunft seit 15 Jahren, und wir machen jährlich Urlaub. Können wir nur empfehlen :-)"
       }
     ]
@@ -63,7 +115,18 @@
     "checkout": "11:00",
     "pool": "Seasonal shared pool",
     "pool_dates_2027": null,
+    "parking": "Free open-air parking within the property (same wording as the live site FAQ; Google Business Profile attribute still to be compared)",
     "verified_at": "2026-10-02"
+  },
+  "availability": {
+    "_about": "Availability engine (server side, v2/src/server/availability/*). Feeds: Booking.com iCal, Airbnb iCal, Direct/WhatsApp calendar iCal — their URLs are SECRETS and live only in palmiye-secrets/availability.php outside the web root. This block holds only non-secret behaviour. season = the dates Ali opens for sale; outside it the calendar shows 'not open yet'. null = nothing is shown as free (fail-safe).",
+    "season": { "start": null, "end": null },
+    "sync_interval_minutes": 20,
+    "stale_after_minutes": 180,
+    "expire_after_minutes": 1440,
+    "fetch_timeout_seconds": 10,
+    "horizon_days": 550,
+    "public_cache_seconds": 300
   },
   "security": {
     "cameras": "exterior / entrance / common-area only",

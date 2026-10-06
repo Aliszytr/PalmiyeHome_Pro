@@ -1,5 +1,10 @@
 {
-  "_lang": { "code": "en", "name": "English", "locale": "en_US", "path": "/" },
+  "_lang": {
+    "code": "en",
+    "name": "English",
+    "locale": "en_US",
+    "path": "/"
+  },
   "meta": {
     "title": "Palmiye Home — Holiday Apartment with Pool in Göynük, Kemer",
     "description": "A peaceful {unit} holiday apartment for up to {max_guests} guests in Göynük, Kemer (Antalya): seasonal shared pool, mountain views and a fully equipped home. {score} on Booking.com.",
@@ -39,18 +44,16 @@
     "unit": "{unit} apartment",
     "guests": "Up to {max_guests} guests",
     "pool": "Seasonal shared pool",
-    "checkin": "Check-in {checkin}"
+    "checkin": "Check-in {checkin}",
+    "source": "Booking.com",
+    "verified": "Verified guest score",
+    "score_aria": "{score} out of 10"
   },
   "apartment": {
     "title": "A whole apartment, not just a room",
     "lead": "Palmiye Home is a bright {unit} apartment: a living room with an open kitchen, a separate bedroom and a bathroom with a washing machine.",
     "body": "Light floors, soft daylight and simple, comfortable furniture. There is room to cook, to unpack properly and to rest after a day at the beach or in the mountains.",
-    "list": [
-      "Living room with sofa and Smart TV",
-      "Open kitchen with fridge, oven and cooktop",
-      "Bedroom with a double bed",
-      "Bathroom with shower and washing machine"
-    ]
+    "list": ["Living room with sofa and Smart TV", "Open kitchen with fridge, oven and cooktop", "Bedroom with a double bed", "Bathroom with shower and washing machine"]
   },
   "gallery": {
     "title": "A look around",
@@ -70,9 +73,10 @@
   },
   "checkin": {
     "title": "Easy self check-in",
-    "body": "Arrive at your own pace between {checkin_from} and {checkin_until} and let yourself in — no front desk, no waiting for a key handover. Arrival details are shared with confirmed guests before the stay. Check-out is by {checkout}.",
+    "body": "Arrive at your own pace and let yourself in — no front desk and no waiting for a key handover. Arrival details are shared with confirmed guests before the stay.",
     "checkin_label": "Check-in",
-    "checkout_label": "Check-out"
+    "checkout_label": "Check-out",
+    "owner": "Palmiye Home is a professionally run holiday home, looked after closely by its owner. You can message us on WhatsApp before and during your stay."
   },
   "amenities": {
     "title": "Everything you need for the stay",
@@ -83,7 +87,7 @@
     "washer": "Washing machine",
     "hairdryer": "Hair dryer",
     "baby": "Baby cot and high chair on request",
-    "parking": "Free parking on site",
+    "parking": "Free open-air parking on site",
     "cameras": "Exterior security cameras (entrance and common areas)"
   },
   "pool": {
@@ -107,34 +111,52 @@
     "address_label": "Address",
     "map_load": "Show map",
     "map_note": "The map is loaded from Google Maps only after you click.",
-    "map_open": "Open in Google Maps",
-    "map_title": "Map of Palmiye Home, Göynük, Kemer"
+    "map_open": "View on Google Maps",
+    "map_title": "Map of Palmiye Home, Göynük, Kemer",
+    "directions": "Get directions"
   },
   "reviews": {
-    "title": "What guests say",
-    "lead": "Rated {score} on Booking.com. Two reviews in the guests' own words:",
-    "source": "Guest review on Booking.com",
-    "all": "Read all reviews on Booking.com"
+    "title": "Independent guest reviews",
+    "lead": "What we describe on this page is confirmed by real guests on independent platforms.",
+    "all": "Read all reviews on Booking.com",
+    "booking_label": "Guest score on Booking.com",
+    "booking_note": "Only guests who have stayed can review on Booking.com.",
+    "read_full": "Read the full review on Booking.com",
+    "original": "Original review in {language}",
+    "google_rating_only": "Star rating without a written review",
+    "google_link": "View Palmiye Home on Google Maps",
+    "airbnb_text": "Palmiye Home is also listed on Airbnb, where guests leave reviews after their stay.",
+    "airbnb_link": "Read reviews on Airbnb",
+    "rating_out_of": "{rating} out of {scale}",
+    "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    "countries": {
+      "RS": "Serbia",
+      "DE": "Germany"
+    },
+    "languages": {
+      "en": "English",
+      "de": "German"
+    }
   },
   "faq": {
     "title": "Questions & answers",
     "items": [
-      { "q": "What are the check-in and check-out times?", "a": "Check-in is between {checkin_from} and {checkin_until}. Check-out is by {checkout}." },
-      { "q": "How many guests can stay?", "a": "The apartment is suitable for up to {max_guests} guests." },
-      { "q": "When is the pool open?", "a": "The shared pool is seasonal and has an adult and a children's section. Opening dates can change each year, so please ask when you check your dates." },
-      { "q": "Is there parking?", "a": "Yes, free open-air parking is available on site." },
-      { "q": "Is there a baby cot or high chair?", "a": "Yes, a baby cot and a high chair can be provided on request." },
-      { "q": "How far is the beach?", "a": "The beach is about 2 km away — roughly 15–20 min on foot. Kemer centre is about 10 minutes by car." },
-      { "q": "Is the calendar on this site final?", "a": "No. The calendar is updated manually and is only indicative. Your dates are confirmed by the host on WhatsApp or by Booking.com / Airbnb when you book there." }
+      {"q": "What are the check-in and check-out times?", "a": "Check-in is between {checkin_from} and {checkin_until}. Check-out is by {checkout}."},
+      {"q": "How many guests can stay?", "a": "The apartment is suitable for up to {max_guests} guests."},
+      {"q": "When is the pool open?", "a": "The shared pool is seasonal and has an adult and a children's section. Opening dates can change each year, so please ask when you check your dates."},
+      {"q": "Is there parking?", "a": "Yes, free open-air parking is available on site."},
+      {"q": "Can I book from within Turkey?", "a": "Yes — on WhatsApp or on Airbnb. Booking.com may not be available for bookings made from within Turkey."},
+      {"q": "Is there a baby cot or high chair?", "a": "Yes, a baby cot and a high chair can be provided on request."},
+      {"q": "How far is the beach?", "a": "The beach is about 2 km away — roughly 15–20 min on foot. Kemer centre is about 10 minutes by car."},
+      {"q": "How up to date is the calendar?", "a": "The calendar is synchronised automatically from the Booking.com, Airbnb and direct booking calendars. Final availability is confirmed when you book — by the host on WhatsApp or by Booking.com / Airbnb."}
     ]
   },
   "availability": {
     "title": "Check availability",
-    "lead": "Pick your dates to see if they look free, then ask the host or book on the platform you prefer.",
-    "indicative": "Indicative availability — the calendar is updated manually. Please confirm your dates before you travel.",
-    "legend_free": "Looks free",
+    "lead": "Pick your dates to see what is open, then book on the platform you prefer or ask us directly.",
+    "legend_free": "Available",
     "legend_booked": "Booked",
-    "legend_unknown": "Not published yet",
+    "legend_unknown": "Not open yet",
     "prev_month": "Previous month",
     "next_month": "Next month",
     "pick_start": "Select your arrival date.",
@@ -142,20 +164,24 @@
     "selected": "{start} → {end} · {nights} nights",
     "clear": "Clear dates",
     "guests": "Guests",
-    "updated": "Calendar last updated: {date}",
-    "channels_title": "Ask or book",
+    "channels_title": "Book or ask",
     "whatsapp": "Ask on WhatsApp",
-    "whatsapp_desc": "Message the host with your dates",
+    "whatsapp_desc": "Direct contact with Palmiye Home",
     "booking": "Booking.com",
     "booking_desc": "Book on Booking.com",
     "airbnb": "Airbnb",
     "airbnb_desc": "Book on Airbnb",
     "wa_message_dates": "Hello! I am interested in Palmiye Home from {start} to {end} for {guests} guest(s). Is it available?",
-    "wa_message": "Hello! I would like to ask about availability at Palmiye Home."
+    "wa_message": "Hello! I would like to ask about availability at Palmiye Home.",
+    "sync_note": "Availability is synchronised automatically from our booking calendars (Booking.com, Airbnb and direct bookings). Final availability is confirmed when you book.",
+    "loading": "Loading availability…",
+    "state_stale": "The calendar could not be refreshed recently. Please confirm your dates with us before booking.",
+    "state_unavailable": "Live availability cannot be shown right now. Send us your dates on WhatsApp or check them on Booking.com or Airbnb.",
+    "booking_tr_note": "Booking.com may not be available for bookings made from within Turkey."
   },
   "consent": {
     "title": "Cookies",
-    "text": "With your permission we use Google Analytics and Google Ads cookies to understand visits and measure our ads. If you decline, these cookies are not set. You can change your choice at any time.",
+    "text": "We would like to use Google Analytics and Google Ads cookies to measure visits and ads. Nothing is loaded unless you accept.",
     "accept": "Accept",
     "decline": "Decline",
     "more": "Privacy policy"
@@ -191,22 +217,29 @@
   },
   "privacy": {
     "title": "Privacy policy",
-    "meta_description": "How the Palmiye Home website handles data: cookies, Google Analytics, Google Ads, visit notifications and your choices.",
+    "meta_description": "How the Palmiye Home website handles data: consent, Google Analytics, Google Ads, visit notifications, the availability calendar and maps.",
     "updated": "Technical description last updated: {build_date}",
     "back": "Back to the home page",
     "sections": [
-      { "h": "Who we are", "p": "This website belongs to Palmiye Home, a holiday apartment in Göynük, Kemer, Antalya, Turkey. Contact: {email}." },
-      { "h": "Cookies and your choice", "p": "When you first visit, a banner asks whether Google Analytics and Google Ads cookies may be used. Until you accept, Google consent is set to “denied” and these cookies are not stored. Your choice is saved in your browser (localStorage key “palmiye_cookies”) so the banner does not appear again; you can change it any time with “Cookie settings” at the bottom of each page. Your language choice is saved in the same way (key “palmiye_lang”)." },
-      { "h": "Google Analytics and Google Ads", "p": "The site loads Google's tag (gtag.js) for Google Analytics 4 and Google Ads conversion measurement. With consent denied, Google may still receive cookieless measurement signals (for example that a page was viewed or a booking link was clicked) without storing cookies on your device. With consent granted, Google may use cookies to measure visits and ad performance. We record clicks on WhatsApp, Booking.com and Airbnb links and the use of the availability calendar; we do not send names, phone numbers, email addresses or chat contents to Google." },
-      { "h": "Visit notifications", "p": "When a page is opened, the site sends our own server a short anonymous notice (language, a rough device type such as phone or desktop, the page path and the name of the referring website). Our server forwards a short message to the owner's Telegram account. Your IP address, browser details and screen size are not included in the message and no per-visitor record is kept; only a shared counter used to limit the number of notifications is stored. Within the same browser session the notice is sent once (sessionStorage key “palmiye_notified”)." },
-      { "h": "Map", "p": "The Google Maps map is not loaded automatically. It loads only if you click “Show map”; Google then processes your request under its own privacy policy." },
-      { "h": "Booking platforms and WhatsApp", "p": "Links to WhatsApp, Booking.com and Airbnb open those services. Anything you send or book there is handled by those services under their own terms and privacy policies." },
-      { "h": "Your rights", "p": "You can ask us about the data we hold or request its deletion by writing to {email}." }
+      {"h": "Who we are", "p": "This website belongs to Palmiye Home, a holiday apartment in Göynük, Kemer, Antalya, Turkey. Contact: {email}."},
+      {"h": "Hosting", "p": "Like every website, the site runs on a hosting provider's web server, which keeps standard technical access logs (including IP addresses) for security and operation. We do not use these logs to profile visitors."},
+      {"h": "Cookies and your choice", "p": "When you first visit, a small banner asks whether Google Analytics and Google Ads may be used. Until you accept, Google's tag is not loaded at all: no Google cookies are set and no measurement data is sent to Google. Your choice is saved in your browser (localStorage key “palmiye_cookies”) so the banner does not appear again; you can change it at any time with “Cookie settings” at the bottom of each page. If you pick a language with the language switch, that choice is saved in the same way (key “palmiye_lang”); the site never redirects you automatically."},
+      {"h": "Google Analytics and Google Ads", "p": "Only after you accept does the site load Google's tag (gtag.js) for Google Analytics 4 and Google Ads conversion measurement; Google may then use cookies to measure visits and ad performance. From then on we record clicks on the WhatsApp, Booking.com and Airbnb links, clicks on review links and the use of the availability calendar. We do not send names, phone numbers, email addresses or chat contents to Google. If you later decline, measurement stops and the Google cookies set by this site are deleted."},
+      {"h": "Visit notifications", "p": "When a page is opened, the site sends our own server a short notice that contains only the page language, the page path and the name of the referring website (not its full address). To add an approximate location (city or region and country), our server looks up your IP address in a GeoIP database stored on the server itself; no external service is asked. The IP address is used only for this lookup in the server's memory and is then discarded: it is not stored, not logged and not included in the message. The server then sends a short message to the owner's Telegram account, for example “Yeni ziyaret · Antalya, Türkiye · TR · Ana sayfa” (new visit · place · language · page). The location is approximate and can be wrong, for example with a VPN or a mobile network. No per-visitor record is kept; only a shared counter that limits the number of notifications is stored. Within one browser session the notice is sent once (sessionStorage key “palmiye_notified”)."},
+      {"h": "Availability calendar", "p": "The calendar shows dates from our Booking.com, Airbnb and direct booking calendars. Our server reads only the dates from those calendars; guest names, contact details, reservation codes and prices are neither read nor published. Your browser loads the calendar data from our own server and sends no personal data with it."},
+      {"h": "Map", "p": "The Google Maps map is not loaded automatically. It loads only if you click “Show map”; Google then processes your request under its own privacy policy. The “View on Google Maps” and “Get directions” links open Google Maps."},
+      {"h": "Booking platforms and WhatsApp", "p": "Links to WhatsApp, Booking.com and Airbnb open those services. Anything you send or book there is handled by those services under their own terms and privacy policies."},
+      {"h": "Your rights", "p": "You can ask us about the data we hold or request its deletion by writing to {email}."}
     ]
   },
   "notfound": {
     "title": "Page not found",
     "text": "The page you are looking for does not exist or has moved.",
     "back": "Go to the home page"
+  },
+  "lang_suggest": {
+    "text": "This page is also available in English.",
+    "switch": "Read in English",
+    "dismiss": "Close"
   }
 }

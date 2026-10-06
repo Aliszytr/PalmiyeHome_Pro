@@ -6,6 +6,8 @@ import json
 import re
 import subprocess
 import sys
+
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
@@ -51,6 +53,10 @@ forbidden = list(CONFIG["forbidden_claims"]) + [
     "Haziran–Kasım", "Haziran-Kasım", "Juni–November", "июнь–ноябрь", "Cirali", "Çıralı", "★", "⭐",
     "aggregateRating", "reviewCount", "starRating", "Green dates are available", "Yeşil tarihler müsait",
     "Message Queue", "fonts.googleapis.com", "fonts.gstatic.com", "unpkg.com", "lucide",
+    # 2027 QA revision: manual calendar is gone, no device class, no admin-style public button
+    "bookings.js", "PALMIYE_BOOKINGS", "Calendar last updated", "Takvimin son güncellenmesi", "Kalender zuletzt aktualisiert",
+    "Календарь обновлён", "updated manually", "elle güncellenir", "von Hand aktualisiert", "обновляется вручную",
+    "Rezervasyon tarihlerini güncelle", "guests love", "misafirler bayılıyor",
 ]
 hits = []
 for p, s in list(pub_text.items()) + list(src_text.items()):
@@ -64,7 +70,10 @@ nine_six = [str(p.relative_to(REPO)) for p, s in list(pub_text.items()) + list(s
 check("no 9.6 / 9,6 anywhere in V2", not nine_six, ", ".join(nine_six))
 
 # Secrets: Telegram bot token pattern, filled env values, private keys — whole V2 tree + tracked repo files
-SECRET = re.compile(r"\b\d{8,10}:[A-Za-z0-9_-]{35}\b|-----BEGIN [A-Z ]*PRIVATE KEY-----|api\.telegram\.org/bot\d|define\('TELEGRAM_BOT_TOKEN',\s*'(?!YOUR_)")
+SECRET = re.compile(r"\b\d{8,10}:[A-Za-z0-9_-]{35}\b|-----BEGIN [A-Z ]*PRIVATE KEY-----|api\.telegram\.org/bot\d|define\('TELEGRAM_BOT_TOKEN',\s*'(?!YOUR_)"
+                    # private iCal export URLs (Booking / Airbnb / Google Calendar secret address)
+                    r"|admin\.booking\.com/hotel/hoteladmin/ical|airbnb\.[a-z.]+/calendar/ical/\d|calendar\.google\.com/calendar/ical/[^\s'\"]+/private-"
+                    r"|define\('PALMIYE_ICAL_[A-Z]+',\s*'https?://|\$2[aby]\$\d\d\$[./A-Za-z0-9]{53}")
 tracked = subprocess.run(["git", "ls-files"], cwd=REPO, capture_output=True, text=True).stdout.split("\n")
 scan = set(p for p in V2.rglob("*") if p.is_file() and ".mock" not in p.parts and p.suffix not in {".avif", ".webp", ".jpg", ".png"})
 scan |= set(REPO / t for t in tracked if t and Path(t).suffix not in {".avif", ".webp", ".jpg", ".jpeg", ".png", ".zip", ".ico", ".heic"})
@@ -233,20 +242,99 @@ for s in pub_text.values():
         labels_found.add(json.dumps(json.loads(m), sort_keys=True))
 check("Ads conversion labels in pages == config (Set B)", labels_found == {json.dumps(t["ads_conversion_labels"], sort_keys=True)}, str(labels_found))
 idx = (PUB / "index.html").read_text(encoding="utf-8")
-order = [idx.find(x) for x in ("googletagmanager.com/gtag/js", "'consent','default'", "'config','AW-", "'config','G-")]
-check("<head> order: gtag.js → consent default (denied) → config AW → config GA4", all(o > 0 for o in order) and order == sorted(order), str(order))
-check("consent default denies all four types", all(f"{k}:'denied'" in idx for k in ("ad_storage", "ad_user_data", "ad_personalization", "analytics_storage")))
 track_js = (PUB / "assets/js/track.js").read_text(encoding="utf-8")
-check("event taxonomy present (5 events) and review click has no conversion",
-      all(e in track_js for e in ("whatsapp_click", "booking_click", "airbnb_click", "booking_review_click", "availability_check"))
-      and "booking_review_click: " not in track_js.split("CONVERSION_FOR")[1].split("}")[0])
+if CONFIG["site"]["consent_mode"] == "basic":
+    head = idx.split("</head>")[0]
+    loader = track_js.split("function loadTagIfBasic")[1].split("function clearGoogleCookies")[0]
+    lo = [loader.find(x) for x in ("gtagSafe('config', T.google_ads_id)", "gtagSafe('config', T.ga4_measurement_id)", "googletagmanager.com/gtag/js")]
+    check("BASIC consent: no gtag.js in any HTML; consent default set inline; tag + config AW → GA4 injected only after Accept",
+          not any("googletagmanager.com/gtag/js" in t_ for p_, t_ in pub_text.items() if p_.suffix == ".html")
+          and "'consent','default'" in head and all(o > 0 for o in lo) and lo == sorted(lo)
+          and "var sent = !BASIC || consented();" in track_js, str(lo))
+else:
+    order = [idx.find(x) for x in ("googletagmanager.com/gtag/js", "'consent','default'", "'config','AW-", "'config','G-")]
+    check("<head> order: gtag.js → consent default (denied) → config AW → config GA4", all(o > 0 for o in order) and order == sorted(order), str(order))
+check("consent default denies all four types", all(f"{k}:'denied'" in idx for k in ("ad_storage", "ad_user_data", "ad_personalization", "analytics_storage")))
+conv_map = track_js.split("var CONVERSION_FOR = ")[1].split("}")[0]
+check("event taxonomy present; only whatsapp/booking/airbnb clicks are Ads conversions (review clicks never)",
+      all(e in track_js for e in ("whatsapp_click", "booking_click", "airbnb_click", "booking_review_click", "availability_check", "review_source_click"))
+      and set(re.findall(r"(\w+_click):", conv_map)) == {"whatsapp_click", "booking_click", "airbnb_click"})
+review_links_ok = True
+for lang in LANGS:
+    s_ = (PUB / ("index.html" if lang == "en" else f"{lang}/index.html")).read_text(encoding="utf-8")
+    for m in re.finditer(r'<a [^>]*href="([^"]+)"[^>]*>', s_):
+        tag, href = m.group(0), m.group(1)
+        if "#tab-reviews" in href and 'data-track="booking_review_click"' not in tag:
+            review_links_ok = False
+        if 'data-cta="reviews"' in tag and re.search(r'data-track="(booking|airbnb|whatsapp)_click"', tag):
+            review_links_ok = False
+check("every review link is tagged as a review click, none as a booking conversion", review_links_ok)
 
 php = (PUB / "api/telegram-notify.php").read_text(encoding="utf-8")
-check("Telegram endpoint: no REMOTE_ADDR, no per-visitor files, secret outside web root",
-      "REMOTE_ADDR" not in php and "md5(" not in php and "palmiye-secrets" in php and "Refused: secret file is inside the document root" in php)
-check("Telegram client sends only language/device/page/referrer",
-      "body = JSON.stringify({ language: D.lang, device: device, page: location.pathname, referrer: ref })" in track_js
-      and "screen." not in track_js and "userAgent" not in track_js.split("notifyVisit")[1].split("JSON.stringify")[1])
+geo = (PUB / "api/_lib/geo.php").read_text(encoding="utf-8")
+boot = (PUB / "api/_lib/bootstrap.php").read_text(encoding="utf-8")
+server_php = {p_.relative_to(PUB).as_posix(): p_.read_text(encoding="utf-8") for p_ in (PUB / "api").rglob("*.php")}
+ip_users = sorted(k for k, v in server_php.items() if "REMOTE_ADDR" in v)
+geo_body = geo.split("function palmiye_approx_location")[1]
+check("Telegram: IP read only inside api/_lib/geo.php, local lookup only, discarded; never written/logged/sent",
+      ip_users == ["api/_lib/geo.php"]
+      and not re.search(r"file_put_contents|fwrite|error_log|curl_|file_get_contents\(\s*'http", geo_body)
+      and "$ip = null;" in geo_body and "HTTP_X_FORWARDED_FOR" not in geo
+      and "$ip" not in php and "REMOTE_ADDR" not in php, str(ip_users))
+check("Telegram: no per-visitor files, one anonymous debounce state, 1/min + 20/h, '+N' summary, secret outside web root",
+      "md5(" not in php and "$MIN_INTERVAL_SEC  = 60" in php and "$MAX_PER_HOUR      = 20" in php and "$suppressedBefore . ' ziyaret daha" in php
+      and "palmiye-secrets" in boot and "Refused: secret file is inside the document root" in boot)
+check("Telegram client sends only language/page/referrer host (no device class, screen, UA)",
+      "body = JSON.stringify({ language: D.lang, page: location.pathname, referrer: ref })" in track_js
+      and "device" not in track_js.split("function notifyVisit")[1] and "screen." not in track_js
+      and "'device'" not in php)
+
+# 6. 2027 QA revision rules -----------------------------------------------------------
+manifest = json.loads((V2 / "src" / "assets-manifest.json").read_text(encoding="utf-8"))
+hero = next(e for e in manifest["images"] if e["slug"] == "hero-pool-mountain")
+check("hero = new natural IMG_0167 retouch (old clouded version 362887… not used)",
+      hero["source"]["sha256"] != "362887a55fbe911f36c5cc6eaf299b7af2d2830fb0dd7a978f03ef554f761f96")
+check("hero CTA scrolls to the on-page availability section (not to Booking.com)",
+      all('href="#availability" data-track="availability_check" data-cta="hero"' in (PUB / ("index.html" if l == "en" else f"{l}/index.html")).read_text(encoding="utf-8") for l in LANGS))
+check("root page: no forced language redirect (only explicit legacy ?lang=)",
+      "navigator.language" not in idx.split("</head>")[0] and "palmiye_lang" not in idx.split("</head>")[0]
+      and "data-lang-suggest" in idx)
+check("legacy data/bookings.js is not a V2 dependency (no file, no reference)",
+      not (PUB / "data" / "bookings.js").exists() and not any("bookings.js" in t_ for t_ in pub_text.values()))
+av_php = (PUB / "api/_lib/availability.php").read_text(encoding="utf-8")
+av_pub = (PUB / "api/availability.php").read_text(encoding="utf-8")
+check("availability engine: endpoint + cron + owner health present; library not web-accessible; secrets only via palmiye_secret()",
+      all((PUB / f).exists() for f in ("api/availability.php", "api/availability-sync.php", "api/availability-health.php", "api/_lib/settings.json", "api/_lib/.htaccess"))
+      and "Require all denied" in (PUB / "api/_lib/.htaccess").read_text()
+      and "RewriteRule ^api/availability\\.json$ /api/availability.php" in (PUB / ".htaccess").read_text()
+      and "palmiye_secret('PALMIYE_ICAL_BOOKING')" in av_php and "PHP_SAPI !== 'cli'" in (PUB / "api/availability-sync.php").read_text())
+pub_fn = av_php.split("function palmiye_av_public")[1].split("function palmiye_av_health")[0]
+pub_keys = re.findall(r"'(\w+)'\s+=>", pub_fn.split("return array(")[-1])
+check("availability public JSON: only version / status / last sync / season / closed ranges (no SUMMARY, DESCRIPTION, UID, price)",
+      "'SUMMARY'" not in av_php and "'DESCRIPTION'" not in av_php and "'UID'" not in av_php
+      and pub_keys == ["version", "status", "last_successful_sync", "season", "start", "end", "closed", "ranges"], str(pub_keys))
+r = subprocess.run([sys.executable, str(V2 / "tools" / "test_availability.py")], capture_output=True, text=True, encoding="utf-8", errors="replace")
+check("availability fail-safe tests (Python reference engine)", r.returncode == 0, (r.stdout.strip().splitlines() or ["?"])[-1])
+check("production season is not invented (config availability.season stays null until Ali sets it)",
+      CONFIG["availability"]["season"]["start"] is None or bool(re.match(r"^\d{4}-\d{2}-\d{2}$", CONFIG["availability"]["season"]["start"])))
+excerpt_ok = all(seg in r_["text"] for r_ in CONFIG["guest_reviews"]["items"] for seg in r_["excerpt"])
+google_ok = True
+for it in CONFIG["platform_reviews"]["items"]:
+    if not it.get("text"):
+        for lang in LANGS:
+            s_ = (PUB / ("index.html" if lang == "en" else f"{lang}/index.html")).read_text(encoding="utf-8")
+            card = s_.split('class="review-source rs-google"')[1].split("</article>")[0]
+            if "<blockquote" in card or 'class="rs-text"' in card:
+                google_ok = False
+check("reviews: excerpts are verbatim; a rating without text (Google · Hamza Konak 5/5) shows no invented text", excerpt_ok and google_ok)
+check("Google Business: no invented profile URL (null until verified) — Maps links use documented search/directions URLs",
+      (CONFIG["google_business"]["profile_url"] is None and "google.com/maps/search/?api=1" in idx and "google.com/maps/dir/?api=1" in idx)
+      or bool(CONFIG["google_business"]["profile_url"]))
+check("Turkey logic: all three channels always present; TR order + note via time zone only (no IP, no geo API)",
+      all(f'data-channel-item="{c}"' in idx for c in ("booking", "airbnb", "whatsapp")) and "data-tr-note" in idx
+      and "resolvedOptions().timeZone" in (PUB / "assets/js/site.js").read_text(encoding="utf-8")
+      and CONFIG["market"]["channel_order"]["tr"] == ["whatsapp", "airbnb", "booking"]
+      and CONFIG["market"]["channel_order"]["intl"] == ["booking", "airbnb", "whatsapp"])
 
 failed = [r for r in results if not r[1]]
 print(f"\n{len(results) - len(failed)}/{len(results)} checks passed")

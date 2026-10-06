@@ -1,0 +1,14 @@
+{
+  "availability": {
+    "season": {
+      "start": null,
+      "end": null
+    },
+    "sync_interval_minutes": 20,
+    "stale_after_minutes": 180,
+    "expire_after_minutes": 1440,
+    "fetch_timeout_seconds": 10,
+    "horizon_days": 550,
+    "public_cache_seconds": 300
+  }
+}

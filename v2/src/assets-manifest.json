@@ -14,8 +14,8 @@
         "file": "DagManzaraliModernHavuzluTatilKoyu.png",
         "width": 1672,
         "height": 941,
-        "bytes": 2964272,
-        "sha256": "362887a55fbe911f36c5cc6eaf299b7af2d2830fb0dd7a978f03ef554f761f96"
+        "bytes": 2971101,
+        "sha256": "63d638b31cf1cba32700a0c22da3e408b441cca00b5d6af7e35e1f90d08b299f"
       },
       "crop": null,
       "aspect": [
@@ -28,63 +28,63 @@
           "format": "avif",
           "width": 480,
           "height": 270,
-          "bytes": 18135
+          "bytes": 17792
         },
         {
           "file": "assets/img/hero-pool-mountain-480.webp",
           "format": "webp",
           "width": 480,
           "height": 270,
-          "bytes": 34448
+          "bytes": 34248
         },
         {
           "file": "assets/img/hero-pool-mountain-800.avif",
           "format": "avif",
           "width": 800,
           "height": 450,
-          "bytes": 46053
+          "bytes": 46216
         },
         {
           "file": "assets/img/hero-pool-mountain-800.webp",
           "format": "webp",
           "width": 800,
           "height": 450,
-          "bytes": 88320
+          "bytes": 89404
         },
         {
           "file": "assets/img/hero-pool-mountain-1200.avif",
           "format": "avif",
           "width": 1200,
           "height": 675,
-          "bytes": 95209
+          "bytes": 96810
         },
         {
           "file": "assets/img/hero-pool-mountain-1200.webp",
           "format": "webp",
           "width": 1200,
           "height": 675,
-          "bytes": 181096
+          "bytes": 182912
         },
         {
           "file": "assets/img/hero-pool-mountain-1600.avif",
           "format": "avif",
           "width": 1600,
           "height": 900,
-          "bytes": 148341
+          "bytes": 149604
         },
         {
           "file": "assets/img/hero-pool-mountain-1600.webp",
           "format": "webp",
           "width": 1600,
           "height": 900,
-          "bytes": 288092
+          "bytes": 289778
         },
         {
           "file": "assets/img/hero-pool-mountain-1200.jpg",
           "format": "jpg",
           "width": 1200,
           "height": 675,
-          "bytes": 214720
+          "bytes": 215377
         }
       ]
     },
@@ -1472,8 +1472,8 @@
         "file": "DagManzaraliModernHavuzluTatilKoyu.png",
         "width": 1672,
         "height": 941,
-        "bytes": 2964272,
-        "sha256": "362887a55fbe911f36c5cc6eaf299b7af2d2830fb0dd7a978f03ef554f761f96"
+        "bytes": 2971101,
+        "sha256": "63d638b31cf1cba32700a0c22da3e408b441cca00b5d6af7e35e1f90d08b299f"
       },
       "crop": [
         244,
@@ -1491,35 +1491,35 @@
           "format": "avif",
           "width": 480,
           "height": 600,
-          "bytes": 39918
+          "bytes": 39547
         },
         {
           "file": "assets/img/hero-pool-mountain-portrait-480.webp",
           "format": "webp",
           "width": 480,
           "height": 600,
-          "bytes": 76404
+          "bytes": 77340
         },
         {
           "file": "assets/img/hero-pool-mountain-portrait-753.avif",
           "format": "avif",
           "width": 753,
           "height": 941,
-          "bytes": 82513
+          "bytes": 81947
         },
         {
           "file": "assets/img/hero-pool-mountain-portrait-753.webp",
           "format": "webp",
           "width": 753,
           "height": 941,
-          "bytes": 162978
+          "bytes": 161920
         },
         {
           "file": "assets/img/hero-pool-mountain-portrait-753.jpg",
           "format": "jpg",
           "width": 753,
           "height": 941,
-          "bytes": 188752
+          "bytes": 187892
         }
       ]
     },
@@ -1528,7 +1528,7 @@
       "role": "og",
       "source": {
         "file": "DagManzaraliModernHavuzluTatilKoyu.png",
-        "sha256": "362887a55fbe911f36c5cc6eaf299b7af2d2830fb0dd7a978f03ef554f761f96"
+        "sha256": "63d638b31cf1cba32700a0c22da3e408b441cca00b5d6af7e35e1f90d08b299f"
       },
       "crop": "centre 1200x630",
       "aspect": [
@@ -1541,7 +1541,7 @@
           "format": "jpg",
           "width": 1200,
           "height": 630,
-          "bytes": 201196
+          "bytes": 202899
         }
       ]
     }

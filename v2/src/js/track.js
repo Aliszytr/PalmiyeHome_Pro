@@ -7,11 +7,16 @@
  *   airbnb_click          GA4 + Ads conversion "airbnb"
  *   booking_review_click  GA4 only — never a booking conversion
  *   availability_check    GA4 only — "Check availability" CTA or a completed date range
+ *   review_source_click   GA4 only — Google / Airbnb review-source links (param: platform)
  *
  * IDs and labels come from config/site-config.json via #site-data (never hard-coded here).
- * Consent: Google Consent Mode v2 defaults are set inline in <head> (all denied).
- * The visitor's choice is stored in localStorage "palmiye_cookies" (accepted | declined),
- * the same key production uses, so earlier choices stay valid.
+ *
+ * Consent (config site.consent_mode):
+ *   basic    — gtag.js is not loaded and NOTHING is queued for Google until the visitor
+ *              accepts. Clicks before that are not measured (deterministic, no replay).
+ *   advanced — gtag.js loads with all consent types denied (V1 behaviour).
+ * The choice is stored in localStorage "palmiye_cookies" (accepted | declined), the same
+ * key production uses, so earlier choices stay valid.
  */
 (function () {
   'use strict';
@@ -20,6 +25,7 @@
   if (!dataEl) return;
   var D = JSON.parse(dataEl.textContent);
   var T = D.tracking;
+  var BASIC = T.consent_mode === 'basic';
   var CONSENT_KEY = 'palmiye_cookies';
   var DEBUG = /[?&]debug_tracking=1\b/.test(location.search) || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
 
@@ -32,6 +38,8 @@
     return value;
   }
 
+  function consented() { return store('local', CONSENT_KEY) === 'accepted'; }
+
   function gtagSafe() {
     if (typeof window.gtag === 'function') window.gtag.apply(window, arguments);
   }
@@ -43,12 +51,15 @@
   function track(name, params) {
     var p = { language: D.lang };
     for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k) && params[k] !== undefined) p[k] = params[k];
-    gtagSafe('event', name, p);
     var key = CONVERSION_FOR[name];
     var label = key && T.ads_conversion_labels[key];
-    if (label) gtagSafe('event', 'conversion', { send_to: T.google_ads_id + '/' + label });
-    log.push({ event: name, params: p, conversion: label ? T.google_ads_id + '/' + label : null });
-    if (DEBUG) console.info('[track]', name, p, label ? '+ Ads conversion ' + key : '');
+    var sent = !BASIC || consented();
+    if (sent) {
+      gtagSafe('event', name, p);
+      if (label) gtagSafe('event', 'conversion', { send_to: T.google_ads_id + '/' + label });
+    }
+    log.push({ event: name, params: p, conversion: label ? T.google_ads_id + '/' + label : null, sent: sent });
+    if (DEBUG) console.info('[track]', name, p, label ? '+ Ads conversion ' + key : '', sent ? '' : '(not sent: no consent)');
   }
 
   function classify(a) {
@@ -69,7 +80,9 @@
     var section = el.closest('section[id], footer[id], header');
     track(name, {
       cta_location: el.getAttribute('data-cta') || (section && section.id) || 'page',
-      method: name === 'availability_check' ? 'cta' : undefined
+      method: name === 'availability_check' ? 'cta' : undefined,
+      platform: el.getAttribute('data-platform') || undefined,
+      market: CONVERSION_FOR[name] && document.documentElement.getAttribute('data-market') || undefined
     });
   }, true);
 
@@ -81,7 +94,7 @@
   var tagLoaded = !!document.querySelector('script[src*="googletagmanager.com/gtag/js"]');
 
   function loadTagIfBasic() {
-    if (tagLoaded || T.consent_mode !== 'basic') return;
+    if (tagLoaded || !BASIC) return;
     tagLoaded = true;
     gtagSafe('js', new Date());
     gtagSafe('config', T.google_ads_id);
@@ -117,41 +130,52 @@
   }
 
   var banner = document.getElementById('consent');
-  function showBanner() {
+  var reopenedFrom = null;
+  function setBanner(open) {
     if (!banner) return;
-    banner.hidden = false;
-    var first = banner.querySelector('button');
-    if (first) first.focus({ preventScroll: true });
+    banner.hidden = !open;
+    document.documentElement.classList.toggle('has-consent', open);
   }
   if (banner) {
     banner.addEventListener('click', function (e) {
       var b = e.target.closest('[data-consent]');
       if (!b) return;
       applyChoice(b.getAttribute('data-consent'));
-      banner.hidden = true;
+      setBanner(false);
+      if (reopenedFrom) { reopenedFrom.focus(); reopenedFrom = null; }
+    });
+    banner.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && reopenedFrom) { setBanner(false); reopenedFrom.focus(); reopenedFrom = null; }
     });
   }
+  // "Cookie settings" re-opens the banner and moves focus into it; on first load the banner
+  // does not steal focus (it sits right after the skip link in the tab order instead).
   document.addEventListener('click', function (e) {
-    if (e.target.closest && e.target.closest('[data-consent-open]')) showBanner();
+    var opener = e.target.closest && e.target.closest('[data-consent-open]');
+    if (!opener) return;
+    reopenedFrom = opener;
+    setBanner(true);
+    var first = banner && banner.querySelector('button');
+    if (first) first.focus({ preventScroll: true });
   });
 
   var stored = store('local', CONSENT_KEY);
   if (stored === 'accepted') loadTagIfBasic();
-  else if (stored !== 'declined') showBanner();
+  else if (stored !== 'declined') setBanner(true);
 
   // ── Visit notice (server-side Telegram, anonymous) ─────
+  // Sends only: page language, page path, referring host name. The server adds an
+  // approximate place from a local GeoIP lookup and discards the IP.
   function notifyVisit() {
     if (!D.telegram_endpoint || store('session', 'palmiye_notified')) return;
     if (navigator.webdriver || /bot|crawl|spider|lighthouse|headless|preview/i.test(navigator.userAgent)) return;
     store('session', 'palmiye_notified', '1');
-    var device = window.matchMedia('(max-width: 640px)').matches ? 'mobile'
-      : window.matchMedia('(max-width: 1024px)').matches ? 'tablet' : 'desktop';
     var ref = '';
     try {
       var r = document.referrer ? new URL(document.referrer).hostname : '';
       if (r && r !== location.hostname) ref = r;
     } catch (e) { /* ignore */ }
-    var body = JSON.stringify({ language: D.lang, device: device, page: location.pathname, referrer: ref });
+    var body = JSON.stringify({ language: D.lang, page: location.pathname, referrer: ref });
     try {
       fetch(D.telegram_endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true, credentials: 'omit' })
         .catch(function () {});
