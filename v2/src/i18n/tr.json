@@ -102,7 +102,7 @@
     "center": "Göynük merkez",
     "center_desc": "Market ve dükkânlar yürüme mesafesinde",
     "beach": "Plaj",
-    "beach_desc": "Yaklaşık 2 km — yürüyerek 15–20 dk",
+    "beach_desc": "Yaklaşık 2 km",
     "canyon": "Göynük Kanyonu",
     "canyon_desc": "Arabayla yaklaşık 5 dk",
     "kemer": "Kemer merkez",
@@ -120,6 +120,7 @@
     "title": "Bağımsız misafir değerlendirmeleri",
     "lead": "Bu sayfada anlattıklarımızı, bağımsız platformlardaki gerçek misafirler doğruluyor.",
     "all": "Tüm yorumları Booking.com'da okuyun",
+    "booking_tr_access_note": "Booking.com erişimi Türkiye'den sınırlı olabilir.",
     "booking_label": "Booking.com misafir puanı",
     "booking_note": "Booking.com'da yalnızca konaklamış misafirler değerlendirme yazabilir.",
     "read_full": "Yorumun tamamını Booking.com'da okuyun",
@@ -148,7 +149,7 @@
       {"q": "Havuz ne zaman açık?", "a": "Ortak havuzda yetişkin ve çocuk bölümleri vardır. {pool_note}"},
       {"q": "Otopark var mı?", "a": "Evet, tesis içinde ücretsiz açık otopark bulunur."},
       {"q": "Bebek yatağı veya mama sandalyesi var mı?", "a": "Evet, istek üzerine bebek yatağı ve mama sandalyesi sağlanabilir."},
-      {"q": "Plaj ne kadar uzakta?", "a": "Plaj yaklaşık 2 km uzaklıkta — yürüyerek 15–20 dakika. Kemer merkez arabayla yaklaşık 10 dakika."},
+      {"q": "Plaj ne kadar uzakta?", "a": "Plaj yaklaşık 2 km uzaklıkta. Kemer merkez arabayla yaklaşık 10 dakika."},
       {"q": "Takvim ne kadar güncel?", "a": "Takvim, Booking.com ve Airbnb takvimlerimizden otomatik olarak senkronize edilir; bize doğrudan yapılan rezervasyonlar da bu takvimlerde kapatılır. Kesin müsaitlik rezervasyon sırasında doğrulanır — WhatsApp'ta ev sahibi ya da Booking.com / Airbnb tarafından."}
     ]
   },

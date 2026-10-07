@@ -8,6 +8,7 @@ return to normal behaviour (no code change). Browser behaviour (hint order, ?ph_
 values, neutral time zone) is covered by the QA run documented in the report.
 """
 import json
+from html import unescape as html_unescape
 import re
 import sys
 from pathlib import Path
@@ -78,7 +79,7 @@ for label, files in (("ON", on), ("OFF", off)):
         li = re.search(r'<li data-channel-item="booking">(.*?)</li>', h, re.S)
         # the Booking <li> and its link must carry no hidden attribute (class names like
         # "visually-hidden" are the screen-reader "(opens in a new tab)" text, not hiding)
-        if not li or re.search(r'<(li|a)[^>]*\shidden[\s>=]', li.group(0).split("data-tr-note")[0]):
+        if not li or re.search(r'<(li|a)\b[^>]*\shidden[\s>=]', li.group(0).split("data-tr-note")[0]):
             bad.append(lang)
     check(f"Booking channel always in the DOM and never hidden (restriction {label})", not bad, str(bad))
 
@@ -133,6 +134,36 @@ for lang in LANGS:
     hc = page(confirmed, lang)
     check(f"pool confirmed date [{lang}]: one config field switches the text to the confirmed date",
           SEASONAL[lang] in hc and B.day_month(lang, "2027-05-02") in hc and CONFIRM[lang] not in hc)
+
+# ── RC4: Booking review access note (TR hint only; the review link itself always stays) ──
+REVIEW_NOTE = {"en": "Booking.com access may be limited from Türkiye.",
+               "tr": "Booking.com erişimi Türkiye'den sınırlı olabilir.",
+               "de": "Der Zugriff auf Booking.com kann aus der Türkei eingeschränkt sein.",
+               "ru": "Доступ к Booking.com из Турции может быть ограничен."}
+for lang in LANGS:
+    h = page(on, lang)
+    art = re.search(r'<article class="review-source rs-booking".*?</article>', h, re.S).group(0)
+    n = re.search(r'<p class="rs-access-note" data-tr-review-note hidden>(.*?)</p>', art)
+    check(f"review access note [{lang}]: exact text, under the Booking review link, hidden by default (site.js reveals it for a TR hint)",
+          n and n.group(1) == B.text(lang, "reviews.booking_tr_access_note") and html_unescape(n.group(1)) == REVIEW_NOTE[lang] and art.index('data-cta="reviews"') < art.index("data-tr-review-note"))
+    h = page(off, lang)
+    check(f"review access note [{lang}]: absent when the restriction is OFF; review link still present",
+          "data-tr-review-note" not in h and REVIEW_NOTE[lang] not in h and 'data-track="booking_review_click" data-cta="reviews"' in h)
+
+# ── RC4: beach copy = distance only (no walking-time promise) ──
+BEACH = {"en": "About 2 km", "tr": "Yaklaşık 2 km", "de": "Etwa 2 km", "ru": "Около 2 км"}
+WALK = re.compile(r"15[–-]20")
+for lang in LANGS:
+    h = page(ref, lang)
+    check(f"beach copy [{lang}]: exactly '{BEACH[lang]}', no 15–20 min walking claim anywhere on the page",
+          B.text(lang, "location.beach_desc") == BEACH[lang] and f">{BEACH[lang]}<" in h and not WALK.search(h))
+
+# ── RC4: no-JS reservation links carry no dates ──
+for lang in LANGS:
+    h = page(ref, lang)
+    hrefs = re.findall(r'data-channel="(?:booking|airbnb)"[^>]*href="([^"]*)"', h)
+    check(f"static OTA links [{lang}]: Booking + Airbnb without check-in/check-out parameters",
+          len(hrefs) == 2 and not any(re.search(r"check_?in|check_?out", x) for x in hrefs), str(hrefs))
 
 print(f"\n{sum(results)}/{len(results)} market tests passed")
 sys.exit(0 if all(results) else 1)

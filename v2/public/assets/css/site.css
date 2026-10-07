@@ -246,6 +246,7 @@ address { font-style: normal; }
 .rs-author { margin-bottom: .4em; }
 .rs-note, .rs-text { color: var(--muted); font-size: .95rem; }
 .rs-link { margin: 0; }
+.rs-access-note { margin: 4px 0 0; color: var(--muted); font-size: .84rem; }
 .stars { display: inline-flex; gap: 2px; color: #b8860b; }
 .stars .icon { width: 1.15em; height: 1.15em; }
 .stars .icon.off { color: var(--line); }

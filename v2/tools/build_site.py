@@ -495,6 +495,8 @@ def reviews(lang):
         f'<p class="rs-label">{text(lang, "reviews.booking_label")} · {text(lang, "reviews.booking_note")}</p>'
         + "".join(quotes) +
         f'<p class="rs-link"><a class="link-arrow" href="{booking_reviews_url()}" target="_blank" rel="noopener" data-track="booking_review_click" data-cta="reviews">{text(lang, "reviews.all")}{new_tab(lang)}</a></p>'
+        + (f'<p class="rs-access-note" data-tr-review-note hidden>{text(lang, "reviews.booking_tr_access_note")}</p>'
+           if restriction_on() else "") +
         '</article>')
     side = []
     for r in CONFIG["platform_reviews"]["items"]:

@@ -102,7 +102,7 @@
     "center": "Göynük centre",
     "center_desc": "Shops and markets within walking distance",
     "beach": "Beach",
-    "beach_desc": "About 2 km — 15–20 min on foot",
+    "beach_desc": "About 2 km",
     "canyon": "Göynük Canyon",
     "canyon_desc": "About 5 min by car",
     "kemer": "Kemer centre",
@@ -120,6 +120,7 @@
     "title": "Independent guest reviews",
     "lead": "What we describe on this page is confirmed by real guests on independent platforms.",
     "all": "Read all reviews on Booking.com",
+    "booking_tr_access_note": "Booking.com access may be limited from Türkiye.",
     "booking_label": "Guest score on Booking.com",
     "booking_note": "Only guests who have stayed can review on Booking.com.",
     "read_full": "Read the full review on Booking.com",
@@ -148,7 +149,7 @@
       {"q": "When is the pool open?", "a": "The shared pool has an adult and a children's section. {pool_note}"},
       {"q": "Is there parking?", "a": "Yes, free open-air parking is available on site."},
       {"q": "Is there a baby cot or high chair?", "a": "Yes, a baby cot and a high chair can be provided on request."},
-      {"q": "How far is the beach?", "a": "The beach is about 2 km away — roughly 15–20 min on foot. Kemer centre is about 10 minutes by car."},
+      {"q": "How far is the beach?", "a": "The beach is about 2 km away. Kemer centre is about 10 minutes by car."},
       {"q": "How up to date is the calendar?", "a": "The calendar is synchronised automatically from our Booking.com and Airbnb calendars; bookings made directly with us are blocked there too. Final availability is confirmed when you book — by the host on WhatsApp or by Booking.com / Airbnb."}
     ]
   },

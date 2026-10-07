@@ -88,6 +88,9 @@
       var note = $('[data-tr-note]', list);
       if (note) note.hidden = marketHint !== 'tr';
     }
+    // Same hint, small access note under the "read all reviews on Booking.com" link (the link stays).
+    var reviewNote = $('[data-tr-review-note]');
+    if (reviewNote) reviewNote.hidden = marketHint !== 'tr';
   }
   document.documentElement.setAttribute('data-market-hint', marketHint);
   document.documentElement.setAttribute('data-market-source', marketSource);
@@ -170,28 +173,17 @@
   function inWindow(s) { return trusted() && !!av.window && s >= av.window.start && s <= av.window.end; }
   function rangeHasBooked(a, b) { for (var d = parse(a); iso(d) < b; d = addDays(d, 1)) if (isBooked(iso(d))) return true; return false; }
 
-  // First bookable window (same rule as the production smart redirect): the first
-  // run of min_stay free nights inside the booking window, from today on.
-  function firstWindow() {
-    if (!av.window || !trusted()) return null;
-    var start = parse(av.window.start), end = parse(av.window.end), now = today();
-    var cand = now > start ? now : start;
-    for (var guard = 0; guard < 400 && iso(addDays(cand, L.min_stay - 1)) <= iso(end); guard++) {
-      var a = iso(cand), b = iso(addDays(cand, L.min_stay));
-      if (!rangeHasBooked(a, b)) return { start: a, end: b };
-      cand = addDays(cand, 1);
-    }
-    return null;
-  }
-
   // ── Reservation links ─────────────────────────────────
+  // Dates go into the Booking.com / Airbnb URLs ONLY after the guest has picked a valid
+  // check-in AND check-out. No selection → plain listing URLs without any date parameter
+  // (never pre-filled with the booking-window start or a "first free" guess).
   var sel = { start: null, end: null };
   var guestsEl = $('#guests');
   function guests() { return guestsEl ? parseInt(guestsEl.value, 10) || L.default_guests : L.default_guests; }
 
   function updateLinks() {
     var g = guests();
-    var dates = sel.start && sel.end ? sel : firstWindow();
+    var dates = sel.start && sel.end && sel.start < sel.end ? sel : null;
     var wa = $('[data-channel="whatsapp"]'), bk = $('[data-channel="booking"]'), ab = $('[data-channel="airbnb"]');
     var msg = sel.start && sel.end
       ? t('availability.wa_message_dates', { start: show(sel.start), end: show(sel.end), guests: g })
@@ -317,8 +309,23 @@
     return j.closed.every(function (r) { return r && RX.test(r.start) && RX.test(r.end) && r.start < r.end; });
   }
 
+  // Initial month: before the booking window opens, start at the window's first month (instead
+  // of months of "not open yet" days); inside or after the window, the current month. Only the
+  // view moves — availability itself is unchanged (after the window every day stays 'unknown').
+  var positioned = false;
+  function positionView() {
+    if (positioned || !av.window || !trusted()) return;
+    positioned = true;
+    var ws = parse(av.window.start);
+    if (ws && today() < ws) {
+      first = new Date(ws.getFullYear(), ws.getMonth(), 1);
+      view = new Date(first.getTime());
+    }
+  }
+
   function apply(j) {
     av = valid(j) ? { status: j.status, window: j.booking_window, closed: j.closed } : { status: 'unavailable', window: null, closed: [] };
+    positionView();
     if (sel.start && (!inWindow(sel.start) || (sel.end && rangeHasBooked(sel.start, sel.end)))) sel = { start: null, end: null };
     showState(); render(); updateStatus(); updateLinks();
   }

@@ -34,6 +34,7 @@ SUITES = [
     ("verify_master", [sys.executable, str(REPO / "tools" / "verify_master.py")], r"(\d+)/(\d+) checks passed"),
     ("availability", [sys.executable, str(V2 / "tools" / "test_availability.py")], r"(\d+)/(\d+) availability tests passed"),
     ("market", [sys.executable, str(V2 / "tools" / "test_market.py")], r"(\d+)/(\d+) market tests passed"),
+    ("site_js", [sys.executable, str(V2 / "tools" / "test_site_js.py")], r"(\d+)/(\d+) site\.js browser tests passed"),
 ]
 # Anything that must never reach the web root.
 FORBIDDEN_PATH = re.compile(r"(^|/)(\.git|\.mock|fixtures|tests?|screenshots|reports|node_modules|__pycache__)(/|$)|"
@@ -68,6 +69,7 @@ def main():
     ap.add_argument("--root", required=True)
     ap.add_argument("--php", action="append", default=[], help="also run test_php_local.py with this PHP (repeatable)")
     ap.add_argument("--local-tls-no-verify", action="store_true", help="passed to test_php_local.py (sandbox copy only)")
+    ap.add_argument("--same-as", help="final promotion: an approved release folder whose SHA256SUMS.txt must be byte-identical")
     a = ap.parse_args()
     if not re.fullmatch(r"\d+\.\d+\.\d+(-rc\d+)?", a.version) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", a.date):
         fail("bad --version / --date")
@@ -127,8 +129,10 @@ def main():
         shutil.rmtree(rc_root)
         fail("secret pattern found in publish: " + ", ".join(leaks))
 
-    # 6. deployment/ — templates and selftest fixtures only (no real values)
+    # 6. deployment/ — templates, deploy procedures and selftest fixtures only (no real values)
     shutil.copyfile(V2 / "deploy" / "palmiye-secrets" / "env.example.php", deployment / "env.example.php")
+    for doc in sorted((V2 / "deploy").glob("*.md")):
+        shutil.copyfile(doc, deployment / doc.name)
     (deployment / "selftest-fixtures").mkdir()
     for f in sorted((V2 / "tests" / "fixtures").glob("*")):
         shutil.copyfile(f, deployment / "selftest-fixtures" / f.name)
@@ -139,6 +143,12 @@ def main():
     sums = "\n".join(lines) + "\n"
     (checks / "SHA256SUMS.txt").write_text(sums, encoding="utf-8", newline="\n")
     total = sum(p.stat().st_size for p in pub_files)
+    if a.same_as:
+        approved = (Path(a.same_as) / "checksums" / "SHA256SUMS.txt").read_bytes()
+        if approved != sums.encode("utf-8"):
+            shutil.rmtree(rc_root)
+            fail(f"publish is NOT byte-identical to {a.same_as} — a code/content change needs a new RC")
+        print(f"PASS publish byte-identical to {a.same_as}")
 
     # 8. Manifest + VERSION
     commit = git("rev-parse", "HEAD")
@@ -174,6 +184,7 @@ def main():
         "consent_mode": CONFIG["site"]["consent_mode"],
         "google_ads_id": CONFIG["tracking"]["google_ads_id"],
         "ga4_measurement_id": CONFIG["tracking"]["ga4_measurement_id"],
+        "promoted_from": a.same_as,
         "tests": tests,
         "build_status": "PASS_LOCAL",
         "deploy_status": "NOT_DEPLOYED",

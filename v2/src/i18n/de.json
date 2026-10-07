@@ -102,7 +102,7 @@
     "center": "Ortszentrum Göynük",
     "center_desc": "Geschäfte und Märkte zu Fuß erreichbar",
     "beach": "Strand",
-    "beach_desc": "Etwa 2 km — 15–20 Min. zu Fuß",
+    "beach_desc": "Etwa 2 km",
     "canyon": "Göynük-Schlucht",
     "canyon_desc": "Etwa 5 Min. mit dem Auto",
     "kemer": "Zentrum von Kemer",
@@ -120,6 +120,7 @@
     "title": "Unabhängige Gästebewertungen",
     "lead": "Was wir auf dieser Seite beschreiben, bestätigen echte Gäste auf unabhängigen Plattformen.",
     "all": "Alle Bewertungen auf Booking.com lesen",
+    "booking_tr_access_note": "Der Zugriff auf Booking.com kann aus der Türkei eingeschränkt sein.",
     "booking_label": "Gästebewertung auf Booking.com",
     "booking_note": "Auf Booking.com können nur Gäste bewerten, die tatsächlich übernachtet haben.",
     "read_full": "Ganze Bewertung auf Booking.com lesen",
@@ -148,7 +149,7 @@
       {"q": "Wann ist der Pool geöffnet?", "a": "Der Gemeinschaftspool hat einen Bereich für Erwachsene und einen für Kinder. {pool_note}"},
       {"q": "Gibt es Parkplätze?", "a": "Ja, auf dem Gelände gibt es kostenlose Parkplätze im Freien."},
       {"q": "Gibt es ein Babybett oder einen Hochstuhl?", "a": "Ja, ein Babybett und ein Hochstuhl können auf Anfrage bereitgestellt werden."},
-      {"q": "Wie weit ist der Strand entfernt?", "a": "Der Strand ist etwa 2 km entfernt — rund 15–20 Minuten zu Fuß. Das Zentrum von Kemer erreichen Sie in etwa 10 Minuten mit dem Auto."},
+      {"q": "Wie weit ist der Strand entfernt?", "a": "Der Strand ist etwa 2 km entfernt. Das Zentrum von Kemer erreichen Sie in etwa 10 Minuten mit dem Auto."},
       {"q": "Wie aktuell ist der Kalender?", "a": "Der Kalender wird automatisch mit unseren Kalendern auf Booking.com und Airbnb synchronisiert; Direktbuchungen werden dort ebenfalls blockiert. Die endgültige Verfügbarkeit wird bei der Buchung bestätigt — vom Gastgeber per WhatsApp oder von Booking.com / Airbnb."}
     ]
   },
